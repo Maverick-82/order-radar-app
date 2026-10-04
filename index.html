@@ -1,0 +1,1983 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<script>try{var __t=localStorage.getItem('theme');if(__t==='light'||__t==='dark')document.documentElement.setAttribute('data-theme',__t);}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>거래처 주문 레이더</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="theme-color" content="#2563eb">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="주문레이더">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+:root{
+  --bg:#f4f6f8; --surface:#ffffff; --surface-2:#eef1f4; --ink:#131820; --ink-2:#434b58; --muted:#737d8b; --line:#e1e5ea; --line-2:#cfd5dd;
+  --accent:#2563eb; --accent-ink:#1a4fc4; --accent-soft:#e8f0fe;
+  --good:#1d7f47; --good-soft:#dff1e6; --warn:#a66300; --warn-soft:#fbeed6; --bad:#c23636; --bad-soft:#fbe3e3; --idle:#667085; --idle-soft:#eceef2;
+  --bar:#2563eb; --bar-muted:#b7d3f6; --shadow:0 8px 30px rgba(20,30,50,.14);
+  --cat-aqua:#1baf7a; --cat-aqua-soft:#dbf2e9; --cat-orange:#eb6834; --cat-orange-soft:#fbe4d9; --cat-violet:#4a3aa7; --cat-violet-soft:#e7e3f8;
+  --cat-yellow:#eda100; --cat-yellow-soft:#fbedd1; --cat-magenta:#e87ba4; --cat-magenta-soft:#fbe4ec; --cat-green:#008300; --cat-green-soft:#dcefdc;
+  --chart-1:#93b4ef; --chart-2:#f3b98d; --chart-3:#8fd0bd; --chart-4:#f2cf8d; --chart-5:#eeaac6; --chart-6:#a9d6a4; --chart-7:#bcb2ec;
+  --chart-accent:#8fabe8; --chart-accent-ink:#6f8fd4;
+  --card-shadow:0 1px 2px rgba(16,24,40,.04), 0 2px 10px rgba(16,24,40,.06);
+  --card-shadow-hover:0 6px 20px rgba(16,24,40,.10), 0 2px 6px rgba(16,24,40,.06);
+  --font:"IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0f1216; --surface:#171b21; --surface-2:#1f242c; --ink:#eef1f5; --ink-2:#c3cad4; --muted:#8e98a5; --line:#2a3039; --line-2:#3a424d;
+  --accent:#5b93ef; --accent-ink:#93bbf5; --accent-soft:#182a41;
+  --good:#45b877; --good-soft:#15301f; --warn:#e2a23c; --warn-soft:#342711; --bad:#ee6b6b; --bad-soft:#3a1b1c; --idle:#9aa3b0; --idle-soft:#262b33;
+  --cat-aqua:#199e70; --cat-aqua-soft:#132e26; --cat-orange:#d95926; --cat-orange-soft:#3a2416; --cat-violet:#9085e9; --cat-violet-soft:#241f47;
+  --cat-yellow:#c98500; --cat-yellow-soft:#332a10; --cat-magenta:#d55181; --cat-magenta-soft:#3a1f29; --cat-green:#008300; --cat-green-soft:#173517;
+  --chart-1:#7fa3e0; --chart-2:#d99f6e; --chart-3:#6fb89f; --chart-4:#cfab60; --chart-5:#cf85a7; --chart-6:#84b87e; --chart-7:#a294dd;
+  --chart-accent:#7fa3e0; --chart-accent-ink:#5f85c8;
+  --card-shadow:0 1px 2px rgba(0,0,0,.24), 0 2px 10px rgba(0,0,0,.3);
+  --card-shadow-hover:0 6px 22px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.3);
+  --bar:#5b93ef; --bar-muted:#1c5cab; --shadow:0 8px 30px rgba(0,0,0,.5); color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0f1216; --surface:#171b21; --surface-2:#1f242c; --ink:#eef1f5; --ink-2:#c3cad4; --muted:#8e98a5; --line:#2a3039; --line-2:#3a424d;
+  --accent:#5b93ef; --accent-ink:#93bbf5; --accent-soft:#182a41;
+  --good:#45b877; --good-soft:#15301f; --warn:#e2a23c; --warn-soft:#342711; --bad:#ee6b6b; --bad-soft:#3a1b1c; --idle:#9aa3b0; --idle-soft:#262b33;
+  --cat-aqua:#199e70; --cat-aqua-soft:#132e26; --cat-orange:#d95926; --cat-orange-soft:#3a2416; --cat-violet:#9085e9; --cat-violet-soft:#241f47;
+  --cat-yellow:#c98500; --cat-yellow-soft:#332a10; --cat-magenta:#d55181; --cat-magenta-soft:#3a1f29; --cat-green:#008300; --cat-green-soft:#173517;
+  --chart-1:#7fa3e0; --chart-2:#d99f6e; --chart-3:#6fb89f; --chart-4:#cfab60; --chart-5:#cf85a7; --chart-6:#84b87e; --chart-7:#a294dd;
+  --chart-accent:#7fa3e0; --chart-accent-ink:#5f85c8;
+  --card-shadow:0 1px 2px rgba(0,0,0,.24), 0 2px 10px rgba(0,0,0,.3);
+  --card-shadow-hover:0 6px 22px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.3);
+  --bar:#5b93ef; --bar-muted:#1c5cab; --shadow:0 8px 30px rgba(0,0,0,.5); color-scheme:dark; }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5;margin:0;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1280px;margin:0 auto}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:saturate(180%) blur(10px);-webkit-backdrop-filter:saturate(180%) blur(10px);margin-inline:-16px;padding:14px 16px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;max-width:1280px;margin:0 auto;justify-content:space-between}
+.brand h1{font-size:19px;font-weight:700;margin:0;letter-spacing:-.01em;display:flex;align-items:baseline;gap:8px}
+.brand .titlegrp{display:flex;align-items:center;gap:12px}
+.brand .logo{height:34px;width:auto;display:block;flex:none}
+.brand .divider{width:1px;height:26px;background:var(--line-2);flex:none;display:block}
+.ver-tag{font-size:10.5px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);letter-spacing:.02em;padding:2px 8px;border-radius:999px;vertical-align:middle}
+.authcard .logo{height:34px;width:auto;display:block;margin-bottom:12px}
+.whoami{display:flex;flex-direction:column;align-items:flex-end;gap:5px;font-size:12.5px;color:var(--ink-2);margin-left:auto}
+.whoami .row{display:flex;align-items:center;gap:10px}
+.whoami .cap{color:var(--muted);font-size:12px}
+.whoami .role{font-size:11px;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:1px 8px}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;max-width:1280px;margin:12px auto 0;padding-bottom:10px;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:none;border:1px solid transparent;background:none;font:inherit;color:var(--ink-2);padding:8px 16px;border-radius:999px;cursor:pointer;font-weight:500;white-space:nowrap;transition:background-color .15s,color .15s,box-shadow .15s,transform .15s}
+nav.tabs button:hover{color:var(--ink);background:var(--surface-2);transform:translateY(-1px)}
+nav.tabs button[aria-selected="true"]{color:var(--accent-ink);background:var(--accent-soft);font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.10)}
+nav.tabs button[data-tab="customers"][aria-selected="true"]{color:var(--cat-aqua);background:var(--cat-aqua-soft)}
+nav.tabs button[data-tab="sales"][aria-selected="true"]{color:var(--cat-orange);background:var(--cat-orange-soft)}
+nav.tabs button[data-tab="products"][aria-selected="true"]{color:var(--cat-violet);background:var(--cat-violet-soft)}
+nav.tabs button[data-tab="cityhall"][aria-selected="true"]{color:var(--cat-magenta);background:var(--cat-magenta-soft)}
+button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.view{padding-top:18px;display:grid;gap:28px}
+section.view > *{min-width:0}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+h2{font-size:16px;margin:0;font-weight:600;letter-spacing:-.01em}
+h2::before{content:"";display:inline-block;width:4px;height:12px;border-radius:2px;background:var(--accent);margin-right:8px;vertical-align:middle}
+h3{font-size:14px;margin:0;font-weight:600;letter-spacing:-.005em}
+.lede{color:var(--ink-2);margin:0;max-width:75ch;line-height:1.6}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0;box-shadow:var(--card-shadow);animation:fadeIn .28s ease}
+.panel-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px;margin-bottom:12px}
+.panel-h .note{color:var(--muted);font-size:12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px}
+.kpi{background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 220%);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:14px 16px 13px;position:relative;box-shadow:var(--card-shadow);transition:box-shadow .18s ease,transform .18s ease;animation:fadeIn .32s ease}
+.kpi:hover{box-shadow:var(--card-shadow-hover);transform:translateY(-2px)}
+.kpi:nth-of-type(4n+2){border-left-color:var(--cat-aqua)}
+.kpi:nth-of-type(4n+3){border-left-color:var(--cat-orange)}
+.kpi:nth-of-type(4n+4){border-left-color:var(--cat-violet)}
+.kpi .l{font-size:12px;color:var(--muted);letter-spacing:.02em}
+.kpi .v{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em;margin-top:3px}
+.kpi .s{font-size:12px;color:var(--ink-2);margin-top:1px}
+.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.tbl-wrap{overflow-x:auto;margin-inline:-4px}
+.hscroll-fixed{position:fixed;left:0;right:0;bottom:env(safe-area-inset-bottom,0px);height:14px;overflow-x:auto;overflow-y:hidden;background:var(--surface);border-top:1px solid var(--line);z-index:35}
+.hscroll-fixed.hide{display:none}
+.hscroll-fixed>div{height:1px}
+.kpi.click{cursor:pointer}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{font-weight:600;color:var(--muted);font-size:11.5px;letter-spacing:.02em;text-align:left;padding:9px 10px;border-bottom:1px solid var(--line-2);white-space:nowrap;background:var(--surface);position:sticky;top:0}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;white-space:nowrap;transition:background-color .1s}
+tbody tr:nth-child(even) td{background:var(--surface-2)}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--accent-soft)}
+.lnk{color:var(--accent-ink);cursor:pointer;text-decoration:none;border:0;background:none;font:inherit;padding:0;text-align:left}
+.lnk:hover{text-decoration:underline}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:1px 8px 1px 7px;border-radius:999px;white-space:nowrap;line-height:18px}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.s-good{color:var(--good);background:var(--good-soft)}
+.s-warn{color:var(--warn);background:var(--warn-soft)}
+.s-bad{color:var(--bad);background:var(--bad-soft)}
+.s-info{color:var(--accent-ink);background:var(--accent-soft)}
+.s-idle{color:var(--idle);background:var(--idle-soft)}
+.s-umbrella{color:var(--cat-violet);background:var(--cat-violet-soft)}
+.pill.b-big{color:var(--cat-orange);background:var(--cat-orange-soft)}
+.pill.b-return{color:var(--cat-violet);background:var(--cat-violet-soft)}
+.pill.b-first{color:var(--cat-aqua);background:var(--cat-aqua-soft)}
+.tag{display:inline-block;font-size:11px;color:var(--ink-2);background:var(--surface-2);border-radius:4px;padding:0 6px;white-space:nowrap;line-height:18px}
+.period-tag{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:3px 10px 3px 9px;white-space:nowrap}
+.count-tag{display:inline-flex;align-items:center;font-size:11.5px;font-weight:600;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.period-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.stackbar{display:flex;gap:2px;height:22px;border-radius:6px;overflow:hidden;background:var(--surface-2)}
+.stackbar .seg{height:100%;min-width:2px}
+.stackbar-legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin-top:11px;font-size:12.5px}
+.stackbar-legend .li{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2);max-width:240px}
+.stackbar-legend .sw{width:9px;height:9px;border-radius:2.5px;flex:none}
+.stackbar-legend .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stackbar-legend .amt{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:12px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters input[type=search],.filters select{font:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:7px;padding:7px 10px;min-width:0}
+.filters input[type=search]{flex:1 1 220px}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:10px;overflow:hidden;flex-wrap:wrap;box-shadow:var(--card-shadow)}
+.seg button{font:inherit;font-size:13px;border:0;background:var(--surface);color:var(--ink-2);padding:7px 13px;cursor:pointer;border-right:1px solid var(--line-2);transition:background-color .15s,color .15s}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:var(--surface-2);color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
+.btn{font:inherit;font-size:12.5px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 11px;cursor:pointer;transition:background-color .12s,box-shadow .12s,transform .12s}
+.btn:hover{background:var(--surface-2);box-shadow:var(--card-shadow)}
+.btn.primary{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-ink) 100%);border-color:var(--accent);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.btn.primary:hover{filter:brightness(1.06);box-shadow:0 4px 14px rgba(0,0,0,.24)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.icon-btn{padding:5px 9px;font-size:15px;line-height:1;border-radius:999px;color:var(--ink-2)}
+.btn.icon-btn:active{transform:rotate(-40deg);transition:transform .15s}
+.subnav{display:flex;flex-wrap:wrap;gap:6px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:18px}
+.grid2 > *{min-width:0}
+.status-row{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(240px,1fr);gap:18px}
+.status-row > *{min-width:0}
+.hbars{display:grid;gap:9px}
+.hbar{display:grid;grid-template-columns:minmax(80px,150px) 1fr auto;gap:10px;align-items:center;font-size:13px}
+.hbar.click{cursor:pointer;margin-inline:-6px;padding:3px 6px;border-radius:6px}
+.hbar.click:hover{background:var(--surface-2)}
+.hbar .t{height:16px;background:var(--surface-2);border-radius:8px;overflow:hidden}
+.hbar .t b{display:block;height:100%;border-radius:0 8px 8px 0;transition:filter .12s}
+.hbar.click:hover .t b{filter:brightness(1.08)}
+.hbar .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbar .num{font-weight:600}
+.vbars-wrap{overflow-x:auto}
+.vbars{display:flex;align-items:flex-end;gap:7px;height:160px;padding-top:10px}
+.vbars .col{flex:1 1 0;min-width:34px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.vbars .bar{width:62%;background:linear-gradient(180deg,var(--chart-accent) 0%,var(--chart-accent-ink) 100%);border-radius:6px 6px 0 0;min-height:2px;transition:filter .12s}
+.vbars .col:hover .bar{filter:brightness(1.08)}
+.vbars .lbl{font-size:10.5px;color:var(--muted);margin-top:5px;white-space:nowrap}
+.vbars .val{font-size:11px;font-weight:600;color:var(--ink-2);margin-bottom:3px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.explain{background:var(--surface-2);border-radius:11px;padding:11px 13px;font-size:12.5px;color:var(--ink-2)}
+.explain b{color:var(--ink)}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:12.5px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:3px 11px;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
+details.help summary{cursor:pointer;color:var(--accent-ink);font-size:13px}
+details.help[open] summary{margin-bottom:8px}
+dl.defs{display:grid;grid-template-columns:max-content 1fr;gap:4px 12px;margin:0;font-size:12.5px}
+dl.defs dt{font-weight:600}
+dl.defs dd{margin:0;color:var(--ink-2)}
+.rowhd{white-space:nowrap;font-size:11.5px;font-weight:600;color:var(--muted)}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:13px;z-index:60}
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,14,20,.38);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(880px,100%);background:var(--bg);z-index:41;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.drawer-h{display:flex;align-items:flex-start;gap:12px;padding:calc(14px + env(safe-area-inset-top,0px)) 18px 12px;border-bottom:1px solid var(--line);background:var(--surface)}
+.drawer-h .ttl{flex:1;min-width:0}
+.drawer-h h2{font-size:17px;word-break:keep-all}
+.drawer-b{flex:1;overflow-y:auto;padding:16px 18px calc(40px + env(safe-area-inset-bottom,0px));display:grid;gap:16px;align-content:start;grid-auto-rows:max-content}
+.drawer-b > *{min-width:0}
+.x{font:inherit;font-size:20px;line-height:1;border:0;background:none;color:var(--ink-2);cursor:pointer;padding:4px 6px;border-radius:6px}
+.x:hover{background:var(--surface-2)}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px;font-size:12.5px;color:var(--ink-2)}
+.order{border-top:1px solid var(--line);padding:10px 0}
+.order:first-child{border-top:0}
+.order.click{cursor:pointer;margin-inline:-8px;padding-inline:8px;border-radius:8px}
+.order.click:hover{background:var(--surface-2)}
+.order-h{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.order-h .amt{margin-left:auto;font-weight:600;font-variant-numeric:tabular-nums}
+.order .ship{font-size:12px;color:var(--ink-2);white-space:pre-wrap;word-break:break-all;margin-top:3px}
+/* order detail modal */
+.omodal-scrim{position:fixed;inset:0;background:rgba(10,14,20,.5);z-index:50}
+.omodal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(480px,92vw);max-height:88vh;overflow-y:auto;background:var(--surface);border-radius:14px;box-shadow:var(--shadow);z-index:51}
+.omodal-h{display:flex;align-items:flex-start;gap:10px;padding:16px 18px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface)}
+.omodal-h .ttl{flex:1;min-width:0}
+.omodal-h h3{font-size:16px;word-break:keep-all}
+.omodal-b{padding:16px 18px 20px;display:grid;gap:16px}
+.info-box{display:grid;background:var(--surface-2);border-radius:12px;overflow:hidden}
+.info-row{font-size:13px;display:grid;grid-template-columns:56px 1fr;gap:8px;padding:11px 13px;border-bottom:1px solid var(--line)}
+.info-box .info-row:last-child{border-bottom:0}
+.info-row .l{color:var(--accent-ink);font-size:11px;font-weight:700;background:var(--accent-soft);border-radius:5px;padding:2px 6px;height:fit-content;white-space:nowrap}
+.info-row .v{word-break:break-all;padding-top:1px}
+.contact-phones{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.contact-phones a{color:#fff;text-decoration:none;font-weight:600;border:0;background:var(--good);border-radius:999px;padding:4px 12px;font-size:12.5px;display:inline-flex;align-items:center;gap:4px;transition:filter .12s}
+.contact-phones a:hover{filter:brightness(1.08)}
+.omodal-b .tbl-wrap{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0}
+.omodal-b .tbl-wrap table{font-size:12.5px}
+.omodal-b .tbl-wrap th{background:var(--surface-2)}
+.omodal-total{display:flex;justify-content:space-between;align-items:center;font-weight:700;padding:13px 15px;border-top:0;background:var(--accent-soft);color:var(--accent-ink);border-radius:12px;font-size:15.5px}
+.quicklog{display:grid;gap:9px;border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:var(--cat-aqua-soft)}
+.quicklog .qhead{font-size:12.5px;font-weight:700;color:var(--ink)}
+.quicklog select,.quicklog textarea{font:inherit;font-size:13px;border:1px solid var(--line-2);border-radius:7px;padding:7px 9px;background:var(--surface);color:var(--ink)}
+.quicklog textarea{width:100%;resize:vertical;min-height:56px}
+.log-item{display:grid;gap:3px;padding:9px 0;border-bottom:1px solid var(--line)}
+.log-item:last-child{border-bottom:0}
+.log-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.log-h .who{font-size:12px;color:var(--muted)}
+.log-note{font-size:13px;white-space:pre-wrap}
+.log-next{font-size:12px;color:var(--accent-ink)}
+.log-del{font-size:11.5px;color:var(--muted);border:0;background:none;cursor:pointer;margin-left:auto}
+.log-del:hover{color:var(--bad)}
+.log-outcome{font-size:11.5px;font-weight:600;padding:1px 7px;border-radius:999px}
+.log-outcome.ok{color:var(--good);background:var(--good-soft)}
+.log-outcome.pending{color:var(--warn);background:var(--warn-soft)}
+.log-outcome.none{color:var(--muted);background:var(--surface-2)}
+.log-form{display:grid;gap:8px;border:1px solid var(--line);border-radius:12px;padding:12px 13px;background:var(--cat-violet-soft)}
+.log-form .row{display:flex;flex-wrap:wrap;gap:8px}
+.log-form select,.log-form input[type=date]{font:inherit;font-size:13px;border:1px solid var(--line-2);border-radius:6px;padding:6px 8px;background:var(--surface)}
+.log-form textarea{font:inherit;font-size:13px;border:1px solid var(--line-2);border-radius:6px;padding:8px;resize:vertical;min-height:56px;background:var(--surface);color:var(--ink)}
+.log-form label.small{font-size:12px;color:var(--ink-2);display:flex;align-items:center;gap:6px}
+/* auth */
+.authwrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%,var(--accent-soft) 0%,var(--bg) 62%)}
+.authcard{width:min(360px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px 28px;box-shadow:0 20px 60px rgba(20,30,50,.18);position:relative;overflow:hidden}
+.authcard::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent) 0%,var(--cat-violet) 100%)}
+.authcard h1{font-size:18px;margin:0 0 4px}
+.authcard p.lede{margin-bottom:18px}
+.authcard label{display:block;font-size:12.5px;color:var(--ink-2);margin-bottom:4px;margin-top:12px}
+.authcard input{width:100%;font:inherit;font-size:14px;border:1px solid var(--line-2);border-radius:7px;padding:9px 10px;background:var(--surface);color:var(--ink)}
+.authcard .err{color:var(--bad);font-size:12.5px;margin-top:10px}
+.authcard .ok{color:var(--good);font-size:12.5px;margin-top:10px}
+.authcard .switch{margin-top:16px;font-size:12.5px;text-align:center;color:var(--ink-2)}
+.hide{display:none !important}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{color:var(--muted);font-size:13px;padding:20px;display:flex;align-items:center;gap:10px}
+.spin::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--line-2);border-top-color:var(--accent);animation:spin .7s linear infinite;flex:none}
+@media (max-width:640px){
+  .hide-sm{display:none}
+  body{padding-inline:12px}
+  .brand h1{font-size:17px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .status-row{grid-template-columns:1fr}
+  .kpi{padding:12px}
+  .kpi .v{font-size:17px}
+  nav.tabs button{padding:8px 10px 9px;font-size:12.5px}
+  .drawer{width:100%}
+  .drawer-b{padding:14px 14px calc(32px + env(safe-area-inset-bottom,0px))}
+  .panel{padding:13px}
+  table{font-size:12.5px}
+}
+</style>
+</head>
+<body>
+
+<div id="auth" class="authwrap">
+  <div class="authcard">
+    <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
+    <h1>거래처 주문 레이더</h1>
+    <p class="lede small">팀 계정으로 로그인하세요.</p>
+    <div id="loginBox">
+      <label>이메일</label>
+      <input id="li-email" type="email" autocomplete="username">
+      <label>비밀번호</label>
+      <input id="li-pw" type="password" autocomplete="current-password">
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn primary" id="btn-login" style="flex:1">로그인</button>
+      </div>
+      <div class="switch">아직 계정이 없나요? <a href="#" id="go-signup" class="lnk">가입하기</a> · <a href="#" id="go-forgot" class="lnk">비밀번호를 잊으셨나요?</a></div>
+      <div id="loginMsg"></div>
+    </div>
+    <div id="signupBox" class="hide">
+      <label>이름</label>
+      <input id="su-name" type="text" autocomplete="name">
+      <label>이메일</label>
+      <input id="su-email" type="email" autocomplete="username">
+      <label>비밀번호 (6자 이상)</label>
+      <input id="su-pw" type="password" autocomplete="new-password">
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn primary" id="btn-signup" style="flex:1">가입하기</button>
+      </div>
+      <div class="switch">이미 계정이 있나요? <a href="#" id="go-login" class="lnk">로그인</a></div>
+      <div id="signupMsg"></div>
+    </div>
+    <div id="forgotBox" class="hide">
+      <p class="lede small">가입할 때 쓴 이메일을 입력하면 비밀번호 재설정 링크를 보내드려요.</p>
+      <label>이메일</label>
+      <input id="fp-email" type="email" autocomplete="username">
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn primary" id="btn-forgot" style="flex:1">재설정 링크 보내기</button>
+      </div>
+      <div class="switch"><a href="#" id="go-login-2" class="lnk">로그인으로 돌아가기</a></div>
+      <div id="forgotMsg"></div>
+    </div>
+    <div id="resetBox" class="hide">
+      <p class="lede small">새 비밀번호를 설정하세요.</p>
+      <label>새 비밀번호 (6자 이상)</label>
+      <input id="rp-pw" type="password" autocomplete="new-password">
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn primary" id="btn-reset" style="flex:1">비밀번호 변경</button>
+      </div>
+      <div id="resetMsg"></div>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="wrap hide">
+<header class="top">
+  <div class="brand">
+    <div class="titlegrp">
+      <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
+      <span class="divider" aria-hidden="true"></span>
+      <h1>거래처 주문 레이더 <span class="ver-tag">v2.8</span></h1>
+    </div>
+    <div class="whoami">
+      <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
+      <span class="cap">Maverick</span>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button data-tab="summary" aria-selected="true">📊 대시보드</button>
+    <button data-tab="customers" aria-selected="false">🏢 거래처</button>
+    <button data-tab="sales" aria-selected="false">💼 영업</button>
+    <button data-tab="cityhall" aria-selected="false">🏛️ 시청</button>
+    <button data-tab="products" aria-selected="false">🏷️ 장애인생산품</button>
+  </nav>
+</header>
+
+<section class="view" id="view-summary"></section>
+<section class="view hide" id="view-customers"></section>
+<section class="view hide" id="view-sales"></section>
+<section class="view hide" id="view-cityhall"></section>
+<section class="view hide" id="view-products"></section>
+</div>
+
+<div id="drawerHost"></div>
+<div id="toast" class="toast" hidden></div>
+<div id="hscrollBar" class="hscroll-fixed hide"><div id="hscrollBarInner"></div></div>
+
+<script>
+const SUPABASE_URL = "https://hevlgbkkzrambtkqfbka.supabase.co";
+const SUPABASE_KEY = "sb_publishable_SHekPJ0rm5wZHxQORLY8Wg_GA1Jk-It";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const won = n => (n==null? '-' : Math.round(n).toLocaleString('ko-KR')+'원');
+const num = n => (n==null? '-' : Math.round(n).toLocaleString('ko-KR'));
+const fmtDate = d => d ? d : '-';
+const esc = s => (s==null?'':String(s)).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const eok = n => ((Number(n)||0)/1e8).toFixed(2)+'억';
+function daysAgoStr(n){ if(n==null) return '-'; if(n<=0) return '오늘'; return n+'일 전'; }
+// 주문서의 담당자 필드는 "김성준 010-2914-2422", "백마리아 차장 02-399-1082 / 010-5282-8548",
+// "복지후생담당관실 박준우 행정관 02-3480-1942/010-2387-5635" 처럼 이름(+직함/부서)과 전화번호가
+// 한 줄에 자유롭게 섞여 있어서, 전화번호만 뽑아내 바로 누를 수 있는 링크로 만들고 나머지를 담당자 이름으로 씀.
+function parseContact(raw){
+  if(!raw || !String(raw).trim()) return null;
+  const s = String(raw).trim();
+  const phoneRe = /(01[016789][-.\s]?\d{3,4}[-.\s]?\d{4}|0[2-6][0-9]?[-.\s]?\d{3,4}[-.\s]?\d{4})/g;
+  const phones = [...new Set((s.match(phoneRe)||[]).map(p=>p.trim()))];
+  let name = s;
+  phones.forEach(p=>{ name = name.split(p).join(' '); });
+  name = name.replace(/[\/,·]/g,' ').replace(/\s+/g,' ').trim();
+  return {name, phones, raw:s};
+}
+function contactCell(raw){
+  const c = parseContact(raw);
+  if(!c) return '<span class="small muted">-</span>';
+  const phones = c.phones.length ? `<div class="small muted">${c.phones.map(p=>`<a href="tel:${p.replace(/[^0-9]/g,'')}">${esc(p)}</a>`).join(' · ')}</div>` : '';
+  return `<div class="small">${esc(c.name||'-')||'<span class=\"muted\">-</span>'}</div>${phones}`;
+}
+// 가로로 넓은 표(시청 탭 등)는 표 자체의 가로 스크롤바가 화면 맨 아래(표 끝)에 있어서
+// 스크롤을 한참 내려야만 보여요 — 그래서 화면 하단에 고정된 별도 스크롤바를 만들어서
+// 표의 스크롤과 서로 동기화시켜요. 화면 어디서든 바로 가로로 이동할 수 있게.
+let hscrollWrap = null;
+function syncHScrollBar(){
+  const bar = document.getElementById('hscrollBar');
+  const inner = document.getElementById('hscrollBarInner');
+  if(!hscrollWrap || !hscrollWrap.isConnected){ bar.classList.add('hide'); return; }
+  const need = hscrollWrap.scrollWidth > hscrollWrap.clientWidth + 2;
+  bar.classList.toggle('hide', !need);
+  inner.style.width = hscrollWrap.scrollWidth + 'px';
+  bar.scrollLeft = hscrollWrap.scrollLeft;
+}
+function bindStickyHScroll(wrapEl){
+  hscrollWrap = wrapEl;
+  const bar = document.getElementById('hscrollBar');
+  let syncing = false;
+  wrapEl.onscroll = ()=>{ if(syncing) return; syncing=true; bar.scrollLeft = wrapEl.scrollLeft; syncing=false; };
+  bar.onscroll = ()=>{ if(syncing) return; syncing=true; wrapEl.scrollLeft = bar.scrollLeft; syncing=false; };
+  syncHScrollBar();
+}
+function unbindStickyHScroll(){
+  hscrollWrap = null;
+  document.getElementById('hscrollBar').classList.add('hide');
+}
+window.addEventListener('resize', ()=>{ if(hscrollWrap) syncHScrollBar(); });
+function toast(msg){
+  const t = document.getElementById('toast'); if(!t) return;
+  t.textContent = msg; t.hidden = false;
+  clearTimeout(toast._t); toast._t = setTimeout(()=>{ t.hidden = true; }, 1800);
+}
+function copyTSV(rows, label){
+  const txt = rows.map(r=>r.map(v=>String(v??'').replace(/[\t\n\r]+/g,' ')).join('\t')).join('\n');
+  const done = () => toast(`${label} ${rows.length-1}행 복사됨 · 엑셀에 붙여넣기 하세요`);
+  try{ navigator.clipboard.writeText(txt).then(done, fallback); }catch(e){ fallback(); }
+  function fallback(){
+    const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ toast('복사가 막혀 있어요. 표를 드래그해서 복사하세요'); }
+    ta.remove();
+  }
+}
+
+const STATUS_CLS = {'활성':'s-good','신규':'s-info','주의':'s-warn','이탈의심':'s-bad','휴면':'s-idle','일회성':'s-idle','통합집계':'s-umbrella'};
+function statusPill(st){ return `<span class="pill ${STATUS_CLS[st]||'s-idle'}">${esc(st||'-')}</span>`; }
+
+let ME = null; // {id, name, role}
+let CUSTS = []; // customer_stats rows, loaded once per session
+let custById = new Map();
+let currentTab = 'summary';
+let currentSalesSub = 'coretarget';
+const VIEW_IDS = ['summary','customers','sales','products','cityhall'];
+
+// ---------------- Auth ----------------
+const authBoxes = ['loginBox','signupBox','forgotBox','resetBox'];
+function showAuthBox(id){ authBoxes.forEach(b=> document.getElementById(b).classList.toggle('hide', b!==id) ); }
+
+document.getElementById('go-signup').onclick = (e)=>{e.preventDefault(); showAuthBox('signupBox');};
+document.getElementById('go-login').onclick = (e)=>{e.preventDefault(); showAuthBox('loginBox');};
+document.getElementById('go-forgot').onclick = (e)=>{e.preventDefault(); showAuthBox('forgotBox');};
+document.getElementById('go-login-2').onclick = (e)=>{e.preventDefault(); showAuthBox('loginBox');};
+
+document.getElementById('btn-login').onclick = async ()=>{
+  const email = document.getElementById('li-email').value.trim();
+  const password = document.getElementById('li-pw').value;
+  const msg = document.getElementById('loginMsg');
+  msg.innerHTML = '<div class="small muted">로그인 중...</div>';
+  const {data, error} = await sb.auth.signInWithPassword({email, password});
+  if(error){ msg.innerHTML = `<div class="err">${esc(error.message)}</div>`; return; }
+  msg.innerHTML = '';
+};
+
+document.getElementById('btn-signup').onclick = async ()=>{
+  const name = document.getElementById('su-name').value.trim();
+  const email = document.getElementById('su-email').value.trim();
+  const password = document.getElementById('su-pw').value;
+  const msg = document.getElementById('signupMsg');
+  if(!name || !email || password.length<6){ msg.innerHTML = '<div class="err">이름, 이메일, 6자 이상 비밀번호를 입력하세요.</div>'; return; }
+  msg.innerHTML = '<div class="small muted">가입 처리 중...</div>';
+  const {data, error} = await sb.auth.signUp({email, password, options:{data:{name}}});
+  if(error){
+    const already = /already registered|already exists|already been registered/i.test(error.message||'');
+    msg.innerHTML = already
+      ? `<div class="err">이미 가입된 이메일이에요. <a href="#" id="su-to-forgot" class="lnk">비밀번호 찾기</a>를 이용해주세요.</div>`
+      : `<div class="err">${esc(error.message)}</div>`;
+    const link = document.getElementById('su-to-forgot');
+    if(link) link.onclick = (e)=>{ e.preventDefault(); document.getElementById('fp-email').value = email; showAuthBox('forgotBox'); };
+    return;
+  }
+  if(data.session){ msg.innerHTML = ''; }
+  else { msg.innerHTML = '<div class="ok">가입되었습니다. 이메일 확인이 필요하면 메일함을 확인한 뒤 로그인해주세요.</div>'; }
+};
+
+document.getElementById('btn-forgot').onclick = async ()=>{
+  const email = document.getElementById('fp-email').value.trim();
+  const msg = document.getElementById('forgotMsg');
+  if(!email){ msg.innerHTML = '<div class="err">이메일을 입력하세요.</div>'; return; }
+  msg.innerHTML = '<div class="small muted">전송 중...</div>';
+  const {error} = await sb.auth.resetPasswordForEmail(email, {redirectTo: window.location.href});
+  if(error){ msg.innerHTML = `<div class="err">${esc(error.message)}</div>`; return; }
+  msg.innerHTML = '<div class="ok">재설정 링크를 이메일로 보냈어요. 메일함(스팸함 포함)을 확인한 뒤, 그 링크를 이 브라우저에서 열어주세요.</div>';
+};
+
+document.getElementById('btn-reset').onclick = async ()=>{
+  const pw = document.getElementById('rp-pw').value;
+  const msg = document.getElementById('resetMsg');
+  if(pw.length<6){ msg.innerHTML = '<div class="err">6자 이상 입력하세요.</div>'; return; }
+  msg.innerHTML = '<div class="small muted">변경 중...</div>';
+  const {error} = await sb.auth.updateUser({password: pw});
+  if(error){ msg.innerHTML = `<div class="err">${esc(error.message)}</div>`; return; }
+  msg.innerHTML = '<div class="ok">비밀번호가 변경됐어요. 이동합니다...</div>';
+  setTimeout(()=>{ window.location.href = window.location.href.split('#')[0].split('?')[0]; }, 900);
+};
+
+document.getElementById('btn-logout').onclick = async ()=>{ await sb.auth.signOut(); };
+document.getElementById('btn-refresh').onclick = ()=>{ location.reload(); };
+
+// ---------------- 라이트/다크 테마 전환 (자동 → 라이트 → 다크 순환, localStorage에 저장) ----------------
+(function(){
+  const THEME_LABEL = {auto:'자동', light:'라이트', dark:'다크'};
+  const THEME_ICON = {auto:'🌓', light:'☀️', dark:'🌙'};
+  const btn = document.getElementById('btn-theme');
+  function currentTheme(){
+    try{ const t = localStorage.getItem('theme'); return (t==='light'||t==='dark') ? t : 'auto'; }catch(e){ return 'auto'; }
+  }
+  function applyTheme(t){
+    if(t==='light' || t==='dark') document.documentElement.setAttribute('data-theme', t);
+    else document.documentElement.removeAttribute('data-theme');
+    btn.textContent = THEME_ICON[t];
+    btn.title = '테마: ' + THEME_LABEL[t] + ' (눌러서 전환)';
+  }
+  applyTheme(currentTheme());
+  btn.onclick = ()=>{
+    const order = ['auto','light','dark'];
+    const next = order[(order.indexOf(currentTheme())+1) % order.length];
+    try{ if(next==='auto') localStorage.removeItem('theme'); else localStorage.setItem('theme', next); }catch(e){}
+    applyTheme(next);
+  };
+})();
+
+sb.auth.onAuthStateChange(async (event, session)=>{
+  if(event === 'PASSWORD_RECOVERY'){
+    document.getElementById('app').classList.add('hide');
+    document.getElementById('auth').classList.remove('hide');
+    showAuthBox('resetBox');
+    return;
+  }
+  if(session && session.user){
+    await boot(session.user.id);
+  } else {
+    ME = null;
+    document.getElementById('app').classList.add('hide');
+    document.getElementById('auth').classList.remove('hide');
+  }
+});
+
+async function boot(uid){
+  const {data: prof, error} = await sb.from('profiles').select('id,name,role').eq('id', uid).single();
+  if(error || !prof){ return; }
+  ME = prof;
+  document.getElementById('who-name').textContent = ME.name || '';
+  document.getElementById('who-role').textContent = ME.role==='admin' ? '관리자' : '팀원';
+  document.getElementById('auth').classList.add('hide');
+  document.getElementById('app').classList.remove('hide');
+  // 대시보드가 쓸 데이터를 순서대로 기다리지 않고 한 번에 병렬로 미리 불러와서 초기 로딩 시간을 줄임
+  // (renderSummaryView 안의 ensureXxxLoaded()들은 캐시돼 있어서 여기서 미리 불러두면 중복 요청 없이 즉시 반환됨)
+  await Promise.all([
+    CUSTS.length===0 ? loadCustomers() : Promise.resolve(),
+    ensureMonthsLoaded().catch(()=>{}),
+    ensureItemTotalsLoaded().catch(()=>{}),
+    ensureCustYearTotalsLoaded().catch(()=>{})
+  ]);
+  renderTab();
+}
+
+// ---------------- Tabs ----------------
+document.getElementById('tabs').addEventListener('click', (e)=>{
+  const b = e.target.closest('button[data-tab]'); if(!b) return;
+  currentTab = b.dataset.tab;
+  if(currentTab!=='cityhall') unbindStickyHScroll();
+  [...document.querySelectorAll('#tabs button')].forEach(x=>x.setAttribute('aria-selected', x===b));
+  VIEW_IDS.forEach(id=> document.getElementById('view-'+id).classList.toggle('hide', currentTab!==id));
+  renderTab();
+});
+
+function renderTab(){
+  if(currentTab==='summary') renderSummaryView();
+  else if(currentTab==='customers') renderCustomersView();
+  else if(currentTab==='sales') renderSalesView();
+  else if(currentTab==='products') renderProductsView();
+  else if(currentTab==='cityhall') renderCityHallView();
+}
+
+// ---------------- Data load ----------------
+async function loadCustomers(){
+  document.getElementById('view-customers').innerHTML = '<div class="spin">불러오는 중...</div>';
+  let all = [];
+  const pageSize = 10000; // customer_stats는 뷰라 페이지마다 다시 계산됨 — 한 번에 받아서 재계산 횟수를 줄임
+  for(let from=0; ; from += pageSize){
+    const {data, error} = await sb.from('customer_stats').select('*')
+      .order('total_amount', {ascending:false}).order('customer_id', {ascending:true})
+      .range(from, from+pageSize-1);
+    if(error){ document.getElementById('view-customers').innerHTML = `<div class="panel err">불러오기 실패: ${esc(error.message)}</div>`; return; }
+    all = all.concat(data || []);
+    if(!data || data.length < pageSize) break;
+  }
+  CUSTS = all;
+  custById = new Map(CUSTS.map(c=>[c.customer_id, c]));
+}
+
+// ---------------- shared chart helpers ----------------
+// opts.cat=true: 서로 다른 항목(유형 등)을 구분하는 목적이면 항목마다 다른 색(카테고리 색)을 씀.
+// opts.cat 없으면(기본): 순위 비교가 목적이라 한 가지 색(블루)의 짙기만 순위에 따라 달라짐 — 1위가 가장 진함.
+const CAT_HUES = ['var(--chart-1)','var(--chart-2)','var(--chart-3)','var(--chart-4)','var(--chart-5)','var(--chart-6)','var(--chart-7)'];
+function hbars(rows, opts){
+  opts = opts || {};
+  const max = opts.max || Math.max(...rows.map(r=>r.v),1);
+  const n = rows.length;
+  return `<div class="hbars">${rows.map((r,i)=>{
+    const color = opts.cat ? CAT_HUES[i % CAT_HUES.length] : 'var(--chart-accent)';
+    const op = opts.cat ? 1 : Math.max(0.4, 1 - (n>1? i/(n-1) : 0)*0.55).toFixed(2);
+    return `<div class="hbar${r.id!=null?' click':''}"${r.id!=null?` data-hb-id="${r.id}"`:''}><span class="nm" title="${esc(r.n)}">${esc(r.n)}</span><span class="t"><b style="width:${Math.max(0,r.v/max*100).toFixed(1)}%;background:${color};opacity:${op}"></b></span><span class="num small">${r.s}</span></div>`;
+  }).join('')}</div>`;
+}
+// 품목별 매출 비중을 가로 스택바(한 줄 누적 막대)로 보여줌 — 순위표는 이미 hbars로 쓰고 있어서,
+// "부분 대 전체" 구성비를 보여줄 땐 파이차트 대신 스택바 형태로 다르게 표현.
+function stackbar(rows, capN){
+  capN = capN || 7;
+  const CAT = ['var(--chart-1)','var(--chart-2)','var(--chart-3)','var(--chart-4)','var(--chart-5)','var(--chart-6)','var(--chart-7)'];
+  const sorted = rows.slice().sort((a,b)=>b.v-a.v);
+  const top = sorted.slice(0, capN);
+  const restRows = sorted.slice(capN);
+  const restSum = restRows.reduce((s,r)=>s+r.v,0);
+  const total = sorted.reduce((s,r)=>s+r.v,0) || 1;
+  const items = top.map((r,i)=>({n:r.n, v:r.v, c:CAT[i % CAT.length]}));
+  if(restSum>0) items.push({n:`기타 ${restRows.length}개`, v:restSum, c:'var(--idle)'});
+  return `
+  <div class="stackbar">${items.map(it=>`<div class="seg" style="width:${Math.max(0.6,it.v/total*100).toFixed(2)}%;background:${it.c}" title="${esc(it.n)} · ${won(it.v)} (${(it.v/total*100).toFixed(1)}%)"></div>`).join('')}</div>
+  <div class="stackbar-legend">${items.map(it=>`<span class="li"><span class="sw" style="background:${it.c}"></span><span class="nm" title="${esc(it.n)}">${esc(it.n)}</span><span class="amt">${(it.v/total*100).toFixed(0)}%</span></span>`).join('')}</div>`;
+}
+function monthBars(rows){
+  const max = Math.max(...rows.map(r=>Number(r.amount)||0),1);
+  return `<div class="vbars-wrap"><div class="vbars">${rows.map(r=>{
+    const amt = Number(r.amount)||0;
+    const h = Math.max(2, Math.round(amt/max*140));
+    const lbl = r.month.slice(2,7).replace('-','.');
+    return `<div class="col" title="${esc(lbl)} · ${won(r.amount)}"><div class="val">${amt?eok(amt):''}</div><div class="bar" style="height:${h}px"></div><div class="lbl">${esc(lbl)}</div></div>`;
+  }).join('')}</div></div>`;
+}
+function monthTable(rows){
+  if(!rows.length) return '';
+  return `<div class="tbl-wrap" style="margin-top:12px"><table><thead><tr><th class="rowhd">월</th>${rows.map(r=>`<th class="num">${esc(r.month.slice(2,7).replace('-','.'))}</th>`).join('')}</tr></thead><tbody>
+    <tr><td class="rowhd">금액</td>${rows.map(r=>`<td class="num">${won(r.amount)}</td>`).join('')}</tr>
+  </tbody></table></div>`;
+}
+// ---------------- generic year-range helpers (요약 차트 · 거래처 상세 차트 공용) ----------------
+function monthYears(monthsArr){ return [...new Set((monthsArr||[]).map(m=>m.month.slice(0,4)))]; }
+function monthYearBounds(monthsArr, y){
+  let a=-1,b=-1;
+  (monthsArr||[]).forEach((m,i)=>{ if(m.month.slice(0,4)===y){ if(a<0)a=i; b=i+1; } });
+  return [a,b];
+}
+function monthRangeBounds(monthsArr, range){
+  const n = (monthsArr||[]).length;
+  const years = monthYears(monthsArr);
+  if(range==='recent') return [Math.max(0, n-12), n];
+  if(range==='all' || !years.includes(range)) return [0, n];
+  return monthYearBounds(monthsArr, range);
+}
+function monthRangeChips(monthsArr, range, segId){
+  const years = monthYears(monthsArr);
+  if(years.length<=1) return '';
+  const n = (monthsArr||[]).length;
+  const opts = [['recent','최근 12개월'], ...years.map(y=>[y,y+'년']), ['all',`전체(${n}개월)`]];
+  return `<div class="seg" id="${segId}">${opts.map(([k,label])=>`<button data-yr="${k}" aria-pressed="${range===k}">${label}</button>`).join('')}</div>`;
+}
+// summaryMonths: monthly_order_totals 전체 캐시(전 거래처 공통 타임라인). 요약 차트와 거래처 상세 차트가 함께 씀.
+let summaryMonths = null;
+async function ensureMonthsLoaded(){
+  if(summaryMonths) return summaryMonths;
+  const {data, error} = await sb.from('monthly_order_totals').select('*').order('month', {ascending:true});
+  if(error){ summaryMonths = []; throw error; }
+  summaryMonths = data || [];
+  return summaryMonths;
+}
+function statusHelpBlock(){
+  return `<details class="help" style="margin-top:12px"><summary>상태·주기는 이렇게 판정했어요</summary>
+  <dl class="defs">
+  <dt>기준일</dt><dd>오늘 날짜 기준으로 실시간 계산돼요.</dd>
+  <dt>주문 주기</dt><dd>주문한 날짜 사이 간격의 중앙값이에요. 같은 날 여러 건은 1회로 셉니다.</dd>
+  <dt>${statusPill('신규')}</dt><dd>첫 주문이 90일 이내이고, 지금까지 주문일수가 2회 이하</dd>
+  <dt>${statusPill('활성')}</dt><dd>주문 3회 이상 — 경과일 ≤ 주기×1.5(최소 35일) · 주문 2회 — 경과일 ≤ 75일</dd>
+  <dt>${statusPill('주의')}</dt><dd>주문 3회 이상 — 경과일 ≤ 주기×3(최소 75일) · 주문 2회 — 경과일 ≤ 120일</dd>
+  <dt>${statusPill('이탈의심')}</dt><dd>주문 3회 이상인데 경과일이 주기×3, 75일을 모두 넘음</dd>
+  <dt>${statusPill('휴면')}</dt><dd>주문 2회만 하고 그 뒤 120일 넘게 주문 없음</dd>
+  <dt>${statusPill('일회성')}</dt><dd>전체 기간 통틀어 1번만 주문 (최근 90일 이내 신규는 아님)</dd>
+  <dt>${statusPill('통합집계')}</dt><dd>과거 부서 구분 없이 쌓인 '본청' 이름의 옛 거래처예요. 최근 주문은 산하 과·부서 이름으로 개별 등록돼 이 계정 자체는 경과일이 길어 보이지만, 산하 부서들은 최근 60일 내에도 활발히 주문 중이라 이탈로 보지 않아요. 상세에서 산하 부서 목록을 확인하세요.</dd>
+  <dt>학교 주의점</dt><dd>학교는 방학(7~8월)·예산 시기 때문에 주문이 끊겨 보일 수 있어요. 이탈의심은 '연락해볼 후보'로 보세요.</dd>
+  </dl></details>`;
+}
+// 영업 탭 하위 패널들에서 공통으로 쓰는 "기준 자세히 보기" 접이식 블록.
+// statusHelpBlock()과 같은 모양(요약 탭)을 그대로 따라서, 팀원이 어디서든 같은 방식으로 기준을 확인할 수 있게 함.
+function critHelp(summary, dlHtml){
+  return `<details class="help" style="margin-top:10px"><summary>${esc(summary)}</summary><dl class="defs">${dlHtml}</dl></details>`;
+}
+function gotoCustomersByStatus(status){
+  custStatusFilter = status;
+  currentTab = 'customers';
+  unbindStickyHScroll();
+  document.querySelectorAll('#tabs button[data-tab]').forEach(x=> x.setAttribute('aria-selected', String(x.dataset.tab==='customers')));
+  VIEW_IDS.forEach(id=> document.getElementById('view-'+id).classList.toggle('hide', id!=='customers'));
+  renderTab();
+  window.scrollTo(0,0);
+}
+function gotoCoreTargets(){
+  currentSalesSub = 'coretarget';
+  currentTab = 'sales';
+  unbindStickyHScroll();
+  document.querySelectorAll('#tabs button[data-tab]').forEach(x=> x.setAttribute('aria-selected', String(x.dataset.tab==='sales')));
+  VIEW_IDS.forEach(id=> document.getElementById('view-'+id).classList.toggle('hide', id!=='sales'));
+  renderTab();
+  window.scrollTo(0,0);
+}
+function gotoCustomersByQuery(name){
+  custQuery = name;
+  custStatusFilter = '전체';
+  currentTab = 'customers';
+  unbindStickyHScroll();
+  document.querySelectorAll('#tabs button[data-tab]').forEach(x=> x.setAttribute('aria-selected', String(x.dataset.tab==='customers')));
+  VIEW_IDS.forEach(id=> document.getElementById('view-'+id).classList.toggle('hide', id!=='customers'));
+  renderTab();
+  window.scrollTo(0,0);
+}
+
+// ---------------- 품목 이름 정리 (특가/공동구매 등 태그 제거 후 동일 품목 합산) ----------------
+// "특가(25년강남서초연간)-복사용지 A4/80g [2,500매]", "복사용지 A4/80g - 공동구매 [2,500매]",
+// "복사용지 A4/80g(2,500매) [2,500매]" 처럼 실제로는 같은 품목인데 주문서에 붙는 태그·중복 표기 때문에
+// 다른 이름으로 집계되던 것들을 하나로 합쳐서 보여주기 위한 정리 함수. 무게·규격·친환경 여부처럼
+// 실제로 다른 품목을 가리키는 표기는 건드리지 않는다.
+function normalizeItemName(raw){
+  const s = String(raw||'').trim();
+  const m = s.match(/^(.*?)(\s*\[[^\]]+\])?$/s);
+  let base = (m && m[1] ? m[1] : s).trim();
+  const bracket = (m && m[2]) ? m[2].trim() : '';
+  base = base.replace(/^특가\([^)]*\)\s*-\s*/, '').replace(/^특가\s*-\s*/, '');
+  base = base.replace(/\s*-\s*(공동구매|교육청)\s*$/, '');
+  if(bracket){
+    const bc = bracket.replace(/^\[|\]$/g, '').trim();
+    const escRe = bc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    base = base.replace(new RegExp('\\(' + escRe + '\\)\\s*$'), '').trim();
+  }
+  return bracket ? (base + ' ' + bracket) : base;
+}
+let itemTotalsCache = null;
+async function ensureItemTotalsLoaded(){
+  if(itemTotalsCache) return itemTotalsCache;
+  const {data, error} = await sb.from('item_totals').select('*').order('amount', {ascending:false}).limit(1500);
+  if(error){ itemTotalsCache = []; throw error; }
+  itemTotalsCache = data || [];
+  return itemTotalsCache;
+}
+function topMergedItems(rows, n){
+  const byName = new Map();
+  (rows||[]).forEach(r=>{
+    const key = normalizeItemName(r.item_name);
+    if(!byName.has(key)) byName.set(key, {item_name:key, amount:0, qty:0});
+    const e = byName.get(key);
+    e.amount += Number(r.amount)||0;
+    e.qty += Number(r.qty)||0;
+  });
+  return [...byName.values()].sort((a,b)=>b.amount-a.amount).slice(0,n);
+}
+// customer_year_totals: 거래처별 × 연도별 누적매출/주문수 전체 캐시 (요약 탭의 "거래처별" 랭킹에 씀).
+let custYearTotals = null;
+async function ensureCustYearTotalsLoaded(){
+  if(custYearTotals) return custYearTotals;
+  let all = [];
+  const pageSize = 10000; // customer_year_totals도 뷰라 페이지마다 다시 계산됨 — 한 번에 받아서 재계산 횟수를 줄임
+  for(let from=0; ; from += pageSize){
+    const {data, error} = await sb.from('customer_year_totals').select('*')
+      .order('customer_id', {ascending:true})
+      .range(from, from+pageSize-1);
+    if(error){ custYearTotals = []; throw error; }
+    all = all.concat(data || []);
+    if(!data || data.length < pageSize) break;
+  }
+  custYearTotals = all;
+  return custYearTotals;
+}
+// 요약 탭 상단 기간칩(최근12개월/연도/전체)과 거래처 상세창의 기간칩이 같이 쓰는 라벨 함수.
+function rangeLabel(range){
+  if(range==='recent') return '최근 12개월';
+  if(range==='all') return '전체';
+  return range+'년';
+}
+
+// ---------------- 요약 ----------------
+let summaryRange = 'recent';
+let summaryGroupBy = '유형별'; // '유형별' | '거래처별'
+
+// 유형별/거래처별 누적매출 상위 랭킹 계산. 연도(2024/2025/2026)가 선택된 경우엔 그 해 실적만으로,
+// '최근 12개월'·'전체'가 선택된 경우엔 (연도별 집계로는 정확히 재현할 수 없어) 전체 기간 누적으로 계산.
+function summaryByType(range){
+  const yr = ['2024','2025','2026'].includes(range) ? Number(range) : null;
+  const amtByCust = yr!=null ? new Map((custYearTotals||[]).filter(r=>r.year===yr).map(r=>[r.customer_id, Number(r.total_amount)||0])) : null;
+  const byType = {};
+  CUSTS.forEach(c=>{
+    let t = c.ctype || '미분류';
+    if(t==='초등학교' || t==='유치원·어린이집') t = '초등학교·유치원';
+    const amt = yr!=null ? (amtByCust.get(c.customer_id)||0) : (Number(c.total_amount)||0);
+    if(amt>0) byType[t] = (byType[t]||0) + amt;
+  });
+  return byType;
+}
+// 선택한 기간(연도)에 실제 주문이 있었던 거래처 수. '최근12개월'·'전체'는 summaryByType과 같은 이유로
+// 연도별 집계로 정확히 재현할 수 없어 전체 누적 거래처 수(CUSTS.length)로 계산.
+function summaryCustomerCount(range){
+  const yr = ['2024','2025','2026'].includes(range) ? Number(range) : null;
+  if(yr!=null){
+    const ids = new Set((custYearTotals||[]).filter(r=>r.year===yr && Number(r.total_amount)>0).map(r=>r.customer_id));
+    return ids.size;
+  }
+  return CUSTS.length;
+}
+function summaryTopCustomers(range, n){
+  const yr = ['2024','2025','2026'].includes(range) ? Number(range) : null;
+  if(yr!=null){
+    return (custYearTotals||[]).filter(r=>r.year===yr && Number(r.total_amount)>0)
+      .sort((a,b)=>Number(b.total_amount)-Number(a.total_amount)).slice(0,n)
+      .map(r=>{ const c = custById.get(r.customer_id); return {n:(c&&c.name)||`#${r.customer_id}`, v:Number(r.total_amount)||0, s:won(r.total_amount), id:r.customer_id}; });
+  }
+  return CUSTS.slice().sort((a,b)=>(Number(b.total_amount)||0)-(Number(a.total_amount)||0)).slice(0,n)
+    .map(c=>({n:c.name, v:Number(c.total_amount)||0, s:won(c.total_amount), id:c.customer_id}));
+}
+
+async function renderSummaryView(){
+  const el = document.getElementById('view-summary');
+  el.innerHTML = '<div class="spin">불러오는 중...</div>';
+  const now = new Date();
+  const pad = n=>String(n).padStart(2,'0');
+  const nowYM = `${now.getFullYear()}-${pad(now.getMonth()+1)}`;
+  const dayOfMonth = now.getDate();
+  const startCur = `${nowYM}-01`;
+  const nextD = new Date(now.getFullYear(), now.getMonth()+1, 1);
+  const startNext = `${nextD.getFullYear()}-${pad(nextD.getMonth()+1)}-01`;
+  let itemRows = [], monthActs = [], monthOrders = [];
+  try{
+    const [, items, , actsRes, notableRes] = await Promise.all([
+      ensureMonthsLoaded(), ensureItemTotalsLoaded(), ensureCustYearTotalsLoaded(),
+      sb.from('activities').select('id,kind,customer_id,note,created_at,customers(name)')
+        .gte('created_at', startCur).lt('created_at', startNext)
+        .order('created_at', {ascending:false}).limit(300),
+      sb.from('order_notability').select('*')
+        .gte('order_date', startCur).lt('order_date', startNext)
+        .order('amount', {ascending:false}).limit(500)
+    ]);
+    itemRows = items;
+    monthActs = (actsRes && actsRes.data) || [];
+    monthOrders = (notableRes && notableRes.data) || [];
+  }
+  catch(error){ el.innerHTML = `<div class="panel">불러오기 실패: ${esc(error.message)}</div>`; return; }
+  const byStatus = {}; CUSTS.forEach(c=>byStatus[c.status]=(byStatus[c.status]||0)+1);
+  const topItems = topMergedItems(itemRows, 40);
+  const [a,b] = monthRangeBounds(summaryMonths, summaryRange);
+  const chartRows = summaryMonths.slice(a,b);
+  // KPI의 "주문금액"·"주문"은 선택한 기간(최근12개월/연도/전체) 동안의 실적으로 계산 — monthly_order_totals가
+  // 이미 월별 금액·건수를 갖고 있어서, 그 기간에 해당하는 월들만 더하면 됨.
+  const rangeAmount = chartRows.reduce((s,r)=>s+(Number(r.amount)||0),0);
+  const rangeOrders = chartRows.reduce((s,r)=>s+(Number(r.order_count)||0),0);
+  const byType = summaryByType(summaryRange);
+  const topCustomers = summaryTopCustomers(summaryRange, 10);
+  const rangeCustCount = summaryCustomerCount(summaryRange);
+  const curIdx = (summaryMonths||[]).findIndex(r=>r.month.slice(0,7)===nowYM);
+  const curMonthRow = curIdx>=0 ? summaryMonths[curIdx] : {amount:0, order_count:0};
+  const prevMonthRow = curIdx>0 ? summaryMonths[curIdx-1] : null;
+  const momBadge = (cur, prev)=>{
+    const c = Number(cur)||0, p = Number(prev)||0;
+    if(!p) return '';
+    const pct = (c-p)/p*100, up = pct>=0;
+    return `<span style="color:${up?'var(--good)':'var(--bad)'}">${up?'▲':'▼'} ${Math.abs(pct).toFixed(1)}%</span>`;
+  };
+  const amtDelta = momBadge(curMonthRow.amount, prevMonthRow && prevMonthRow.amount);
+  const cntDelta = momBadge(curMonthRow.order_count, prevMonthRow && prevMonthRow.order_count);
+  // 이번달 신규 거래처(첫 주문이 이번달) — customer_stats.first_date 기준, CUSTS는 이미 전량 로드돼 있음
+  const newCustomersThisMonth = CUSTS.filter(c=>c.first_date && c.first_date.slice(0,7)===nowYM).length;
+  const actKindCount = {call:0, visit:0, sms:0};
+  monthActs.forEach(a=>{ if(actKindCount[a.kind]!=null) actKindCount[a.kind]++; });
+  // 이번달 "주목할 만한 주문" — 사람이 표를 하나하나 훑지 않으면 놓치기 쉬운 신호 3가지를 자동으로 골라냄:
+  // 1) 금액 자체가 크거나 그 거래처 평소 평균보다 훨씬 큰 주문, 2) 한동안 뜸했던 거래처가 다시 주문, 3) 꽤 큰 금액으로 시작한 첫 거래.
+  const NOTABLE_BIG_ABS = 20000000, NOTABLE_BIG_REL = 2.5, NOTABLE_RETURN_GAP = 120, NOTABLE_FIRST_MIN = 5000000;
+  const notableOrders = monthOrders.map(o=>{
+    const amt = Number(o.amount)||0, avg = Number(o.cust_avg_amount)||0, n = Number(o.cust_order_n)||0;
+    const gap = o.gap_days!=null ? Number(o.gap_days) : null;
+    const badges = [], why = [];
+    if(amt>=NOTABLE_BIG_ABS || (n>1 && avg>0 && amt>=avg*NOTABLE_BIG_REL)){
+      badges.push({cls:'b-big', label:'고액 주문'});
+      if(n>1 && avg>0) why.push(`평소 평균(${eok(avg)}원)의 ${(amt/avg).toFixed(1)}배`);
+    }
+    if(gap!=null && gap>=NOTABLE_RETURN_GAP){
+      badges.push({cls:'b-return', label:`${Math.round(gap/30)}개월만에 복귀`});
+      why.push(`직전 주문(${o.prev_order_date}) 이후 ${num(gap)}일만`);
+    }
+    if(o.prev_order_date==null && amt>=NOTABLE_FIRST_MIN){
+      badges.push({cls:'b-first', label:'첫 거래'});
+      why.push('이 거래처와의 첫 주문');
+    }
+    if(!badges.length) return null;
+    return {customer_id:o.customer_id, customer_name:o.customer_name, order_date:o.order_date, amount:amt, badges, why: why.join(' · ')};
+  }).filter(Boolean).sort((x,y)=>y.amount-x.amount).slice(0,6);
+  el.innerHTML = `
+  <div class="kpis">
+    <div class="kpi"><div class="l">주문금액 (${rangeLabel(summaryRange)})</div><div class="v">${won(rangeAmount)}</div></div>
+    <div class="kpi"><div class="l">거래처 (${rangeLabel(summaryRange)})</div><div class="v">${num(rangeCustCount)}곳</div></div>
+    <div class="kpi"><div class="l">주문 (${rangeLabel(summaryRange)})</div><div class="v">${num(rangeOrders)}건</div></div>
+    <div class="kpi click" data-goto-core="1"><div class="l">주문 늦어진 거래처</div><div class="v" style="color:var(--bad)">${num((byStatus['이탈의심']||0)+(byStatus['주의']||0))}곳</div><div class="s">🔥 핵심 영업대상 보기 →</div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><h2>월별 주문금액</h2><span class="period-tag">${chartRows.length}개월</span></div>
+    ${monthRangeChips(summaryMonths, summaryRange, 'summarySeg')}
+    ${chartRows.length? monthBars(chartRows) : '<p class="small muted">데이터가 없습니다.</p>'}
+    ${monthTable(chartRows)}
+  </div>
+  <div class="status-row">
+  <div class="panel"><div class="panel-h"><h2>거래처 상태 분포</h2><span class="period-tag">기준일 ${todayStr()}</span></div>
+    <div class="chip-row">${Object.entries(byStatus).sort((a,b)=>{const ia=STATUS_ORDER.indexOf(a[0]),ib=STATUS_ORDER.indexOf(b[0]);return (ia<0?999:ia)-(ib<0?999:ib);}).map(([k,v])=>`<button class="chip" data-goto-st="${esc(k)}">${statusPill(k)} ${v}곳</button>`).join('')}</div>
+    ${statusHelpBlock()}
+  </div>
+  <div class="panel"><div class="panel-h"><h2>당월 주문 현황</h2><span class="period-tag">${esc(nowYM)} · ${dayOfMonth}일째</span></div>
+    <div class="kpis">
+      <div class="kpi"><div class="l">당월 주문금액</div><div class="v" title="${won(curMonthRow.amount)}">${eok(curMonthRow.amount)}원</div>${amtDelta?`<div class="s">전월 대비 ${amtDelta}</div>`:''}</div>
+      <div class="kpi"><div class="l">당월 주문수</div><div class="v">${num(curMonthRow.order_count)}건</div>${cntDelta?`<div class="s">전월 대비 ${cntDelta}</div>`:''}</div>
+    </div>
+    ${Number(curMonthRow.amount)?'':'<p class="small muted" style="margin-top:10px">이번 달 주문 데이터가 아직 없어요.</p>'}
+  </div>
+  </div>
+  <div class="panel"><div class="panel-h"><h2>이번달 주목할 만한 주문</h2><span class="period-tag">${esc(nowYM)} 기준</span></div>
+    ${notableOrders.length ? `
+    <div class="notable-list">
+      ${notableOrders.map(o=>`<div class="order click" data-goto-cust="${o.customer_id}">
+        <div class="order-h"><b>${esc(o.customer_name)}</b> ${o.badges.map(b=>`<span class="pill ${b.cls}">${esc(b.label)}</span>`).join('')} <span class="amt">${won(o.amount)}</span></div>
+        <div class="ship">${esc(o.order_date)} · ${esc(o.why)}</div>
+      </div>`).join('')}
+    </div>` : `<p class="small muted">이번달은 특별히 두드러지는 주문이 없어요. (평소보다 훨씬 크거나, 오래 뜸했다 돌아왔거나, 큰 금액으로 시작한 첫 거래를 자동으로 찾아드려요)</p>`}
+  </div>
+  <div class="panel"><div class="panel-h"><h2>이번달 영업 활동</h2><span class="period-tag">${esc(nowYM)} · ${dayOfMonth}일째</span></div>
+    <div class="kpis">
+      <div class="kpi"><div class="l">신규 거래처</div><div class="v">${num(newCustomersThisMonth)}곳</div><div class="s">이번달 첫 주문</div></div>
+      <div class="kpi"><div class="l">전화</div><div class="v">${num(actKindCount.call)}건</div></div>
+      <div class="kpi"><div class="l">방문</div><div class="v">${num(actKindCount.visit)}건</div></div>
+      <div class="kpi"><div class="l">문자</div><div class="v">${num(actKindCount.sms)}건</div></div>
+    </div>
+    ${monthActs.length ? `
+    <div class="tbl-wrap" style="margin-top:14px"><table><thead><tr><th>거래처</th><th>구분</th><th>내용</th><th class="num">일시</th></tr></thead><tbody>
+      ${monthActs.slice(0,8).map(a=>`<tr class="click" data-goto-cust="${a.customer_id}"><td>${esc((a.customers&&a.customers.name)||'-')}</td><td><span class="tag">${LOG_TYPE[a.kind]||a.kind}</span></td><td class="small muted">${esc((a.note||'').slice(0,40))}${(a.note||'').length>40?'…':''}</td><td class="num small muted">${esc((a.created_at||'').slice(0,10))}</td></tr>`).join('')}
+    </tbody></table></div>
+    ${monthActs.length>8?`<p class="small muted" style="margin-top:6px">이번달 총 ${num(monthActs.length)}건 중 8건만 표시했어요.</p>`:''}
+    ` : `<p class="small muted" style="margin-top:12px">아직 이번달에 기록된 통화·방문·문자가 없어요. 거래처 상세에서 "기록 남기기"로 남기면 여기서 볼 수 있어요.</p>`}
+  </div>
+  <div class="panel"><div class="panel-h"><h2>${esc(summaryGroupBy)} 누적매출 상위</h2>
+    <div class="seg" id="summaryGroupSeg">
+      <button data-g="유형별" aria-pressed="${summaryGroupBy==='유형별'}">유형별</button>
+      <button data-g="거래처별" aria-pressed="${summaryGroupBy==='거래처별'}">거래처별</button>
+    </div></div>
+    <span class="period-tag">${rangeLabel(summaryRange)} 기준</span>
+    ${summaryGroupBy==='유형별'
+      ? hbars(Object.entries(byType).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([n,v])=>({n,v,s:won(v)})), {cat:true})
+      : hbars(topCustomers)}
+  </div>
+  <div class="panel"><div class="panel-h"><h2>주요 품목</h2><span class="note">누적금액 상위 · 특가·공동구매 등 표기만 다른 동일 품목은 합산</span></div>
+    ${stackbar(topItems.map(i=>({n:i.item_name, v:Number(i.amount)||0})))}
+    <div class="tbl-wrap" style="max-height:300px;overflow-y:auto;margin-top:14px"><table><thead><tr><th>품목</th><th class="num">누적금액</th><th class="num">수량</th></tr></thead><tbody>
+    ${topItems.map(i=>`<tr><td>${esc(i.item_name)}</td><td class="num">${won(i.amount)}</td><td class="num">${num(i.qty)}</td></tr>`).join('')}
+    </tbody></table></div></div>`;
+  el.querySelectorAll('[data-yr]').forEach(b=> b.onclick = ()=>{ summaryRange = b.dataset.yr; renderSummaryView(); });
+  el.querySelectorAll('[data-goto-st]').forEach(b=> b.onclick = ()=> gotoCustomersByStatus(b.dataset.gotoSt) );
+  el.querySelectorAll('[data-goto-core]').forEach(b=> b.onclick = ()=> gotoCoreTargets() );
+  const gseg = document.getElementById('summaryGroupSeg');
+  if(gseg) gseg.onclick = (e)=>{ const b=e.target.closest('button[data-g]'); if(!b) return; summaryGroupBy = b.dataset.g; renderSummaryView(); };
+  el.querySelectorAll('[data-hb-id]').forEach(b=> b.onclick = ()=> openDrawer(Number(b.dataset.hbId)) );
+  el.querySelectorAll('[data-goto-cust]').forEach(tr=> tr.onclick = ()=> openDrawer(Number(tr.dataset.gotoCust)) );
+}
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+
+// 재주문 예측(item_family_stats 기반 다음 주문일 예상)은 더 이상 별도 탭이 아니라
+// '핵심 영업대상'의 거래처별 팁으로 흡수됨 — renderCoreTargets() 참고.
+
+// ---------------- 제품가격 (자사 판매상품 카탈로그 · ablemarket.or.kr 기준 정적 데이터, 잉크/토너 제외) ----------------
+const PRODUCTS = [{"c":"사무용지","b":"꿈드래장애인일자리센터","n":"복사용지 A4/85g(2,500매)","p":"31,000원"},{"c":"사무용지","b":"꿈드래장애인일자리센터","n":"복사용지 A4/80g(2,500매)","p":"28,000원"},{"c":"사무용지","b":"꿈드래장애인일자리센터","n":"복사용지 A4/75g(2,500매)","p":"27,500원"},{"c":"사무용지","b":"갑을장애인직업휴먼센터","n":"복사용지 A3/75g(1,250매)","p":"28,400원"},{"c":"사무용지","b":"갑을장애인직업휴먼센터","n":"복사용지 B4/75g(2,500매)","p":"38,600원"},{"c":"사무용지","b":"갑을장애인직업휴먼센터","n":"복사용지 A4/75g(2,500매)","p":"27,500원"},{"c":"사무용지","b":"갑을장애인직업휴먼센터","n":"복사용지 A4/80g(2,500매)","p":"28,000원"},{"c":"사무용지","b":"갑을장애인직업휴먼센터","n":"복사용지 A4/85g(2,500매)","p":"31,000원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"복사용지 A4/80g(친환경) (2,500매)","p":"28,000원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"복사용지 A4/75g(친환경) (2,500매)","p":"26,000원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"중질지 A4/70g(2,500매)","p":"23,700원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"중질지 B4/70g(2,500매)","p":"31,200원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"복사용지 B4/75g(2,500매)","p":"38,600원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"복사용지 A3/75g(1,250매)","p":"28,400원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"복사용지 B4/80g(2,500매)","p":"39,600원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"복사용지 A3/80g(1,250매)","p":"29,700원"},{"c":"사무용지","b":"갑을장애인직업휴먼센터","n":"중질지 B4/70g(2,500매)","p":"31,200원"},{"c":"사무용지","b":"치즈팩토리","n":"복사용지 A4/85g(2,500매)","p":"31,000원"},{"c":"사무용지","b":"사단법인 한국나눔복지연합회","n":"중질지 A4/70g(2,500매)","p":"23,700원"},{"c":"사무용지","b":"사단법인 한국나눔복지연합회","n":"중질지 B4/70g(2,500매)","p":"31,200원"},{"c":"사무용지","b":"갑을장애인직업휴먼센터","n":"중질지 A4/70g(2,500매)","p":"23,700원"},{"c":"사무용지","b":"사단법인 한국나눔복지연합회","n":"복사용지 A4/80g(건식2종/친환경)(2,500매)","p":"28,000원"},{"c":"사무용지","b":"사단법인 한국나눔복지연합회","n":"복사용지 A4/85g(2,500매)","p":"31,000원"},{"c":"사무용지","b":"사단법인 한국나눔복지연합회","n":"컬러 복사용지(색지) A4/70g(250매)","p":"15,800원"},{"c":"사무용지","b":"사단법인 한국나눔복지연합회","n":"컬러 복사용지(색지) A4/75g(250매)","p":"15,800원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"복사용지 A4/75g(2,500매)","p":"27,500원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"복사용지 A4/80g(2,500매)","p":"28,000원"},{"c":"사무용지","b":"사단법인 에스디워크 서울지사","n":"복사용지 A4/85g(2,500매)","p":"31,000원"},{"c":"사무용지","b":"꿈드래장애인일자리센터","n":"중질지 A4/70g(2,500매)","p":"23,700원"},{"c":"사무용지","b":"치즈팩토리","n":"복사용지 A4/80g(2,500매)","p":"28,000원"},{"c":"사무용지","b":"꿈드래장애인일자리센터","n":"복사용지 A3/75g(1,250매)","p":"28,400원"},{"c":"사무용지","b":"꿈드래장애인일자리센터","n":"복사용지 B4/75g(2,500매)","p":"38,600원"},{"c":"사무용지","b":"사단법인 한국나눔복지연합회","n":"복사용지 A4/75g(2,500매)","p":"27,500원"},{"c":"사무용지","b":"사단법인 한국나눔복지연합회","n":"복사용지 A4/80g(2,500매)","p":"28,000원"},{"c":"사무용지","b":"치즈팩토리","n":"중질지 B4/70g(2,500매)","p":"31,200원"},{"c":"사무용지","b":"치즈팩토리","n":"중질지 A4/70g(2,500매)","p":"23,700원"},{"c":"사무용지","b":"치즈팩토리","n":"복사용지 A4/80g(2,500매) 친환경지","p":"28,000원"},{"c":"사무용지","b":"치즈팩토리","n":"복사용지 A3/80g(1,250매)","p":"29,700원"},{"c":"사무용지","b":"치즈팩토리","n":"복사용지 B4/80g(2,500매)","p":"39,600원"},{"c":"사무용품","b":"행복한나무","n":"결재판 A4(검정색)","p":"2,950원"},{"c":"사무용품","b":"행복한나무","n":"진행문서화일(판지) A4/노랑(10매)","p":"10,400원"},{"c":"사무용품","b":"행복한나무","n":"정부화일 A4 (분홍/BOX)","p":"155,000원"},{"c":"사무용품","b":"행복한나무","n":"정부화일 A4 (연두/BOX)","p":"155,000원"},{"c":"사무용품","b":"행복한나무","n":"진행문서화일(판지) A4/하늘(10매)","p":"10,400원"},{"c":"사무용품","b":"행복한나무","n":"보존용표지 A4(100매)","p":"22,000원"},{"c":"사무용품","b":"행복한나무","n":"보존용표지 B4(100매)","p":"33,000원"},{"c":"사무용품","b":"행복한나무","n":"정부화일 A4/분홍(10매)","p":"3,100원"},{"c":"사무용품","b":"행복한나무","n":"정부화일 A4/연두(10매)","p":"3,100원"},{"c":"사무용품","b":"행복한나무","n":"책표지 A4/세로(넓은면)(10조)","p":"10,000원"},{"c":"사무용품","b":"행복한나무","n":"책표지 A4/가로(좁은면)(10조)","p":"10,000원"},{"c":"사무용품","b":"행복한나무","n":"결재판 A4(회색)","p":"2,950원"},{"c":"사무용품","b":"행복한나무","n":"책표지 B4/가로(좁은면)(10조)","p":"97,000원"},{"c":"사무용품","b":"행복한나무","n":"책표지B4(넓은면)","p":"100,000원"},{"c":"사무용품","b":"행복한나무","n":"정부화일 A4 (하늘/BOX)","p":"155,000원"},{"c":"사무용품","b":"행복한나무","n":"정부화일 A4 (노랑/BOX)","p":"155,000원"},{"c":"사무용품","b":"행복한나무","n":"정부화일 A4/하늘(10매)","p":"3,100원"},{"c":"사무용품","b":"행복한나무","n":"정부화일 A4/노랑(10매)","p":"3,100원"},{"c":"사무용품","b":"행복한나무","n":"문서보존상자 A4/하늘(10매)","p":"13,400원"},{"c":"사무용품","b":"행복한나무","n":"문서보존상자 A4/노랑(10매)","p":"13,400원"},{"c":"사무용품","b":"행복한나무","n":"문서보존상자 B4/하늘(10매)","p":"27,500원"},{"c":"사무용품","b":"행복한나무","n":"문서보존상자 B4/노랑(10매)","p":"27,500원"},{"c":"화장지류","b":"늘푸름보호작업장","n":"점보롤화장지 300m/두겹(16롤)","p":"42,800원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"점보롤화장지 300m/두겹(16롤)","p":"42,800원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"롤화장지 30m/세겹(30롤)","p":"14,300원"},{"c":"화장지류","b":"소울터보호작업장","n":"점보롤화장지 300m/두겹(16롤)","p":"42,800원"},{"c":"화장지류","b":"소울터보호작업장","n":"점보롤화장지 500m/한겹(16롤)","p":"43,800원"},{"c":"화장지류","b":"소울터보호작업장","n":"핸드타올 일반지(5,000매)","p":"31,000원"},{"c":"화장지류","b":"소울터보호작업장","n":"핸드타올 고급지(5,000매)","p":"33,000원"},{"c":"화장지류","b":"소울터보호작업장","n":"롤화장지 50m(10롤)","p":"4,800원"},{"c":"화장지류","b":"소울터보호작업장","n":"롤화장지 60m(24롤)","p":"13,300원"},{"c":"화장지류","b":"소울터보호작업장","n":"롤화장지 70m(10롤)","p":"6,500원"},{"c":"화장지류","b":"늘푸름보호작업장","n":"점보롤화장지 500m/한겹(16롤)","p":"43,800원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"점보롤화장지 500m/한겹(16롤)","p":"43,800원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"핸드타올 일반지(5,000매)","p":"31,000원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"핸드타올 고급지(5,000매)","p":"33,000원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"롤화장지 50m/두겹(10롤)","p":"4,800원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"롤화장지 60m/두겹(24롤)","p":"13,300원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"롤화장지 70m/두겹(10롤)","p":"6,500원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"핸드타올 갈색지(5,000매)","p":"31,400원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"냅킨(10,000매)","p":"16,500원"},{"c":"화장지류","b":"늘푸름보호작업장","n":"핸드타올 일반지(5,000매)","p":"31,000원"},{"c":"화장지류","b":"늘푸름보호작업장","n":"핸드타올 고급지(5,000매)","p":"33,000원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"사각티슈(250매)","p":"1,450원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"점보롤 케이스","p":"5,800원"},{"c":"화장지류","b":"그린내 직업재활시설","n":"핸드타올 케이스","p":"7,800원"},{"c":"화장지류","b":"늘푸름보호작업장","n":"롤화장지 50m(10롤)","p":"4,800원"},{"c":"화장지류","b":"늘푸름보호작업장","n":"롤화장지 50m(24롤)","p":"13,100원"},{"c":"화장지류","b":"늘푸름보호작업장","n":"롤화장지 70m(10롤)","p":"6,500원"},{"c":"전자제품","b":"시흥시장애인보호작업장","n":"단독경보형화재감지기","p":"10,000원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(면조명,엣지)","p":"115,500원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(면조명,엣지)","p":"115,500원"},{"c":"전자제품","b":"SRC직업재활센터","n":"화재감지기(택 1)","p":"3,520원"},{"c":"전자제품","b":"참행복한세상","n":"공기살균기 30평형","p":"2,400,000원"},{"c":"전자제품","b":"참행복한세상","n":"공기살균기 50평형","p":"3,800,000원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실외조명(투광등)","p":"275,000원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실외조명(가로등및보안등)","p":"275,000원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(다운라이트)","p":"26,400원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(원형직부등)","p":"33,000원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(직부등)","p":"59,400원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(원형센서등)","p":"38,500원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(간접등)","p":"48,400원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(면조명)","p":"132,000원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(면조명)","p":"126,500원"},{"c":"전자제품","b":"늘푸름보호작업장","n":"LED 실내조명(방진방습등)","p":"121,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"배쓰밤 바다상추","p":"7,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"바디워시 세트","p":"17,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"핸드워시폼(거품) 세트","p":"13,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"핸드워시 세트","p":"13,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"헤어바디 5종세트","p":"39,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"주방단짝 2종세트","p":"12,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"헤어바디 2종세트","p":"17,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"배쓰밤 파우더 세트","p":"7,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"핸드워시폼 500g","p":"7,000원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"거품비누 3L (핸드워시 가능)","p":"15,700원"},{"c":"생활용품","b":"성모자애보호작업장","n":"배쓰밤 청귤(분말형)","p":"1,500원"},{"c":"생활용품","b":"성모자애보호작업장","n":"배쓰밤 바다상추(분말형)","p":"1,500원"},{"c":"생활용품","b":"성모자애보호작업장","n":"식기세척기 액체세제","p":"5,000원"},{"c":"생활용품","b":"성모보호작업장","n":"나너봄 디퓨저&사쉐 세트","p":"25,000원"},{"c":"생활용품","b":"성모보호작업장","n":"나너봄 사쉐","p":"10,000원"},{"c":"생활용품","b":"성모보호작업장","n":"나너봄 디퓨저","p":"17,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"핸드워시폼(거품) 8kg","p":"36,000원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"주방세제 2종세트","p":"8,800원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"린스 1L","p":"8,900원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"세탁세제 10L(일반/드럼 겸용)","p":"32,450원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"피톤치드 주방세제 1L","p":"5,700원"},{"c":"생활용품","b":"오뚜기직업재활센터","n":"미니사쉐디퓨저","p":"7,000원"},{"c":"생활용품","b":"오뚜기직업재활센터","n":"사쉐디퓨저","p":"15,000원"},{"c":"생활용품","b":"오뚜기직업재활센터","n":"스톤 디퓨저","p":"25,000원"},{"c":"생활용품","b":"누야하우스","n":"다함께 핸드워시(물비누)","p":"18,000원"},{"c":"생활용품","b":"강남세움보호작업장","n":"세안비누(3개입포장)(스윗유자*3개입)","p":"2,750원"},{"c":"생활용품","b":"강남세움보호작업장","n":"세안비누(3개입포장)(스윗살구*3개입)","p":"3,600원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"오미자 홍초 주방세제(택 1)","p":"4,230원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"스킨 500ml","p":"14,300원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"주방세제 13L","p":"26,100원"},{"c":"생활용품","b":"누야하우스","n":"세안비누 코코넛(10개입)","p":"29,000원"},{"c":"생활용품","b":"누야하우스","n":"아카시아 바디워시","p":"15,200원"},{"c":"생활용품","b":"누야하우스","n":"아카시아 바디로션","p":"15,200원"},{"c":"생활용품","b":"누야하우스","n":"파이브플러스 샴푸","p":"15,200원"},{"c":"생활용품","b":"누야하우스","n":"파이브플러스 헤어미스트","p":"12,900원"},{"c":"생활용품","b":"누야하우스","n":"거품형 핸드워시(아카시아) 250ml","p":"7,600원"},{"c":"생활용품","b":"성모자애보호작업장","n":"비누2종세트(선택)","p":"7,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"주방세제 2구 선물 세트","p":"11,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"비누&세제 5종 선물세트","p":"22,000원"},{"c":"생활용품","b":"우리마포보호작업장","n":"리띠아모 디퓨저","p":"13,200원"},{"c":"생활용품","b":"용산구립장애인보호작업장","n":"광목 에코백(인쇄가능)","p":"전화문의"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"천연 핸드크림 50ml","p":"4,670원"},{"c":"생활용품","b":"성모자애보호작업장","n":"주방세제 사과향 500g","p":"5,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"주방세제 자몽향 500g","p":"5,000원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"다목적 세정제 500mL","p":"3,850원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"다목적 세정제 18L","p":"27,500원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"샴푸 500mL","p":"5,600원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"샴푸 1L","p":"8,900원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"린스 500mL","p":"5,600원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"바디워시 500mL","p":"5,600원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"바디워시 1L","p":"8,900원"},{"c":"생활용품","b":"누야하우스","n":"내츄럴 손세정 스프레이","p":"6,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"핸드워시 360g","p":"6,000원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"클렌징폼 120g","p":"4,670원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"거품비누 300g (핸드워시 가능)","p":"6,430원"},{"c":"생활용품","b":"동작구립장애인보호작업장","n":"KF94 마스크(대형)","p":"290원"},{"c":"생활용품","b":"성모자애보호작업장","n":"핸드워시폼(거품) 300g","p":"6,000원"},{"c":"생활용품","b":"도봉장애인보호작업시설","n":"KF94 마스크(대형)","p":"290원"},{"c":"생활용품","b":"성모자애보호작업장","n":"바디워시 350g","p":"7,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"기분좋은 바디워시 리필 600g","p":"9,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"핸드워시 폼 리필 600g","p":"6,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"핸드워시 리필 600g","p":"6,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"주방세제 사과향 리필 600g","p":"4,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"주방세제 자몽향 리필 600g","p":"4,000원"},{"c":"생활용품","b":"구립강서구직업재활센터","n":"인쇄 마스크","p":"전화문의"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"락스 18L","p":"29,370원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"로션 500ml","p":"14,300원"},{"c":"생활용품","b":"성모자애보호작업장","n":"린스바(고체 린스)","p":"8,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"샴푸바(고체 샴푸)","p":"8,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"해달별 주방세제 업소용 10kg","p":"21,000원"},{"c":"생활용품","b":"은평구립직업재활센터","n":"작업용 면장갑","p":"22,300원"},{"c":"생활용품","b":"은평구립직업재활센터","n":"작업용 면장갑","p":"24,300원"},{"c":"생활용품","b":"누야하우스","n":"천연화장품 클렌징솝(클렌징폼)","p":"8,400원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"물비누 3L","p":"7,590원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"물비누 18L","p":"31,900원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"참숯 주방세제 3L","p":"9,350원"},{"c":"생활용품","b":"강남세움보호작업장","n":"세안비누(비포장)(50개)","p":"41,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"EM 세탁 비누","p":"1,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"어성초 비누","p":"5,000원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"참숯주방세제 500ml","p":"4,230원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"세탁세제 3L(일반/드럼 겸용)","p":"13,200원"},{"c":"생활용품","b":"성모자애보호작업장","n":"로즈마리 비누","p":"3,000원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"참숯 주방세트 2종","p":"6,600원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"주방세제 3종세트(주방/참숯/피톤치드 용기500ml*3)","p":"13,200원"},{"c":"생활용품","b":"밀알희망일터","n":"시트형 세탁세제","p":"2,200원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"피톤치드 주방세제 500ml","p":"4,230원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"피톤치드 주방세제 750ml","p":"4,780원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"피톤치드 주방세제 3L","p":"10,100원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"참숯주방세제 750ml","p":"4,780원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"물비누 500ml","p":"3,500원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"섬유유연제 3L","p":"7,250원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"섬유유연제 20L","p":"30,350원"},{"c":"생활용품","b":"마포푸르메직업재활센터","n":"아텐토 토끼자수 파우치","p":"16,900원"},{"c":"생활용품","b":"마포푸르메직업재활센터","n":"아텐토 토끼자수 에코백","p":"26,900원"},{"c":"생활용품","b":"마포푸르메직업재활센터","n":"아텐토 양자수 에코백","p":"23,000원"},{"c":"생활용품","b":"마포푸르메직업재활센터","n":"아텐토 로아스웨이드 숄더백","p":"28,000원"},{"c":"생활용품","b":"마포푸르메직업재활센터","n":"아텐토 무지개 얼룩말 대형 에코백","p":"26,000원"},{"c":"생활용품","b":"참행복한세상","n":"방진마스크","p":"500원"},{"c":"생활용품","b":"구립강서구직업재활센터","n":"드노핌 제설제","p":"3,000원"},{"c":"생활용품","b":"구립강서구직업재활센터","n":"KF94 마스크(대형) 흰색(3중)","p":"290원"},{"c":"생활용품","b":"성모자애보호작업장","n":"오트밀 비누","p":"4,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"코코아 비누","p":"4,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"샴푸바 쿨링","p":"8,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"비타민 바디바","p":"7,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"배쓰밤 청귤","p":"6,000원"},{"c":"생활용품","b":"성모자애보호작업장","n":"어메니티 세트(3종)","p":"7,000원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"락스 2L","p":"5,940원"},{"c":"생활용품","b":"사회복지법인 에덴복지재단 형원","n":"물비누 10L","p":"17,600원"},{"c":"식료품","b":"해나무일터","n":"쿠키미니드림세트","p":"11,000원"},{"c":"식료품","b":"해나무일터","n":"마들렌드림세트","p":"16,000원"},{"c":"식료품","b":"해나무일터","n":"골고루드림세트","p":"19,000원"},{"c":"식료품","b":"해나무일터","n":"가득세트","p":"54,000원"},{"c":"식료품","b":"해나무일터","n":"두리세트","p":"36,000원"},{"c":"식료품","b":"해나무일터","n":"쿠키만드림세트","p":"32,000원"},{"c":"식료품","b":"SG블루웰","n":"블루원더 드립백&위더스 쿠키 패키지 선물세트","p":"55,000원"},{"c":"식료품","b":"삼성떡프린스","n":"20구 찰떡세트","p":"40,000원"},{"c":"식료품","b":"삼성떡프린스","n":"떡국떡 세트","p":"32,000원"},{"c":"식료품","b":"은평보호작업장","n":"블루베리넛(견과, 20g*30봉)","p":"20,900원"},{"c":"식료품","b":"은평보호작업장","n":"레드베리넛(견과, 20g*30봉)","p":"20,900원"},{"c":"식료품","b":"희망일터","n":"마음을 담다 1호 선물세트","p":"22,000원"},{"c":"식료품","b":"희망일터","n":"강화를 담다 선물세트","p":"65,000원"},{"c":"식료품","b":"희망일터","n":"희망을 담다 1호 선물세트","p":"30,000원"},{"c":"식료품","b":"희망일터","n":"온기를 담다 선물세트","p":"10,000원"},{"c":"식료품","b":"희망일터","n":"진심을 담다 선물세트","p":"20,000원"},{"c":"식료품","b":"희망일터","n":"행복을 담다 선물세트","p":"26,000원"},{"c":"식료품","b":"희망일터","n":"정성을 담다 1호 선물세트","p":"29,000원"},{"c":"식료품","b":"희망일터","n":"강화이야기 선물세트","p":"70,000원"},{"c":"식료품","b":"희망일터","n":"사색미 선물세트","p":"30,000원"},{"c":"식료품","b":"사랑의일터","n":"타르트&구움과자 세트","p":"37,500원"},{"c":"식료품","b":"그라나다보호작업센터","n":"드립백커피 세트(예가체프+블루마운틴)","p":"31,000원"},{"c":"식료품","b":"소울터보호작업장","n":"현미 누룽지(25봉입)","p":"30,000원"},{"c":"식료품","b":"소울터보호작업장","n":"유기농 현미 누룽지 선물세트","p":"15,000원"},{"c":"식료품","b":"은평보호작업장","n":"요거베리넛(견과, 25g*30봉)","p":"20,900원"},{"c":"식료품","b":"삼성떡프린스","n":"2구 답례떡","p":"2,650원"},{"c":"식료품","b":"삼성떡프린스","n":"3구 답례떡","p":"3,750원"},{"c":"식료품","b":"삼성떡프린스","n":"10구 찰떡세트","p":"19,200원"},{"c":"식료품","b":"사랑의일터","n":"만주선물세트","p":"32,500원"},{"c":"식료품","b":"사랑의일터","n":"미니쿠키 선물세트(택 1)","p":"18,500원"},{"c":"식료품","b":"소울터보호작업장","n":"현미 누룽지 선물세트","p":"27,500원"},{"c":"식료품","b":"은평보호작업장","n":"마카베리넛(견과, 25g*30봉)","p":"23,100원"},{"c":"식료품","b":"공감플러스","n":"하트빈 원두커피(200g)","p":"14,000원"},{"c":"식료품","b":"공감플러스","n":"하트빈 원두커피(500g)","p":"20,000원"},{"c":"식료품","b":"공감플러스","n":"하트빈 원두커피(1kg)","p":"32,000원"},{"c":"식료품","b":"공감플러스","n":"하트빈 스페셜 드립백(9g*8ea)","p":"12,000원"},{"c":"식료품","b":"은평보호작업장","n":"구운 아몬드 300g","p":"7,700원"},{"c":"식료품","b":"은평보호작업장","n":"오메가 호두 300g","p":"7,700원"},{"c":"식료품","b":"아름다운","n":"발효원액 2종세트(오디원500ml+오미자원500ml)","p":"46,000원"},{"c":"식료품","b":"서울장애인종합복지관 보호작업시설","n":"쿠키 선물세트(17입)","p":"31,500원"},{"c":"식료품","b":"SG블루웰","n":"블루원더 드립백 선물세트 C","p":"18,150원"},{"c":"식료품","b":"SG블루웰","n":"블루원더 드립백 25개","p":"33,000원"},{"c":"식료품","b":"바오로교실 보호작업장","n":"누룽지과자 선물세트","p":"25,000원"},{"c":"식료품","b":"은평보호작업장","n":"엔젤스 넛 선물세트1","p":"42,900원"},{"c":"식료품","b":"은평보호작업장","n":"엔젤스 넛 선물세트2","p":"41,800원"},{"c":"식료품","b":"그라나다보호작업센터","n":"드립백 3종 선물세트","p":"24,000원"},{"c":"식료품","b":"바오로교실 보호작업장","n":"누룽지과자","p":"1,500원"},{"c":"식료품","b":"똘레랑스","n":"수제쿠키 초코(115g*5봉지)","p":"18,500원"},{"c":"식료품","b":"똘레랑스","n":"수제쿠키 호두(115g*5봉지)","p":"18,500원"},{"c":"식료품","b":"똘레랑스","n":"수제쿠키 블랑(115g*5봉지)","p":"18,500원"},{"c":"식료품","b":"똘레랑스","n":"수제쿠키 호두초코(100g*5봉지)","p":"18,500원"},{"c":"식료품","b":"아름다운","n":"발효원액(매실원500ml)","p":"20,000원"},{"c":"식료품","b":"아름다운","n":"발효원액(오미자원500ml)","p":"26,000원"},{"c":"식료품","b":"똘레랑스","n":"수제쿠키 마들렌(5봉지)","p":"8,800원"},{"c":"식료품","b":"똘레랑스","n":"수제쿠키 만델슈니텐(100g*5봉지)","p":"18,500원"},{"c":"식료품","b":"똘레랑스","n":"똘레랑스 수제쿠키 미니혼합(5봉지)","p":"22,500원"},{"c":"식료품","b":"그라나다보호작업센터","n":"원두커피 콜롬비아 슈프리모(500g*2팩)","p":"36,000원"},{"c":"식료품","b":"그라나다보호작업센터","n":"드립백커피 마라와카 블루마운틴(8g*8개입)","p":"9,000원"},{"c":"식료품","b":"아름다운","n":"발효원액 프리미엄 2종세트(오미자원375ml+복분자원375ml)","p":"42,000원"},{"c":"식료품","b":"아름다운","n":"프리미엄 발효원액 3종세트","p":"55,000원"},{"c":"식료품","b":"아름다운","n":"발효원액 프리미엄 2종세트(복분자원375ml+매실원375ml)","p":"34,000원"},{"c":"식료품","b":"은평보호작업장","n":"더블베리넛(견과, 25g*30봉)","p":"22,000원"},{"c":"식료품","b":"은평보호작업장","n":"크랜베리넛(견과, 25g*30봉)","p":"19,800원"},{"c":"식료품","b":"그라나다보호작업센터","n":"드립백커피 예가체프(8g*8개입)","p":"8,000원"},{"c":"식료품","b":"그라나다보호작업센터","n":"원두커피 케냐AA(500g*2팩)","p":"36,000원"},{"c":"식료품","b":"그라나다보호작업센터","n":"원두커피 에티오피아 예가체프(500g*2팩)","p":"33,000원"},{"c":"식료품","b":"SG블루웰","n":"블루원더 다크","p":"15,400원"},{"c":"식료품","b":"SG블루웰","n":"블루원더 미디엄","p":"17,600원"},{"c":"식료품","b":"SG블루웰","n":"블루원더 드립백(낱개)","p":"1,300원"},{"c":"식료품","b":"SG블루웰","n":"블루원더 드립백 A","p":"6,000원"},{"c":"식료품","b":"SG블루웰","n":"블루원더 드립백 B","p":"12,100원"},{"c":"식료품","b":"희망일터","n":"강화섬쌀  백미(삼광)","p":"19,000원"},{"c":"식료품","b":"희망일터","n":"강화섬쌀  백미(해들)","p":"20,000원"},{"c":"식료품","b":"희망일터","n":"강화섬쌀  백미(고시히카리)","p":"23,000원"},{"c":"식료품","b":"희망일터","n":"강화섬쌀 친환경백미","p":"23,000원"},{"c":"식료품","b":"희망일터","n":"강화섬쌀 현미, 찹쌀, 찹쌀현미","p":"20,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"[부의,결혼,화혼]이중봉투(인쇄)/1도","p":"8,200원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"[부의,결혼,화혼]이중봉투(양면인쇄)/1도","p":"8,800원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투2호(인쇄)/1도","p":"72,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투4호(인쇄)/1도","p":"122,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"행정봉투2호(인쇄)/1도","p":"83,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"행정봉투4호(인쇄)/1도","p":"133,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투2호(인쇄)/테입/1도","p":"105,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투4호(인쇄)/테입/1도","p":"155,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"행정봉투2호(인쇄)/테입/1도","p":"116,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"행정봉투4호(인쇄)/테입/1도","p":"166,000원"},{"c":"인쇄물/판촉물","b":"소망드림복지 센터","n":"[판촉물] 초경량 5단 6K 캡슐 양우산","p":"전화문의"},{"c":"인쇄물/판촉물","b":"번동보호작업장","n":"[판촉물] LCD 도킹 보조배터리 10,000mAh","p":"전화문의"},{"c":"인쇄물/판촉물","b":"번동보호작업장","n":"[판촉물] 크리스탈 기념패","p":"132,000원"},{"c":"인쇄물/판촉물","b":"번동보호작업장","n":"[판촉물] 송월 뉴컬러무지 40","p":"전화문의"},{"c":"인쇄물/판촉물","b":"EM실천","n":"[판촉물] 휴대용 칫솔 살균기","p":"전화문의"},{"c":"인쇄물/판촉물","b":"EM실천","n":"[판촉물] 충전식 초음파 가습기","p":"전화문의"},{"c":"인쇄물/판촉물","b":"다모인","n":"친환경 현수막(제작상품)","p":"전화문의"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투2호(양면인쇄)/1도/테입","p":"116,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투2호(양면인쇄)/1도","p":"83,000원"},{"c":"인쇄물/판촉물","b":"번동보호작업장","n":"타올/수건(종류 다양, 인쇄)","p":"전화문의"},{"c":"인쇄물/판촉물","b":"조은세상","n":"행정봉투2호(양면인쇄)/1도","p":"94,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투3호(인쇄)/모조지/테입/4도","p":"198,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"행정봉투2호(양면인쇄)/1도/테입","p":"127,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투2호(인쇄)/4도/테입","p":"132,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투4호(인쇄)/모조지/1도","p":"144,000원"},{"c":"인쇄물/판촉물","b":"동작구립장애인보호작업장","n":"점자명함(200매)","p":"38,500원"},{"c":"인쇄물/판촉물","b":"동작구립장애인보호작업장","n":"서울시청 명함","p":"22,000원"},{"c":"인쇄물/판촉물","b":"열림일터","n":"쇼핑백(제작상품)","p":"전화문의"},{"c":"인쇄물/판촉물","b":"다모인","n":"현수막(제작상품)","p":"전화문의"},{"c":"인쇄물/판촉물","b":"동작구립장애인보호작업장","n":"배너","p":"전화문의"},{"c":"인쇄물/판촉물","b":"동작구립장애인보호작업장","n":"현수막(제작상품)","p":"전화문의"},{"c":"인쇄물/판촉물","b":"조은세상","n":"서식 인쇄","p":"전화문의"},{"c":"인쇄물/판촉물","b":"조은세상","n":"리플렛, 카다로그, 자료집","p":"전화문의"},{"c":"인쇄물/판촉물","b":"조은세상","n":"제본 작업","p":"전화문의"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투4호(인쇄)/4도/모조지","p":"176,000원"},{"c":"인쇄물/판촉물","b":"동작구립장애인보호작업장","n":"명함/인쇄(200매)","p":"22,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"행정봉투3호(인쇄)/1도","p":"127,500원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투2호(인쇄)/4도","p":"99,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투3호(인쇄)/1도","p":"116,500원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"특대4절봉투(인쇄)/테잎/1도","p":"221,500원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투4호(인쇄)/모조지/테입/4도","p":"209,000원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"일반봉투3호(인쇄)/테입/1도","p":"149,500원"},{"c":"인쇄물/판촉물","b":"조은세상","n":"행정봉투3호(인쇄)/테입/1도","p":"160,500원"},{"c":"인쇄물/판촉물","b":"EM실천","n":"리플렛/카다로그/자료집(인쇄물)","p":"전화문의"},{"c":"인쇄물/판촉물","b":"EM실천","n":"명함","p":"전화문의"},{"c":"인쇄물/판촉물","b":"EM실천","n":"현수막 제작","p":"전화문의"},{"c":"인쇄물/판촉물","b":"소망드림복지 센터","n":"친환경 에코백","p":"전화문의"},{"c":"인쇄물/판촉물","b":"소망드림복지 센터","n":"727 저탄소 부직포가방","p":"전화문의"},{"c":"인쇄물/판촉물","b":"번동보호작업장","n":"기념패(종류 다양)","p":"38,500원"},{"c":"서비스외","b":"(사)해오름장애인협회","n":"구내방송장치","p":"전화문의"},{"c":"서비스외","b":"EM실천","n":"우편물발송 대행사업","p":"전화문의"},{"c":"서비스외","b":"보라매보호작업장","n":"보라매보호작업장 청소/소독 용역","p":"전화문의"},{"c":"서비스외","b":"강서나누리센터","n":"강서나누리센터 소독/방역 용역","p":"전화문의"},{"c":"서비스외","b":"(사)해오름장애인협회","n":"CCTV / 차량번호판독기","p":"전화문의"},{"c":"서비스외","b":"해맑음보호작업시설","n":"에이블클린 소독/방역 용역","p":"전화문의"},{"c":"서비스외","b":"사단법인 한국나눔복지연합회","n":"구내 방송장치 생산 및 설치","p":"전화문의"},{"c":"서비스외","b":"드림장애인보호작업장","n":"드림 소독/저수조 청소 용역","p":"전화문의"},{"c":"서비스외","b":"파란마음복지센터","n":"파란마음 소독/저수조 청소 용역","p":"전화문의"},{"c":"서비스외","b":"오뚜기직업재활센터","n":"오뚜기직업재활센터 소독/방역","p":"전화문의"},{"c":"서비스외","b":"SRC직업재활센터","n":"SRC직업재활센터 소독/방역","p":"전화문의"}];
+const PRODUCT_CATS = ["사무용지","사무용품","화장지류","전자제품","생활용품","식료품","인쇄물/판촉물","서비스외"];
+let prodQuery = '';
+let prodCat = '전체';
+
+function renderProductsView(){
+  const el = document.getElementById('view-products');
+  const catCounts = {}; PRODUCT_CATS.forEach(c=>catCounts[c]=0); PRODUCTS.forEach(p=>catCounts[p.c]++);
+  el.innerHTML = `
+    <div class="panel">
+      <div class="panel-h">
+        <h2 id="prodHeading">장애인생산품 (${num(PRODUCTS.length)}개)</h2>
+        <span class="note">에이블마켓 판매상품 · 잉크/토너 제외</span>
+      </div>
+      <div class="filters">
+        <input type="search" id="pq" placeholder="품명, 생산시설로 검색 (예: 복사용지, A4)" value="${esc(prodQuery)}">
+        <button class="btn" id="pcopyall">목록 복사</button>
+      </div>
+      <div class="chip-row" id="prodChips" style="margin-top:10px">
+        <button class="chip" data-c="전체" aria-pressed="${prodCat==='전체'}">전체 ${PRODUCTS.length}</button>
+        ${PRODUCT_CATS.map(c=>`<button class="chip" data-c="${esc(c)}" aria-pressed="${prodCat===c}">${esc(c)} ${catCounts[c]}</button>`).join('')}
+      </div>
+      <div id="prodResult" style="margin-top:12px"></div>
+    </div>`;
+  // 검색창을 매 키 입력마다 새로 그리면 포커스가 날아가서 글자가 안 눌리는 것처럼 보여요 —
+  // 그래서 입력창은 그대로 두고, 결과 영역만 갱신합니다.
+  function filtered(){
+    let list = PRODUCTS;
+    if(prodCat!=='전체') list = list.filter(p=>p.c===prodCat);
+    const q = prodQuery.trim().toLowerCase();
+    if(q) list = list.filter(p=> p.n.toLowerCase().includes(q) || p.b.toLowerCase().includes(q));
+    return list;
+  }
+  function draw(){
+    const list = filtered();
+    document.getElementById('prodResult').innerHTML = `
+      <div class="small muted" style="margin-bottom:6px">${num(list.length)}개 상품</div>
+      <div class="tbl-wrap"><table><thead><tr><th>품명</th><th>생산시설</th><th class="num">가격</th><th></th></tr></thead><tbody>
+      ${list.slice(0,400).map((p,i)=>`<tr>
+        <td style="white-space:normal;min-width:180px">${esc(p.n)}</td>
+        <td class="small muted">${esc(p.b)}</td>
+        <td class="num">${p.p==='전화문의'?'<span class="pill s-warn">전화문의</span>':esc(p.p)}</td>
+        <td><button class="lnk small" data-cp="${i}">복사</button></td>
+      </tr>`).join('')}
+      </tbody></table></div>
+      ${list.length>400?`<div class="small muted" style="margin-top:8px">검색 결과 ${num(list.length)}건 중 400건만 표시 — 검색어를 더 입력해보세요.</div>`:''}`;
+    document.getElementById('prodResult').querySelectorAll('[data-cp]').forEach(btn=>{
+      btn.onclick = ()=>{
+        const p = list[Number(btn.dataset.cp)];
+        copyProductLine(`${p.b} / ${p.n} / ${p.p}`);
+      };
+    });
+  }
+  document.getElementById('pq').oninput = (e)=>{ prodQuery = e.target.value; draw(); };
+  document.getElementById('prodChips').onclick = (e)=>{
+    const b = e.target.closest('.chip'); if(!b) return;
+    prodCat = b.dataset.c;
+    [...document.querySelectorAll('#prodChips .chip')].forEach(c=>c.setAttribute('aria-pressed', String(c===b)));
+    draw();
+  };
+  document.getElementById('pcopyall').onclick = ()=>{
+    const rows = [['생산시설','품명','가격']].concat(filtered().map(p=>[p.b,p.n,p.p]));
+    copyTSV(rows, '장애인생산품');
+  };
+  draw();
+}
+function copyProductLine(text){
+  const done = ()=> toast('복사됐어요');
+  const fallback = ()=>{
+    const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ toast('복사가 막혀 있어요. 텍스트를 드래그해서 복사하세요'); }
+    ta.remove();
+  };
+  try{ navigator.clipboard.writeText(text).then(done, fallback); }catch(e){ fallback(); }
+}
+
+// ---------------- City Hall (시청) view ----------------
+// city_hall_department_stats는 뷰라서, 부서 목록(city_hall_departments, 현장조사 결과 포함)에
+// orders를 매 조회 때마다 실시간으로 조인해요 — 그래서 새 주문이 들어오면 "최근 주문일" 등이
+// 스냅샷을 다시 만들 필요 없이 자동으로 최신 상태를 반영해요.
+let CITYHALL = [];
+let chQuery = '';
+let chBuilding = '전체';
+let chStatus = '전체';
+const CH_BUILDING_ORDER = ['본청','서소문청사','서소문2청사','무교로청사','남산청사','프레스센터'];
+const CH_STATUS_ORDER = ['전체','확보(주문이력 있음)','영업기회(생산시설 직접거래-우회구매)','영업기회(우선구매 미참여 추정)','미확인'];
+const CH_STATUS_SHORT = {
+  '확보(주문이력 있음)':'확보',
+  '영업기회(생산시설 직접거래-우회구매)':'영업기회(우회구매)',
+  '영업기회(우선구매 미참여 추정)':'영업기회(미참여)',
+  '미확인':'미확인',
+};
+const CH_STATUS_CLS = {
+  '확보(주문이력 있음)':'s-good',
+  '영업기회(생산시설 직접거래-우회구매)':'s-bad',
+  '영업기회(우선구매 미참여 추정)':'s-warn',
+  '미확인':'s-idle',
+};
+function chStatusPill(st){ return `<span class="pill ${CH_STATUS_CLS[st]||'s-idle'}">${esc(CH_STATUS_SHORT[st]||st||'-')}</span>`; }
+
+async function ensureCityHallLoaded(){
+  if(CITYHALL.length) return CITYHALL;
+  const {data, error} = await sb.from('city_hall_department_stats').select('*');
+  if(error){ throw error; }
+  const floorKey = f=>{
+    if(!f) return 0;
+    const s = String(f).replace('층','');
+    if(s.startsWith('지하')){ const n = parseInt(s.replace('지하',''),10); return Number.isFinite(n) ? -n : -99; }
+    const n = parseInt(s,10); return Number.isFinite(n) ? n : 0;
+  };
+  CITYHALL = (data||[]).slice().sort((a,b)=>{
+    const bi = CH_BUILDING_ORDER.indexOf(a.building) - CH_BUILDING_ORDER.indexOf(b.building);
+    if(bi) return bi;
+    const di = (a.dong||'').localeCompare(b.dong||'');
+    if(di) return di;
+    return floorKey(b.floor) - floorKey(a.floor);
+  });
+  return CITYHALL;
+}
+
+function filteredCityHall(){
+  let list = CITYHALL;
+  if(chBuilding!=='전체') list = list.filter(r=>r.building===chBuilding);
+  if(chStatus==='__opp__') list = list.filter(r=> r.status.startsWith('영업기회'));
+  else if(chStatus!=='전체') list = list.filter(r=>r.status===chStatus);
+  const q = chQuery.trim().toLowerCase();
+  if(q) list = list.filter(r=> (r.dept_name||'').toLowerCase().includes(q) || (r.customer_name||'').toLowerCase().includes(q) || (r.building||'').toLowerCase().includes(q));
+  return list;
+}
+
+async function renderCityHallView(){
+  const el = document.getElementById('view-cityhall');
+  el.innerHTML = '<div class="spin">불러오는 중...</div>';
+  try{ await ensureCityHallLoaded(); }
+  catch(e){ el.innerHTML = `<div class="panel err">불러오기 실패: ${esc(e.message||e)}</div>`; return; }
+
+  const total = CITYHALL.length;
+  const cnt = st => CITYHALL.filter(r=>r.status===st).length;
+  const bypassN = cnt('영업기회(생산시설 직접거래-우회구매)');
+  const commercialN = cnt('영업기회(우선구매 미참여 추정)');
+  const secureN = cnt('확보(주문이력 있음)');
+  const unknownN = cnt('미확인');
+
+  // 청사(본청/별관)별로 몇 부서인지 · 그중 우리시설 주문/사설업체 사용/직접 생산시설 주문 예상/미확인이
+  // 몇 곳인지 한눈에 보는 요약표. 판정상태가 이 4가지로만 나오도록 뷰에서 정리해뒀기 때문에 합계가 항상 맞음(기타 없음).
+  const buildingRows = CH_BUILDING_ORDER.filter(b=> CITYHALL.some(r=>r.building===b)).map(b=>{
+    const list = CITYHALL.filter(r=>r.building===b);
+    const c = st => list.filter(r=>r.status===st).length;
+    const secure = c('확보(주문이력 있음)');
+    const commercial = c('영업기회(우선구매 미참여 추정)');
+    const bypass = c('영업기회(생산시설 직접거래-우회구매)');
+    const unknown = c('미확인');
+    return {building:b, total:list.length, secure, commercial, bypass, unknown};
+  });
+  const buildingTot = buildingRows.reduce((a,r)=>({total:a.total+r.total, secure:a.secure+r.secure,
+    commercial:a.commercial+r.commercial, bypass:a.bypass+r.bypass, unknown:a.unknown+r.unknown}),
+    {total:0,secure:0,commercial:0,bypass:0,unknown:0});
+
+  // 청사별 비교 — 가로 막대그래프 대신, 숫자는 그대로 읽히면서 비중만 셀 배경 농도로 보여주는 히트맵 표.
+  // 농도는 그 청사 안에서 해당 상태가 차지하는 비중(건수/부서수)을 제곱근 스케일로 — 작은 비중도 눈에 띄게.
+  const heat = (val, total, colorVar) => {
+    if(!val || !total) return '';
+    const pct = Math.min(val/total, 1);
+    const alpha = Math.round(Math.min(Math.sqrt(pct)*95, 88));
+    return `background:color-mix(in srgb, ${colorVar} ${alpha}%, var(--surface))`;
+  };
+  const buildingTableHTML = `
+    <div class="tbl-wrap" style="margin-top:14px">
+      <table>
+        <thead><tr>
+          <th>청사</th><th class="num">부서 수</th>
+          <th class="num">우리시설 주문<div class="small muted" style="font-weight:400">(확보)</div></th>
+          <th class="num">사설업체 사용<div class="small muted" style="font-weight:400">(미참여)</div></th>
+          <th class="num">생산시설 직접주문 예상<div class="small muted" style="font-weight:400">(우회구매)</div></th>
+          <th class="num">미확인</th>
+        </tr></thead>
+        <tbody>
+          ${buildingRows.map(r=>`<tr class="click" data-building="${esc(r.building)}">
+            <td>${esc(r.building)}</td>
+            <td class="num">${num(r.total)}</td>
+            <td class="num" style="${heat(r.secure, r.total, 'var(--good)')}">${num(r.secure)}</td>
+            <td class="num" style="${heat(r.commercial, r.total, 'var(--warn)')}">${num(r.commercial)}</td>
+            <td class="num" style="${heat(r.bypass, r.total, 'var(--bad)')}">${num(r.bypass)}</td>
+            <td class="num" style="${heat(r.unknown, r.total, 'var(--idle)')}">${num(r.unknown)}</td>
+          </tr>`).join('')}
+          <tr style="font-weight:700;background:var(--surface-2)">
+            <td>합계</td><td class="num">${num(buildingTot.total)}</td><td class="num">${num(buildingTot.secure)}</td>
+            <td class="num">${num(buildingTot.commercial)}</td><td class="num">${num(buildingTot.bypass)}</td>
+            <td class="num">${num(buildingTot.unknown)}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="small muted" style="margin-top:6px">색이 짙을수록 그 청사 안에서 차지하는 비중이 커요 (건수 ÷ 부서 수)</div>
+    <div class="small muted" style="margin-top:6px">청사 행을 누르면 아래 목록이 해당 청사로 걸러져요</div>`;
+
+  el.innerHTML = `
+    <div class="panel">
+      <div class="panel-h">
+        <h2>서울시청 복사용지 영업현황</h2>
+        <span class="note">공식 청사안내(seoul.go.kr) 기준 ${num(total)}개 부서 · 현장조사 2026.7~8</span>
+      </div>
+      <div class="kpis">
+        <div class="kpi click" data-status="확보(주문이력 있음)"><div class="l">확보</div><div class="v">${num(secureN)}</div><div class="s">주문이력 있음</div></div>
+        <div class="kpi click" data-status="영업기회(생산시설 직접거래-우회구매)"><div class="l">🎯 영업기회 · 우회구매</div><div class="v">${num(bypassN)}</div><div class="s">직접 주문하는데, 우리를 거치지 않음</div></div>
+        <div class="kpi click" data-status="영업기회(우선구매 미참여 추정)"><div class="l">🎯 영업기회 · 미참여</div><div class="v">${num(commercialN)}</div><div class="s">우리가 제공 안 하는 일반업체 사용</div></div>
+        <div class="kpi click" data-status="미확인"><div class="l">미확인</div><div class="v">${num(unknownN)}</div><div class="s">향후 조사 대상</div></div>
+      </div>
+      <p class="explain"><b>영업기회 · 우회구매</b>는 현장조사에서 확인된 공급업체가 우리와 거래하는 생산시설(치즈·갑을·꿈드래·그린내·나눔·SD·리드릭 등)인데, 그 부서·품목은 우리를 거치지 않고 생산시설에 직접 주문 중인 것으로 확인된 곳이에요 — 우리 쪽으로 전환 가능성이 가장 높은 타깃입니다. <b>영업기회 · 미참여</b>는 더블A·후지필름 등 우리가 취급하지 않는 일반 상업 브랜드를 쓰고 있어, 장애인생산품 우선구매 제도 자체를 안내하는 게 먼저 필요한 곳이에요. KPI 카드를 누르면 해당 상태만 걸러서 볼 수 있어요.</p>
+      ${buildingTableHTML}
+      <div class="filters" style="margin-top:12px">
+        <input type="search" id="chq" placeholder="부서명, 거래처명, 건물로 검색" value="${esc(chQuery)}">
+        <select id="chBuildingSel">
+          <option ${chBuilding==='전체'?'selected':''}>전체</option>
+          ${CH_BUILDING_ORDER.filter(b=>CITYHALL.some(r=>r.building===b)).map(b=>`<option ${chBuilding===b?'selected':''}>${esc(b)}</option>`).join('')}
+        </select>
+        <select id="chStatusSel">
+          <option value="전체" ${chStatus==='전체'?'selected':''}>전체 상태</option>
+          <option value="__opp__" ${chStatus==='__opp__'?'selected':''}>🎯 영업기회만 (${num(bypassN+commercialN)})</option>
+          ${CH_STATUS_ORDER.filter(s=>s!=='전체').map(s=>`<option value="${esc(s)}" ${chStatus===s?'selected':''}>${CH_STATUS_SHORT[s]||s}</option>`).join('')}
+        </select>
+        <button class="btn" id="chcopyall">목록 복사</button>
+      </div>
+      <div id="chResult" style="margin-top:12px"></div>
+    </div>`;
+
+  el.querySelectorAll('.kpi[data-status]').forEach(k=>{
+    k.onclick = ()=>{
+      chStatus = k.dataset.status;
+      const sel = document.getElementById('chStatusSel'); if(sel) sel.value = chStatus;
+      draw();
+      document.getElementById('chResult').scrollIntoView({behavior:'smooth', block:'start'});
+    };
+  });
+  el.querySelectorAll('tr[data-building]').forEach(tr=>{
+    tr.onclick = ()=>{
+      chBuilding = tr.dataset.building;
+      const sel = document.getElementById('chBuildingSel'); if(sel) sel.value = chBuilding;
+      draw();
+      document.getElementById('chResult').scrollIntoView({behavior:'smooth', block:'start'});
+    };
+  });
+
+  // 거래처명이 "건물·부서"에 이미 다 나온 이름 그대로(그 뒤에 몇 글자만 더 붙은 게 아니라 부서명 자체로 끝나는 경우)면
+  // 거래처 칸에 또 적지 않음 — 대신 부서명 자체를 눌러서 열 수 있게 함. 가로 폭도 그만큼 줄어듦.
+  const custSameAsDept = r => !!(r.customer_id && r.dept_name && r.customer_name && String(r.customer_name).trim().endsWith(String(r.dept_name).trim()));
+  function draw(){
+    const list = filteredCityHall();
+    document.getElementById('chResult').innerHTML = `
+      <div class="small muted" style="margin-bottom:6px">${num(list.length)}개 부서</div>
+      <div class="tbl-wrap"><table class="ch-table"><thead><tr>
+        <th>상태</th><th>건물·부서</th><th>거래처</th>
+        <th>복사용지 최근주문</th><th>우리 최근품목·생산시설(전품목)</th><th>현장 확인 공급업체</th><th>담당자</th>
+      </tr></thead><tbody>
+      ${list.slice(0,400).map(r=>{ const same = custSameAsDept(r); return `<tr>
+        <td>${chStatusPill(r.status)}</td>
+        <td class="small" style="white-space:normal;max-width:170px"><div class="small muted" style="line-height:1.3">${esc(r.building)}${r.dong?' '+esc(r.dong):''}${r.floor?' · '+esc(r.floor):''}</div><div style="line-height:1.3">${same?`<button class="lnk" data-cust="${r.customer_id}">${esc(r.dept_name)}</button>`:esc(r.dept_name)}${r.unit_type?` <span class="tag">${esc(r.unit_type)}</span>`:''}</div></td>
+        <td class="small" style="white-space:normal;max-width:150px">${same?'<span class="muted">-</span>':(r.customer_id?`<button class="lnk" data-cust="${r.customer_id}">${esc(r.customer_name||'')}</button>`:(r.customer_name?esc(r.customer_name):'<span class="muted">-</span>'))}</td>
+        <td class="small" style="white-space:normal;max-width:160px">${r.copier_last_date?`${esc(r.copier_last_date)}<div class="small muted">${num(r.copier_order_count)}회 · ${esc(r.copier_last_item||'')}</div>`:'<span class="muted">-</span>'}</td>
+        <td class="small" style="white-space:normal;max-width:220px">${r.last_item_name?`${esc(r.last_item_name)}<div class="small muted">${esc(r.last_supplier_name||'')} · ${esc(r.last_order_date||'')}</div>`:'<span class="muted">-</span>'}</td>
+        <td class="small" style="white-space:normal;max-width:180px">${r.competitor_raw?`${esc(r.competitor_raw)}${r.competitor_item?` (${esc(r.competitor_item)})`:''}<div class="small muted">${esc(r.survey_date||'')}</div>`:(r.survey_result?`<span class="small muted">${esc(r.survey_result)}</span>`:'<span class="muted">-</span>')}</td>
+        <td style="white-space:normal;max-width:130px">${contactCell(r.investigator)}</td>
+      </tr>`; }).join('')}
+      </tbody></table></div>
+      ${list.length>400?`<div class="small muted" style="margin-top:8px">검색 결과 ${num(list.length)}건 중 400건만 표시 — 검색어를 더 입력해보세요.</div>`:''}`;
+    document.getElementById('chResult').querySelectorAll('[data-cust]').forEach(btn=>{
+      btn.onclick = ()=> openDrawer(Number(btn.dataset.cust));
+    });
+    const wrapEl = document.getElementById('chResult').querySelector('.tbl-wrap');
+    if(wrapEl) bindStickyHScroll(wrapEl);
+  }
+  document.getElementById('chq').oninput = (e)=>{ chQuery = e.target.value; draw(); };
+  document.getElementById('chBuildingSel').onchange = (e)=>{ chBuilding = e.target.value; draw(); };
+  document.getElementById('chStatusSel').onchange = (e)=>{ chStatus = e.target.value; draw(); };
+  document.getElementById('chcopyall').onclick = ()=>{
+    const rows = [['건물','동','층','부서명','상태','거래처','복사용지최근주문일','복사용지주문횟수','복사용지최근품목','우리최근품목','우리최근생산시설','우리최근주문일','현장확인공급업체','현장확인품목','조사일자','담당자']]
+      .concat(filteredCityHall().map(r=>[r.building,r.dong||'',r.floor,r.dept_name,r.status,r.customer_name||'',r.copier_last_date||'',r.copier_order_count||'',r.copier_last_item||'',r.last_item_name||'',r.last_supplier_name||'',r.last_order_date||'',r.competitor_raw||'',r.competitor_item||'',r.survey_date||'',r.investigator||'']));
+    copyTSV(rows, '시청 부서 목록');
+  };
+  draw();
+}
+
+// ---------------- Customers view ----------------
+let custQuery = '';
+let custStatusFilter = '전체';
+const STATUS_ORDER = ['전체','활성','신규','주의','이탈의심','휴면','일회성','통합집계'];
+
+function filteredCustomers(){
+  let list = CUSTS;
+  if(custStatusFilter !== '전체') list = list.filter(c=>c.status===custStatusFilter);
+  if(custQuery.trim()){
+    const q = custQuery.trim().toLowerCase();
+    list = list.filter(c=> (c.name||'').toLowerCase().includes(q) || (c.edu_office||'').toLowerCase().includes(q));
+  }
+  return list;
+}
+
+function renderCustomersView(){
+  const el = document.getElementById('view-customers');
+  el.innerHTML = `
+    <div class="panel">
+      <div class="panel-h">
+        <h2 id="custHeading">거래처</h2>
+        <span class="period-tag">최근 데이터 기준 · 매출 많은 순</span>
+      </div>
+      <div class="filters">
+        <input type="search" id="cq" placeholder="거래처명, 교육청으로 검색" value="${esc(custQuery)}">
+        <select id="cstatus">${STATUS_ORDER.map(s=>`<option ${s===custStatusFilter?'selected':''}>${s}</option>`).join('')}</select>
+      </div>
+      <div class="tbl-wrap" style="margin-top:12px">
+        <table>
+          <thead><tr><th>거래처</th><th>유형</th><th>상태</th><th class="num">누적매출</th><th class="num">주문수</th><th class="num">최근주문</th></tr></thead>
+          <tbody id="custRows"></tbody>
+        </table>
+      </div>
+      <div class="small muted" id="custMoreNote" style="margin-top:8px"></div>
+    </div>`;
+  // 검색창 자체를 매 키 입력마다 새로 그리면(innerHTML 전체 교체) 포커스가 날아가서
+  // 글자가 안 눌리는 것처럼 보여요 — 그래서 입력창은 그대로 두고, 목록(tbody)만 갱신합니다.
+  function drawList(){
+    const filtered = filteredCustomers();
+    const list = filtered.slice(0, 300);
+    document.getElementById('custHeading').textContent = `거래처 (${num(CUSTS.length)}곳)`;
+    document.getElementById('custRows').innerHTML = list.map(c=>`
+      <tr class="click" data-id="${c.customer_id}">
+        <td>${esc(c.name)}</td>
+        <td><span class="tag">${esc(c.ctype||'-')}</span></td>
+        <td>${statusPill(c.status)}</td>
+        <td class="num">${won(c.total_amount)}</td>
+        <td class="num">${num(c.order_count)}</td>
+        <td class="num">${daysAgoStr(c.days_since_last_order)}</td>
+      </tr>`).join('');
+    document.getElementById('custMoreNote').textContent = filtered.length>300
+      ? `검색 결과 ${num(filtered.length)}건 중 300건만 표시 — 검색어를 더 입력해보세요.` : '';
+  }
+  document.getElementById('cq').oninput = (e)=>{ custQuery = e.target.value; drawList(); };
+  document.getElementById('cstatus').onchange = (e)=>{ custStatusFilter = e.target.value; drawList(); };
+  document.getElementById('custRows').onclick = (e)=>{
+    const tr = e.target.closest('tr[data-id]'); if(!tr) return;
+    openDrawer(Number(tr.dataset.id));
+  };
+  drawList();
+}
+
+// ---------------- Sales view ----------------
+function renderSalesView(){
+  const el = document.getElementById('view-sales');
+  el.innerHTML = `
+    <div class="subnav">
+      <div class="seg" id="salesSeg">
+        <button data-s="coretarget" aria-pressed="${currentSalesSub==='coretarget'}">🔥 핵심 영업대상</button>
+        <button data-s="churn" aria-pressed="${currentSalesSub==='churn'}">📉 이탈 감지</button>
+        <button data-s="program" aria-pressed="${currentSalesSub==='program'}">🤝 공동구매 미참여</button>
+        <button data-s="gift" aria-pressed="${currentSalesSub==='gift'}">🎁 명절선물 고객</button>
+        <button data-s="contact" aria-pressed="${currentSalesSub==='contact'}">☎️ 연락 성과</button>
+      </div>
+    </div>
+    <div id="salesBody"></div>`;
+  document.getElementById('salesSeg').onclick = (e)=>{
+    const b = e.target.closest('button[data-s]'); if(!b) return;
+    currentSalesSub = b.dataset.s; renderSalesView();
+  };
+  ({coretarget:renderCoreTargets, churn:renderChurn, program:renderProgram, gift:renderGift, contact:renderContactOutcome})[currentSalesSub]();
+}
+
+// 품목 끊김(item_family_stats 기반, 거래는 계속되는데 특정 품목만 끊긴 곳)은 더 이상 별도 탭이 아니라
+// '이탈 감지' 하단 섹션으로 흡수됨 — renderChurn() 참고.
+// 추가구매 추천(item_type_penetration 기반 동종업계 교차판매)도 더 이상 별도 탭이 아니라
+// '핵심 영업대상'의 거래처별 팁으로 흡수됨 — renderCoreTargets() 참고.
+
+async function renderProgram(){
+  const body = document.getElementById('salesBody');
+  body.innerHTML = '<div class="panel"><p class="small muted">불러오는 중...</p></div>';
+  const {data, error} = await sb.from('edu_office_program').select('*').order('edu_office');
+  if(error){ body.innerHTML = `<div class="panel">불러오기 실패: ${esc(error.message)}</div>`; return; }
+  let sel = (data && data[0]) ? data[0].edu_office : null;
+  function draw(){
+    const cur = data.find(e=>e.edu_office===sel);
+    const ids = (cur.non_participant_ids||[]).map(id=>custById.get(id)).filter(Boolean).sort((a,b)=>(b.total_amount||0)-(a.total_amount||0));
+    body.innerHTML = `<div class="panel">
+      <div class="panel-h"><h2>교육지원청별 공동구매·연간단가 참여 현황</h2></div>
+      <p class="explain">교육지원청 소속 거래처 중, 해당 교육지원청의 공동구매나 연간단가(특가) 품목을 <b>한 번도 주문하지 않은 곳</b>이에요. 다음 공동구매 안내 대상입니다. (마지막 데이터 갱신 시점 기준)</p>
+      <div class="tbl-wrap" style="margin-top:10px"><table><thead><tr><th>교육지원청</th><th class="num">거래처</th><th class="num">참여</th><th class="num">미참여</th><th>참여율</th><th class="num">누적 금액</th></tr></thead><tbody>
+      ${data.map(e=>`<tr class="click" data-eo="${esc(e.edu_office)}" ${e.edu_office===sel?'style="background:var(--accent-soft)"':''}><td>${esc(e.edu_office)}</td><td class="num">${e.total_customers}</td><td class="num">${e.participating}</td><td class="num">${e.total_customers-e.participating}</td><td class="num">${Math.round(e.participating/e.total_customers*100)}%</td><td class="num">${won(e.total_amount)}</td></tr>`).join('')}
+      </tbody></table></div></div>
+      <div class="panel"><div class="panel-h"><h2>${esc(sel)} 교육지원청 미참여 거래처 ${num(ids.length)}곳</h2></div>
+      <div class="tbl-wrap"><table><thead><tr><th>거래처</th><th>상태</th><th class="num">누적 금액</th></tr></thead><tbody>
+      ${ids.map(c=>`<tr class="click" data-id="${c.customer_id}"><td>${esc(c.name)}</td><td>${statusPill(c.status)}</td><td class="num">${won(c.total_amount)}</td></tr>`).join('')}
+      </tbody></table></div></div>`;
+    body.querySelectorAll('[data-eo]').forEach(r=>r.onclick=()=>{ sel=r.dataset.eo; draw(); });
+    body.querySelectorAll('tr[data-id]').forEach(tr=> tr.onclick = ()=> openDrawer(Number(tr.dataset.id)) );
+  }
+  if(!data || !data.length){ body.innerHTML = '<div class="panel"><p class="small muted">데이터가 없습니다.</p></div>'; return; }
+  draw();
+}
+
+async function renderGift(){
+  const body = document.getElementById('salesBody');
+  body.innerHTML = '<div class="panel"><p class="small muted">불러오는 중...</p></div>';
+  const {data, error} = await sb.from('gift_customers').select('*');
+  if(error){ body.innerHTML = `<div class="panel">불러오기 실패: ${esc(error.message)}</div>`; return; }
+  const rows = (data||[]).map(r=>({...r, c: custById.get(r.customer_id)})).filter(r=>r.c);
+  const onlySeol = rows.filter(r=>r.seol_amount>0 && r.chuseok_amount<=0);
+  const rest = rows.filter(r=>!(r.seol_amount>0 && r.chuseok_amount<=0));
+  onlySeol.sort((a,b)=>(b.seol_amount)-(a.seol_amount));
+  rest.sort((a,b)=>((b.seol_amount||0)+(b.chuseok_amount||0))-((a.seol_amount||0)+(a.chuseok_amount||0)));
+  const ordered = onlySeol.concat(rest);
+  body.innerHTML = `<div class="panel">
+    <div class="panel-h"><h2>명절 선물세트 구매 거래처</h2></div>
+    <p class="explain">설·추석 선물세트를 주문한 곳이에요. <b>가장 최근 설엔 샀는데 그 다음 추석엔 안 산 곳 ${num(onlySeol.length)}곳</b>은 위쪽에 모았어요 — 다음 설 영업 리스트로 쓰세요.</p>
+    <div class="tbl-wrap" style="margin-top:10px"><table><thead><tr><th>거래처</th><th class="num">최근 설</th><th class="num">최근 추석</th><th class="num">누적 금액</th></tr></thead><tbody>
+    ${ordered.map(r=>`<tr class="click" data-id="${r.customer_id}"><td>${esc(r.c.name)} ${r.seol_amount>0&&r.chuseok_amount<=0?'<span class="pill s-warn">추석 미구매</span>':''}</td><td class="num">${r.seol_amount?won(r.seol_amount):'—'}</td><td class="num">${r.chuseok_amount?won(r.chuseok_amount):'—'}</td><td class="num">${won(r.c.total_amount)}</td></tr>`).join('')}
+    </tbody></table></div></div>`;
+  body.querySelectorAll('tr[data-id]').forEach(tr=> tr.onclick = ()=> openDrawer(Number(tr.dataset.id)) );
+}
+
+// 기관유형별로 "지금이 연락하기 좋은 시점"인지: 학교류는 방학 끝난 신학기 초(3월·9월), 공공기관류는
+// 예산 집행 초반(3~4월)과 연말 예산 소진기(9~12월)를 좋은 타이밍으로 봄. 복지시설·기업 등 정해진
+// 주기가 뚜렷하지 않은 유형은 타이밍 보너스를 주지 않음.
+const TIMING_GOOD_MONTHS = {
+  '유치원·어린이집':[3,9], '초등학교':[3,9], '중학교':[3,9], '고등학교':[3,9], '특수·기타학교':[3,9], '교육청·도서관':[3,9],
+  '구청':[3,4,9,10,11,12], '서울시 본청·사업소':[3,4,9,10,11,12], '중앙부처·공공기관':[3,4,9,10,11,12],
+  '공사·공단':[3,4,9,10,11,12], '동주민센터':[3,4,9,10,11,12], '소방':[3,4,9,10,11,12], '경찰':[3,4,9,10,11,12], '법무·사법':[3,4,9,10,11,12],
+};
+function timingGood(ctype){ const months = TIMING_GOOD_MONTHS[ctype]; return months ? months.includes(new Date().getMonth()+1) : false; }
+const SCHOOL_CTYPES = ['유치원·어린이집','초등학교','중학교','고등학교','특수·기타학교'];
+
+// 이탈의심+주의가 1000곳이 넘어 어디부터 손댈지 막막하다는 요청으로 추가한 뷰.
+// 기존 '영업 우선순위'(로그스케일로 완만하게 반영)와 중복된다는 피드백을 받아 그 쪽을 없애고,
+// 이 뷰 하나에 상태 위험도·지연 정도·타이밍까지 전부 합치면서, 주문수·금액만큼은 일부러 로그로 누르지 않고
+// 그대로 반영 — "컸던 곳이 끊기면 확실히 위로" 올라오게 한 게 핵심 차이.
+async function renderCoreTargets(){
+  const body = document.getElementById('salesBody');
+  body.innerHTML = '<div class="panel"><p class="small muted">불러오는 중...</p></div>';
+  const pool = CUSTS.filter(c=>['이탈의심','주의'].includes(c.status));
+  // 이 그룹(이탈의심+주의) 안에서 주문수·누적금액 각각의 백분위를 매김 — 로그스케일을 쓰지 않아 '컸던 곳'이 확실히 위로 옴.
+  const rankPct = (arr, key) => {
+    const sorted = arr.slice().sort((a,b)=>(Number(a[key])||0)-(Number(b[key])||0));
+    const m = new Map();
+    sorted.forEach((c,i)=> m.set(c.customer_id, sorted.length>1 ? i/(sorted.length-1) : 1));
+    return m;
+  };
+  const ocRank = rankPct(pool, 'order_count');
+  const amtRank = rankPct(pool, 'total_amount');
+  const nowMonth = new Date().getMonth()+1;
+  const scored = pool.map(c=>{
+    const ocP = ocRank.get(c.customer_id)||0, amtP = amtRank.get(c.customer_id)||0;
+    const volumeScore = Math.max(ocP, amtP);           // 주문수든 금액이든, 이 그룹 안에서 더 두드러진 쪽
+    const why = ocP>=amtP ? '주문수' : '금액';
+    const riskW = c.status==='이탈의심' ? 1.2 : 1;      // 이미 끊긴(이탈의심)쪽이 더 급함
+    const cyc = Number(c.typical_cycle_days)||0;
+    const sn = Number(c.days_since_last_order)||0;
+    const overdueX = cyc ? sn/cyc : null;               // 평소 주기 대비 몇 배 늦었는지
+    const overdueScore = Math.min(overdueX!=null?overdueX:3, 8) / 8;  // 0~1로 정규화(최대 8배까지만 인정)
+    const timing = timingGood(c.ctype);
+    const onVacation = SCHOOL_CTYPES.includes(c.ctype) && (nowMonth===7 || nowMonth===8);
+    // 최종 점수 = 주문수·금액(70%) + 지연정도(30%), 상태 위험도와 타이밍으로 가점. 방학 중인 학교는 판단을 흐릴 수 있어 소폭 감점만.
+    const score = (volumeScore*0.7 + overdueScore*0.3) * riskW * (timing?1.15:1) * (onVacation?0.85:1);
+    return Object.assign({}, c, {_ocP:ocP, _amtP:amtP, _why:why, _overdueX:overdueX, _timing:timing, _onVacation:onVacation, _score:score});
+  }).sort((a,b)=>b._score-a._score);
+  const TOP_N = 60;
+  const list = scored.slice(0, TOP_N);
+
+  // 예전 '재주문 예측'(품목별 다음 주문 예상일)과 '추가구매 추천'(동종업계 교차판매)을
+  // 별도 탭으로 안 두고, 이 상위 60곳에 한해서만 팁으로 붙여줌 — 연락할 때 바로 같이 쓰라고.
+  const ids = list.map(c=>c.customer_id);
+  const ctypes = [...new Set(list.map(c=>c.ctype).filter(Boolean))];
+  const [{data: fam}, {data: pen}, {data: haveRows}] = await Promise.all([
+    sb.from('item_family_stats').select('*').in('customer_id', ids).in('status', ['정상','임박','지연']).order('next_date', {ascending:true}),
+    sb.from('item_type_penetration').select('*').in('ctype', ctypes).order('penetration_pct', {ascending:false}).limit(3000),
+    sb.from('item_customer_stats').select('customer_id,item_name').in('customer_id', ids),
+  ]);
+  const nextByCust = new Map();
+  (fam||[]).forEach(r=>{ if(!nextByCust.has(r.customer_id)) nextByCust.set(r.customer_id, r); }); // next_date 오름차순이라 처음 걸리는 게 가장 가까운 예상일
+  const haveByCust = new Map();
+  (haveRows||[]).forEach(r=>{ if(!haveByCust.has(r.customer_id)) haveByCust.set(r.customer_id, new Set()); haveByCust.get(r.customer_id).add(r.item_name); });
+  const penByType = new Map();
+  (pen||[]).forEach(r=>{ if(!penByType.has(r.ctype)) penByType.set(r.ctype, []); penByType.get(r.ctype).push(r); });
+  list.forEach(c=>{
+    c._next = nextByCust.get(c.customer_id) || null;
+    const have = haveByCust.get(c.customer_id) || new Set();
+    c._reco = (penByType.get(c.ctype)||[]).find(r=>!have.has(r.item_name)) || null;
+  });
+
+  function tipLines(c){
+    const t = [];
+    t.push(c._why==='금액'
+      ? `누적 ${won(c.total_amount)} — 이탈의심·주의 ${num(pool.length)}곳 중 금액 상위 ${Math.max(1,Math.round((1-c._amtP)*100))}%`
+      : `주문 ${num(c.order_count)}회 — 이탈의심·주의 ${num(pool.length)}곳 중 주문수 상위 ${Math.max(1,Math.round((1-c._ocP)*100))}%`);
+    t.push(c._overdueX!=null
+      ? `평소 ${Math.round(c.typical_cycle_days)}일 주기인데 ${num(c.days_since_last_order)}일째 (평소의 ${c._overdueX.toFixed(1)}배)`
+      : `마지막 주문 후 ${num(c.days_since_last_order)}일째`);
+    t.push(c.status==='이탈의심' ? '전화보다 방문·이메일 등 적극적인 컨택이 효과적이에요' : '아직 늦은 정도는 가벼워요 — 안부 전화 정도로 충분해요');
+    if(c._onVacation) t.push('학교 방학(7~8월) 중이라 일시적으로 뜸한 걸 수 있어요 — 개학(9월) 전후 재확인');
+    else if(c._timing) t.push('지금이 이 기관유형 연락하기 좋은 시점이에요');
+    if(c._next) t.push(`🔁 '${c._next.item_name}' 곧 재주문 예상 (${c._next.next_date} 경, 평소 ${c._next.cycle_days}일 주기) — 연락할 때 같이 챙기세요`);
+    if(c._reco) t.push(`➕ 아직 안 산 '${c._reco.item_name}' 권해보세요 (동종 ${c.ctype||''} ${c._reco.penetration_pct}% 구매)`);
+    return t;
+  }
+
+  body.innerHTML = `<div class="panel">
+    <div class="panel-h"><h2>🔥 핵심 영업대상</h2><div class="filters"><button class="btn" id="ctcopy">목록 복사</button></div></div>
+    <p class="explain">이탈의심·주의 상태 <b>${num(pool.length)}곳</b> 중 <b>주문을 많이 했던 곳</b> 또는 <b>누적 금액이 컸던 곳</b>을 우선하고, 얼마나 늦었는지·상태 급한 정도·연락 타이밍까지 함께 반영해 상위 ${num(list.length)}곳으로 좁혔어요. 거래처마다 왜 올라왔는지, 어떻게 접근하면 좋을지 — 그리고 곧 재주문할 품목·추가로 권할 품목까지 팁으로 같이 적어뒀어요.</p>
+    ${critHelp('이렇게 추렸어요', `
+      <dt>대상</dt><dd>상태가 이탈의심 또는 주의인 ${num(pool.length)}곳 전체 (활성·신규·휴면·일회성은 급하지 않거나 애매해서 제외)</dd>
+      <dt>규모 점수 (가중치 70%)</dt><dd>이 ${num(pool.length)}곳 안에서 '주문 횟수' 백분위와 '누적 금액' 백분위 중 더 높은 쪽 — 로그로 누르지 않아서 컸던 곳이 확실히 위로 와요</dd>
+      <dt>지연 점수 (가중치 30%)</dt><dd>경과일 ÷ 평소주기 (최대 8배까지만 인정) — 많이 늦어질수록 올라가요</dd>
+      <dt>상태 가중치</dt><dd>이탈의심 ×1.2 (주의보다 더 급함)</dd>
+      <dt>타이밍/방학 보정</dt><dd>그 기관유형이 지금 연락 좋은 시점이면 ×1.15 · 학교가 방학(7~8월) 중이면 판단이 흐려질 수 있어 ×0.85</dd>
+      <dt>표시</dt><dd>점수 높은 순 상위 ${TOP_N}곳 — 각 행마다 왜 올라왔는지와 접근 팁을 함께 적어요</dd>
+      <dt>🔁 재주문 예상 팁</dt><dd>이 60곳 중, 전에 3번 이상 주기적으로 산 품목이 있고 평소 주기로 계산한 다음 예상일이 가까운 경우만 표시</dd>
+      <dt>➕ 추가구매 추천 팁</dt><dd>같은 기관유형이 많이 사는데 이 거래처는 아직 안 산 품목 중 동종 구매율이 가장 높은 1개 (표본 8곳·구매 3곳 이상인 경우만)</dd>
+    `)}
+    <div style="margin:10px 0 6px"><span class="count-tag">상위 ${list.length}곳 (전체 ${num(pool.length)}곳 중)</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th class="num">순위</th><th>거래처</th><th>상태</th><th class="num">주문수</th><th class="num">누적매출</th><th class="num">최근주문</th></tr></thead>
+      <tbody>${list.map((c,ri)=>`<tr class="click" data-id="${c.customer_id}">
+        <td class="num">${ri+1}</td>
+        <td>
+          <div><b>${esc(c.name)}</b> <span class="small muted">${esc(c.ctype||'')}</span> <span class="pill ${c._why==='주문수'?'s-info':'s-warn'}">${c._why}</span>${c._timing&&!c._onVacation?' <span class="pill s-good">지금 좋음</span>':''}</div>
+          <div class="small muted" style="margin-top:4px;line-height:1.6">${tipLines(c).map(t=>'· '+esc(t)).join('<br>')}</div>
+        </td>
+        <td>${statusPill(c.status)}</td>
+        <td class="num">${num(c.order_count)}회</td>
+        <td class="num">${won(c.total_amount)}</td>
+        <td class="num">${daysAgoStr(c.days_since_last_order)}</td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+  body.querySelector('table').onclick = (e)=>{ const tr=e.target.closest('tr[data-id]'); if(tr) openDrawer(Number(tr.dataset.id)); };
+  document.getElementById('ctcopy').onclick = ()=>{
+    const rows = [['순위','거래처','기관유형','상태','두드러진이유','주문수','누적매출','최근주문','팁']].concat(
+      list.map((c,ri)=>[ri+1, c.name, c.ctype||'', c.status, c._why, c.order_count||0, Math.round(c.total_amount||0), c.last_date||'', tipLines(c).join(' / ')])
+    );
+    copyTSV(rows, '핵심 영업대상');
+  };
+}
+
+// '이탈 감지'(거래 자체가 끊긴 곳, customer_stats 기준)와 '품목 끊김'(거래는 계속되는데
+// 특정 품목만 끊긴 곳, item_family_stats 기준)은 둘 다 "더 안 사고 있다"는 같은 종류의 신호라
+// 탭을 따로 두지 않고 한 화면에 두 섹션으로 합쳐서 보여줌.
+async function renderChurn(){
+  const body = document.getElementById('salesBody');
+  body.innerHTML = '<div class="panel"><p class="small muted">불러오는 중...</p></div>';
+  const list = CUSTS.filter(c=>c.status==='이탈의심').sort((a,b)=>(b.days_since_last_order||0)-(a.days_since_last_order||0)).slice(0,80);
+
+  const activeIds = new Set(CUSTS.filter(c=>c.status==='활성'||c.status==='신규').map(c=>c.customer_id));
+  const {data, error} = await sb.from('item_family_stats').select('*')
+    .in('status', ['끊김의심','지연'])
+    .order('total_amount', {ascending:false})
+    .limit(1000);
+  const PST = {'정상':'s-idle','임박':'s-info','지연':'s-warn','끊김의심':'s-bad'};
+  const itemRows = error ? [] : (data||[]).filter(r=>activeIds.has(r.customer_id)).map(r=>({...r, cname:(custById.get(r.customer_id)||{}).name||''})).slice(0,300);
+
+  body.innerHTML = `<div class="panel">
+    <div class="panel-h"><h2>📉 이탈 감지 — 거래 자체가 끊김</h2><span class="note">이탈의심 상태, 마지막 주문 이후 경과일이 긴 순 (상위 ${list.length}곳)</span></div>
+    <p class="explain">상태가 <b>이탈의심</b>인 거래처만 모았어요 — 주문을 3번 이상 한 이력이 있는데, 마지막 주문 이후 경과일이 평소 주기의 3배와 75일을 둘 다 넘긴 곳이에요. 대시보드 탭의 상태 판정 기준과 완전히 같습니다.</p>
+    ${critHelp('판정 기준 자세히', `
+      <dt>대상</dt><dd>주문 3회 이상 — 경과일이 평소주기×3(또는 75일 중 큰 값)을 모두 넘긴 거래처</dd>
+      <dt>정렬</dt><dd>마지막 주문 이후 경과일이 긴 순으로 최대 80곳</dd>
+      <dt>학교 주의점</dt><dd>학교는 방학(7~8월) 때문에 일시적으로 끊긴 것처럼 보일 수 있어요 — 개학 시점(3월·9월)도 함께 참고하세요</dd>
+    `)}
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>거래처</th><th class="num">경과일</th><th class="num">평소주기</th><th class="num">누적매출</th><th class="num">주문수</th></tr></thead>
+      <tbody>${list.map(c=>`<tr class="click" data-id="${c.customer_id}">
+        <td>${esc(c.name)}</td>
+        <td class="num">${daysAgoStr(c.days_since_last_order)}</td>
+        <td class="num">${c.typical_cycle_days? Math.round(c.typical_cycle_days)+'일' : '-'}</td>
+        <td class="num">${won(c.total_amount)}</td>
+        <td class="num">${num(c.order_count)}</td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <div class="panel-h"><h2>📦 이탈 감지 — 품목만 끊김</h2><span class="note">거래는 계속되는데 특정 품목만 끊김 (상위 ${itemRows.length}곳)</span></div>
+    <p class="explain">거래처는 여전히 주문 중인데(상태: 활성·신규), 전에는 주기적으로 사던 품목을 한동안 안 사고 있어요. <b>다른 업체에서 사고 있을 가능성</b>이 있어 확인이 필요한 곳이에요.</p>
+    ${critHelp('대상은 이렇게 골랐어요', `
+      <dt>대상 거래처</dt><dd>거래처 자체는 여전히 활성 또는 신규 상태 — 다른 품목은 계속 주문 중인 곳만</dd>
+      <dt>대상 품목</dt><dd>그 거래처가 3번 이상 주기적으로 산 적 있는 품목 중에서만 판단 (1~2번만 산 품목은 제외)</dd>
+      <dt>같은 품목 판정</dt><dd>특가·공동구매·교육청 등 태그, 포장 매수 표기 차이는 무시하고, 복사용지·핸드타올류는 무게(75/80/85g)나 등급(일반지/고급지 등) 차이도 같은 품목으로 봐요 — 규격(A4/A3/B4 등)은 다른 품목으로 구분해요</dd>
+      <dt>${statusPill('지연')}</dt><dd>경과일이 평소주기×1.5(또는 20일 중 큰 값)를 넘음 — 슬슬 확인해볼 단계</dd>
+      <dt>${statusPill('끊김의심')}</dt><dd>경과일이 평소주기×3(또는 75일 중 큰 값)을 넘음 — 다른 곳에서 사고 있을 가능성이 큰 단계</dd>
+      <dt>정렬</dt><dd>그 품목의 누적 구매금액이 큰 순</dd>
+    `)}
+    <div style="margin:10px 0 6px"><span class="count-tag">${num(itemRows.length)}건</span></div>
+    <div class="tbl-wrap"><table><thead><tr><th>거래처</th><th>품목</th><th class="num">이전 주기</th><th class="num">마지막 구매</th><th class="num">누적 금액</th><th>상태</th></tr></thead><tbody>
+    ${itemRows.map(r=>`<tr class="click" data-id="${r.customer_id}"><td>${esc(r.cname)}</td><td class="small">${esc(r.item_name)}</td><td class="num">${r.cycle_days}일 (${r.order_count}회)</td><td class="num">${r.last_date}<div class="small muted">${r.since_days}일 전</div></td><td class="num">${won(r.total_amount)}</td><td><span class="pill ${PST[r.status]||'s-idle'}">${esc(r.status)}</span></td></tr>`).join('')}
+    </tbody></table></div>
+  </div>`;
+  body.querySelectorAll('tr[data-id]').forEach(tr=> tr.onclick = ()=> openDrawer(Number(tr.dataset.id)) );
+}
+
+// success-window in days used for "영업 성공" matching
+const OUTCOME_WINDOW_DAYS = 14;
+function computeOutcome(activityDateStr, orderDates){
+  // orderDates: array of 'YYYY-MM-DD' strings for that customer
+  const a = new Date(activityDateStr+'T00:00:00');
+  const end = new Date(a.getTime() + OUTCOME_WINDOW_DAYS*86400000);
+  const today = new Date(new Date().toISOString().slice(0,10)+'T00:00:00');
+  let hit = null;
+  for(const ds of orderDates){
+    const d = new Date(ds+'T00:00:00');
+    if(d>=a && d<=end){ if(!hit || d<hit) hit = d; }
+  }
+  if(hit) return {state:'ok', date: hit.toISOString().slice(0,10)};
+  if(today <= end) return {state:'pending'};
+  return {state:'none'};
+}
+
+async function renderContactOutcome(){
+  const body = document.getElementById('salesBody');
+  body.innerHTML = '<div class="spin">불러오는 중...</div>';
+  const {data: acts, error} = await sb.from('activities')
+    .select('id,customer_id,kind,note,created_at,author_id,profiles(name),customers(name)')
+    .in('kind', ['call','visit','sms'])
+    .order('created_at', {ascending:false})
+    .limit(500);
+  if(error){ body.innerHTML = `<div class="panel">불러오기 실패: ${esc(error.message)}</div>`; return; }
+  if(!acts || acts.length===0){
+    body.innerHTML = `<div class="panel"><div class="panel-h"><h2>연락 성과</h2></div><p class="lede small muted">아직 기록된 통화·방문·문자가 없어요. 거래처 상세에서 기록을 남기면 여기서 성공률을 볼 수 있어요.</p></div>`;
+    return;
+  }
+  const custIds = [...new Set(acts.map(a=>a.customer_id))];
+  const {data: ords} = await sb.from('orders').select('customer_id,order_date').in('customer_id', custIds);
+  const ordersByCust = new Map();
+  (ords||[]).forEach(o=>{ if(!ordersByCust.has(o.customer_id)) ordersByCust.set(o.customer_id, []); ordersByCust.get(o.customer_id).push(o.order_date); });
+
+  const rows = acts.map(a=>{
+    const ds = a.created_at.slice(0,10);
+    const outcome = computeOutcome(ds, ordersByCust.get(a.customer_id)||[]);
+    return {...a, ds, outcome};
+  });
+  const total = rows.length;
+  const ok = rows.filter(r=>r.outcome.state==='ok').length;
+  const pending = rows.filter(r=>r.outcome.state==='pending').length;
+  const decided = total - pending;
+  const rate = decided>0 ? Math.round(ok/decided*100) : 0;
+
+  const byAuthor = new Map();
+  rows.forEach(r=>{
+    const key = r.author_id;
+    if(!byAuthor.has(key)) byAuthor.set(key, {name: (r.profiles&&r.profiles.name)||'(알수없음)', total:0, ok:0, decided:0});
+    const e = byAuthor.get(key); e.total++;
+    if(r.outcome.state!=='pending'){ e.decided++; if(r.outcome.state==='ok') e.ok++; }
+  });
+  const authorRows = [...byAuthor.values()].sort((a,b)=>b.total-a.total);
+
+  body.innerHTML = `
+    <div class="panel">
+      <div class="panel-h"><h2>연락 성과</h2><span class="note">통화·방문·문자 후 ${OUTCOME_WINDOW_DAYS}일 이내 주문이 들어오면 "성공"으로 판단</span></div>
+      <div class="kpis">
+        <div class="kpi"><div class="l">총 접촉</div><div class="v">${num(total)}</div></div>
+        <div class="kpi"><div class="l">성공</div><div class="v">${num(ok)}</div></div>
+        <div class="kpi"><div class="l">성공률</div><div class="v">${decided>0? rate+'%' : '-'}</div><div class="s">판정 완료 ${num(decided)}건 기준</div></div>
+        <div class="kpi"><div class="l">대기중</div><div class="v">${num(pending)}</div><div class="s">${OUTCOME_WINDOW_DAYS}일 아직 안 지남</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><h3>담당자별</h3></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>담당자</th><th class="num">접촉수</th><th class="num">성공</th><th class="num">성공률</th></tr></thead>
+        <tbody>${authorRows.map(a=>`<tr><td>${esc(a.name)}</td><td class="num">${num(a.total)}</td><td class="num">${num(a.ok)}</td><td class="num">${a.decided>0? Math.round(a.ok/a.decided*100)+'%':'-'}</td></tr>`).join('')}</tbody>
+      </table></div>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><h3>최근 기록</h3></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>날짜</th><th>거래처</th><th>구분</th><th>담당자</th><th>결과</th></tr></thead>
+        <tbody>${rows.slice(0,100).map(r=>`<tr class="click" data-id="${r.customer_id}">
+          <td>${r.ds}</td><td>${esc((r.customers&&r.customers.name)||'')}</td>
+          <td>${LOG_TYPE[r.kind]||r.kind}</td>
+          <td>${esc((r.profiles&&r.profiles.name)||'')}</td>
+          <td>${outcomeBadge(r.outcome)}</td>
+        </tr>`).join('')}</tbody>
+      </table></div>
+    </div>`;
+  body.querySelectorAll('tr[data-id]').forEach(tr=> tr.onclick = ()=> openDrawer(Number(tr.dataset.id)) );
+}
+
+function outcomeBadge(o){
+  if(o.state==='ok') return `<span class="log-outcome ok">주문 성공 (${o.date})</span>`;
+  if(o.state==='pending') return `<span class="log-outcome pending">대기중</span>`;
+  return `<span class="log-outcome none">성과 없음</span>`;
+}
+
+// ---------------- Drawer ----------------
+// ===== 영업 참고 (상세창) =====
+const SALES_TIP = {
+  '유치원·어린이집':'방학·행사철엔 주문이 자연스럽게 뜸해져요. 개학 직후나 명절 앞두고 연락하면 반응이 좋아요.',
+  '초등학교':'여름·겨울 방학엔 주문이 끊기는 게 정상이에요. 방학 끝난 직후가 연락하기 좋은 타이밍이에요.',
+  '중학교':'여름·겨울 방학엔 주문이 끊기는 게 정상이에요. 방학 끝난 직후가 연락하기 좋은 타이밍이에요.',
+  '고등학교':'여름·겨울 방학엔 주문이 끊기는 게 정상이에요. 방학 끝난 직후가 연락하기 좋은 타이밍이에요.',
+  '특수·기타학교':'방학 시즌 영향이 커요. 개학 시점에 맞춰 연락해보세요.',
+  '교육청·도서관':'예산 배정 시기(3~4월, 9월 전후)에 발주가 몰리는 경향이 있어요.',
+  '구청':'예산 소진기(11~12월)·새 회계연도 초(1~3월)를 참고해서 연락 타이밍을 잡아보세요.',
+  '서울시 본청·사업소':'예산 소진기(11~12월)·새 회계연도 초(1~3월)를 참고해서 연락 타이밍을 잡아보세요.',
+  '중앙부처·공공기관':'예산 소진기(11~12월)·새 회계연도 초(1~3월)를 참고해서 연락 타이밍을 잡아보세요.',
+  '공사·공단':'예산·입찰 일정에 영향을 받아요. 담당 부서 예산 편성 시기를 먼저 확인해보세요.',
+  '재단·협회':'사업·후원 예산에 따라 주문이 들쑥날쑥할 수 있어요.',
+  '복지시설':'후원금·지원 예산 상황에 따라 주문이 줄 수 있어요. 부담 없이 안부만 여쭤보는 톤이 좋아요.',
+  '의료·보건':'예산·입찰 주기를 먼저 확인해보세요.',
+  '소방':'예산 소진기(11~12월)를 참고해보세요.',
+  '경찰':'예산 소진기(11~12월)를 참고해보세요.',
+  '법무·사법':'예산 소진기(11~12월)를 참고해보세요.',
+  '기업':'담당자 교체나 구매 정책 변경 가능성을 먼저 확인해보세요.',
+};
+function salesTipHTML(c){
+  const md_ = c.typical_cycle_days!=null ? Math.round(c.typical_cycle_days) : null;
+  const sn = c.days_since_last_order;
+  let situation;
+  if(c.status==='이탈의심'){
+    situation = md_ ? `보통 ${md_}일마다 주문하시던 곳인데 ${sn}일째 소식이 없어요 (평소 주기의 ${(sn/md_).toFixed(1)}배).` : `${sn}일째 주문이 없어요.`;
+  } else if(c.status==='주의'){
+    situation = md_ ? `보통 ${md_}일 주기인데 지금 ${sn}일째로 살짝 늦어지고 있어요. 아직 이탈은 아니고 먼저 챙기면 좋은 단계예요.` : `주문이 평소보다 살짝 늦어지고 있어요 (${sn}일째).`;
+  } else if(c.status==='휴면'){
+    situation = `2번 주문 후 ${sn}일간 소식이 없어요. 초반 관계를 다시 살려볼 만한 곳이에요.`;
+  } else {
+    situation = `지금까지 딱 한 번(${c.last_date||''}) 주문하고 이어지지 않았어요. 그때 경험이 어땠는지 확인해볼 만해요.`;
+  }
+  const tip = SALES_TIP[c.ctype] || '주문 이력을 참고해서 자연스러운 타이밍에 연락해보세요.';
+  return `<div class="panel">
+    <div class="panel-h"><h3>영업 참고</h3><span class="note">전화·방문 전에 참고하세요</span></div>
+    <p class="explain">${esc(situation)}<br>💡 ${esc(tip)}</p>
+  </div>`;
+}
+// 이 거래처에 한해서, 영업 탭의 핵심 영업대상(재주문 예상·추가구매 추천 팁)·이탈 감지(품목 끊김 포함)가
+// 쓰는 것과 완전히 같은 기준으로 계산한 품목별 근거를 보여줌 — "거래처별로도 설명이 상세했으면 좋겠다"는
+// 요청에 맞춰, 패널에서 보던 판정을 그 거래처 하나로 좁혀서 구체적인 품목명·날짜·숫자로 보여준다.
+function salesDetailHTML(c, itemStats, recoRows, itemStatsSku){
+  const stats = itemStats || [];
+  const stopped = stats.filter(r=>r.status==='끊김의심').sort((a,b)=>(b.total_amount||0)-(a.total_amount||0));
+  const delayed = stats.filter(r=>r.status==='지연').sort((a,b)=>(b.total_amount||0)-(a.total_amount||0));
+  const upcoming = stats.filter(r=>r.status==='임박').sort((a,b)=> (a.next_date<b.next_date?-1:1));
+  // 추천(미구매 품목) 제외 목록은 핵심 영업대상의 추가구매 추천 팁과 같은 기준(정확한 품목명)으로 맞춰서 비교
+  const have = new Set((itemStatsSku||stats).map(r=>r.item_name));
+  const recos = (recoRows||[]).filter(r=>!have.has(r.item_name)).slice(0,3);
+
+  const li = (arr, fmt) => arr.slice(0,5).map(r=>`<li>${fmt(r)}</li>`).join('');
+  const sections = [];
+  if(stopped.length){
+    sections.push(`<div style="margin-top:10px"><b class="small">🔴 끊긴 것으로 보이는 품목 (${stopped.length}개)</b>
+      <div class="small muted">평소 주기의 3배(또는 75일) 넘게 안 산 품목 — 다른 곳에서 사고 있을 가능성</div>
+      <ul class="small" style="margin:6px 0 0 18px">${li(stopped, r=>`${esc(r.item_name)} — 평소 ${r.cycle_days}일 주기인데 ${r.since_days}일째 없음 (누적 ${won(r.total_amount)})`)}</ul></div>`);
+  }
+  if(delayed.length){
+    sections.push(`<div style="margin-top:10px"><b class="small">🟡 늦어지고 있는 품목 (${delayed.length}개)</b>
+      <ul class="small" style="margin:6px 0 0 18px">${li(delayed, r=>`${esc(r.item_name)} — 예상일 ${r.next_date}보다 늦어지는 중 (평소 ${r.cycle_days}일 주기)`)}</ul></div>`);
+  }
+  if(upcoming.length){
+    sections.push(`<div style="margin-top:10px"><b class="small">🟢 곧 재주문할 것으로 보이는 품목 (${upcoming.length}개)</b>
+      <ul class="small" style="margin:6px 0 0 18px">${li(upcoming, r=>`${esc(r.item_name)} — 예상일 ${r.next_date}${r.usual_qty?` (보통 ${num(r.usual_qty)}개)`:''}`)}</ul></div>`);
+  }
+  if(recos.length){
+    sections.push(`<div style="margin-top:10px"><b class="small">💡 같은 유형 기관이 많이 사는 미구매 품목</b>
+      <ul class="small" style="margin:6px 0 0 18px">${recos.map(r=>`<li>${esc(r.item_name)} — 동종(${esc(c.ctype||'')}) 구매율 ${r.penetration_pct}%</li>`).join('')}</ul></div>`);
+  }
+  if(!sections.length) return '';
+  return `<div class="panel">
+    <div class="panel-h"><h3>이 거래처의 품목별 근거</h3><span class="note">영업 탭과 같은 기준</span></div>
+    ${sections.join('')}
+  </div>`;
+}
+
+// orders 테이블은 한 품목이 한 줄이라, 같은 날짜+주문번호(order_no)를 묶어야 실제 주문 1건이 됨.
+// order_no가 없는 옛날 데이터는 그냥 각 줄을 독립된 주문으로 취급.
+function groupOrders(orders){
+  const map = new Map();
+  (orders||[]).forEach(o=>{
+    const key = (o.order_no!=null && o.order_no!=='') ? `${o.order_date}__${o.order_no}` : `row_${o.id}`;
+    if(!map.has(key)) map.set(key, {order_date:o.order_date, order_no:o.order_no, address:o.address, contact:o.contact, delivery_note:o.delivery_note, summary:o.summary, status:o.status, items:[], total:0});
+    const g = map.get(key);
+    g.items.push(o);
+    g.total += Number(o.supply_amount)||0;
+  });
+  return [...map.values()].sort((a,b)=>{
+    if(a.order_date!==b.order_date) return a.order_date<b.order_date?1:-1;
+    return (Number(b.order_no)||0)-(Number(a.order_no)||0);
+  });
+}
+
+async function openDrawer(custId){
+  // custById는 customer_stats(=주문 이력이 1건이라도 있는 거래처만) 기준이라, 시청 탭처럼
+  // 주문 이력 없이 거래처로만 등록된 곳(예: 현장조사로 공급만 확인된 곳)은 여기 없을 수 있음 —
+  // 그런 경우 customers 테이블에서 바로 최소 정보를 가져와 드로어를 띄움(통계는 전부 0/빈 값으로 표시).
+  let c = custById.get(custId);
+  if(!c){
+    const {data} = await sb.from('customers').select('id,name,ctype,edu_office').eq('id', custId).single();
+    if(!data) return;
+    c = {customer_id: data.id, name: data.name, ctype: data.ctype, edu_office: data.edu_office, status: null,
+      total_amount: 0, order_count: 0, days_since_last_order: null, typical_cycle_days: null, last_date: null, umbrella_children: 0};
+  }
+  const host = document.getElementById('drawerHost');
+  host.innerHTML = `<div class="scrim"></div>
+    <div class="drawer">
+      <div class="drawer-h">
+        <div class="ttl">
+          <h2>${esc(c.name)}</h2>
+          <div class="meta">${statusPill(c.status)} <span class="tag">${esc(c.ctype||'-')}</span> ${c.edu_office?`<span class="tag">${esc(c.edu_office)}</span>`:''}</div>
+        </div>
+        <button class="x" aria-label="닫기">✕</button>
+      </div>
+      <div class="drawer-b" id="drawerBody"><div class="spin">불러오는 중...</div></div>
+    </div>`;
+  const close = ()=>{ host.innerHTML=''; };
+  host.querySelector('.scrim').onclick = close;
+  host.querySelector('.x').onclick = close;
+
+  const [{data: orders}, {data: acts}, {data: allOrders}, months, {data: itemStats}, {data: itemStatsSku}, {data: recoRows}] = await Promise.all([
+    sb.from('orders').select('*').eq('customer_id', custId).order('order_date', {ascending:false}).order('order_no', {ascending:false}).limit(150),
+    sb.from('activities').select('id,kind,note,next_contact_date,created_at,author_id,profiles(name)').eq('customer_id', custId).order('created_at', {ascending:false}),
+    sb.from('orders').select('order_date,supply_amount,order_no').eq('customer_id', custId),
+    ensureMonthsLoaded().catch(()=>[]),
+    sb.from('item_family_stats').select('*').eq('customer_id', custId).then(r=>r, ()=>({data:[]})),
+    sb.from('item_customer_stats').select('*').eq('customer_id', custId).then(r=>r, ()=>({data:[]})),
+    c.ctype ? sb.from('item_type_penetration').select('*').eq('ctype', c.ctype).order('penetration_pct', {ascending:false}).limit(30).then(r=>r, ()=>({data:[]})) : Promise.resolve({data:[]})
+  ]);
+  const orderDates = (orders||[]).map(o=>o.order_date);
+  const byMonth = new Map();
+  const orderKeysByMonth = new Map(); // 월별 실제 "주문 건수"(날짜+주문번호 조합) 집계 — 기간별 주문수 KPI에 씀
+  (allOrders||[]).forEach(o=>{
+    if(!o.order_date) return;
+    const m = o.order_date.slice(0,7)+'-01';
+    byMonth.set(m, (byMonth.get(m)||0)+(Number(o.supply_amount)||0));
+    if(!orderKeysByMonth.has(m)) orderKeysByMonth.set(m, new Set());
+    orderKeysByMonth.get(m).add(o.order_date+'_'+o.order_no);
+  });
+  const hasAnyOrders = byMonth.size > 0;
+  const custMonthsAll = (months && months.length)
+    ? months.map(m=>({month: m.month, amount: byMonth.get(m.month)||0, orders:(orderKeysByMonth.get(m.month)||new Set()).size}))
+    : [...byMonth.entries()].sort((a,b)=> a[0]<b[0]?-1:1).map(([month,amount])=>({month, amount, orders:(orderKeysByMonth.get(month)||new Set()).size}));
+  let custRange = 'recent';
+  // 주문(orders) 테이블은 한 줄이 "한 주문의 품목 하나"라서, 같은 날짜·같은 주문번호(order_no)끼리
+  // 묶어야 실제 "주문 1건"이 됨 — 최근 주문 목록은 이 묶음 단위로 보여주고, 클릭하면 그 주문에 속한
+  // 품목 전체와 배송지·담당자 연락처를 한번에 보여줌.
+  const orderGroups = groupOrders(orders).slice(0,25);
+
+  // 주문 상세(품목 전체 + 담당자 연락처)를 팝업으로 보여주고, 그 자리에서 바로 통화·방문·문자
+  // 기록을 남길 수 있게 함 — 저장하면 드로어 아래쪽 "통화·방문 기록" 목록도 바로 갱신됨.
+  function openOrderDetail(g){
+    const mount = document.createElement('div');
+    document.body.appendChild(mount);
+    const contact = parseContact(g.contact);
+    const closeModal = ()=>{ mount.remove(); };
+    mount.innerHTML = `<div class="omodal-scrim"></div>
+      <div class="omodal">
+        <div class="omodal-h">
+          <div class="ttl">
+            <h3>${esc(c.name)}</h3>
+            <div class="meta">${esc(g.order_date||'')}${g.order_no!=null?` · 주문번호 ${esc(g.order_no)}`:''} ${g.status?`<span class="pill s-idle">${esc(g.status)}</span>`:''}</div>
+          </div>
+          <button class="x" aria-label="닫기">✕</button>
+        </div>
+        <div class="omodal-b">
+          <div class="info-box">
+            ${g.address ? `<div class="info-row"><div class="l">배송지</div><div class="v">${esc(g.address)}</div></div>` : ''}
+            <div class="info-row"><div class="l">담당자</div><div class="v">
+              ${contact ? `${esc(contact.name||'-')}${contact.phones.length ? `<div class="contact-phones">${contact.phones.map(p=>`<a href="tel:${p.replace(/[^0-9]/g,'')}">📞 ${esc(p)}</a>`).join('')}</div>` : ''}` : `<span class="small muted">등록된 연락처가 없어요</span>`}
+            </div></div>
+            ${g.delivery_note ? `<div class="info-row"><div class="l">비고</div><div class="v small muted">${esc(g.delivery_note)}</div></div>` : ''}
+          </div>
+          <div class="tbl-wrap"><table><thead><tr><th>품목</th><th class="num">수량</th><th class="num">금액</th></tr></thead><tbody>
+            ${g.items.map(it=>`<tr><td>${esc(it.item_name||'')}</td><td class="num">${num(it.quantity)}</td><td class="num">${won(it.supply_amount)}</td></tr>`).join('')}
+          </tbody></table></div>
+          <div class="omodal-total"><span>총 금액</span><span>${won(g.total)}</span></div>
+          <div class="quicklog">
+            <div class="qhead">지금 연락했다면 바로 기록을 남기세요</div>
+            <div class="row">
+              <select id="oq-kind">
+                <option value="call">전화</option>
+                <option value="visit">방문</option>
+                <option value="sms">문자</option>
+              </select>
+            </div>
+            <textarea id="oq-note" placeholder="통화·방문·문자 내용을 남겨주세요"></textarea>
+            <div style="display:flex;justify-content:flex-end"><button class="btn primary" id="oq-submit">기록 남기기</button></div>
+            <div id="oq-msg"></div>
+          </div>
+        </div>
+      </div>`;
+    mount.querySelector('.omodal-scrim').onclick = closeModal;
+    mount.querySelector('.x').onclick = closeModal;
+    mount.querySelector('#oq-submit').onclick = async ()=>{
+      const kind = mount.querySelector('#oq-kind').value;
+      const note = mount.querySelector('#oq-note').value.trim();
+      const msg = mount.querySelector('#oq-msg');
+      if(!note){ msg.innerHTML = '<div class="err small">내용을 입력해주세요.</div>'; return; }
+      const {error} = await sb.from('activities').insert({customer_id: custId, kind, note});
+      if(error){ msg.innerHTML = `<div class="err small">저장 실패: ${esc(error.message)}</div>`; return; }
+      toast('기록을 남겼어요');
+      closeModal();
+      const {data: acts2} = await sb.from('activities').select('id,kind,note,next_contact_date,created_at,author_id,profiles(name)').eq('customer_id', custId).order('created_at', {ascending:false});
+      renderLogSection(custId, acts2||[], orderDates);
+    };
+  }
+
+  const body = document.getElementById('drawerBody');
+  if(!body) return; // drawer already closed
+
+  function drawBody(){
+    const [ra,rb] = monthRangeBounds(custMonthsAll, custRange);
+    const chartRows = custMonthsAll.slice(ra,rb);
+    // 누적매출·주문수도 아래 "월별 주문금액" 기간칩(최근12개월/연도/전체)에 맞춰 그 기간 실적으로 보여줌.
+    const rangeAmount = hasAnyOrders ? chartRows.reduce((s,r)=>s+(Number(r.amount)||0),0) : (c.total_amount||0);
+    const rangeOrders = hasAnyOrders ? chartRows.reduce((s,r)=>s+(Number(r.orders)||0),0) : (c.order_count||0);
+    body.innerHTML = `
+      <div class="kpis">
+        <div class="kpi"><div class="l">누적매출 (${rangeLabel(custRange)})</div><div class="v">${won(rangeAmount)}</div></div>
+        <div class="kpi"><div class="l">주문수 (${rangeLabel(custRange)})</div><div class="v">${num(rangeOrders)}</div></div>
+        <div class="kpi"><div class="l">최근주문</div><div class="v">${daysAgoStr(c.days_since_last_order)}</div><div class="s">${c.last_date||''}</div></div>
+        <div class="kpi"><div class="l">평소주기</div><div class="v">${c.typical_cycle_days? Math.round(c.typical_cycle_days)+'일':'-'}</div></div>
+      </div>
+      ${c.status==='통합집계' ? `<div class="panel" style="background:var(--cat-violet-soft);border-color:var(--cat-violet)">
+        <div class="panel-h"><h3 style="color:var(--cat-violet)">⚠ 통합집계 거래처</h3></div>
+        <p class="small">이 계정은 과거 부서 구분 없이 쌓인 '본청' 이름의 옛 거래처예요. 최근 주문은 산하 과·부서(${c.umbrella_children||0}곳)로 개별 등록되고 있어서, 이 계정 자체는 최근주문이 오래돼 보이지만 이탈은 아니에요.</p>
+        <button class="lnk" id="umbrellaGotoBtn" style="font-weight:600">→ "${esc(c.name)}" 산하 부서 목록 보기</button>
+      </div>` : ''}
+      ${['이탈의심','주의','휴면','일회성'].includes(c.status) ? salesTipHTML(c) : ''}
+      ${salesDetailHTML(c, itemStats, recoRows, itemStatsSku)}
+      <div class="panel">
+        <div class="panel-h"><h3>월별 주문금액</h3><span class="period-tag">${chartRows.length}개월</span></div>
+        ${hasAnyOrders ? monthRangeChips(custMonthsAll, custRange, 'custChartSeg') : ''}
+        ${hasAnyOrders ? monthBars(chartRows) : '<p class="small muted">주문 이력이 없습니다.</p>'}
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h3>최근 주문 (${orderGroups.length}건)</h3><span class="note">눌러서 품목·담당자 연락처 보기</span></div>
+        ${orderGroups.map((g,i)=>`<div class="order click" data-og="${i}">
+          <div class="order-h"><b>${esc(g.order_date||'')}</b> <span class="small muted">품목 ${g.items.length}개${g.summary?` · ${esc(g.summary)}`:''}</span> <span class="amt">${won(g.total)}</span></div>
+          ${g.address?`<div class="ship">${esc(g.address)}</div>`:''}
+        </div>`).join('') || '<p class="small muted">주문 이력이 없습니다.</p>'}
+      </div>
+      <div class="panel" id="logPanel"></div>`;
+    body.querySelectorAll('[data-yr]').forEach(b=> b.onclick = ()=>{ custRange = b.dataset.yr; drawBody(); });
+    body.querySelectorAll('[data-og]').forEach(el=> el.onclick = ()=> openOrderDetail(orderGroups[Number(el.dataset.og)]) );
+    const umbrellaBtn = document.getElementById('umbrellaGotoBtn');
+    if(umbrellaBtn) umbrellaBtn.onclick = ()=>{ close(); gotoCustomersByQuery(c.name); };
+    renderLogSection(custId, acts||[], orderDates);
+  }
+  drawBody();
+}
+
+function renderLogSection(custId, acts, orderDates){
+  const panel = document.getElementById('logPanel');
+  if(!panel) return;
+  panel.innerHTML = `
+    <div class="panel-h"><h3>통화·방문·문자 기록</h3><span class="period-tag">${acts.length}건</span></div>
+    <div id="logList">${acts.map(a=>logItemHTML(a, orderDates)).join('') || '<p class="small muted">아직 기록이 없습니다.</p>'}</div>
+    <div class="log-form" style="margin-top:12px">
+      <div class="row">
+        <select id="log-kind">
+          <option value="call">전화</option>
+          <option value="visit">방문</option>
+          <option value="sms">문자</option>
+        </select>
+        <label class="small">다음 연락 예정일 <input type="date" id="log-next"></label>
+      </div>
+      <textarea id="log-note" placeholder="통화·방문·문자 내용을 남겨주세요"></textarea>
+      <div style="display:flex;justify-content:flex-end"><button class="btn primary" id="log-submit">기록 남기기</button></div>
+      <div id="log-msg"></div>
+    </div>`;
+  panel.querySelectorAll('.log-del').forEach(btn=>{
+    btn.onclick = async ()=>{
+      if(!confirm('이 기록을 삭제할까요?')) return;
+      const id = btn.dataset.id;
+      const {error} = await sb.from('activities').delete().eq('id', id);
+      if(error){ alert('삭제 실패: '+error.message); return; }
+      const {data: acts2} = await sb.from('activities').select('id,kind,note,next_contact_date,created_at,author_id,profiles(name)').eq('customer_id', custId).order('created_at', {ascending:false});
+      renderLogSection(custId, acts2||[], orderDates);
+    };
+  });
+  document.getElementById('log-submit').onclick = async ()=>{
+    const kind = document.getElementById('log-kind').value;
+    const note = document.getElementById('log-note').value.trim();
+    const next = document.getElementById('log-next').value || null;
+    const msg = document.getElementById('log-msg');
+    if(!note){ msg.innerHTML = '<div class="err small">내용을 입력해주세요.</div>'; return; }
+    const {error} = await sb.from('activities').insert({customer_id: custId, kind, note, next_contact_date: next});
+    if(error){ msg.innerHTML = `<div class="err small">저장 실패: ${esc(error.message)}</div>`; return; }
+    const c = custById.get(custId);
+    const {data: orders2} = await sb.from('orders').select('order_date').eq('customer_id', custId);
+    const newOrderDates = (orders2||[]).map(o=>o.order_date);
+    const {data: acts2} = await sb.from('activities').select('id,kind,note,next_contact_date,created_at,author_id,profiles(name)').eq('customer_id', custId).order('created_at', {ascending:false});
+    renderLogSection(custId, acts2||[], newOrderDates);
+  };
+}
+
+const LOG_TYPE = {call:'전화', visit:'방문', sms:'문자'};
+function logItemHTML(a, orderDates){
+  const ds = a.created_at.slice(0,10);
+  const outcome = computeOutcome(ds, orderDates);
+  const mine = ME && a.author_id===ME.id;
+  const canDel = mine || (ME && ME.role==='admin');
+  return `<div class="log-item">
+    <div class="log-h">
+      <span class="tag">${LOG_TYPE[a.kind]||a.kind}</span>
+      <span class="who">${esc((a.profiles&&a.profiles.name)||'')} · ${ds}</span>
+      ${outcomeBadge(outcome)}
+      ${canDel? `<button class="log-del" data-id="${a.id}">삭제</button>` : ''}
+    </div>
+    <div class="log-note">${esc(a.note)}</div>
+    ${a.next_contact_date? `<div class="log-next">다음 연락 예정: ${a.next_contact_date}</div>` : ''}
+  </div>`;
+}
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}</script>
+</body>
+</html>
