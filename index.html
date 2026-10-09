@@ -390,7 +390,7 @@ tr.click:hover td{background:var(--accent-soft)}
   .kpi .v{font-size:20px}
 }
 
-/* 오늘의 영업대상 */
+/* 영업대상 */
 .today-dot{font-size:10px;font-weight:700;color:#fff;background:var(--accent);border-radius:999px;padding:1px 7px;margin-left:2px}
 .chip[aria-pressed="true"] .muted{color:rgba(255,255,255,.75)}
 .outbtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
@@ -472,6 +472,9 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
 
 .brand .titletxt{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
 .brand .titletxt .cap{display:inline-flex;align-items:center;gap:8px;line-height:1}
+
+.kpi .v{white-space:nowrap}
+@media (max-width:520px){ .kpis .kpi.wide-m{grid-column:1/-1} }
 </style>
 </head>
 <body>
@@ -533,7 +536,7 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
     <div class="titlegrp">
       <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1>거래처 주문 레이더</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.8</span></span></div>
+      <div class="titletxt"><h1>거래처 주문 레이더</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.9</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -1107,10 +1110,10 @@ async function renderSummaryView(){
   }).filter(Boolean).sort((x,y)=>y.amount-x.amount).slice(0,6);
   el.innerHTML = `
   <div class="kpis">
-    <div class="kpi"><div class="l">주문금액 (${rangeLabel(summaryRange)})</div><div class="v">${won(rangeAmount)}</div></div>
+    <div class="kpi wide-m"><div class="l">주문금액 (${rangeLabel(summaryRange)})</div><div class="v">${won(rangeAmount)}</div></div>
     <div class="kpi"><div class="l">거래처 (${rangeLabel(summaryRange)})</div><div class="v">${num(rangeCustCount)}곳</div></div>
     <div class="kpi"><div class="l">주문 (${rangeLabel(summaryRange)})</div><div class="v">${num(rangeOrders)}건</div></div>
-    <div class="kpi click" data-goto-core="1"><div class="l">주문 늦어진 거래처</div><div class="v" style="color:var(--bad)">${num((byStatus['이탈의심']||0)+(byStatus['주의']||0))}곳</div><div class="s">🔥 오늘의 영업대상 보기 →</div></div>
+    <div class="kpi click" data-goto-core="1"><div class="l">주문 늦어진 거래처</div><div class="v" style="color:var(--bad)">${num((byStatus['이탈의심']||0)+(byStatus['주의']||0))}곳</div><div class="s">🔥 영업대상 보기 →</div></div>
   </div>
   <div class="panel">
     <div class="panel-h"><h2>월별 주문금액</h2><span class="period-tag">${chartRows.length}개월</span></div>
@@ -1721,7 +1724,7 @@ function renderSalesView(){
   el.innerHTML = `
     <div class="subnav">
       <div class="seg" id="salesSeg">
-        <button data-s="coretarget" aria-pressed="${currentSalesSub==='coretarget'}">🔥 오늘의 영업대상</button>
+        <button data-s="coretarget" aria-pressed="${currentSalesSub==='coretarget'}">🔥 영업대상</button>
         <button data-s="churn" aria-pressed="${currentSalesSub==='churn'}">📉 이탈 감지</button>
         <button data-s="program" aria-pressed="${currentSalesSub==='program'}">🤝 공동구매 미참여</button>
         <button data-s="gift" aria-pressed="${currentSalesSub==='gift'}">🎁 명절선물 고객</button>
@@ -1802,7 +1805,7 @@ const SCHOOL_CTYPES = ['유치원·어린이집','초등학교','중학교','고
 // 기존 '영업 우선순위'(로그스케일로 완만하게 반영)와 중복된다는 피드백을 받아 그 쪽을 없애고,
 // 이 뷰 하나에 상태 위험도·지연 정도·타이밍까지 전부 합치면서, 주문수·금액만큼은 일부러 로그로 누르지 않고
 // 그대로 반영 — "컸던 곳이 끊기면 확실히 위로" 올라오게 한 게 핵심 차이.
-// ===== 오늘의 영업대상: 상위 카테고리를 날마다 돌려가며 10~15곳씩 추천 =====
+// ===== 영업대상: 상위 카테고리를 날마다 돌려가며 10~15곳씩 추천 =====
 // 영업 담당이 같은 종류의 기관을 묶어서 연락하도록 상위 6개 카테고리로 나누고, 영업일(월~금) 순서대로 하루에 한 카테고리씩 보여줌.
 const CAT_GROUPS = [
   {key:'school',  name:'학교·교육',   icon:'🏫', types:['유치원·어린이집','초등학교','중학교','고등학교','특수·기타학교','교육청·도서관']},
@@ -1814,8 +1817,6 @@ const CAT_GROUPS = [
 ];
 const CAT_OF = {}; CAT_GROUPS.forEach(g=>g.types.forEach(t=>{ CAT_OF[t]=g.key; }));
 const CORE_PER_DAY = 12;      // 하루에 보여줄 곳 수 (10~15)
-const CORE_FIXED = 3;         // 점수 상위 몇 곳은 매일 고정, 나머지는 날짜로 순환
-const CORE_ROTATE_POOL = 30;  // 순환 후보 폭
 const CORE_COOLDOWN_DAYS = 14; // 연락한 곳은 이 기간 쉬게 함 (다음 연락일을 정했으면 그 날 다시)
 // 연락 결과 → 다음 연락까지 쉬는 일수
 const OUTCOMES = [
@@ -1893,12 +1894,41 @@ async function renderCoreTargets(){
   const dueIds = new Set(due.map(c=>c.customer_id));
   const rest = inCat.filter(c=>!dueIds.has(c.customer_id) && !cooling(c));
   const coolingCount = inCat.length - rest.length - due.length;
-  const dayKey = Number(todayStr.replace(/-/g,''));
-  const catIdx = CAT_GROUPS.indexOf(cat);
-  const fixed = rest.slice(0, CORE_FIXED);
-  const rotPool = rest.slice(CORE_FIXED, CORE_FIXED+CORE_ROTATE_POOL);
-  const rotated = seededShuffle(rotPool, dayKey*10+catIdx);
-  const list = due.concat(fixed, rotated).slice(0, Math.max(CORE_PER_DAY, due.length));
+  // 한 번 추천된 곳은 다시 나오지 않게 기록(sales_target_log)을 보고 빼고, 점수 순서대로 다음 곳을 보여줌.
+  // 이 카테고리가 한 바퀴 다 돌면(안 나온 곳이 모자라면) 가장 오래전에 추천했던 곳부터 다시 채움.
+  const need = Math.max(CORE_PER_DAY, due.length);
+  let logRows = [], logOk = true;
+  { const {data, error} = await sb.from('sales_target_log').select('customer_id,shown_date').eq('cat_key', cat.key).limit(20000);
+    if(error){ logOk = false; } else logRows = data||[]; }
+  const lastShown = new Map(); // customer_id → 가장 최근 추천일
+  logRows.forEach(r=>{ const v=lastShown.get(r.customer_id); if(!v || r.shown_date>v) lastShown.set(r.customer_id, r.shown_date); });
+  const todayShown = new Set(logRows.filter(r=>r.shown_date===todayStr).map(r=>r.customer_id));
+  let list, repeatNote = '';
+  if(isToday && todayShown.size){
+    // 오늘 이미 뽑아둔 목록 — 어느 기기에서 열어도 같은 목록
+    list = due.concat(rest.filter(c=>todayShown.has(c.customer_id)));
+  } else {
+    const unseen = rest.filter(c=>!lastShown.has(c.customer_id));
+    let pick = unseen.slice(0, Math.max(0, need - due.length));
+    if(pick.length < need - due.length){
+      const again = rest.filter(c=>lastShown.has(c.customer_id) && !pick.includes(c))
+        .sort((a,b)=> String(lastShown.get(a.customer_id)).localeCompare(String(lastShown.get(b.customer_id))) || b._score-a._score)
+        .slice(0, need - due.length - pick.length);
+      if(again.length) repeatNote = `이 카테고리는 한 바퀴를 다 돌아서, 오래전에 추천했던 곳부터 다시 채웠어요.`;
+      pick = pick.concat(again);
+    }
+    list = due.concat(pick);
+    if(isToday && logOk && list.length){
+      // 오늘 목록을 기록 → 다음에 이 카테고리 차례가 오면 이 곳들은 빠짐
+      const ins = await sb.from('sales_target_log').upsert(list.map(c=>({customer_id:c.customer_id, cat_key:cat.key, shown_date:todayStr})), {onConflict:'shown_date,customer_id', ignoreDuplicates:true});
+      if(!ins.error){
+        const {data:again2} = await sb.from('sales_target_log').select('customer_id').eq('cat_key', cat.key).eq('shown_date', todayStr);
+        const set2 = new Set((again2||[]).map(r=>r.customer_id));
+        if(set2.size) list = due.concat(rest.filter(c=>set2.has(c.customer_id)));
+      }
+    }
+  }
+  const seenCount = rest.filter(c=>lastShown.has(c.customer_id) && !(isToday && todayShown.has(c.customer_id))).length;
 
   // 선택된 곳에만 재주문 예상·추가구매 추천 팁을 붙임
   const ids = list.map(c=>c.customer_id);
@@ -1947,14 +1977,14 @@ async function renderCoreTargets(){
   const outBtns = c=>`<div class="outbtns">${OUTCOMES.map(o=>`<button class="outbtn ${o.cls}" data-o="${o.k}" data-cid="${c.customer_id}">${esc(o.label)}</button>`).join('')}</div>`;
 
   body.innerHTML = `<div class="panel">
-    <div class="panel-h"><h2>🔥 오늘의 영업대상</h2><div class="filters"><span class="period-tag">${esc(dateLabel)}</span><button class="btn" id="ctcopy">목록 복사</button></div></div>
+    <div class="panel-h"><h2>🔥 영업대상</h2><div class="filters"><span class="period-tag">${esc(dateLabel)}</span><button class="btn" id="ctcopy">목록 복사</button></div></div>
     <div class="chip-row" id="catChips" style="margin:6px 0 10px">${chips}</div>
     <p class="explain">${isToday?'오늘은':'선택한 카테고리는'} <b>${cat.icon} ${esc(cat.name)}</b> 차례예요. 이탈의심·주의 거래처 <b>${num(inCat.length)}곳</b> 중 <b>${num(list.length)}곳</b>을 골랐고, 아래 버튼으로 연락 결과를 남기면 그 곳은 쉬었다가 다시 올라와요.
-      ${doneToday?`<br>오늘 남긴 연락 기록 <b>${num(doneToday)}건</b>`:''}${coolingCount>0?` · 최근 연락해서 쉬는 중 ${num(coolingCount)}곳`:''}
+      ${doneToday?`<br>오늘 남긴 연락 기록 <b>${num(doneToday)}건</b>`:''}${coolingCount>0?` · 최근 연락해서 쉬는 중 ${num(coolingCount)}곳`:''}${seenCount>0?` · 이미 추천한 곳 ${num(seenCount)}곳은 제외`:''}${repeatNote?`<br>${esc(repeatNote)}`:''}
     ${critHelp('이렇게 골라요', `
       <dt>카테고리 순서</dt><dd>월~금 영업일마다 학교·교육 → 중앙부처·국회 → 서울시·구청 → 공기업·공공 → 안전·보건 → 복지·기업 순으로 돌아가요 (토·일은 월요일 차례). 위 칩을 누르면 다른 카테고리도 볼 수 있어요.</dd>
       <dt>점수</dt><dd>규모(주문수·누적금액 백분위) 70% + 지연 정도 30%, 이탈의심 ×1.2, 연락 좋은 시기 ×1.15, 방학 학교 ×0.85</dd>
-      <dt>매일 바뀌는 방법</dt><dd>점수 상위 ${CORE_FIXED}곳은 고정, 나머지는 그 다음 ${CORE_ROTATE_POOL}곳 중에서 날짜 기준으로 섞어서 ${CORE_PER_DAY - CORE_FIXED}곳을 뽑아요. 같은 날엔 어느 기기에서 봐도 같은 목록이에요.</dd>
+      <dt>매번 바뀌는 방법</dt><dd>그 카테고리 차례가 오면 점수가 높은 순서로 ${CORE_PER_DAY}곳을 보여주고, 한 번 나온 곳은 기록해서 다음 차례엔 빠져요. 그래서 다음엔 후순위 거래처가 나와요. 그 카테고리를 한 바퀴 다 돌면 가장 오래전에 나왔던 곳부터 다시 시작해요. 같은 날엔 어느 기기에서 봐도 같은 목록이에요.</dd>
       <dt>쉬는 규칙</dt><dd>연락 결과를 남기면 결과에 따라 쉬어요 — 부재중 3일, 주문 약속 7일, 통화 연결 14일, 거절 60일. 정해둔 다음 연락일이 오면 맨 위에 '약속한 날'로 올라와요.</dd>
       <dt>🔁 재주문 예상 / ➕ 추가구매 추천</dt><dd>골라진 곳에 한해서만 팁으로 붙여요</dd>
     `)}
@@ -1998,7 +2028,7 @@ async function renderCoreTargets(){
     const rows = [['순서','카테고리','거래처','기관유형','상태','두드러진이유','주문수','누적매출','최근주문','팁']].concat(
       list.map((c,ri)=>[ri+1, cat.name, c.name, c.ctype||'', c.status, c._why, c.order_count||0, Math.round(c.total_amount||0), c.last_date||'', tipLines(c).join(' / ')])
     );
-    copyTSV(rows, '오늘의 영업대상 '+cat.name);
+    copyTSV(rows, '영업대상 '+cat.name);
   };
 }
 
