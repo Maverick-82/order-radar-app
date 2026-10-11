@@ -14,7 +14,10 @@
 <meta name="apple-mobile-web-app-title" content="주문레이더">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://hevlgbkkzrambtkqfbka.supabase.co" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"></noscript>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 :root{
@@ -542,7 +545,7 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
     <div class="titlegrp">
       <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1>거래처 주문 레이더</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.11</span></span></div>
+      <div class="titletxt"><h1>거래처 주문 레이더</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.12</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -754,29 +757,69 @@ sb.auth.onAuthStateChange(async (event, session)=>{
   if(session && session.user){
     await boot(session.user.id);
   } else {
-    ME = null;
+    ME = null; BOOTED_UID = null; idbClear();
+    CUSTS = []; custById = new Map(); summaryMonths = null; itemTotalsCache = null; custYearTotals = null;
     document.getElementById('app').classList.add('hide');
     document.getElementById('auth').classList.remove('hide');
   }
 });
 
+// ---------------- 빠른 첫 화면: 지난번에 받은 데이터를 기기에 저장해 두었다가 먼저 보여주고, 최신 데이터는 뒤에서 받아 바뀐 게 있을 때만 갱신 ----------------
+const SNAP_VER = 'snap1:';
+function idbOpen(){ return new Promise((res,rej)=>{ try{ const r = indexedDB.open('radar-cache',1); r.onupgradeneeded = ()=>r.result.createObjectStore('kv'); r.onsuccess = ()=>res(r.result); r.onerror = ()=>rej(r.error); }catch(e){ rej(e); } }); }
+async function idbGet(k){ try{ const db = await idbOpen(); return await new Promise(res=>{ const q = db.transaction('kv').objectStore('kv').get(k); q.onsuccess = ()=>res(q.result||null); q.onerror = ()=>res(null); }); }catch(e){ return null; } }
+async function idbSet(k,v){ try{ const db = await idbOpen(); await new Promise(res=>{ const t = db.transaction('kv','readwrite'); t.objectStore('kv').put(v,k); t.oncomplete = ()=>res(); t.onerror = ()=>res(); t.onabort = ()=>res(); }); }catch(e){} }
+async function idbClear(){ try{ const db = await idbOpen(); await new Promise(res=>{ const t = db.transaction('kv','readwrite'); t.objectStore('kv').clear(); t.oncomplete = ()=>res(); t.onerror = ()=>res(); t.onabort = ()=>res(); }); }catch(e){} }
+function snapSig(){
+  let a=0, d=0; CUSTS.forEach(c=>{ a += Number(c.total_amount)||0; d += Number(c.days_since_last_order)||0; });
+  const m = summaryMonths||[], last = m[m.length-1];
+  const ex = summaryExtras;
+  return [CUSTS.length, a, d, m.length, last?`${last.amount}:${last.order_count}`:'', (custYearTotals||[]).length, (itemTotalsCache||[]).length, ex?ex.acts.length+':'+ex.orders.length:''].join('|');
+}
+function applySnapshot(sn){
+  CUSTS = sn.CUSTS||[]; custById = new Map(CUSTS.map(c=>[c.customer_id, c]));
+  summaryMonths = sn.summaryMonths||null; itemTotalsCache = sn.itemTotalsCache||null; custYearTotals = sn.custYearTotals||null;
+  summaryExtras = (sn.summaryExtras && sn.summaryExtras.key===curMonthKey()) ? Object.assign({}, sn.summaryExtras, {keep:true}) : null;
+}
+let BOOTED_UID = null;
 async function boot(uid){
-  const {data: prof, error} = await sb.from('profiles').select('id,name,role').eq('id', uid).single();
-  if(error || !prof){ return; }
+  if(BOOTED_UID === uid) return; // 토큰 갱신 등으로 같은 로그인이 다시 알려져도 처음부터 다시 그리지 않음
+  BOOTED_UID = uid;
+  // 사용자 정보 확인·저장된 데이터 읽기·최신 데이터 받기를 한꺼번에 시작 (순서대로 기다리지 않음)
+  const snapP = idbGet(SNAP_VER+uid);
+  const profP = sb.from('profiles').select('id,name,role').eq('id', uid).single();
+  const fresh = Promise.all([
+    loadCustomers(true), ensureMonthsLoaded(true), ensureItemTotalsLoaded(true), ensureCustYearTotalsLoaded(true),
+    fetchSummaryExtras().catch(()=>null)
+  ]);
+  fresh.catch(()=>{}); // 아래에서 처리
+  const [{data: prof, error}, snap] = await Promise.all([profP, snapP]);
+  if(error || !prof){ BOOTED_UID = null; return; }
   ME = prof;
   document.getElementById('who-name').textContent = ME.name || '';
   document.getElementById('who-role').textContent = ME.role==='admin' ? '관리자' : '팀원';
   document.getElementById('auth').classList.add('hide');
   document.getElementById('app').classList.remove('hide');
-  // 대시보드가 쓸 데이터를 순서대로 기다리지 않고 한 번에 병렬로 미리 불러와서 초기 로딩 시간을 줄임
-  // (renderSummaryView 안의 ensureXxxLoaded()들은 캐시돼 있어서 여기서 미리 불러두면 중복 요청 없이 즉시 반환됨)
-  await Promise.all([
-    CUSTS.length===0 ? loadCustomers() : Promise.resolve(),
-    ensureMonthsLoaded().catch(()=>{}),
-    ensureItemTotalsLoaded().catch(()=>{}),
-    ensureCustYearTotalsLoaded().catch(()=>{})
-  ]);
-  renderTab();
+  const hasSnap = !!(snap && snap.CUSTS && snap.CUSTS.length);
+  let sigShown = null;
+  if(!hasSnap){ const v = document.getElementById('view-'+currentTab); if(v && !v.innerHTML.trim()) v.innerHTML = '<div class="spin">불러오는 중...</div>'; }
+  if(hasSnap && CUSTS.length===0){
+    // 지난번 데이터를 바로 보여줌 (이 사이 최신 데이터는 뒤에서 계속 받는 중)
+    applySnapshot(snap); sigShown = snapSig(); renderTab();
+  }
+  try{
+    await fresh; // 최신 데이터 도착 (loadCustomers 등이 전역 데이터를 새 걸로 바꿔둠)
+  }catch(e){
+    if(hasSnap){ toast('최신 데이터를 못 불러와서 지난번 데이터를 보여주고 있어요'); return; }
+    document.getElementById('view-summary').innerHTML = `<div class="panel err">불러오기 실패: ${esc((e&&e.message)||e)}</div>`; return;
+  }
+  const sigNow = snapSig();
+  if(sigShown === null){ renderTab(); }
+  else if(sigNow !== sigShown){
+    const y = window.scrollY; renderTab(); setTimeout(()=>window.scrollTo(0,y), 0); toast('최신 데이터로 갱신했어요');
+  }
+  // 다음 접속 때 바로 보여줄 수 있게 저장 (화면이 다 그려진 뒤 한가할 때)
+  setTimeout(()=>{ idbSet(SNAP_VER+uid, {at:Date.now(), CUSTS, summaryMonths, itemTotalsCache, custYearTotals, summaryExtras}); }, 800);
 }
 
 // ---------------- Tabs ----------------
@@ -799,15 +842,15 @@ function renderTab(){
 }
 
 // ---------------- Data load ----------------
-async function loadCustomers(){
-  document.getElementById('view-customers').innerHTML = '<div class="spin">불러오는 중...</div>';
+async function loadCustomers(quiet){
+  if(!quiet) document.getElementById('view-customers').innerHTML = '<div class="spin">불러오는 중...</div>';
   let all = [];
   const pageSize = 10000; // customer_stats는 뷰라 페이지마다 다시 계산됨 — 한 번에 받아서 재계산 횟수를 줄임
   for(let from=0; ; from += pageSize){
     const {data, error} = await sb.from('customer_stats').select('*')
       .order('total_amount', {ascending:false}).order('customer_id', {ascending:true})
       .range(from, from+pageSize-1);
-    if(error){ document.getElementById('view-customers').innerHTML = `<div class="panel err">불러오기 실패: ${esc(error.message)}</div>`; return; }
+    if(error){ if(quiet) throw error; document.getElementById('view-customers').innerHTML = `<div class="panel err">불러오기 실패: ${esc(error.message)}</div>`; return; }
     all = all.concat(data || []);
     if(!data || data.length < pageSize) break;
   }
@@ -883,10 +926,10 @@ function monthRangeChips(monthsArr, range, segId){
 }
 // summaryMonths: monthly_order_totals 전체 캐시(전 거래처 공통 타임라인). 요약 차트와 거래처 상세 차트가 함께 씀.
 let summaryMonths = null;
-async function ensureMonthsLoaded(){
-  if(summaryMonths) return summaryMonths;
+async function ensureMonthsLoaded(force){
+  if(summaryMonths && !force) return summaryMonths;
   const {data, error} = await sb.from('monthly_order_totals').select('*').order('month', {ascending:true});
-  if(error){ summaryMonths = []; throw error; }
+  if(error){ if(!force) summaryMonths = []; throw error; }
   summaryMonths = data || [];
   return summaryMonths;
 }
@@ -959,10 +1002,10 @@ function normalizeItemName(raw){
   return bracket ? (base + ' ' + bracket) : base;
 }
 let itemTotalsCache = null;
-async function ensureItemTotalsLoaded(){
-  if(itemTotalsCache) return itemTotalsCache;
+async function ensureItemTotalsLoaded(force){
+  if(itemTotalsCache && !force) return itemTotalsCache;
   const {data, error} = await sb.from('item_totals').select('*').order('amount', {ascending:false}).limit(1500);
-  if(error){ itemTotalsCache = []; throw error; }
+  if(error){ if(!force) itemTotalsCache = []; throw error; }
   itemTotalsCache = data || [];
   return itemTotalsCache;
 }
@@ -979,15 +1022,15 @@ function topMergedItems(rows, n){
 }
 // customer_year_totals: 거래처별 × 연도별 누적매출/주문수 전체 캐시 (요약 탭의 "거래처별" 랭킹에 씀).
 let custYearTotals = null;
-async function ensureCustYearTotalsLoaded(){
-  if(custYearTotals) return custYearTotals;
+async function ensureCustYearTotalsLoaded(force){
+  if(custYearTotals && !force) return custYearTotals;
   let all = [];
   const pageSize = 10000; // customer_year_totals도 뷰라 페이지마다 다시 계산됨 — 한 번에 받아서 재계산 횟수를 줄임
   for(let from=0; ; from += pageSize){
     const {data, error} = await sb.from('customer_year_totals').select('*')
       .order('customer_id', {ascending:true})
       .range(from, from+pageSize-1);
-    if(error){ custYearTotals = []; throw error; }
+    if(error){ if(!force) custYearTotals = []; throw error; }
     all = all.concat(data || []);
     if(!data || data.length < pageSize) break;
   }
@@ -1040,6 +1083,27 @@ function summaryTopCustomers(range, n){
     .map(c=>({n:c.name, v:Number(c.total_amount)||0, s:won(c.total_amount), id:c.customer_id}));
 }
 
+// 요약 탭의 '이번 달 활동·주목 주문' — 부팅 때 미리 받아두고(저장해 둔 값이 있으면 그걸 먼저 보여줌) 첫 화면을 빠르게 그림
+let summaryExtras = null;
+function curMonthKey(){ const n=new Date(); return `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-01`; }
+async function fetchSummaryExtras(){
+  const now = new Date(), pad = n=>String(n).padStart(2,'0');
+  const startCur = curMonthKey();
+  const nextD = new Date(now.getFullYear(), now.getMonth()+1, 1);
+  const startNext = `${nextD.getFullYear()}-${pad(nextD.getMonth()+1)}-01`;
+  const [actsRes, notableRes] = await Promise.all([
+    sb.from('activities').select('id,kind,customer_id,note,created_at,customers(name)')
+      .gte('created_at', startCur).lt('created_at', startNext)
+      .order('created_at', {ascending:false}).limit(300),
+    sb.from('order_notability').select('*')
+      .gte('order_date', startCur).lt('order_date', startNext)
+      .order('amount', {ascending:false}).limit(500)
+  ]);
+  if(actsRes.error) throw actsRes.error;
+  if(notableRes.error) throw notableRes.error;
+  summaryExtras = {key:startCur, acts:(actsRes.data||[]), orders:(notableRes.data||[]), t:Date.now(), keep:false};
+  return summaryExtras;
+}
 async function renderSummaryView(){
   const el = document.getElementById('view-summary');
   el.innerHTML = '<div class="spin">불러오는 중...</div>';
@@ -1052,18 +1116,15 @@ async function renderSummaryView(){
   const startNext = `${nextD.getFullYear()}-${pad(nextD.getMonth()+1)}-01`;
   let itemRows = [], monthActs = [], monthOrders = [];
   try{
-    const [, items, , actsRes, notableRes] = await Promise.all([
+    const ex = summaryExtras;
+    const usable = ex && ex.key===startCur && (ex.keep || Date.now()-ex.t < 30000);
+    const [, items, , extras] = await Promise.all([
       ensureMonthsLoaded(), ensureItemTotalsLoaded(), ensureCustYearTotalsLoaded(),
-      sb.from('activities').select('id,kind,customer_id,note,created_at,customers(name)')
-        .gte('created_at', startCur).lt('created_at', startNext)
-        .order('created_at', {ascending:false}).limit(300),
-      sb.from('order_notability').select('*')
-        .gte('order_date', startCur).lt('order_date', startNext)
-        .order('amount', {ascending:false}).limit(500)
+      usable ? Promise.resolve(ex) : fetchSummaryExtras()
     ]);
+    if(ex && ex.keep) ex.keep = false; // 저장해 둔 값은 첫 화면에만 쓰고, 이후엔 다시 받아서 최신으로 보여줌
     itemRows = items;
-    monthActs = (actsRes && actsRes.data) || [];
-    monthOrders = (notableRes && notableRes.data) || [];
+    monthActs = extras.acts; monthOrders = extras.orders;
   }
   catch(error){ el.innerHTML = `<div class="panel">불러오기 실패: ${esc(error.message)}</div>`; return; }
   const byStatus = {}; CUSTS.forEach(c=>byStatus[c.status]=(byStatus[c.status]||0)+1);
