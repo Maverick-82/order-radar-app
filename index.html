@@ -485,6 +485,28 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
 .status-row .chip-row .chip{padding:2px 9px 2px 3px;font-size:12px;display:inline-flex;align-items:center;gap:4px;line-height:1.2;box-shadow:none}
 .status-row .chip-row .chip .pill{font-size:11px;padding:1px 8px 1px 6px;line-height:15px}
 .status-row .help{margin-top:8px !important}
+.adm-note{font-size:12.5px;color:var(--muted);margin:2px 0 14px;line-height:1.5}
+.adm-list{display:flex;flex-direction:column;gap:10px}
+.adm-row{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--surface)}
+.adm-row.pending{border-color:var(--warn,#e0a100);background:color-mix(in srgb,var(--warn,#e0a100) 8%,var(--surface))}
+.adm-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.adm-name{font-weight:700;font-size:14.5px}
+.adm-id{font-size:12px;color:var(--muted)}
+.adm-badge{font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;border:1px solid var(--line-2);color:var(--muted)}
+.adm-badge.ok{color:var(--good,#1a8f4a);border-color:currentColor}
+.adm-badge.wait{color:var(--warn,#b07d00);border-color:currentColor}
+.adm-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.adm-ctl select{font:inherit;font-size:12.5px;border:1px solid var(--line-2);border-radius:8px;padding:5px 8px;background:var(--surface);color:var(--ink)}
+.adm-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.adm-tabs label{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;border:1px solid var(--line-2);border-radius:999px;padding:3px 10px;cursor:pointer;user-select:none}
+.adm-tabs label.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+.adm-tabs input{accent-color:var(--accent);margin:0}
+.modalback{position:fixed;inset:0;background:rgba(10,20,40,.45);display:flex;align-items:center;justify-content:center;z-index:200;padding:16px}
+.modalback.hide{display:none}
+.modalcard{width:min(340px,100%);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;box-shadow:0 20px 60px rgba(20,30,50,.3)}
+.modalcard h3{margin:0 0 6px;font-size:16px}
+.modalcard label{display:block;font-size:12.5px;color:var(--ink-2);margin:12px 0 4px}
+.modalcard input{width:100%;font:inherit;font-size:14px;border:1px solid var(--line-2);border-radius:7px;padding:9px 10px;background:var(--surface);color:var(--ink)}
 </style>
 </head>
 <body>
@@ -493,10 +515,10 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
   <div class="authcard">
     <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
     <h1 class="sr-only">able market</h1>
-    <p class="lede small">팀 계정으로 로그인하세요.</p>
+    <p class="lede small" id="auth-lede">팀 계정으로 로그인하세요.</p>
     <div id="loginBox">
-      <label>이메일</label>
-      <input id="li-email" type="email" autocomplete="username">
+      <label>아이디 또는 이메일</label>
+      <input id="li-email" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
       <label>비밀번호</label>
       <input id="li-pw" type="password" autocomplete="current-password">
       <div style="margin-top:16px;display:flex;gap:8px">
@@ -508,18 +530,19 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
     <div id="signupBox" class="hide">
       <label>이름</label>
       <input id="su-name" type="text" autocomplete="name">
-      <label>이메일</label>
-      <input id="su-email" type="email" autocomplete="username">
+      <label>아이디 또는 이메일</label>
+      <input id="su-email" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="예: able1 (영문·숫자) 또는 이메일">
       <label>비밀번호 (6자 이상)</label>
       <input id="su-pw" type="password" autocomplete="new-password">
       <div style="margin-top:16px;display:flex;gap:8px">
         <button class="btn primary" id="btn-signup" style="flex:1">가입하기</button>
       </div>
+      <p class="small muted" style="margin:12px 0 0;line-height:1.5">가입 후 관리자가 승인하면 사용할 수 있어요.</p>
       <div class="switch">이미 계정이 있나요? <a href="#" id="go-login" class="lnk">로그인</a></div>
       <div id="signupMsg"></div>
     </div>
     <div id="forgotBox" class="hide">
-      <p class="lede small">가입할 때 쓴 이메일을 입력하면 비밀번호 재설정 링크를 보내드려요.</p>
+      <p class="lede small">가입할 때 쓴 이메일을 입력하면 비밀번호 재설정 링크를 보내드려요. (아이디로 가입했다면 관리자에게 문의하세요)</p>
       <label>이메일</label>
       <input id="fp-email" type="email" autocomplete="username">
       <div style="margin-top:16px;display:flex;gap:8px">
@@ -527,6 +550,15 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
       </div>
       <div class="switch"><a href="#" id="go-login-2" class="lnk">로그인으로 돌아가기</a></div>
       <div id="forgotMsg"></div>
+    </div>
+    <div id="pendingBox" class="hide">
+      <p style="font-size:15px;font-weight:700;margin:4px 0 8px">승인 대기 중이에요</p>
+      <p class="small muted" style="line-height:1.6;margin:0 0 4px"><span id="pd-name"></span> 계정이 가입됐어요. 관리자가 승인하면 사용할 수 있어요. 승인 후 아래 버튼을 눌러주세요.</p>
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn primary" id="btn-recheck" style="flex:1">승인 확인</button>
+        <button class="btn" id="btn-logout-2">로그아웃</button>
+      </div>
+      <div id="pendingMsg"></div>
     </div>
     <div id="resetBox" class="hide">
       <p class="lede small">새 비밀번호를 설정하세요.</p>
@@ -546,10 +578,10 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
     <div class="titlegrp">
       <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.13</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.14</span></span></div>
     </div>
     <div class="whoami">
-      <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
+      <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
     </div>
   </div>
   <nav class="tabs" id="tabs">
@@ -559,6 +591,7 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
     <button data-tab="cityhall" aria-selected="false">🏛️ 시청</button>
     <button data-tab="products" aria-selected="false">🏷️ 장애인생산품</button>
     <button data-tab="stmt" aria-selected="false">🧾 거래명세서</button>
+    <button data-tab="admin" aria-selected="false" class="hide" id="tab-admin">👥 관리자</button>
   </nav>
 </header>
 
@@ -568,6 +601,22 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
 <section class="view hide" id="view-cityhall"></section>
 <section class="view hide" id="view-products"></section>
 <section class="view hide" id="view-stmt"></section>
+<section class="view hide" id="view-admin"></section>
+<div id="pwModal" class="modalback hide">
+  <div class="modalcard">
+    <h3>비밀번호 변경</h3>
+    <p class="small muted" style="margin:0;line-height:1.5">새 비밀번호는 6자 이상이어야 해요.</p>
+    <label>새 비밀번호</label>
+    <input id="pw-new" type="password" autocomplete="new-password">
+    <label>새 비밀번호 확인</label>
+    <input id="pw-new2" type="password" autocomplete="new-password">
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <button class="btn primary" id="btn-pw-save" style="flex:1">변경</button>
+      <button class="btn" id="btn-pw-cancel">취소</button>
+    </div>
+    <div id="pwMsg"></div>
+  </div>
+</div>
 </div>
 
 <div id="drawerHost"></div>
@@ -659,11 +708,16 @@ let CUSTS = []; // customer_stats rows, loaded once per session
 let custById = new Map();
 let currentTab = 'summary';
 let currentSalesSub = 'coretarget';
-const VIEW_IDS = ['summary','customers','sales','products','cityhall','stmt'];
+const VIEW_IDS = ['summary','customers','sales','products','cityhall','stmt','admin'];
+const ALL_TABS = [['summary','대시보드'],['customers','거래처'],['sales','영업'],['cityhall','시청'],['products','장애인생산품'],['stmt','거래명세서']];
+const ID_DOMAIN = 'example.com'; // 아이디(able1 등)로 가입·로그인할 때 내부적으로 붙이는 주소 (실제 메일은 안 감)
+function loginEmail(v){ v = String(v||'').trim(); return v.includes('@') ? v : v.toLowerCase()+'@'+ID_DOMAIN; }
+function loginIdOnly(v){ v = String(v||'').trim(); return v.includes('@') ? v : v.toLowerCase(); }
+function canTab(t){ if(!ME) return false; if(t==='admin') return ME.role==='admin'; if(ME.role==='admin') return true; return !Array.isArray(ME.tabs) || ME.tabs.includes(t); }
 
 // ---------------- Auth ----------------
-const authBoxes = ['loginBox','signupBox','forgotBox','resetBox'];
-function showAuthBox(id){ authBoxes.forEach(b=> document.getElementById(b).classList.toggle('hide', b!==id) ); }
+const authBoxes = ['loginBox','signupBox','forgotBox','resetBox','pendingBox'];
+function showAuthBox(id){ authBoxes.forEach(b=> document.getElementById(b).classList.toggle('hide', b!==id) ); const l=document.getElementById('auth-lede'); if(l) l.classList.toggle('hide', id==='pendingBox'); }
 
 document.getElementById('go-signup').onclick = (e)=>{e.preventDefault(); showAuthBox('signupBox');};
 document.getElementById('go-login').onclick = (e)=>{e.preventDefault(); showAuthBox('loginBox');};
@@ -671,34 +725,37 @@ document.getElementById('go-forgot').onclick = (e)=>{e.preventDefault(); showAut
 document.getElementById('go-login-2').onclick = (e)=>{e.preventDefault(); showAuthBox('loginBox');};
 
 document.getElementById('btn-login').onclick = async ()=>{
-  const email = document.getElementById('li-email').value.trim();
+  const raw = document.getElementById('li-email').value.trim();
   const password = document.getElementById('li-pw').value;
   const msg = document.getElementById('loginMsg');
+  if(!raw || !password){ msg.innerHTML = '<div class="err">아이디(또는 이메일)와 비밀번호를 입력하세요.</div>'; return; }
   msg.innerHTML = '<div class="small muted">로그인 중...</div>';
-  const {data, error} = await sb.auth.signInWithPassword({email, password});
-  if(error){ msg.innerHTML = `<div class="err">${esc(error.message)}</div>`; return; }
+  const {data, error} = await sb.auth.signInWithPassword({email: loginEmail(raw), password});
+  if(error){ msg.innerHTML = `<div class="err">${/invalid login/i.test(error.message||'') ? '아이디(이메일) 또는 비밀번호가 맞지 않아요.' : esc(error.message)}</div>`; return; }
   msg.innerHTML = '';
 };
 
 document.getElementById('btn-signup').onclick = async ()=>{
   const name = document.getElementById('su-name').value.trim();
-  const email = document.getElementById('su-email').value.trim();
+  const raw = document.getElementById('su-email').value.trim();
   const password = document.getElementById('su-pw').value;
   const msg = document.getElementById('signupMsg');
-  if(!name || !email || password.length<6){ msg.innerHTML = '<div class="err">이름, 이메일, 6자 이상 비밀번호를 입력하세요.</div>'; return; }
+  if(!name || !raw || password.length<6){ msg.innerHTML = '<div class="err">이름, 아이디(또는 이메일), 6자 이상 비밀번호를 입력하세요.</div>'; return; }
+  if(!raw.includes('@') && !/^[a-z0-9._-]{3,30}$/i.test(raw)){ msg.innerHTML = '<div class="err">아이디는 영문·숫자·._- 3~30자로 입력하세요.</div>'; return; }
+  const email = loginEmail(raw);
   msg.innerHTML = '<div class="small muted">가입 처리 중...</div>';
-  const {data, error} = await sb.auth.signUp({email, password, options:{data:{name}}});
+  const {data, error} = await sb.auth.signUp({email, password, options:{data:{name, login_id: loginIdOnly(raw)}}});
   if(error){
     const already = /already registered|already exists|already been registered/i.test(error.message||'');
     msg.innerHTML = already
-      ? `<div class="err">이미 가입된 이메일이에요. <a href="#" id="su-to-forgot" class="lnk">비밀번호 찾기</a>를 이용해주세요.</div>`
+      ? `<div class="err">이미 가입된 아이디(이메일)예요. 본인 계정이면 로그인하세요.${raw.includes('@')?' <a href="#" id="su-to-forgot" class="lnk">비밀번호 찾기</a>':''}</div>`
       : `<div class="err">${esc(error.message)}</div>`;
     const link = document.getElementById('su-to-forgot');
     if(link) link.onclick = (e)=>{ e.preventDefault(); document.getElementById('fp-email').value = email; showAuthBox('forgotBox'); };
     return;
   }
   if(data.session){ msg.innerHTML = ''; }
-  else { msg.innerHTML = '<div class="ok">가입되었습니다. 이메일 확인이 필요하면 메일함을 확인한 뒤 로그인해주세요.</div>'; }
+  else { msg.innerHTML = '<div class="ok">가입되었어요. 로그인하면 승인 대기 화면이 떠요. (이메일 확인이 필요한 설정이면 메일함을 확인해주세요)</div>'; }
 };
 
 document.getElementById('btn-forgot').onclick = async ()=>{
@@ -723,6 +780,30 @@ document.getElementById('btn-reset').onclick = async ()=>{
 };
 
 document.getElementById('btn-logout').onclick = async ()=>{ await sb.auth.signOut(); };
+document.getElementById('btn-logout-2').onclick = async ()=>{ await sb.auth.signOut(); };
+document.getElementById('btn-recheck').onclick = async ()=>{
+  const m = document.getElementById('pendingMsg'); m.innerHTML = '<div class="small muted">확인 중...</div>';
+  const {data:{session}} = await sb.auth.getSession();
+  if(!session){ m.innerHTML = '<div class="err">다시 로그인해주세요.</div>'; return; }
+  BOOTED_UID = null; await boot(session.user.id);
+  if(!ME || !ME.approved) document.getElementById('pendingMsg').innerHTML = '<div class="err">아직 승인되지 않았어요. 관리자에게 승인을 요청해주세요.</div>';
+};
+(function(){
+  const modal = document.getElementById('pwModal'), msg = document.getElementById('pwMsg');
+  const close = ()=>{ modal.classList.add('hide'); document.getElementById('pw-new').value=''; document.getElementById('pw-new2').value=''; msg.innerHTML=''; };
+  document.getElementById('btn-pw').onclick = ()=>{ modal.classList.remove('hide'); setTimeout(()=>document.getElementById('pw-new').focus(),50); };
+  document.getElementById('btn-pw-cancel').onclick = close;
+  modal.addEventListener('click', e=>{ if(e.target===modal) close(); });
+  document.getElementById('btn-pw-save').onclick = async ()=>{
+    const a = document.getElementById('pw-new').value, b = document.getElementById('pw-new2').value;
+    if(a.length<6){ msg.innerHTML = '<div class="err">6자 이상 입력하세요.</div>'; return; }
+    if(a!==b){ msg.innerHTML = '<div class="err">두 비밀번호가 달라요.</div>'; return; }
+    msg.innerHTML = '<div class="small muted">변경 중...</div>';
+    const {error} = await sb.auth.updateUser({password:a});
+    if(error){ msg.innerHTML = `<div class="err">${esc(error.message)}</div>`; return; }
+    close(); toast('비밀번호가 변경됐어요');
+  };
+})();
 document.getElementById('btn-refresh').onclick = ()=>{ location.reload(); };
 
 // ---------------- 라이트/다크 테마 전환 (자동 → 라이트 → 다크 순환, localStorage에 저장) ----------------
@@ -788,7 +869,7 @@ async function boot(uid){
   BOOTED_UID = uid;
   // 사용자 정보 확인·저장된 데이터 읽기·최신 데이터 받기를 한꺼번에 시작 (순서대로 기다리지 않음)
   const snapP = idbGet(SNAP_VER+uid);
-  const profP = sb.from('profiles').select('id,name,role').eq('id', uid).single();
+  const profP = sb.from('profiles').select('id,name,role,approved,tabs,login_id').eq('id', uid).single();
   const fresh = Promise.all([
     loadCustomers(true), ensureMonthsLoaded(true), ensureItemTotalsLoaded(true), ensureCustYearTotalsLoaded(true),
     fetchSummaryExtras().catch(()=>null)
@@ -797,6 +878,16 @@ async function boot(uid){
   const [{data: prof, error}, snap] = await Promise.all([profP, snapP]);
   if(error || !prof){ BOOTED_UID = null; return; }
   ME = prof;
+  if(!ME.approved){
+    // 승인 전: 데이터 화면 대신 대기 화면
+    document.getElementById('pd-name').textContent = (ME.name||'') + (ME.login_id ? ' ('+ME.login_id+')' : '');
+    document.getElementById('app').classList.add('hide');
+    document.getElementById('auth').classList.remove('hide');
+    showAuthBox('pendingBox');
+    BOOTED_UID = null;
+    return;
+  }
+  applyTabAccess();
   document.getElementById('who-name').textContent = ME.name || '';
   document.getElementById('who-role').textContent = ME.role==='admin' ? '관리자' : '팀원';
   document.getElementById('auth').classList.add('hide');
@@ -824,6 +915,24 @@ async function boot(uid){
 }
 
 // ---------------- Tabs ----------------
+function applyTabAccess(){
+  const btns = [...document.querySelectorAll('#tabs button[data-tab]')];
+  btns.forEach(b=> b.classList.toggle('hide', !canTab(b.dataset.tab)));
+  const first = btns.find(b=>!b.classList.contains('hide'));
+  if(!canTab(currentTab) || currentTab==='admin' && ME.role!=='admin'){
+    currentTab = first ? first.dataset.tab : 'summary';
+    btns.forEach(x=>x.setAttribute('aria-selected', String(x.dataset.tab===currentTab)));
+    VIEW_IDS.forEach(id=> document.getElementById('view-'+id).classList.toggle('hide', currentTab!==id));
+  }
+  if(!first){ const v = document.getElementById('view-summary'); v.classList.remove('hide'); v.innerHTML = '<div class="panel">사용할 수 있는 화면이 없어요. 관리자에게 권한을 요청해주세요.</div>'; }
+  if(ME.role==='admin') refreshAdminBadge();
+}
+async function refreshAdminBadge(){
+  try{
+    const {count} = await sb.from('profiles').select('id',{count:'exact',head:true}).eq('approved', false);
+    document.getElementById('tab-admin').textContent = '👥 관리자' + (count ? ` (${count})` : '');
+  }catch(e){}
+}
 document.getElementById('tabs').addEventListener('click', (e)=>{
   const b = e.target.closest('button[data-tab]'); if(!b) return;
   currentTab = b.dataset.tab;
@@ -834,12 +943,64 @@ document.getElementById('tabs').addEventListener('click', (e)=>{
 });
 
 function renderTab(){
+  if(ME && !canTab(currentTab)) return;
   if(currentTab==='summary') renderSummaryView();
   else if(currentTab==='customers') renderCustomersView();
   else if(currentTab==='sales') renderSalesView();
   else if(currentTab==='products') renderProductsView();
   else if(currentTab==='cityhall') renderCityHallView();
   else if(currentTab==='stmt') renderStmtView();
+  else if(currentTab==='admin') renderAdminView();
+}
+
+// ---------------- 관리자 화면: 가입자 승인 · 권한 ----------------
+async function renderAdminView(){
+  const v = document.getElementById('view-admin');
+  if(!ME || ME.role!=='admin'){ v.innerHTML = '<div class="panel">관리자만 볼 수 있어요.</div>'; return; }
+  v.innerHTML = '<div class="spin">불러오는 중...</div>';
+  const {data, error} = await sb.from('profiles').select('id,name,role,approved,tabs,login_id,created_at').order('created_at',{ascending:true});
+  if(error){ v.innerHTML = `<div class="panel err">불러오기 실패: ${esc(error.message)}</div>`; return; }
+  const rows = (data||[]).slice().sort((a,b)=> (a.approved===b.approved ? 0 : a.approved ? 1 : -1));
+  const pending = rows.filter(r=>!r.approved).length;
+  document.getElementById('tab-admin').textContent = '👥 관리자' + (pending ? ` (${pending})` : '');
+  const fmtD = d=>{ try{ return new Date(d).toLocaleDateString('ko-KR',{year:'2-digit',month:'numeric',day:'numeric'}); }catch(e){ return ''; } };
+  v.innerHTML = `<div class="panel">
+    <h2 style="margin:0 0 4px;font-size:17px">가입자 관리</h2>
+    <div class="adm-note">가입한 사람은 <b>승인</b>해야 데이터를 볼 수 있어요. 승인한 뒤 아래 체크로 볼 수 있는 화면을 정해요. 체크를 바꾸면 바로 저장돼요. (화면 단위 제한이고, 승인을 취소하면 모든 데이터가 막혀요)</div>
+    <div class="adm-list">${rows.map(r=>{
+      const me = r.id===ME.id;
+      const tabsOn = Array.isArray(r.tabs) ? r.tabs : ALL_TABS.map(t=>t[0]);
+      return `<div class="adm-row ${r.approved?'':'pending'}" data-id="${esc(r.id)}">
+        <div class="adm-head"><span class="adm-name">${esc(r.name||'(이름 없음)')}</span><span class="adm-id">${esc(r.login_id||'')}</span><span class="adm-id">${esc(fmtD(r.created_at))} 가입</span>
+          <span class="adm-badge ${r.approved?'ok':'wait'}">${r.approved?'승인됨':'승인 대기'}</span>${me?'<span class="adm-badge">나</span>':''}</div>
+        <div class="adm-ctl">
+          ${me ? '' : `<button class="btn ${r.approved?'':'primary'}" data-act="approve">${r.approved?'승인 취소':'승인'}</button>`}
+          ${me ? '' : `<select data-act="role" aria-label="역할"><option value="member"${r.role!=='admin'?' selected':''}>팀원</option><option value="admin"${r.role==='admin'?' selected':''}>관리자</option></select>`}
+        </div>
+        ${(r.role==='admin') ? '<div class="adm-note" style="margin:8px 0 0">관리자는 모든 화면을 볼 수 있어요.</div>' : `<div class="adm-tabs">${ALL_TABS.map(([k,l])=>`<label class="${tabsOn.includes(k)?'on':''}"><input type="checkbox" data-act="tab" value="${k}"${tabsOn.includes(k)?' checked':''}>${l}</label>`).join('')}</div>`}
+      </div>`; }).join('')}</div>
+  </div>`;
+  v.querySelectorAll('.adm-row').forEach(row=>{
+    const id = row.dataset.id; const rec = rows.find(x=>x.id===id);
+    const save = async (patch, okMsg)=>{
+      const {error} = await sb.from('profiles').update(patch).eq('id', id);
+      if(error){ toast('저장 실패: '+error.message); return false; }
+      Object.assign(rec, patch); toast(okMsg||'저장했어요'); return true;
+    };
+    row.querySelectorAll('[data-act="approve"]').forEach(b=> b.onclick = async ()=>{
+      const next = !rec.approved;
+      if(!next && !confirm(`${rec.name||''} 님의 승인을 취소할까요? 이 사람은 데이터를 볼 수 없게 돼요.`)) return;
+      if(await save({approved: next}, next?'승인했어요':'승인을 취소했어요')) renderAdminView();
+    });
+    row.querySelectorAll('[data-act="role"]').forEach(sel=> sel.onchange = async ()=>{
+      if(await save({role: sel.value}, sel.value==='admin'?'관리자로 변경했어요':'팀원으로 변경했어요')) renderAdminView();
+    });
+    row.querySelectorAll('[data-act="tab"]').forEach(cb=> cb.onchange = async ()=>{
+      const on = [...row.querySelectorAll('[data-act="tab"]:checked')].map(x=>x.value);
+      cb.parentElement.classList.toggle('on', cb.checked);
+      await save({tabs: on}, '화면 권한을 저장했어요');
+    });
+  });
 }
 
 // ---------------- Data load ----------------
@@ -955,6 +1116,7 @@ function critHelp(summary, dlHtml){
   return `<details class="help" style="margin-top:10px"><summary>${esc(summary)}</summary><dl class="defs">${dlHtml}</dl></details>`;
 }
 function gotoCustomersByStatus(status){
+  if(!canTab('customers')){ toast('이 화면을 볼 권한이 없어요'); return; }
   custStatusFilter = status;
   currentTab = 'customers';
   unbindStickyHScroll();
@@ -964,6 +1126,7 @@ function gotoCustomersByStatus(status){
   window.scrollTo(0,0);
 }
 function gotoCoreTargets(){
+  if(!canTab('sales')){ toast('이 화면을 볼 권한이 없어요'); return; }
   currentSalesSub = 'coretarget';
   currentTab = 'sales';
   unbindStickyHScroll();
@@ -973,6 +1136,7 @@ function gotoCoreTargets(){
   window.scrollTo(0,0);
 }
 function gotoCustomersByQuery(name){
+  if(!canTab('customers')){ toast('이 화면을 볼 권한이 없어요'); return; }
   custQuery = name;
   custStatusFilter = '전체';
   currentTab = 'customers';
