@@ -1393,7 +1393,7 @@ async function renderSummaryView(){
     <div class="kpi click" data-goto-core="1"><div class="l">구매 늦어진 거래처</div><div class="v" style="color:var(--bad)">${num((byStatus['이탈의심']||0)+(byStatus['주의']||0))}곳</div><div class="s">🔥 영업대상 보기 →</div></div>
   </div>
   <div class="panel">
-    <div class="panel-h"><h2>월별 판매금액 <small style="font-weight:400;opacity:.6">판매 기준</small></h2><span class="period-tag">${chartRows.length}개월</span></div>
+    <div class="panel-h"><h2>월별 판매금액</h2><span class="period-tag">${chartRows.length}개월</span></div>
     ${monthRangeChips(summaryMonths, summaryRange, 'summarySeg')}
     ${chartRows.length? monthBars(chartRows) : '<p class="small muted">데이터가 없습니다.</p>'}
     ${monthTable(chartRows)}
@@ -2693,7 +2693,7 @@ async function openDrawer(custId){
       ${['이탈의심','주의','휴면','일회성'].includes(c.status) ? salesTipHTML(c) : ''}
       ${salesDetailHTML(c, itemStats, recoRows, itemStatsSku)}
       <div class="panel">
-        <div class="panel-h"><h3>월별 판매금액 <small style="font-weight:400;opacity:.6">판매 기준</small></h3><span class="period-tag">${chartRows.length}개월</span></div>
+        <div class="panel-h"><h3>월별 판매금액</h3><span class="period-tag">${chartRows.length}개월</span></div>
         ${hasAnyOrders ? monthRangeChips(custMonthsAll, custRange, 'custChartSeg') : ''}
         ${hasAnyOrders ? monthBars(chartRows) : '<p class="small muted">판매 이력이 없습니다.</p>'}
       </div>
