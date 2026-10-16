@@ -454,6 +454,7 @@ tr.done-row{opacity:.35;transition:opacity .3s}
 /* 화면 미리보기: 종이처럼 보이게 */
 .stm-preview{display:grid;gap:14px;justify-content:center;overflow-x:auto;padding:4px}
 .stm-preview .stm-page{box-shadow:0 2px 14px rgba(14,26,51,.22);padding:8mm 9mm;width:210mm;height:297mm;border-radius:2px}
+.stm-preview .stm-page.stm-sumpage{height:297mm}
 @media (max-width:900px){ .stm-preview{justify-content:start} .stm-preview .stm-page{zoom:.62} }
 @media (max-width:480px){ .stm-preview .stm-page{zoom:.46} }
 @media print{
@@ -465,6 +466,18 @@ tr.done-row{opacity:.35;transition:opacity .3s}
   #stmtPrintRoot .stm .stm-page:last-child{page-break-after:auto;break-after:auto}
   .stm{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+.stm .stm-sumpage{height:281mm;display:block;overflow:hidden}
+.stm .sum-h{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.4px solid #000;padding-bottom:1.5mm;margin-bottom:3mm}
+.stm .sum-h b{font-size:13pt;letter-spacing:.04em}.stm .sum-h span{font-size:8pt}
+.stm .sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:3mm;align-content:start}
+.stm .sum-card{border:1px solid #777;padding:1.6mm 2.2mm;font-size:7.1pt;line-height:1.22;overflow:hidden}
+.stm .sum-card h4{margin:0 0 .6mm;font-size:9.4pt;line-height:1.25}
+.stm .sum-card .ct{font-size:7pt;color:#444;font-weight:400;margin-left:1.5mm}
+.stm .sum-card .ph{border-bottom:1px solid #bbb;padding-bottom:1mm;margin-bottom:.8mm}
+.stm .sum-card .ph b{font-weight:700}
+.stm .sum-card .sg{margin-top:.8mm}.stm .sum-card .sg>b{font-size:7.4pt}
+.stm .sum-card ul{margin:.3mm 0 0 3.6mm;padding:0}.stm .sum-card li{margin:0}
+.stm .sum-card .more,.stm .sum-card .none{color:#555}
 .stm-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;max-height:150px;overflow-y:auto}
 .stm-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;background:var(--accent-soft);color:var(--accent-ink);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);border-radius:999px;padding:3px 4px 3px 11px;white-space:nowrap}
 .stm-chip b{font-variant-numeric:tabular-nums}
@@ -584,7 +597,7 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
     <div class="titlegrp">
       <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.23</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.24</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -1615,6 +1628,78 @@ function stmPagesHtml(orders){
 
 // 검색할 때마다 체크한 명세서는 '선택함'에 계속 쌓이고, 마지막에 한 번에 한 파일로 인쇄/PDF 저장함.
 let STM = {results:[], missing:[], cart:new Map(), previewOpen:false};
+// ---- 거래처 요약 1장 (선택한 거래처들의 '품목별 근거'를 명세서 뒤에 붙임) ----
+STM.sum = new Map();      // customer_id → {c, itemStats, itemStatsSku, recoRows, contact}
+STM.recoByType = new Map(); // ctype → 동종 기관 미구매 추천 후보
+STM.withSum = (()=>{ try{ return localStorage.getItem('stmWithSum')!=='0'; }catch(e){ return true; } })();
+function stmCustId(o){
+  const r = (o.items||[]).find(i=>i.customer_id);
+  if(r) return r.customer_id;
+  if(o.customer_id) return o.customer_id;
+  const hit = (typeof CUSTS!=='undefined' ? CUSTS : []).find(c=>c.name===o.customer);
+  return hit ? hit.customer_id : null;
+}
+function stmCustIds(chosen){
+  const seen = new Set(), out = [];
+  chosen.forEach(o=>{ const id = stmCustId(o); if(id && !seen.has(id)){ seen.add(id); out.push({id, name:o.customer}); } });
+  return out;
+}
+async function stmSumLoad(list){
+  const need = list.filter(x=>!STM.sum.has(x.id));
+  if(!need.length) return;
+  await loadContacts(need.map(x=>x.id), true);
+  const ids = need.map(x=>x.id);
+  let cMap = new Map();
+  try{ const {data} = await sb.from('customers').select('id,name,ctype').in('id', ids); (data||[]).forEach(r=>cMap.set(r.id, r)); }catch(e){}
+  await Promise.all(need.map(async x=>{
+    const cc = (typeof custById!=='undefined' && custById.get(x.id)) || null;
+    const base = cMap.get(x.id) || {};
+    const c = {name: (cc&&cc.name)||base.name||x.name, ctype: (cc&&cc.ctype)||base.ctype||''};
+    const [a,b] = await Promise.all([
+      sb.from('item_family_stats').select('*').eq('customer_id', x.id).then(r=>r, ()=>({data:[]})),
+      sb.from('item_customer_stats').select('*').eq('customer_id', x.id).then(r=>r, ()=>({data:[]}))
+    ]);
+    if(c.ctype && !STM.recoByType.has(c.ctype)){
+      const r = await sb.from('item_type_penetration').select('*').eq('ctype', c.ctype).order('penetration_pct',{ascending:false}).limit(30).then(r=>r, ()=>({data:[]}));
+      STM.recoByType.set(c.ctype, r.data||[]);
+    }
+    const ct = CONTACT_CACHE.get(x.id);
+    STM.sum.set(x.id, {c, itemStats:(a&&a.data)||[], itemStatsSku:(b&&b.data)||[], recoRows: c.ctype ? (STM.recoByType.get(c.ctype)||[]) : [], contact: ct?ct.contact:''});
+  }));
+}
+function stmSumCard(d){
+  const {c} = d, stats = d.itemStats;
+  const stopped = stats.filter(r=>r.status==='끊김의심').sort((a,b)=>(b.total_amount||0)-(a.total_amount||0));
+  const delayed = stats.filter(r=>r.status==='지연').sort((a,b)=>(b.total_amount||0)-(a.total_amount||0));
+  const upcoming = stats.filter(r=>r.status==='임박').sort((a,b)=> (a.next_date<b.next_date?-1:1));
+  const have = new Set((d.itemStatsSku.length?d.itemStatsSku:stats).map(r=>r.item_name));
+  const recos = (d.recoRows||[]).filter(r=>!have.has(r.item_name));
+  const CAP = 3;
+  const sec = (title, arr, fmt, nShow)=>{
+    if(!arr.length) return '';
+    const shown = arr.slice(0, nShow||CAP);
+    return `<div class="sg"><b>${title} (${arr.length}개)</b><ul>${shown.map(r=>`<li>${fmt(r)}</li>`).join('')}</ul>${arr.length>shown.length?`<div class="more">외 ${arr.length-shown.length}개</div>`:''}</div>`;
+  };
+  const pc = d.contact ? parseContact(d.contact) : null;
+  const phone = pc ? `${esc(pc.name||'')}${pc.phones.length?' · '+pc.phones.map(esc).join(' / '):''}` : '<span class="none">연락처 정보 없음</span>';
+  const body = [
+    sec('🔴 끊긴 것으로 보이는 품목', stopped, r=>`${esc(r.item_name)} — 평소 ${r.cycle_days}일 주기, ${r.since_days}일째 없음 (누적 ${won(r.total_amount)})`),
+    sec('🟡 늦어지고 있는 품목', delayed, r=>`${esc(r.item_name)} — 예상일 ${r.next_date} 지남 (평소 ${r.cycle_days}일 주기)`),
+    sec('🟢 곧 재구매할 것으로 보이는 품목', upcoming, r=>`${esc(r.item_name)} — 예상일 ${r.next_date}${r.usual_qty?` (보통 ${num(r.usual_qty)}개)`:''}`),
+    sec('💡 같은 유형 기관이 많이 사는 미구매 품목', recos.slice(0,3), r=>`${esc(r.item_name)} — 동종(${esc(c.ctype||'')}) 구매율 ${r.penetration_pct}%`)
+  ].join('');
+  return `<div class="sum-card"><h4>${esc(c.name)}<span class="ct">${esc(c.ctype||'')}</span></h4>
+    <div class="ph">📞 ${phone}</div>${body || '<div class="none">표시할 품목 근거가 아직 없어요 (판매 이력이 적은 거래처)</div>'}</div>`;
+}
+function stmSummaryHtml(chosen){
+  if(!STM.withSum) return '';
+  const list = stmCustIds(chosen).filter(x=>STM.sum.has(x.id));
+  if(!list.length) return '';
+  const today = localYmd(new Date()), PER = 6, pages = [];
+  for(let i=0;i<list.length;i+=PER) pages.push(list.slice(i,i+PER));
+  return pages.map((pg,pi)=>`<div class="stm-page stm-sumpage"><div class="sum-h"><b>거래처 영업 요약</b><span>${today}${pages.length>1?` · ${pi+1}/${pages.length}`:''} · 거래처 ${list.length}곳 · 영업 탭과 같은 기준</span></div>
+    <div class="sum-grid">${pg.map(x=>stmSumCard(STM.sum.get(x.id))).join('')}</div></div>`).join('');
+}
 const STM_CART_KEY = 'stmCartV2'; // 판매현황 기준으로 바꾸면서 예전(주문서) 선택 목록과 분리
 function stmSaveCart(){ try{ localStorage.setItem(STM_CART_KEY, JSON.stringify([...STM.cart.values()])); }catch(e){} }
 function stmLoadCart(){ try{ const a = JSON.parse(localStorage.getItem(STM_CART_KEY)||'[]'); (a||[]).forEach(o=>{ if(o&&o.key&&o.items) STM.cart.set(o.key,o); }); }catch(e){} }
@@ -1723,18 +1808,30 @@ function stmDraw(){
       <button class="btn primary" id="stm-print" ${chosen.length?'':'disabled'}>🖨️ 한 파일로 인쇄 / PDF 저장</button></div></div>
     ${chosen.length ? `<div class="stm-chips">${chosen.map(o=>`<span class="stm-chip" title="${esc(o.customer)}"><b>${o.md}-${o.no}</b> ${esc(o.customer.length>16?o.customer.slice(0,16)+'…':o.customer)} <button class="stm-x" data-k="${esc(o.key)}" aria-label="빼기">×</button></span>`).join('')}</div>`
       : '<p class="small muted" style="margin:0">위에서 검색하고 체크하면 여기에 쌓여요. 다른 번호나 거래처로 또 검색해서 체크해도 계속 쌓여요.</p>'}
+    <label class="small" style="display:flex;gap:6px;align-items:center;margin:10px 0 0"><input type="checkbox" id="stm-sum" ${STM.withSum?'checked':''}> 명세서 뒤에 <b>거래처 영업 요약 1장</b> 붙이기 <span class="muted">(선택한 거래처마다 담당자·연락처와 품목별 근거 · ${num(stmCustIds(chosen).length)}곳)</span></label>
     <p class="small muted" style="margin:8px 0 0">인쇄 화면에서 용지 <b>A4</b>, 배율 <b>100%</b>로 인쇄하면 한 장에 같은 명세서가 위·아래 2부 들어가요. 직인은 인쇄 후 찍어주세요. 선택 목록은 이 기기에 저장돼서 새로고침해도 남아요.</p>
   </div>`;
   cartEl.querySelectorAll('.stm-x').forEach(b=> b.onclick = ()=>{ STM.cart.delete(b.dataset.k); stmSaveCart(); stmDraw(); });
   cartEl.querySelector('#stm-clear').onclick = ()=>{ if(!confirm('선택한 명세서를 모두 비울까요?')) return; STM.cart.clear(); stmSaveCart(); stmDraw(); };
   cartEl.querySelector('#stm-pv').onclick = ()=>{ STM.previewOpen = !STM.previewOpen; stmDraw(); };
   cartEl.querySelector('#stm-print').onclick = stmPrint;
-  prev.innerHTML = (STM.previewOpen && chosen.length) ? `<div class="stm stm-preview">${stmPagesHtml(chosen)}</div>` : '';
+  const drawPrev = ()=>{ prev.innerHTML = (STM.previewOpen && chosen.length) ? `<div class="stm stm-preview">${stmPagesHtml(chosen)}${stmSummaryHtml(chosen)}</div>` : ''; };
+  drawPrev();
+  if(STM.previewOpen && chosen.length && STM.withSum){
+    const list = stmCustIds(chosen);
+    if(list.some(x=>!STM.sum.has(x.id))) stmSumLoad(list).then(()=>{ if(STM.previewOpen && prev.isConnected) drawPrev(); }).catch(()=>{});
+  }
+  const cbs = cartEl.querySelector('#stm-sum'); if(cbs) cbs.onchange = ()=>{ STM.withSum = cbs.checked; try{ localStorage.setItem('stmWithSum', cbs.checked?'1':'0'); }catch(e){} stmDraw(); };
 }
-function stmPrint(){
+async function stmPrint(){
   const chosen = stmCartList(); if(!chosen.length) return;
   const root = document.getElementById('stmtPrintRoot');
-  root.innerHTML = `<div class="stm">${stmPagesHtml(chosen)}</div>`;
+  if(STM.withSum){
+    const btn = document.getElementById('stm-print'); if(btn){ btn.disabled = true; btn.textContent = '요약 만드는 중...'; }
+    try{ await stmSumLoad(stmCustIds(chosen)); }catch(e){ toast('거래처 요약을 불러오지 못해서 명세서만 인쇄해요'); }
+    if(btn){ btn.disabled = false; btn.textContent = '🖨️ 한 파일로 인쇄 / PDF 저장'; }
+  }
+  root.innerHTML = `<div class="stm">${stmPagesHtml(chosen)}${stmSummaryHtml(chosen)}</div>`;
   const clear = ()=>{ root.innerHTML=''; window.removeEventListener('afterprint', clear); };
   window.addEventListener('afterprint', clear);
   setTimeout(()=>window.print(), 80);
