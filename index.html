@@ -828,6 +828,35 @@ details.help summary{font-size:14px;font-weight:600}
 .rp-more{font-size:10px;color:var(--p-mut);margin-top:3px;text-align:right}
 .rp-t.sm td small{white-space:normal;overflow-wrap:anywhere}
 .rp-t.sm td:first-child{overflow:visible}
+
+/* ---------- 접근성 보정 (v3.34) ---------- */
+:root{--good-ink:#0a6b49;--warn-ink:#865608;--bad-ink:#b3243f;--idle-ink:#566078}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--good-ink:var(--good);--warn-ink:var(--warn);--bad-ink:var(--bad);--idle-ink:var(--idle)}}
+:root[data-theme="dark"]{--good-ink:var(--good);--warn-ink:var(--warn);--bad-ink:var(--bad);--idle-ink:var(--idle)}
+.s-good{color:var(--good-ink)}.s-warn{color:var(--warn-ink)}.s-bad{color:var(--bad-ink)}.s-idle{color:var(--idle-ink)}
+.chip{min-height:32px}
+label.small input[type=number]{min-height:38px}
+tr.click:focus-visible,.kpi.click:focus-visible,.order.click:focus-visible,[data-goto-cust]:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:8px}
+.rp-na{color:#6b7385}.rp-up{color:#0a7a53}.rp-b.big{color:#a8360a}
+.rp-t th{font-size:11px}.rp-t td small{font-size:11px}.rp-foot{font-size:11px}
+.rp-b{font-size:10.5px}.rp-more{font-size:11px}.rp-sec h3 small{font-size:11px}
+@media print{
+  body.rp-printing .rp-t th{font-size:10.5px}
+  body.rp-printing .rp-t td small{font-size:10px}
+  body.rp-printing .rp-foot{font-size:9px}
+  body.rp-printing .rp-b{font-size:9.5px}
+  body.rp-printing .rp-more{font-size:10px}
+  body.rp-printing .rp-sec h3 small{font-size:10.5px}
+}
+.chip[aria-pressed="true"] .muted{color:rgba(255,255,255,.94)}
+.lnk{min-height:30px;min-width:30px}
+.rp-b{font-size:11px}
+
+:root{--on-accent:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--on-accent:#0b1330}}
+:root[data-theme="dark"]{--on-accent:#0b1330}
+.btn.primary,.chip[aria-pressed="true"],.today-dot{color:var(--on-accent)}
+.chip[aria-pressed="true"] .muted{color:color-mix(in srgb,var(--on-accent) 88%,transparent)}
 </style>
 </head>
 <body>
@@ -899,13 +928,13 @@ details.help summary{font-size:14px;font-weight:600}
     <div class="titlegrp">
       <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.33</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.34</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
     </div>
   </div>
-  <nav class="tabs" id="tabs">
+  <nav class="tabs" id="tabs" aria-label="주 메뉴">
     <button data-tab="summary" aria-selected="true"><span class="ti">📊</span><span class="tl">Dashboard</span></button>
     <button data-tab="cityhall" aria-selected="false"><span class="ti">🏛️</span><span class="tl">시청</span></button>
     <button data-tab="customers" aria-selected="false"><span class="ti">🏢</span><span class="tl">거래처</span></button>
@@ -3619,16 +3648,16 @@ function rpChart(labels, A, B, hl, partialLast, aLabel, bLabel){
       if(av!=null && av>0){
         const last = partialLast && i===hl;
         s+=`<rect x="${cx+1}" y="${y(av)}" width="${bw}" height="${T+ih-y(av)}" rx="2" fill="#2a4bd7" ${last?'fill-opacity=".55" stroke="#2a4bd7" stroke-dasharray="3 2"':''}/>`;
-        s+=`<text x="${cx+1+bw/2}" y="${y(av)-4}" text-anchor="middle" font-size="8.5" fill="#1f2a44" font-weight="700">${(av/1e8).toFixed(1)}</text>`;
+        s+=`<text x="${cx+1+bw/2}" y="${y(av)-4}" text-anchor="middle" font-size="9.5" fill="#1f2a44" font-weight="700">${(av/1e8).toFixed(1)}</text>`;
       }
     }else{
       const av=A[i]; if(av==null) return;
       const isHl = i===hl, last = partialLast && i===hl;
       const fill = isHl ? '#2a4bd7' : '#b4c0f2';
       s+=`<rect x="${cx-bw/2}" y="${y(av)}" width="${bw}" height="${Math.max(1,T+ih-y(av))}" rx="3" fill="${fill}" ${last?'fill-opacity=".55" stroke="#2a4bd7" stroke-dasharray="3 2"':''}/>`;
-      s+=`<text x="${cx}" y="${y(av)-5}" text-anchor="middle" font-size="10.5" fill="#1f2a44" font-weight="${isHl?800:600}">${rpMoneyS(av)}</text>`;
+      s+=`<text x="${cx}" y="${y(av)-5}" text-anchor="middle" font-size="11.5" fill="#1f2a44" font-weight="${isHl?800:600}">${rpMoneyS(av)}</text>`;
     }
-    s+=`<text x="${cx}" y="${H-7}" text-anchor="middle" font-size="10" fill="${i===hl?'#1f2a44':'#6b7385'}" font-weight="${i===hl?800:500}">${esc(lb)}</text>`;
+    s+=`<text x="${cx}" y="${H-7}" text-anchor="middle" font-size="11" fill="${i===hl?'#1f2a44':'#6b7385'}" font-weight="${i===hl?800:500}">${esc(lb)}</text>`;
   });
   s+='</svg>';
   const legend = B ? `<div class="rp-legend"><i style="background:#2a4bd7"></i>${esc(aLabel)}<i style="background:#cdd3e2"></i>${esc(bLabel)}<span>막대 위 숫자: 억원</span></div>` : '';
@@ -3722,19 +3751,19 @@ function rpPaper(d, plan, mode, y, idx, series){
   const ntRows = (ntd.list||[]).slice(0,6);
   const ntBadges = o => [o.big?'<i class="rp-b big">고액</i>':'', o.ret?`<i class="rp-b ret">${Math.max(1,Math.round(Number(o.gap_days)/30))}개월만에 복귀</i>`:'', o.first?'<i class="rp-b first">첫 거래</i>':''].join('');
   const ntWhy = o => { const w=[]; if(o.big && Number(o.order_n)>1 && Number(o.avg_amount)>0) w.push(`평소 평균(${rpMoneyS(o.avg_amount)})의 ${(Number(o.amount)/Number(o.avg_amount)).toFixed(1)}배`); if(o.ret) w.push(`직전 판매 ${String(o.prev_order_date).slice(2).replace(/-/g,'.')} 이후 ${num(o.gap_days)}일만`); if(o.first) w.push('이 거래처와의 첫 판매'); return w.join(' · '); };
-  const rpTbl = ntd.error ? '<p class="rp-empty">주목할 주문을 불러오지 못했어요.</p>' : ntRows.length ? `<table class="rp-t sm"><tbody>${ntRows.map(o=>`<tr><td>${rpName(o.name)}<div class="rp-bs">${ntBadges(o)}</div><small>${esc(String(o.order_date).slice(5).replace('-','/'))} · ${esc(ntWhy(o))}</small></td><td class="n">${rpMoneyS(o.amount)}</td></tr>`).join('')}</tbody></table>${ntd.n>ntRows.length?`<div class="rp-more">전체 ${num(ntd.n)}건 중 금액이 큰 ${ntRows.length}건</div>`:''}` : '<p class="rp-empty">이 기간에는 특별히 두드러지는 주문이 없어요.</p>';
+  const rpTbl = ntd.error ? '<p class="rp-empty">주목할 주문을 불러오지 못했어요.</p>' : ntRows.length ? `<table class="rp-t sm" role="presentation"><tbody>${ntRows.map(o=>`<tr><td>${rpName(o.name)}<div class="rp-bs">${ntBadges(o)}</div><small>${esc(String(o.order_date).slice(5).replace('-','/'))} · ${esc(ntWhy(o))}</small></td><td class="n">${rpMoneyS(o.amount)}</td></tr>`).join('')}</tbody></table>${ntd.n>ntRows.length?`<div class="rp-more">전체 ${num(ntd.n)}건 중 금액이 큰 ${ntRows.length}건</div>`:''}` : '<p class="rp-empty">이 기간에는 특별히 두드러지는 주문이 없어요.</p>';
 
   // 신규 거래처
   const nw = d.new||{n:0,amount:0,list:[]};
   const tooEarly = plan.cur.from <= rpAdd(REP.bounds.min, 31);
   const nwBox = tooEarly ? '<p class="rp-empty">판매 데이터가 시작된 직후라 신규 거래처를 가릴 수 없어요.</p>'
-    : `<div class="rp-line"><b>${num(nw.n)}곳</b> 신규 · 이 기간 매출 ${rpMoney(nw.amount)}</div>` + ((nw.list||[]).length ? `<table class="rp-t sm"><tbody>${nw.list.map(r=>`<tr><td>${rpName(r.name)}<small>${esc(r.ctype||'')}</small></td><td class="n">${rpMoneyS(r.amount)}</td></tr>`).join('')}</tbody></table>` : '');
+    : `<div class="rp-line"><b>${num(nw.n)}곳</b> 신규 · 이 기간 매출 ${rpMoney(nw.amount)}</div>` + ((nw.list||[]).length ? `<table class="rp-t sm" role="presentation"><tbody>${nw.list.map(r=>`<tr><td>${rpName(r.name)}<small>${esc(r.ctype||'')}</small></td><td class="n">${rpMoneyS(r.amount)}</td></tr>`).join('')}</tbody></table>` : '');
 
   // 영업 기록
   const KL = {call:'통화', visit:'방문', sms:'문자', memo:'메모', note:'메모'};
   const kinds = Object.entries(ac.by_kind||{});
   const acBox = ac.n>0
-    ? `<div class="rp-line"><b>${num(ac.n)}건</b> · 14일 안 판매 연결 ${num(ac.ok)}건</div><div class="rp-chips">${kinds.map(([k,v])=>`<span>${esc(KL[k]||k)} ${num(v)}</span>`).join('')}</div>${(ac.by_author||[]).length?`<table class="rp-t sm"><tbody>${ac.by_author.map(a=>`<tr><td>${esc(a.name)}</td><td class="n">${num(a.n)}건</td></tr>`).join('')}</tbody></table>`:''}`
+    ? `<div class="rp-line"><b>${num(ac.n)}건</b> · 14일 안 판매 연결 ${num(ac.ok)}건</div><div class="rp-chips">${kinds.map(([k,v])=>`<span>${esc(KL[k]||k)} ${num(v)}</span>`).join('')}</div>${(ac.by_author||[]).length?`<table class="rp-t sm" role="presentation"><tbody>${ac.by_author.map(a=>`<tr><td>${esc(a.name)}</td><td class="n">${num(a.n)}건</td></tr>`).join('')}</tbody></table>`:''}`
     : `<p class="rp-empty">이 기간에 등록된 통화·방문·문자 기록이 없어요. 거래처 상세에서 기록을 남기면 자동으로 집계돼요.</p>`;
 
   const progNote = plan.inProg ? `<div class="rp-note prog"><b>진행 중인 기간입니다.</b> 판매 데이터는 ${plan.cur.to.replace(/-/g,'.')}까지 반영되었고(${plan.elapsedDays}/${plan.totalDays}일), ${nm.p}·${nm.y} 비교는 같은 일수(${rpMD(plan.prev.from)}~${rpMD(plan.prev.to)}${mode==='year'?'':' / '+rpMD(plan.yoy.from)+'~'+rpMD(plan.yoy.to)})만 잘라서 비교한 값입니다.</div>` : '';
@@ -3842,6 +3871,50 @@ async function renderReportView(){
   }
 }
 
+</script>
+<script>
+// 접근성 보정: 라벨 없는 입력칸에 이름 붙이기 + 마우스로만 누르던 행/카드를 키보드(Tab·Enter·Space)로도 누르게 하기
+(function(){
+  const LABELS = {chq:'부서·거래처·건물 검색', chBuildingSel:'건물 필터', chStatusSel:'상태 필터', cq:'거래처 검색', cstatus:'상태 필터',
+    'sch-kind':'공립·사립 구분', 'sch-status':'구매 상태 필터', 'sch-level':'학교 급 필터', 'sch-sub':'병설·단설 필터', 'sch-office':'교육지원청 필터', 'sch-q':'학교 이름·구 검색'};
+  const CLICKY = 'tr.click,.kpi.click,.order.click,[data-goto-cust],[data-goto-st],[data-goto-core]';
+  const NATIVE = /^(BUTTON|A|INPUT|SELECT|TEXTAREA)$/;
+  function fix(root){
+    root.querySelectorAll('input:not([type=hidden]):not([aria-label]),select:not([aria-label]),textarea:not([aria-label])').forEach(el=>{
+      if(el.closest('label')) return;
+      if(el.id && document.querySelector('label[for="'+el.id+'"]')) return;
+      const t = LABELS[el.id] || el.getAttribute('placeholder') || el.getAttribute('title');
+      if(t) el.setAttribute('aria-label', t);
+    });
+    root.querySelectorAll(CLICKY).forEach(el=>{
+      if(NATIVE.test(el.tagName)) return;
+      if(!el.hasAttribute('tabindex')) el.tabIndex = 0;
+      if(el.tagName!=='TR' && !el.hasAttribute('role')) el.setAttribute('role','button');
+    });
+  }
+  // 거래처 상세 창: 대화상자 역할 표시, 열릴 때 닫기 버튼으로 포커스, Esc로 닫기, 닫으면 눌렀던 곳으로 포커스 복귀
+  let drawerOpen=false, lastFocus=null;
+  function drawerCheck(){
+    const d = document.querySelector('#drawerHost .drawer');
+    if(d && !drawerOpen){
+      drawerOpen=true; lastFocus=document.activeElement;
+      d.setAttribute('role','dialog'); d.setAttribute('aria-modal','true');
+      const h=d.querySelector('h2'); if(h){ h.id='drawerTitle'; d.setAttribute('aria-labelledby','drawerTitle'); }
+      const x=d.querySelector('.x'); if(x) x.focus();
+    }else if(!d && drawerOpen){
+      drawerOpen=false; if(lastFocus && document.contains(lastFocus) && lastFocus!==document.body) lastFocus.focus(); lastFocus=null;
+    }
+  }
+  document.addEventListener('keydown', e=>{
+    if(e.key==='Escape'){ const x=document.querySelector('#drawerHost .x'); if(x){ x.click(); return; } }
+    if(e.key!=='Enter' && e.key!==' ') return;
+    const t = e.target;
+    if(t && t.matches && t.matches(CLICKY) && !NATIVE.test(t.tagName)){ e.preventDefault(); t.click(); }
+  });
+  let raf=0;
+  new MutationObserver(()=>{ if(raf) return; raf=requestAnimationFrame(()=>{ raf=0; fix(document); drawerCheck(); }); }).observe(document.body,{childList:true,subtree:true});
+  fix(document);
+})();
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}</script>
 <div id="stmtPrintRoot"></div>
