@@ -822,6 +822,12 @@ details.help summary{font-size:14px;font-weight:600}
   .rp-chart{min-width:560px}
   .rp-cmp{flex-wrap:wrap}
 }
+.rp-bs{display:flex;flex-wrap:wrap;gap:3px;margin:1px 0}
+.rp-b{font-style:normal;font-size:9.5px;font-weight:700;border-radius:999px;padding:0 6px;line-height:1.5}
+.rp-b.big{background:#ffe9dc;color:#c2410c}.rp-b.ret{background:#e9e5ff;color:#4c3bb5}.rp-b.first{background:#dcf5e8;color:#0d7a52}
+.rp-more{font-size:10px;color:var(--p-mut);margin-top:3px;text-align:right}
+.rp-t.sm td small{white-space:normal;overflow-wrap:anywhere}
+.rp-t.sm td:first-child{overflow:visible}
 </style>
 </head>
 <body>
@@ -893,14 +899,14 @@ details.help summary{font-size:14px;font-weight:600}
     <div class="titlegrp">
       <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIkAAABACAYAAAAuw1S1AAAOZklEQVR4nO2ce5zU1XXAv+f+Zl+z7EMIMLvgg4AKiAhBMSgamsbWFyjiLsguIDQ11tpqm6YmUePqp0Y00cakNZKHymN5jAREC5IoaLVoY2M0NiiKBiywsyAuj33P43fyx+zsznt22Vl3Q3/fz2f/mHvPPffM73fmPs65d8HBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHB4eRB+tuAjLykLvYdHItlnwUyHLAIqR+MDzHvsWDoRyDaL7Y9dXA0LntZXOmvqC57qMe6Vu4/D7EejivdQHXZYydsX5Zw9bcBKVm+fwguq5I6319gpAiN8mcjgAIhqK3/BOq2kOPaSOWwpv4y92TG9LcBCagKK+vm4LJWoMxBpSi9PENRWUQguJwVvi99Rlb+v2JgOckyzWF1/XcQ+RuUvB61VSnBcDcr6m5CdeBPo39CDBwnqVFDoe87KJf0So+RSlbX39wLO1x4Dw2iRgfOs+lnBs6aZHT9IpBpWdGlzGFV/QdUe7Z1S35F3flYcjUwAa0vxQ+M8QWp9e3G1m0MaX6eK89s75ENW3bn0VA0HbEvBCkDLOAgar/Oh+XbqZFgT79WJzXqYnT9dOB8BA+qRRgJoboPo7/BdeQ/qZzgP2H9cQyMYbm2/vNgP45K9n69qo3k5d9I5eBjKWW8+wbjd90BTEmvi08gtJQFI38XU55qd2PMVmz728DnkuoTDmCF7mfeyA86y7q7u1lZdwlGbkEZmsbiT7HlERZ6fp32e3WTATKk6o1ZdRAAkSLaWytS1i/fPwS/9QMyOQiAMBQxD7Km7vyMssqpqP0AqRwkLDOCkPV9avedmVFfNKvqlyByTwYHARiC0ftZVX91j/SnoP+dxOsbimp2ppl4RK6kRhOn1Bo1uKwakPLk7TRJ3EVc2NzJk3tK0/fJuG4tuhU3uO5Kal8yVtddCzo/iZ520IOgidOX2Lexon5Ct/Snof+dJGBfBNJH054UM6ru3ITizx+cgTIuoVz1OWyZT1X5Zdjy16BvxNZLETn5Vd3vngaQ1aD/DuxI7I8RjKn7ckY9K+qHYctNcY2PoXovH3lmUl1eRW7DLODxGAdXEcS+HXq32+t/J1FJfFnZxCXjE8ose26iHdSyoPxRFnoOAbDQs4cPy+4i/uUKf8kyzcnYr/IeOdYSqj1PUF2+keqyexC9L3GUMtdk1GW0AsjtskGVkP0tFpS/So3YAFRO8FNdth7lF7H2yhnUHjgvYx/puu9N46wgMqJP9at4Yj7/bN9gVEbHynCAPM+KhLY1YiP+H4AGomTdFB1K79hCOwHuS4gAV5W/kvAS4WxW1Bdm+BIXx36U37IoatEbTa7E6wdMr4KM/b8FtjW3z2YbACE2Yuu2xmPHyRh9kUoJJW1fdfoRan2/RpneWRbSM4B3UvZp8xJLyj5JWtcW8pJvzYmdYu3TUupa+UkZBIfFlKnmsLpuTlL5oIJIS3jNE5FPMrX2gP53kr4nbrQ0p4TzPtFF+lFaDbbuRqTLSYymX5gaeTtl3VdPbaDWV4fSNYLmmGKCdltSeQ0NSQhUiEzEZmJaG2J0yKndlk3CZ+okzZsot4QJIgxVoRBg2vbynbuO8153ddhA+6ApBXhmDsMzdwyu0oKeWWHnJoaHJEPgSQIxH23S9xmyj6bXp59C1DQb0HyE5E5iQiW9XhVID1MccfS5k+gLlLS3cSNCBcqZ0PE77vgxv/5nJ6L1TeBNbK0J/fIQb8z+4PK3mPiz6WB1Y97S4wlOEpBhyWU7MOqJ2yBYaeVdpji9CVISq5+W+MGtE9s6homrFA4AH6ftI4v0mZOoIoHNLGxv406gJOVD6AVGsK4YzrS24VunvXNs5K6phx57l2Gz0weo/KYu4VtbejGwJXkDFdR3YUyRZBhJ1J4AbE9a520oIdB2WozTqX0cyE8qnx84gj/OYNHfMb/8kbQ2ZJE+2d3oS+S3b+antvIQUJKxQRaYWMLYpjG3zOK1qVvTCu71vB8OQEWhTOUp3zlJ5VcdvKrjsFMXkmkLLF9hWUPy7x1ovwaNWrSKKiWyL6WqylMPAIdjykIkbutjbN4/kpX7z+v8W+M7I7296cm6k+gycvxNrESZmW3dmXAJrrYr9n2DbWXPphQKJ9ZeiS0UwaX3sbpubEzxat+XwL41QYdK+jlecVPYdgfe3+fGlC8/MBnVG+Kk/5dZ5S1p9SFxsRo5gzUHLkoquqyhBLW+h1gPd/6FyJxOSEPWp5v2EXwX5dJs6+0JrdfxrYK3H61l1G2TkgoYXQv8eWy+SEqw9UfU+t7GVh9GxmBzVvIcqKY/CBXWN5XAkMdZWfcsKkcQnYThqoQclc3GjKps1mH0apCutZBt7mSV70kCbS+yeNRRtuzO43DhBVhtN6MSndtphtxfZbY3NVkdSVo3cynKwmzqPBEEzB/GLr2M4PHkO4aq8o9REoNniKBMRuRKlLPSdOBJWReNchoit2K4G5GZCQ6ifMCCsv/KqGeh5xASZ284P3QzOfnrWeXbQsOgzRipSQgeok9RPeR4t+xNQdacRBURm3uypa+3lOfjGfPm2a+mFKgqq8VW7wmqPx3voUHJq+LyPSnRY+QF7+/2Ie75ZatBNqWozU1R/jxVZc90z57UZM1JAs9xIdDrjGM2eeFS5hPyJ38JIsrC8p8gegfwbkolwlGU12LKVAztwelJ5Q1vovaDQHNqnfp7rJy/61iUdg8RpdrzI2z5LkLyaG6Xgccw8ijVZQ8jvb9JkLU1iRqu7ottbm8oy8fDuw/UpRWqKg8HXbyHPARDZ6N2KSGrANFGhD3s9uziC758juvkuJaHMVoPduzoKbl7WDC0jmV1O3DLVETOBT0FxYVQj2W/zg0j3kqwI8+9F39rrC7bSrR9oWc7L+kr7PNNwpiJYA8HCkH82FqP0Z00l7/B1+ICgL0ga0mTtud4EUhMy/czS/6Hpavv41/7244/ZbK3uxHGDLSRBOAyD6NW97cRKWhaz0QJ8VUAUV52z2NDb3W2ehllK48AqOGNQRU80Fud2XMSzRCF7CeG5pM+RN6PiDICYS6ACseh904StCk0hosAxKZXu5oIJ30W2G0REx3VZeQ0lXA2gMnhU/d11LeuZ5oq4wQa2mD74EqOATR7mYJynhHaNMSr7huIiYxqDaZpPDOM8kWEPBX2Bv08U1rFkYhM4waG4WcYwKBWPuRj/E3jmSHC6dgcTjbhqxerye5K7wfz2H/KbI4e2UhpboAbUCYDecBuS1mTP4+PIvaqTVdAUBjcsoaLgjk0FF/PrhN9hllzEoFDCukTZf1AgcROgq3FeIxhG4CEWN76NCMUvgLhnGO+crRxLdeKcDMwDwlnnrGwm73cVVjJzwGavHha4AkDUyIvWhRycrir+Wn+sbCCTQASZJEY/gmgzU2FPZ47DUxCQeCWZDN0s/J9Y4icZ91RGqCqZT0XEuAphcFRjnV5SPhay1puc89jA8pPxDAyStVUtdhohdgKLDrRZ5i9YJqk2Ub2IyV5qVdKCvMjDtJZJpRahmdFmBcnboB7m7x4dAt5BtYQOWmvqNA5tA9Cebx5LRck6a8GmJTO3qan+WeRTgd5yw1VLRal2KxUGAwEgC0Im4BWIFcNP2xcyziB94GuszFKoyg7gf9L12cmshdMg5ezpSubeNI4CZAD1LihXJTr6Bg0FIpRnnfnMyoU5BwgclQwR5QvNjdRqXQm2fZaysXuSs5EWUz4JRo1fCO+MxXOEWUXwr0qfFOFmG1q0zoWifL1jo9vt/mplEpaJcTfa0eiVGFxYSWLCyu4SUKdzpRjhNvcc5lv20QfmN7hnsuXC+dydw8eWQJZc5JgiA1A1vbm2aLQSuMkyu7CSn4slYTcc9lB9BkN5Ycyi5bi+RwWovIrwjDoSl5KiH+IrAkK57IFwtORwCXqTVjM7y0o4IrCCh4bVMGTRDmJKJeIsDRiV8jF/CHV4dFJlSs6xA6qja9xLRMa1zIhFF7sHuyoixkRs0nWnGTQNRxEeDpb+j4LRBIO7nTe9gvZXUO0QsyBZoHImZXWgvf575g6JZJMM62h2AtaonhlFkkzviqMJfI+hMKiYPg4g3rJRSjrEBtuDNui/4DhHW2KGjf0zZowq7sbv839uYYrUUqzqbevUCX2QpPSElkUBl1pR0ULQCAgNXHHqqNGh1AOxWLH1HX3NFl5C3wTuItmDJGz9Eq7wIepGkkw4QxbVsiqkxTP4nDbZm4FVqAD4LpG31EHDFcoblzPOUXXszOqrus2YhCJfgoqafI5is8YbreVVYTXSkua1uOV63mnxUtDx66m0V1J2stcjWvTXC89QbL+IvOv4gVRbkcSLi6cNEQv0o3Ng7opfG2jcS0TgM5DSpbVg0Ce8B8FFbwM/DjSXGy+pzUYVSL/HeFzrV4679Col4JmL1tbvOxuXsf6BJW9PAAdoU9+7XkzWadKNXQFlU4m1MUT0rV+uaC1jd80e3neCL9UuhxDyXixOwE3PAqdWd5JLeNZHLL4Nzo2BTasal7HT1vWsbQFXgMmd/S5CiDH1XU0U+HS5nUsb/GSeLquB/TZlFAwk23+8IWmVQzAXU9vKLqOQyL8FR0LWhVKgS8gsdO3KKOTNE+LVNIkwr9EFX3b+DmC8LeAH8hFmKXCYiB84V35eeFcngHIs/kDEDmCYCFcrpoYs+kJfRqWL57FYeDrTZt4yGWYLTADYbwqwzM27iNCebSbQPh8iJq4ULWwM7JhPqU9alGr+KDzTIkPoKCCVxs3MM0KUAVMsYVcI+xX5WW0YzsqhIxQp3a4rRgaYroTGiJ1CHsi5QU78baMYwYdOxcxXFtYwbKWNfzWtqgycK5CvsBelA0d2/ewmkpCrb9gtga5BeF0VfJESTya4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OAwEPkjAM/rqjCoYzwAAAAASUVORK5CYII=" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.32</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.33</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
     </div>
   </div>
   <nav class="tabs" id="tabs">
-    <button data-tab="summary" aria-selected="true"><span class="ti">📊</span><span class="tl">대시보드</span></button>
+    <button data-tab="summary" aria-selected="true"><span class="ti">📊</span><span class="tl">Dashboard</span></button>
     <button data-tab="cityhall" aria-selected="false"><span class="ti">🏛️</span><span class="tl">시청</span></button>
     <button data-tab="customers" aria-selected="false"><span class="ti">🏢</span><span class="tl">거래처</span></button>
     <button data-tab="sales" aria-selected="false"><span class="ti">💼</span><span class="tl">영업</span></button>
@@ -3575,11 +3581,16 @@ async function rpBounds(){
 async function rpLoad(plan){
   const key = JSON.stringify([plan.cur,plan.prev,plan.yoy,REP.bounds.max]);
   if(REP.cache.has(key)) return REP.cache.get(key);
-  const {data,error} = await sb.rpc('management_report', {
-    p_from:plan.cur.from, p_to:plan.cur.to, p_prev_from:plan.prev.from, p_prev_to:plan.prev.to,
-    p_yoy_from:plan.yoy.from, p_yoy_to:plan.yoy.to, p_asof:REP.bounds.max
-  });
-  if(error) throw error;
+  const [a,b] = await Promise.all([
+    sb.rpc('management_report', {
+      p_from:plan.cur.from, p_to:plan.cur.to, p_prev_from:plan.prev.from, p_prev_to:plan.prev.to,
+      p_yoy_from:plan.yoy.from, p_yoy_to:plan.yoy.to, p_asof:REP.bounds.max
+    }),
+    sb.rpc('management_report_notable', {p_from:plan.cur.from, p_to:plan.cur.to})
+  ]);
+  if(a.error) throw a.error;
+  const data = a.data;
+  data.notable = b.error ? {error:b.error.message, n:0, list:[]} : b.data;
   REP.cache.set(key,data); return data;
 }
 
@@ -3681,8 +3692,9 @@ function rpPaper(d, plan, mode, y, idx, series){
     if(top1) s2 += ` 상위 10곳이 매출의 ${(top10Sum/amt*100).toFixed(0)}%이고, 1위 ${esc(top1.name)} 한 곳이 ${(Number(top1.cur_amount)/amt*100).toFixed(0)}%입니다.`;
     sum.push(s2);
   }else{ sum.push(`${label}에는 집계된 판매가 없습니다.`); }
-  const ch=d.churn, rp=d.repurchase, ac=d.activities;
-  sum.push(`최근 1년 안에 거래가 끊긴 이탈의심 거래처는 <b>${num(ch.n_recent)}곳</b>(연 환산 약 ${rpMoney(ch.est_annual_recent)}), 앞으로 30일 안에 재구매가 예상되는 곳은 <b>${num(rp.n)}곳</b>(약 ${rpMoney(rp.amount)})입니다.`);
+  const ch=d.churn, ac=d.activities, ntd=d.notable||{n:0,list:[]};
+  const nwEarly = plan.cur.from <= rpAdd(REP.bounds.min, 31);
+  sum.push(`최근 1년 안에 거래가 끊긴 이탈의심 거래처는 <b>${num(ch.n_recent)}곳</b>(연 환산 약 ${rpMoney(ch.est_annual_recent)})입니다.` + (ntd.n>0 ? ` 이 기간 주목할 주문은 <b>${num(ntd.n)}건</b>으로, 고액 ${num(ntd.n_big)}건·장기간 뜸했다 복귀 ${num(ntd.n_ret)}건·큰 금액의 첫 거래 ${num(ntd.n_first)}건입니다.` : ''));
   sum.push(ac.n>0 ? `이 기간 영업 기록은 ${num(ac.n)}건, 기록 후 14일 안에 판매로 이어진 건은 ${num(ac.ok)}건입니다.` : `이 기간에 등록된 영업 기록(통화·방문·문자)은 없습니다.`);
 
   // KPI 타일
@@ -3691,7 +3703,7 @@ function rpPaper(d, plan, mode, y, idx, series){
     rpTile('판매건수', `${num(cur.orders)}건`, cmp(oP,oY)),
     rpTile('거래처 수', `${num(cur.customers)}곳`, cmp(cP,cY)),
     rpTile('이탈 위험 거래처', `${num(ch.n_recent)}곳`, `최근 1년 내 끊긴 곳 · 연 환산 약 ${rpMoney(ch.est_annual_recent)}<div class="rp-cmp"><span>이탈의심 전체</span><b>${num(ch.n)}곳</b></div>`, 'warn'),
-    rpTile('재구매 예정 금액(30일)', rpMoney(rp.amount), `${num(rp.n)}곳 예상<div class="rp-cmp"><span>예정일 지났는데 미구매</span><b>${num(rp.overdue_n)}곳 · ${rpMoney(rp.overdue_amount)}</b></div>`, 'ok'),
+    rpTile('신규 거래처', nwEarly ? '-' : `${num((d.new||{}).n)}곳`, nwEarly ? '판매 데이터 시작 직후라 판단 불가' : `이 기간에 첫 구매 · 매출 ${rpMoney((d.new||{}).amount)}`, 'ok'),
     rpTile('영업 기록', `${num(ac.n)}건`, ac.n>0 ? `14일 내 판매 연결 ${num(ac.ok)}건${ac.by_author&&ac.by_author.length?`<div class="rp-cmp"><span>${esc(ac.by_author.slice(0,3).map(a=>a.name+' '+a.n).join(' · '))}</span></div>`:''}` : '등록된 기록 없음')
   ].join('');
 
@@ -3707,8 +3719,10 @@ function rpPaper(d, plan, mode, y, idx, series){
   // 이탈 위험 / 재구매 예정 (상위 7곳씩)
   const chRows = (ch.list||[]).slice(0,7);
   const chTbl = chRows.length ? `<table class="rp-t sm"><thead><tr><th>거래처</th><th class="n">마지막 구매</th><th class="n">연 환산</th></tr></thead><tbody>${chRows.map(r=>`<tr><td>${rpName(r.name)}<small>평소 ${num(r.typical_cycle_days)}일 주기</small></td><td class="n">${esc(String(r.last_date).slice(2).replace(/-/g,'.'))}<small>${num(r.days_since_last_order)}일 경과</small></td><td class="n">${rpMoneyS(r.est_annual)}</td></tr>`).join('')}</tbody></table>` : '<p class="rp-empty">최근 1년 안에 끊긴 이탈의심 거래처가 없어요.</p>';
-  const rpRows = (rp.list||[]).slice(0,7);
-  const rpTbl = rpRows.length ? `<table class="rp-t sm"><thead><tr><th>거래처</th><th class="n">예정일</th><th class="n">예상 금액</th></tr></thead><tbody>${rpRows.map(r=>`<tr><td>${rpName(r.name)}<small>${esc(r.ctype||'')} · ${esc(r.status)}</small></td><td class="n">${esc(String(r.expected_date).slice(5).replace('-','/'))}<small>마지막 ${esc(String(r.last_date).slice(5).replace('-','/'))}</small></td><td class="n">${rpMoneyS(r.avg_amount)}</td></tr>`).join('')}</tbody></table>` : '<p class="rp-empty">30일 안에 예정된 재구매가 없어요.</p>';
+  const ntRows = (ntd.list||[]).slice(0,6);
+  const ntBadges = o => [o.big?'<i class="rp-b big">고액</i>':'', o.ret?`<i class="rp-b ret">${Math.max(1,Math.round(Number(o.gap_days)/30))}개월만에 복귀</i>`:'', o.first?'<i class="rp-b first">첫 거래</i>':''].join('');
+  const ntWhy = o => { const w=[]; if(o.big && Number(o.order_n)>1 && Number(o.avg_amount)>0) w.push(`평소 평균(${rpMoneyS(o.avg_amount)})의 ${(Number(o.amount)/Number(o.avg_amount)).toFixed(1)}배`); if(o.ret) w.push(`직전 판매 ${String(o.prev_order_date).slice(2).replace(/-/g,'.')} 이후 ${num(o.gap_days)}일만`); if(o.first) w.push('이 거래처와의 첫 판매'); return w.join(' · '); };
+  const rpTbl = ntd.error ? '<p class="rp-empty">주목할 주문을 불러오지 못했어요.</p>' : ntRows.length ? `<table class="rp-t sm"><tbody>${ntRows.map(o=>`<tr><td>${rpName(o.name)}<div class="rp-bs">${ntBadges(o)}</div><small>${esc(String(o.order_date).slice(5).replace('-','/'))} · ${esc(ntWhy(o))}</small></td><td class="n">${rpMoneyS(o.amount)}</td></tr>`).join('')}</tbody></table>${ntd.n>ntRows.length?`<div class="rp-more">전체 ${num(ntd.n)}건 중 금액이 큰 ${ntRows.length}건</div>`:''}` : '<p class="rp-empty">이 기간에는 특별히 두드러지는 주문이 없어요.</p>';
 
   // 신규 거래처
   const nw = d.new||{n:0,amount:0,list:[]};
@@ -3745,7 +3759,7 @@ function rpPaper(d, plan, mode, y, idx, series){
     <div class="rp-sec"><h3>매출 상위 거래처 TOP 10</h3>${topTbl}</div>
     <div class="rp-2col">
       <div class="rp-sec"><h3>이탈 위험 거래처 <small>최근 1년 내 거래 끊김 · 연 환산 큰 순</small></h3>${chTbl}</div>
-      <div class="rp-sec"><h3>재구매 예정 <small>앞으로 30일 · 예상 금액 큰 순</small></h3>${rpTbl}</div>
+      <div class="rp-sec"><h3>이 기간 주목할 주문 <small>고액 · 장기 복귀 · 첫 거래</small></h3>${rpTbl}</div>
     </div>
     <div class="rp-2col">
       <div class="rp-sec"><h3>신규 거래처 <small>이 기간 첫 구매</small></h3>${nwBox}</div>
@@ -3754,8 +3768,8 @@ function rpPaper(d, plan, mode, y, idx, series){
     <footer class="rp-foot">
       <b>산출 기준</b>
       <p>매출은 판매현황의 공급가액 합계이며(거래처가 지정되지 않은 줄 제외) 건수는 같은 날·같은 전표·같은 거래처를 1건으로 셉니다. 진행 중인 기간은 비교 기간도 같은 일수만큼만 비교합니다.</p>
-      <p>이탈 위험: 판매 3회 이상이면서 마지막 구매 후 경과일이 평소 주기×3과 75일을 모두 넘은 거래처 중 마지막 구매가 1년 이내인 곳. 연 환산 = 누적매출 ÷ 거래 기간(최소 1년)이며 추정치입니다. 이탈·재구매·신규는 통계 갱신 시점의 현재 상태 기준입니다.</p>
-      <p>재구매 예정: 활성·신규·주의 거래처의 (마지막 구매일 + 평소 주기)가 데이터 기준일 이후 30일 안에 오는 곳. 예상 금액은 구매일당 평균 매출로 계산한 추정치이며 실제 주문을 보장하지 않습니다.</p>
+      <p>이탈 위험: 판매 3회 이상이면서 마지막 구매 후 경과일이 평소 주기×3과 75일을 모두 넘은 거래처 중 마지막 구매가 1년 이내인 곳. 연 환산 = 누적매출 ÷ 거래 기간(최소 1년)이며 추정치입니다. 이탈 위험·신규 거래처 판정은 통계 갱신 시점의 현재 상태 기준입니다.</p>
+      <p>주목할 주문(대시보드와 같은 기준): 한 주문이 2천만원 이상이거나 그 거래처 평소 평균의 2.5배 이상(고액), 직전 판매 후 120일 이상 만의 재주문(복귀), 500만원 이상으로 시작한 첫 거래.</p>
       <div class="rp-sign">작성 ${esc(nowTxt)}${who?` · ${esc(who)}`:''} · able market 앱 자동 생성</div>
     </footer>
    </section>
