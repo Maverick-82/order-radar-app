@@ -460,7 +460,7 @@ tr.done-row{opacity:.35;transition:opacity .3s}
 @media print{
   @page{size:A4;margin:8mm 9mm}
   html,body{background:#fff !important;background-image:none !important;padding:0 !important;margin:0 !important}
-  body > *:not(#stmtPrintRoot){display:none !important}
+  body:not(.rp-printing) > *:not(#stmtPrintRoot){display:none !important}
   #stmtPrintRoot{display:block !important}
   #stmtPrintRoot .stm .stm-page{page-break-after:always;break-after:page;box-shadow:none}
   #stmtPrintRoot .stm .stm-page:last-child{page-break-after:auto;break-after:auto}
@@ -703,6 +703,125 @@ details.help summary{font-size:14px;font-weight:600}
   table.rt td.rt-wide{grid-column:1/-1}
 }
 @media (max-width:720px){.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:4px}.seg button{white-space:nowrap}}
+
+/* ---------- 경영 리포트 ---------- */
+#view-report{gap:14px}
+.rp-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.rp-toolbar .seg{width:auto}
+.rp-pick{display:flex;align-items:center;gap:6px}
+.rp-pick select{min-height:42px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:0 10px;font:inherit}
+.rp-toolbar #rpPrint{margin-left:auto}
+.rp-paper{--p-ink:#141b2d;--p-mut:#667085;--p-line:#e4e7ee;--p-acc:#2a4bd7;--p-soft:#f4f6fb;
+  background:#fff;color:var(--p-ink);width:min(794px,100%);margin:0 auto;border-radius:14px;
+  box-shadow:0 1px 3px rgba(16,24,40,.08),0 12px 40px rgba(16,24,40,.10);padding:0;overflow:hidden;font-size:12.5px;line-height:1.5}
+.rp-page{padding:30px 34px 26px}
+.rp-page+.rp-page{border-top:2px dashed #d5d9e4}
+.rp-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding-bottom:14px;border-bottom:3px solid var(--p-ink);margin-bottom:14px}
+.rp-co{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--p-acc);text-transform:uppercase}
+.rp-head h1{margin:2px 0 0;font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--p-ink)}
+.rp-meta{text-align:right;display:flex;flex-direction:column;gap:1px;font-size:11.5px;color:var(--p-mut)}
+.rp-meta b{font-size:18px;color:var(--p-ink);font-weight:800}
+.rp-meta em{font-style:normal;align-self:flex-end;background:#fff1e6;color:#c2410c;border-radius:999px;padding:1px 9px;font-size:11px;font-weight:700}
+.rp-note.prog{background:#fff8ec;border:1px solid #fde3b4;color:#7a4a05;border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:11.5px}
+.rp-sum{background:var(--p-soft);border-left:4px solid var(--p-acc);border-radius:8px;padding:11px 16px 9px;margin-bottom:14px}
+.rp-sum h3{margin:0 0 4px;font-size:12px;color:var(--p-acc);letter-spacing:.04em}
+.rp-sum ul{margin:0;padding-left:16px}
+.rp-sum li{margin:2px 0;font-size:12.5px}
+.rp-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px}
+.rp-tile{border:1px solid var(--p-line);border-radius:10px;padding:10px 12px;background:#fff;min-width:0}
+.rp-tile.hero{background:linear-gradient(135deg,#eef2ff,#fff);border-color:#cfd8fb}
+.rp-tile.warn{border-top:3px solid #e5484d}.rp-tile.ok{border-top:3px solid #1aa772}
+.rp-tl{font-size:11px;font-weight:700;color:var(--p-mut)}
+.rp-tv{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:1px 0 3px;color:var(--p-ink)}
+.rp-ts{font-size:11px;color:var(--p-mut)}
+.rp-cmp{display:flex;justify-content:space-between;gap:8px;margin-top:2px;font-size:11px}
+.rp-cmp b{color:var(--p-ink);font-weight:700}
+.rp-up{color:#0d8a5f;font-weight:700}.rp-dn{color:#d1344a;font-weight:700}.rp-na{color:#a0a7b8}
+.rp-sec{margin-bottom:14px;min-width:0}
+.rp-sec h3{margin:0 0 6px;font-size:13.5px;font-weight:800;color:var(--p-ink);padding-left:8px;border-left:4px solid var(--p-acc)}
+.rp-sec h3 small{font-weight:500;color:var(--p-mut);font-size:10.5px;margin-left:4px}
+.rp-chart{width:100%;height:auto;display:block}
+.rp-legend{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--p-mut);margin-top:2px}
+.rp-legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.rp-legend span{margin-left:auto}
+.rp-t{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:auto}
+.rp-t th{background:var(--p-soft);color:var(--p-mut);font-weight:700;font-size:10.5px;text-align:left;padding:5px 7px;border-bottom:1px solid var(--p-line);white-space:nowrap}
+.rp-t td{padding:5px 7px;border-bottom:1px solid #eef0f5;vertical-align:middle;color:var(--p-ink)}
+.rp-t th.n,.rp-t td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rp-t th.c,.rp-t td.c{text-align:center;width:24px;color:var(--p-mut)}
+.rp-t td.mut{color:var(--p-mut)}
+.rp-t td small{display:block;color:var(--p-mut);font-size:10px;line-height:1.3}
+.rp-nm{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:600;line-height:1.35}
+.rp-t.sm{font-size:11px}
+.rp-t.sm td{padding:4px 6px}
+.rp-bar{position:relative;min-width:84px}
+.rp-bar span{position:absolute;left:7px;top:50%;height:9px;transform:translateY(-50%);background:#c9d3fb;border-radius:2px;max-width:calc(100% - 14px)}
+.rp-bar em{position:relative;font-style:normal}
+.rp-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rp-line{font-size:12px;margin-bottom:4px}
+.rp-line b{font-size:15px}
+.rp-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:5px}
+.rp-chips span{background:var(--p-soft);border-radius:999px;padding:2px 9px;font-size:11px;font-weight:600}
+.rp-empty{color:var(--p-mut);font-size:11.5px;margin:4px 0;background:var(--p-soft);border-radius:8px;padding:9px 11px}
+.rp-foot{border-top:1px solid var(--p-line);padding-top:8px;color:var(--p-mut);font-size:9.8px;line-height:1.45}
+.rp-foot p{margin:2px 0}
+.rp-sign{margin-top:5px;text-align:right}
+@media (max-width:720px){
+  .rp-toolbar{gap:8px}.rp-toolbar #rpPrint{margin-left:0;flex:1 1 100%}
+  .rp-toolbar .seg{flex:1 1 100%}
+  .rp-pick{flex:1 1 100%}.rp-pick select{flex:1}
+  .rp-page{padding:18px 14px}
+  .rp-head{flex-direction:column;align-items:flex-start}.rp-meta{text-align:left}.rp-meta em{align-self:flex-start}
+  .rp-head h1{font-size:21px}
+  .rp-tiles{grid-template-columns:1fr 1fr}
+  .rp-tile.hero{grid-column:1/-1}
+  .rp-tv{font-size:19px}
+  .rp-2col{grid-template-columns:1fr}
+  .rp-sec{overflow-x:auto}
+  .rp-t{min-width:480px}.rp-t.sm{min-width:0}
+}
+@media print{
+  html:has(body.rp-printing),body.rp-printing{background:#fff !important;background-image:none !important;padding:0 !important;margin:0 !important}
+  body.rp-printing header.top,body.rp-printing nav.tabs,body.rp-printing .toast,body.rp-printing .hscroll-fixed,body.rp-printing .rp-toolbar,body.rp-printing #who-role{display:none !important}
+  body.rp-printing #app.wrap{padding:0 !important;max-width:none !important;margin:0 !important}
+  body.rp-printing section.view{padding:0 !important;gap:0 !important}
+  body.rp-printing .rp-paper{box-shadow:none !important;border-radius:0 !important;width:100% !important;max-width:none !important;font-size:11.5px}
+  body.rp-printing .rp-page{padding:0 !important;border:0 !important}
+  body.rp-printing .rp-page+.rp-page{break-before:page}
+  body.rp-printing .rp-page{break-inside:avoid}
+  body.rp-printing .rp-2col{grid-template-columns:1fr 1fr !important}
+  body.rp-printing .rp-tiles{grid-template-columns:repeat(3,1fr) !important}
+  body.rp-printing .rp-tile.hero{grid-column:auto !important}
+  body.rp-printing .rp-t{min-width:0 !important}
+  body.rp-printing .rp-sec{overflow:visible !important}
+  body.rp-printing *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+.rp-2col>.rp-sec{overflow:hidden}
+.rp-t.sm{table-layout:fixed}
+.rp-t.sm th.n,.rp-t.sm td.n{width:66px}
+.rp-t.sm td:first-child{overflow:hidden}
+
+@media print{
+  body.rp-printing .rp-paper{zoom:.93;font-size:11px}
+  body.rp-printing .rp-head{padding-bottom:9px;margin-bottom:9px}
+  body.rp-printing .rp-head h1{font-size:23px}
+  body.rp-printing .rp-sum{padding:8px 14px 6px;margin-bottom:10px}
+  body.rp-printing .rp-sum li{font-size:11.5px}
+  body.rp-printing .rp-tiles{gap:7px;margin-bottom:10px}
+  body.rp-printing .rp-tile{padding:7px 10px}
+  body.rp-printing .rp-tv{font-size:19px;margin:0 0 2px}
+  body.rp-printing .rp-sec{margin-bottom:9px}
+  body.rp-printing .rp-t td{padding:3.5px 7px}
+  body.rp-printing .rp-t.sm td{padding:3px 6px}
+  body.rp-printing .rp-foot{font-size:9px}
+}
+
+@media (max-width:720px){
+  .rp-toolbar .seg{grid-template-columns:repeat(3,1fr)}
+  .rp-chart{min-width:560px}
+  .rp-cmp{flex-wrap:wrap}
+}
 </style>
 </head>
 <body>
@@ -774,7 +893,7 @@ details.help summary{font-size:14px;font-weight:600}
     <div class="titlegrp">
       <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.31</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.32</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -786,6 +905,7 @@ details.help summary{font-size:14px;font-weight:600}
     <button data-tab="customers" aria-selected="false"><span class="ti">🏢</span><span class="tl">거래처</span></button>
     <button data-tab="sales" aria-selected="false"><span class="ti">💼</span><span class="tl">영업</span></button>
     <button data-tab="products" aria-selected="false"><span class="ti">🏷️</span><span class="tl">생산품</span></button>
+    <button data-tab="report" aria-selected="false"><span class="ti">📑</span><span class="tl">리포트</span></button>
   </nav>
 </header>
 
@@ -794,6 +914,7 @@ details.help summary{font-size:14px;font-weight:600}
 <section class="view hide" id="view-sales"></section>
 <section class="view hide" id="view-cityhall"></section>
 <section class="view hide" id="view-products"></section>
+<section class="view hide" id="view-report"></section>
 <section class="view hide" id="view-stmt"></section>
 <section class="view hide" id="view-recon"></section>
 <section class="view hide" id="view-admin"></section>
@@ -920,13 +1041,13 @@ let CUSTS = []; // customer_stats rows, loaded once per session
 let custById = new Map();
 let currentTab = 'summary';
 let currentSalesSub = 'coretarget';
-const VIEW_IDS = ['summary','customers','sales','products','cityhall','stmt','recon','admin'];
+const VIEW_IDS = ['summary','customers','sales','products','cityhall','report','stmt','recon','admin'];
 // Supabase는 한 번에 1000줄까지만 주므로, 판매 줄이 많은 거래처는 나눠서 끝까지 가져옴
 async function sbAll(build){
   const all=[]; for(let from=0;;from+=1000){ const {data,error}=await build().range(from,from+999); if(error) return {data:all,error}; all.push(...(data||[])); if(!data||data.length<1000) break; }
   return {data:all};
 }
-const ALL_TABS = [['summary','Dashboard'],['cityhall','시청'],['customers','거래처 (거래명세서 포함)'],['sales','영업'],['products','생산품']];
+const ALL_TABS = [['summary','Dashboard'],['cityhall','시청'],['customers','거래처 (거래명세서 포함)'],['sales','영업'],['products','생산품'],['report','경영 리포트']];
 const ID_DOMAIN = 'example.com'; // 아이디(able1 등)로 가입·로그인할 때 내부적으로 붙이는 주소 (실제 메일은 안 감)
 function loginEmail(v){ v = String(v||'').trim(); return v.includes('@') ? v : v.toLowerCase()+'@'+ID_DOMAIN; }
 function loginIdOnly(v){ v = String(v||'').trim(); return v.includes('@') ? v : v.toLowerCase(); }
@@ -1197,6 +1318,7 @@ function renderTab(){
   else if(currentTab==='sales') renderSalesView();
   else if(currentTab==='products') renderProductsView();
   else if(currentTab==='cityhall') renderCityHallView();
+  else if(currentTab==='report') renderReportView();
   else if(currentTab==='stmt') renderStmtView();
   else if(currentTab==='admin') renderAdminView();
 }
@@ -3369,7 +3491,7 @@ function logItemHTML(a, orderDates){
 
 // ---------- 모바일에서 표를 카드로 보여주기 위한 라벨 달기 (화면 폭이 좁을 때만 CSS가 카드로 바꿈) ----------
 (function(){
-  const SKIP = '#view-summary,#view-stmt,#view-recon,#view-admin,.stm,.omodal,.stm-preview';
+  const SKIP = '#view-summary,#view-report,#view-stmt,#view-recon,#view-admin,.stm,.omodal,.stm-preview';
   const IDX = ['#','순서','순위','번호','No','no',''];
   function mark(root){
     (root||document).querySelectorAll('.tbl-wrap > table').forEach(t=>{
@@ -3394,6 +3516,318 @@ function logItemHTML(a, orderDates){
   mo.observe(document.body, {childList:true, subtree:true});
   mark(document);
 })();
+</script>
+<script>
+// ---------------- 경영 리포트 (월간·분기·연간) ----------------
+// DB 함수 management_report(...)가 기간별 집계를 한 번에 돌려줌. 이 화면은 기간 선택 + A4 두 장짜리 보고서 그리기 + 인쇄/PDF 저장만 담당.
+const REP = {mode:'month', y:null, idx:null, bounds:null, cache:new Map(), busy:false, seq:0};
+const rpPad = n => String(n).padStart(2,'0');
+const rpYmd = (y,m,d) => `${y}-${rpPad(m)}-${rpPad(d)}`;
+const rpLastDay = (y,m) => new Date(Date.UTC(y,m,0)).getUTCDate();
+const rpMs = s => Date.UTC(+s.slice(0,4), +s.slice(5,7)-1, +s.slice(8,10));
+const rpDiff = (a,b) => Math.round((rpMs(b)-rpMs(a))/86400000);
+const rpAdd = (s,n) => new Date(rpMs(s)+n*86400000).toISOString().slice(0,10);
+const rpMD = s => `${+s.slice(5,7)}/${+s.slice(8,10)}`;
+
+function rpRange(mode,y,idx){
+  if(mode==='month') return {from:rpYmd(y,idx,1), to:rpYmd(y,idx,rpLastDay(y,idx))};
+  if(mode==='quarter'){ const m1=(idx-1)*3+1, m2=m1+2; return {from:rpYmd(y,m1,1), to:rpYmd(y,m2,rpLastDay(y,m2))}; }
+  return {from:rpYmd(y,1,1), to:rpYmd(y,12,31)};
+}
+function rpBack(mode,y,idx,n){
+  if(mode==='year') return {y:y-n, idx:1};
+  const per = mode==='month' ? 12 : 4;
+  const t = y*per + (idx-1) - n;
+  return {y:Math.floor(t/per), idx:(t%per)+1};
+}
+function rpOrd(mode,y,idx){ return mode==='year'? y : y*(mode==='month'?12:4)+idx; }
+function rpOfDate(mode,s){ const y=+s.slice(0,4), m=+s.slice(5,7); return {y, idx: mode==='month'? m : mode==='quarter'? Math.ceil(m/3) : 1}; }
+function rpLabel(mode,y,idx){ return mode==='month' ? `${y}년 ${idx}월` : mode==='quarter' ? `${y}년 ${idx}분기` : `${y}년`; }
+function rpNames(mode){ return mode==='month' ? {p:'전월', y:'전년 동월'} : mode==='quarter' ? {p:'전분기', y:'전년 동분기'} : {p:'전년', y:'전년'}; }
+const RP_TITLE = {month:'월간', quarter:'분기', year:'연간'};
+
+// 진행 중인 기간(데이터가 아직 기간 끝까지 안 온 경우)은 비교 기간도 같은 일수만큼만 잘라서 비교함
+function rpPlan(mode,y,idx,dataMax){
+  const full = rpRange(mode,y,idx);
+  const inProg = dataMax < full.to;
+  const end = inProg ? dataMax : full.to;
+  const elapsed = rpDiff(full.from, end); // 시작일 기준 경과 일수(시작일=0)
+  const mk = (sy,sidx)=>{ const r=rpRange(mode,sy,sidx); let to=r.to; if(inProg){ const t=rpAdd(r.from, elapsed); if(t<to) to=t; } return {from:r.from, to}; };
+  const p = rpBack(mode,y,idx,1);
+  const yo = mode==='year' ? p : {y:y-1, idx};
+  return {cur:{from:full.from, to:end}, prev:mk(p.y,p.idx), yoy:mk(yo.y,yo.idx), inProg, fullTo:full.to,
+          elapsedDays: elapsed+1, totalDays: rpDiff(full.from, full.to)+1};
+}
+
+async function rpBounds(){
+  const [a,b] = await Promise.all([
+    sb.from('sale_line').select('sale_date').order('sale_date',{ascending:false}).limit(1),
+    sb.from('sale_line').select('sale_date').order('sale_date',{ascending:true}).limit(1)
+  ]);
+  if(a.error) throw a.error; if(b.error) throw b.error;
+  const max=a.data&&a.data[0]&&a.data[0].sale_date, min=b.data&&b.data[0]&&b.data[0].sale_date;
+  if(!max||!min) throw new Error('판매 데이터가 없어요');
+  if(REP.bounds && REP.bounds.max!==max) REP.cache.clear();
+  REP.bounds = {min,max};
+  return REP.bounds;
+}
+
+async function rpLoad(plan){
+  const key = JSON.stringify([plan.cur,plan.prev,plan.yoy,REP.bounds.max]);
+  if(REP.cache.has(key)) return REP.cache.get(key);
+  const {data,error} = await sb.rpc('management_report', {
+    p_from:plan.cur.from, p_to:plan.cur.to, p_prev_from:plan.prev.from, p_prev_to:plan.prev.to,
+    p_yoy_from:plan.yoy.from, p_yoy_to:plan.yoy.to, p_asof:REP.bounds.max
+  });
+  if(error) throw error;
+  REP.cache.set(key,data); return data;
+}
+
+// ---- 표시용 도우미 ----
+function rpMoney(n){ n=Number(n)||0; const a=Math.abs(n); if(a>=1e8) return (n/1e8).toFixed(2)+'억원'; if(a>=1e4) return Math.round(n/1e4).toLocaleString('ko-KR')+'만원'; return Math.round(n).toLocaleString('ko-KR')+'원'; }
+function rpMoneyS(n){ n=Number(n)||0; const a=Math.abs(n); if(a>=1e8) return (n/1e8).toFixed(a>=1e9?1:2)+'억'; return Math.round(n/1e4).toLocaleString('ko-KR')+'만'; }
+function rpPct(cur,base){ cur=Number(cur)||0; base=Number(base)||0; return base>0 ? (cur-base)/base*100 : null; }
+function rpPctTxt(p){ if(p==null) return '-'; const t = Math.abs(p)>=1000 ? '999%+' : Math.abs(p).toFixed(1)+'%'; return (p>=0?'+':'-')+t; }
+function rpDeltaHtml(p){ if(p==null) return '<span class="rp-na">-</span>'; const up=p>=0; return `<span class="${up?'rp-up':'rp-dn'}">${up?'▲':'▼'} ${Math.abs(p)>=1000?'999%+':Math.abs(p).toFixed(1)+'%'}</span>`; }
+const rpName = s => `<span class="rp-nm">${esc(s||'')}</span>`;
+
+// ---- 막대 차트(SVG) ----
+function rpChart(labels, A, B, hl, partialLast, aLabel, bLabel){
+  const W=720,H=160,L=4,R=4,T=20,Bt=22, n=labels.length;
+  const vals=[...A,...(B||[])].filter(v=>v!=null);
+  const max=Math.max(1,...vals), ih=H-T-Bt, iw=(W-L-R)/n;
+  const bw = B ? iw*0.34 : Math.min(iw*0.56, 54);
+  const y = v => T + ih - (v/max)*ih;
+  let s = `<svg class="rp-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="기간별 매출 추이">`;
+  for(let i=0;i<=3;i++){ const gy=T+ih*i/3; s+=`<line x1="${L}" x2="${W-R}" y1="${gy}" y2="${gy}" stroke="#e6e9f0" stroke-width="1"/>`; }
+  labels.forEach((lb,i)=>{
+    const cx=L+iw*i+iw/2;
+    if(B){
+      const bv=B[i], av=A[i];
+      if(bv!=null && bv>0) s+=`<rect x="${cx-bw-1}" y="${y(bv)}" width="${bw}" height="${T+ih-y(bv)}" rx="2" fill="#cdd3e2"/>`;
+      if(av!=null && av>0){
+        const last = partialLast && i===hl;
+        s+=`<rect x="${cx+1}" y="${y(av)}" width="${bw}" height="${T+ih-y(av)}" rx="2" fill="#2a4bd7" ${last?'fill-opacity=".55" stroke="#2a4bd7" stroke-dasharray="3 2"':''}/>`;
+        s+=`<text x="${cx+1+bw/2}" y="${y(av)-4}" text-anchor="middle" font-size="8.5" fill="#1f2a44" font-weight="700">${(av/1e8).toFixed(1)}</text>`;
+      }
+    }else{
+      const av=A[i]; if(av==null) return;
+      const isHl = i===hl, last = partialLast && i===hl;
+      const fill = isHl ? '#2a4bd7' : '#b4c0f2';
+      s+=`<rect x="${cx-bw/2}" y="${y(av)}" width="${bw}" height="${Math.max(1,T+ih-y(av))}" rx="3" fill="${fill}" ${last?'fill-opacity=".55" stroke="#2a4bd7" stroke-dasharray="3 2"':''}/>`;
+      s+=`<text x="${cx}" y="${y(av)-5}" text-anchor="middle" font-size="10.5" fill="#1f2a44" font-weight="${isHl?800:600}">${rpMoneyS(av)}</text>`;
+    }
+    s+=`<text x="${cx}" y="${H-7}" text-anchor="middle" font-size="10" fill="${i===hl?'#1f2a44':'#6b7385'}" font-weight="${i===hl?800:500}">${esc(lb)}</text>`;
+  });
+  s+='</svg>';
+  const legend = B ? `<div class="rp-legend"><i style="background:#2a4bd7"></i>${esc(aLabel)}<i style="background:#cdd3e2"></i>${esc(bLabel)}<span>막대 위 숫자: 억원</span></div>` : '';
+  return s+legend;
+}
+
+async function rpSeries(mode,y,idx,plan){
+  const months = await ensureMonthsLoaded();
+  const by = new Map(months.map(r=>[String(r.month).slice(0,7), Number(r.amount)||0]));
+  const mv = (yy,mm)=> by.get(`${yy}-${rpPad(mm)}`) ?? 0;
+  const dmin = rpOfDate(mode, REP.bounds.min);
+  const minOrd = rpOrd(mode,dmin.y,dmin.idx);
+  if(mode==='month'){
+    const L=[],A=[];
+    for(let k=11;k>=0;k--){ const p=rpBack('month',y,idx,k); if(rpOrd('month',p.y,p.idx)<minOrd) continue; L.push(`${String(p.y).slice(2)}.${rpPad(p.idx)}`); A.push(mv(p.y,p.idx)); }
+    return {labels:L, A, B:null, hl:L.length-1, title:'최근 12개월 월별 매출'};
+  }
+  if(mode==='quarter'){
+    const L=[],A=[];
+    for(let k=7;k>=0;k--){ const p=rpBack('quarter',y,idx,k); if(rpOrd('quarter',p.y,p.idx)<minOrd) continue;
+      const m1=(p.idx-1)*3+1; L.push(`${String(p.y).slice(2)}년 ${p.idx}Q`); A.push(mv(p.y,m1)+mv(p.y,m1+1)+mv(p.y,m1+2)); }
+    return {labels:L, A, B:null, hl:L.length-1, title:'최근 8분기 분기별 매출'};
+  }
+  const L=[],A=[],B=[]; const maxM = REP.bounds.max;
+  for(let m=1;m<=12;m++){
+    L.push(m+'월');
+    const inRange = rpYmd(y,m,1) <= maxM;
+    A.push(inRange ? mv(y,m) : null);
+    B.push(rpYmd(y-1,m,rpLastDay(y-1,m)) >= REP.bounds.min ? mv(y-1,m) : null);
+  }
+  let hl = -1; A.forEach((v,i)=>{ if(v!=null) hl=i; });
+  return {labels:L, A, B, hl, title:`${y}년 월별 매출 (전년 비교)`, aLabel:`${y}년`, bLabel:`${y-1}년`};
+}
+
+// ---- 보고서 본문 ----
+function rpTile(label, valueHtml, subHtml, cls){
+  return `<div class="rp-tile ${cls||''}"><div class="rp-tl">${label}</div><div class="rp-tv">${valueHtml}</div><div class="rp-ts">${subHtml||''}</div></div>`;
+}
+function rpPaper(d, plan, mode, y, idx, series){
+  const nm = rpNames(mode), label = rpLabel(mode,y,idx);
+  const cur=d.cur, prev=d.prev, yoy=d.yoy;
+  const amt=Number(cur.amount), pP=rpPct(amt,prev.amount), pY=rpPct(amt,yoy.amount);
+  const oP=rpPct(cur.orders,prev.orders), oY=rpPct(cur.orders,yoy.orders);
+  const cP=rpPct(cur.customers,prev.customers), cY=rpPct(cur.customers,yoy.customers);
+  const sfx = plan.inProg ? ' (동기간)' : '';
+  const cmp = (p,yy)=> mode==='year'
+     ? `<div class="rp-cmp"><span>${nm.y}</span>${rpDeltaHtml(yy)}</div>`
+     : `<div class="rp-cmp"><span>${nm.p}${sfx}</span>${rpDeltaHtml(p)}</div><div class="rp-cmp"><span>${nm.y}${sfx}</span>${rpDeltaHtml(yy)}</div>`;
+  const periodTxt = `${plan.cur.from.replace(/-/g,'.')} ~ ${plan.cur.to.replace(/-/g,'.')}`;
+  const top = d.top||[], types=d.by_type||[];
+  const top1 = top[0], top10Sum = top.reduce((s,r)=>s+Number(r.cur_amount),0);
+  const topType = types[0];
+
+  // 한눈에 보기 문장
+  const sum = [];
+  if(amt>0){
+    const cmpTxt = mode==='year' ? `${nm.y} 대비 ${rpPctTxt(pY)}` : `${nm.p}${sfx} 대비 ${rpPctTxt(pP)}, ${nm.y}${sfx} 대비 ${rpPctTxt(pY)}`;
+    sum.push(`${label} 매출은 <b>${rpMoney(amt)}</b>${plan.inProg?`(${rpMD(plan.cur.from)}~${rpMD(plan.cur.to)} 누계)`:''}으로 ${cmpTxt}입니다.`);
+    let s2 = `${num(cur.customers)}곳이 ${num(cur.orders)}건을 주문했습니다.`;
+    if(topType) s2 += ` 유형별로는 ${esc(topType.ctype)}이 ${(Number(topType.cur_amount)/amt*100).toFixed(0)}%로 가장 큽니다.`;
+    if(top1) s2 += ` 상위 10곳이 매출의 ${(top10Sum/amt*100).toFixed(0)}%이고, 1위 ${esc(top1.name)} 한 곳이 ${(Number(top1.cur_amount)/amt*100).toFixed(0)}%입니다.`;
+    sum.push(s2);
+  }else{ sum.push(`${label}에는 집계된 판매가 없습니다.`); }
+  const ch=d.churn, rp=d.repurchase, ac=d.activities;
+  sum.push(`최근 1년 안에 거래가 끊긴 이탈의심 거래처는 <b>${num(ch.n_recent)}곳</b>(연 환산 약 ${rpMoney(ch.est_annual_recent)}), 앞으로 30일 안에 재구매가 예상되는 곳은 <b>${num(rp.n)}곳</b>(약 ${rpMoney(rp.amount)})입니다.`);
+  sum.push(ac.n>0 ? `이 기간 영업 기록은 ${num(ac.n)}건, 기록 후 14일 안에 판매로 이어진 건은 ${num(ac.ok)}건입니다.` : `이 기간에 등록된 영업 기록(통화·방문·문자)은 없습니다.`);
+
+  // KPI 타일
+  const tiles = [
+    rpTile('매출(공급가액)', rpMoney(amt), `${won(amt)}${cmp(pP,pY)}`, 'hero'),
+    rpTile('판매건수', `${num(cur.orders)}건`, cmp(oP,oY)),
+    rpTile('거래처 수', `${num(cur.customers)}곳`, cmp(cP,cY)),
+    rpTile('이탈 위험 거래처', `${num(ch.n_recent)}곳`, `최근 1년 내 끊긴 곳 · 연 환산 약 ${rpMoney(ch.est_annual_recent)}<div class="rp-cmp"><span>이탈의심 전체</span><b>${num(ch.n)}곳</b></div>`, 'warn'),
+    rpTile('재구매 예정 금액(30일)', rpMoney(rp.amount), `${num(rp.n)}곳 예상<div class="rp-cmp"><span>예정일 지났는데 미구매</span><b>${num(rp.overdue_n)}곳 · ${rpMoney(rp.overdue_amount)}</b></div>`, 'ok'),
+    rpTile('영업 기록', `${num(ac.n)}건`, ac.n>0 ? `14일 내 판매 연결 ${num(ac.ok)}건${ac.by_author&&ac.by_author.length?`<div class="rp-cmp"><span>${esc(ac.by_author.slice(0,3).map(a=>a.name+' '+a.n).join(' · '))}</span></div>`:''}` : '등록된 기록 없음')
+  ].join('');
+
+  // 유형별
+  const tShow = types.slice(0,6), rest = types.slice(6);
+  const restCur = rest.reduce((s,r)=>s+Number(r.cur_amount),0), restPrev = rest.reduce((s,r)=>s+Number(r.prev_amount),0), restCust = rest.reduce((s,r)=>s+Number(r.cur_customers),0);
+  const typeRow = (r,nmx)=>{ const share = amt>0? Number(r.cur_amount)/amt*100 : 0; return `<tr><td>${esc(nmx||r.ctype)}</td><td class="n">${num(r.cur_amount)}</td><td class="n rp-bar"><span style="width:${Math.min(100,share*2.2)}%"></span><em>${share.toFixed(1)}%</em></td><td class="n">${num(r.cur_customers)}</td><td class="n">${rpDeltaHtml(rpPct(r.cur_amount,r.prev_amount))}</td></tr>`; };
+  const typeTbl = types.length ? `<table class="rp-t"><thead><tr><th>거래처 유형</th><th class="n">매출(원)</th><th class="n">비중</th><th class="n">거래처</th><th class="n">${nm.p}${sfx} 대비</th></tr></thead><tbody>${tShow.map(r=>typeRow(r)).join('')}${rest.length?typeRow({cur_amount:restCur,prev_amount:restPrev,cur_customers:restCust},`기타 ${rest.length}개 유형`):''}</tbody></table>` : '<p class="rp-empty">집계된 판매가 없어요.</p>';
+
+  // 상위 거래처
+  const topTbl = top.length ? `<table class="rp-t"><thead><tr><th class="c">#</th><th>거래처</th><th>유형</th><th class="n">매출(원)</th><th class="n">비중</th><th class="n">건수</th><th class="n">${nm.p}${sfx} 매출</th></tr></thead><tbody>${top.map((r,i)=>`<tr><td class="c">${i+1}</td><td>${rpName(r.name)}</td><td class="mut">${esc(r.ctype||'')}</td><td class="n">${num(r.cur_amount)}</td><td class="n">${(Number(r.cur_amount)/amt*100).toFixed(1)}%</td><td class="n">${num(r.orders)}</td><td class="n">${Number(r.prev_amount)>0?num(r.prev_amount):'<span class="rp-na">-</span>'}</td></tr>`).join('')}</tbody></table>` : '<p class="rp-empty">집계된 판매가 없어요.</p>';
+
+  // 이탈 위험 / 재구매 예정 (상위 7곳씩)
+  const chRows = (ch.list||[]).slice(0,7);
+  const chTbl = chRows.length ? `<table class="rp-t sm"><thead><tr><th>거래처</th><th class="n">마지막 구매</th><th class="n">연 환산</th></tr></thead><tbody>${chRows.map(r=>`<tr><td>${rpName(r.name)}<small>평소 ${num(r.typical_cycle_days)}일 주기</small></td><td class="n">${esc(String(r.last_date).slice(2).replace(/-/g,'.'))}<small>${num(r.days_since_last_order)}일 경과</small></td><td class="n">${rpMoneyS(r.est_annual)}</td></tr>`).join('')}</tbody></table>` : '<p class="rp-empty">최근 1년 안에 끊긴 이탈의심 거래처가 없어요.</p>';
+  const rpRows = (rp.list||[]).slice(0,7);
+  const rpTbl = rpRows.length ? `<table class="rp-t sm"><thead><tr><th>거래처</th><th class="n">예정일</th><th class="n">예상 금액</th></tr></thead><tbody>${rpRows.map(r=>`<tr><td>${rpName(r.name)}<small>${esc(r.ctype||'')} · ${esc(r.status)}</small></td><td class="n">${esc(String(r.expected_date).slice(5).replace('-','/'))}<small>마지막 ${esc(String(r.last_date).slice(5).replace('-','/'))}</small></td><td class="n">${rpMoneyS(r.avg_amount)}</td></tr>`).join('')}</tbody></table>` : '<p class="rp-empty">30일 안에 예정된 재구매가 없어요.</p>';
+
+  // 신규 거래처
+  const nw = d.new||{n:0,amount:0,list:[]};
+  const tooEarly = plan.cur.from <= rpAdd(REP.bounds.min, 31);
+  const nwBox = tooEarly ? '<p class="rp-empty">판매 데이터가 시작된 직후라 신규 거래처를 가릴 수 없어요.</p>'
+    : `<div class="rp-line"><b>${num(nw.n)}곳</b> 신규 · 이 기간 매출 ${rpMoney(nw.amount)}</div>` + ((nw.list||[]).length ? `<table class="rp-t sm"><tbody>${nw.list.map(r=>`<tr><td>${rpName(r.name)}<small>${esc(r.ctype||'')}</small></td><td class="n">${rpMoneyS(r.amount)}</td></tr>`).join('')}</tbody></table>` : '');
+
+  // 영업 기록
+  const KL = {call:'통화', visit:'방문', sms:'문자', memo:'메모', note:'메모'};
+  const kinds = Object.entries(ac.by_kind||{});
+  const acBox = ac.n>0
+    ? `<div class="rp-line"><b>${num(ac.n)}건</b> · 14일 안 판매 연결 ${num(ac.ok)}건</div><div class="rp-chips">${kinds.map(([k,v])=>`<span>${esc(KL[k]||k)} ${num(v)}</span>`).join('')}</div>${(ac.by_author||[]).length?`<table class="rp-t sm"><tbody>${ac.by_author.map(a=>`<tr><td>${esc(a.name)}</td><td class="n">${num(a.n)}건</td></tr>`).join('')}</tbody></table>`:''}`
+    : `<p class="rp-empty">이 기간에 등록된 통화·방문·문자 기록이 없어요. 거래처 상세에서 기록을 남기면 자동으로 집계돼요.</p>`;
+
+  const progNote = plan.inProg ? `<div class="rp-note prog"><b>진행 중인 기간입니다.</b> 판매 데이터는 ${plan.cur.to.replace(/-/g,'.')}까지 반영되었고(${plan.elapsedDays}/${plan.totalDays}일), ${nm.p}·${nm.y} 비교는 같은 일수(${rpMD(plan.prev.from)}~${rpMD(plan.prev.to)}${mode==='year'?'':' / '+rpMD(plan.yoy.from)+'~'+rpMD(plan.yoy.to)})만 잘라서 비교한 값입니다.</div>` : '';
+  const chart = series.labels.length ? rpChart(series.labels, series.A, series.B, series.hl, plan.inProg, series.aLabel, series.bLabel) : '';
+  const nowTxt = new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});
+  const who = (ME&&ME.name)||'';
+
+  return `
+  <article class="rp-paper" id="rpPaper">
+   <section class="rp-page">
+    <header class="rp-head">
+      <div><div class="rp-co">able market · 판매시설</div><h1>${RP_TITLE[mode]} 경영 리포트</h1></div>
+      <div class="rp-meta"><b>${esc(label)}</b>${plan.inProg?'<em>진행 중</em>':''}<span>${periodTxt}</span><span>데이터 기준일 ${REP.bounds.max.replace(/-/g,'.')}</span></div>
+    </header>
+    ${progNote}
+    <div class="rp-sum"><h3>한눈에 보기</h3><ul>${sum.map(t=>`<li>${t}</li>`).join('')}</ul></div>
+    <div class="rp-tiles">${tiles}</div>
+    <div class="rp-sec"><h3>${esc(series.title)}</h3>${chart}</div>
+    <div class="rp-sec"><h3>거래처 유형별 매출</h3>${typeTbl}</div>
+   </section>
+   <section class="rp-page">
+    <div class="rp-sec"><h3>매출 상위 거래처 TOP 10</h3>${topTbl}</div>
+    <div class="rp-2col">
+      <div class="rp-sec"><h3>이탈 위험 거래처 <small>최근 1년 내 거래 끊김 · 연 환산 큰 순</small></h3>${chTbl}</div>
+      <div class="rp-sec"><h3>재구매 예정 <small>앞으로 30일 · 예상 금액 큰 순</small></h3>${rpTbl}</div>
+    </div>
+    <div class="rp-2col">
+      <div class="rp-sec"><h3>신규 거래처 <small>이 기간 첫 구매</small></h3>${nwBox}</div>
+      <div class="rp-sec"><h3>영업 기록</h3>${acBox}</div>
+    </div>
+    <footer class="rp-foot">
+      <b>산출 기준</b>
+      <p>매출은 판매현황의 공급가액 합계이며(거래처가 지정되지 않은 줄 제외) 건수는 같은 날·같은 전표·같은 거래처를 1건으로 셉니다. 진행 중인 기간은 비교 기간도 같은 일수만큼만 비교합니다.</p>
+      <p>이탈 위험: 판매 3회 이상이면서 마지막 구매 후 경과일이 평소 주기×3과 75일을 모두 넘은 거래처 중 마지막 구매가 1년 이내인 곳. 연 환산 = 누적매출 ÷ 거래 기간(최소 1년)이며 추정치입니다. 이탈·재구매·신규는 통계 갱신 시점의 현재 상태 기준입니다.</p>
+      <p>재구매 예정: 활성·신규·주의 거래처의 (마지막 구매일 + 평소 주기)가 데이터 기준일 이후 30일 안에 오는 곳. 예상 금액은 구매일당 평균 매출로 계산한 추정치이며 실제 주문을 보장하지 않습니다.</p>
+      <div class="rp-sign">작성 ${esc(nowTxt)}${who?` · ${esc(who)}`:''} · able market 앱 자동 생성</div>
+    </footer>
+   </section>
+  </article>`;
+}
+
+function rpToolbarHtml(){
+  const m=REP.mode, b=REP.bounds, dmax=rpOfDate(m,b.max), dmin=rpOfDate(m,b.min);
+  const years=[]; for(let yy=dmax.y; yy>=dmin.y; yy--) years.push(yy);
+  const yearSel = `<select id="rpYear" aria-label="연도">${years.map(yy=>`<option value="${yy}" ${yy===REP.y?'selected':''}>${yy}년</option>`).join('')}</select>`;
+  let idxSel='';
+  if(m==='month') idxSel = `<select id="rpIdx" aria-label="월">${Array.from({length:12},(_,i)=>i+1).map(k=>{ const dis = rpOrd('month',REP.y,k)>rpOrd('month',dmax.y,dmax.idx) || rpOrd('month',REP.y,k)<rpOrd('month',dmin.y,dmin.idx); return `<option value="${k}" ${k===REP.idx?'selected':''} ${dis?'disabled':''}>${k}월</option>`; }).join('')}</select>`;
+  if(m==='quarter') idxSel = `<select id="rpIdx" aria-label="분기">${[1,2,3,4].map(k=>{ const dis = rpOrd('quarter',REP.y,k)>rpOrd('quarter',dmax.y,dmax.idx) || rpOrd('quarter',REP.y,k)<rpOrd('quarter',dmin.y,dmin.idx); return `<option value="${k}" ${k===REP.idx?'selected':''} ${dis?'disabled':''}>${k}분기</option>`; }).join('')}</select>`;
+  return `<div class="rp-toolbar">
+    <div class="seg" id="rpMode">${['month','quarter','year'].map(k=>`<button data-mode="${k}" aria-pressed="${m===k}">${RP_TITLE[k]}</button>`).join('')}</div>
+    <div class="rp-pick"><button class="btn" id="rpPrev" aria-label="이전 기간">◀</button>${yearSel}${idxSel}<button class="btn" id="rpNext" aria-label="다음 기간">▶</button></div>
+    <button class="btn primary" id="rpPrint">🖨️ 인쇄 · PDF 저장</button>
+  </div>`;
+}
+
+function rpClamp(){
+  const m=REP.mode, b=REP.bounds, mx=rpOfDate(m,b.max), mn=rpOfDate(m,b.min);
+  if(REP.y==null){ REP.y=mx.y; REP.idx=mx.idx; }
+  if(m==='year') REP.idx=1;
+  if(rpOrd(m,REP.y,REP.idx)>rpOrd(m,mx.y,mx.idx)){ REP.y=mx.y; REP.idx=mx.idx; }
+  if(rpOrd(m,REP.y,REP.idx)<rpOrd(m,mn.y,mn.idx)){ REP.y=mn.y; REP.idx=mn.idx; }
+}
+
+window.addEventListener('beforeprint',()=>{ if(typeof currentTab!=='undefined' && currentTab==='report') document.body.classList.add('rp-printing'); });
+window.addEventListener('afterprint',()=>document.body.classList.remove('rp-printing'));
+async function renderReportView(){
+  const el = document.getElementById('view-report');
+  const my = ++REP.seq;
+  if(!el.dataset.bound){
+    el.dataset.bound='1';
+    el.addEventListener('click', e=>{
+      const t=e.target;
+      const mb=t.closest('#rpMode button');
+      if(mb){ const nm=mb.dataset.mode; if(nm===REP.mode) return;
+        if(REP.mode==='month'&&nm==='quarter') REP.idx=Math.ceil(REP.idx/3);
+        else if(REP.mode==='quarter'&&nm==='month') REP.idx=(REP.idx-1)*3+1;
+        REP.mode=nm; renderReportView(); return; }
+      if(t.closest('#rpPrev')||t.closest('#rpNext')){
+        const dir = t.closest('#rpNext') ? -1 : 1; const p=rpBack(REP.mode,REP.y,REP.idx,dir); REP.y=p.y; REP.idx=p.idx; renderReportView(); return; }
+      if(t.closest('#rpPrint')){
+        const old=document.title; document.title=`경영리포트_${RP_TITLE[REP.mode]}_${REP.mode==='month'?REP.y+'-'+rpPad(REP.idx):REP.mode==='quarter'?REP.y+'-Q'+REP.idx:REP.y}`;
+        const back=()=>{ document.title=old; window.removeEventListener('afterprint',back); };
+        window.addEventListener('afterprint',back); window.print(); setTimeout(back,4000); }
+    });
+    el.addEventListener('change', e=>{
+      if(e.target.id==='rpYear'){ REP.y=+e.target.value; renderReportView(); }
+      if(e.target.id==='rpIdx'){ REP.idx=+e.target.value; renderReportView(); }
+    });
+  }
+  if(!REP.bounds || !el.querySelector('.rp-toolbar')) el.innerHTML = '<div class="spin">불러오는 중...</div>';
+  try{
+    await rpBounds();
+    if(my!==REP.seq) return;
+    rpClamp();
+    const mode=REP.mode, y=REP.y, idx=REP.idx;
+    const plan = rpPlan(mode,y,idx,REP.bounds.max);
+    el.innerHTML = rpToolbarHtml() + '<div id="rpBody"><div class="spin">리포트 만드는 중...</div></div>';
+    const [d, series] = await Promise.all([rpLoad(plan), rpSeries(mode,y,idx,plan)]);
+    if(my!==REP.seq) return;
+    document.getElementById('rpBody').innerHTML = rpPaper(d, plan, mode, y, idx, series);
+  }catch(err){
+    if(my!==REP.seq) return;
+    const body = document.getElementById('rpBody') || el;
+    body.innerHTML = `<div class="panel err">리포트를 만들지 못했어요: ${esc((err&&err.message)||err)}</div>`;
+  }
+}
+
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}</script>
 <div id="stmtPrintRoot"></div>
