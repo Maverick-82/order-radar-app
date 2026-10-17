@@ -536,6 +536,173 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
 .modalcard h3{margin:0 0 6px;font-size:16px}
 .modalcard label{display:block;font-size:12.5px;color:var(--ink-2);margin:12px 0 4px}
 .modalcard input{width:100%;font:inherit;font-size:14px;border:1px solid var(--line-2);border-radius:7px;padding:9px 10px;background:var(--surface);color:var(--ink)}
+
+/* ======================================================================
+   v3.31 디자인 개선 레이어 — 읽기 쉬운 글자/표, 모바일 하단 메뉴, 카드형 표
+   (위쪽 v3.0 테마를 덮어쓰는 마지막 규칙)
+   ====================================================================== */
+:root{
+  --bg:#f3f5fa; --surface-2:#f5f7fc;
+  --ink:#0d1830; --ink-2:#38445f; --muted:#5b6784;
+  --line:#e3e8f2; --line-2:#cfd7e6;
+  --accent:#3552f5; --accent-ink:#2640d0; --accent-soft:#e8ecff;
+  --radius:18px;
+  --card-shadow:0 1px 2px rgba(13,24,48,.05), 0 4px 16px rgba(13,24,48,.05);
+  --card-shadow-hover:0 8px 28px rgba(13,24,48,.12), 0 2px 6px rgba(13,24,48,.06);
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --muted:#97a3c2; --ink-2:#c6d0e6; --line:#22304f; --line-2:#31426b; } }
+:root[data-theme="dark"]{ --muted:#97a3c2; --ink-2:#c6d0e6; --line:#22304f; --line-2:#31426b; }
+
+body{font-size:15px;line-height:1.55;letter-spacing:-.003em}
+.small{font-size:13px}
+.panel-h .note,.muted{color:var(--muted)}
+.lede{font-size:15px}
+
+/* ---------- 머리글 + 탭 (밑줄 탭) ---------- */
+header.top{padding:12px 16px 0;background:color-mix(in srgb,var(--surface) 86%,transparent);border-bottom:1px solid var(--line)}
+.brand .logo{height:36px}
+header.top nav.tabs{width:100%;max-width:1280px;background:none;border:0;border-radius:0;box-shadow:none;padding:0;margin:8px auto 0;gap:2px}
+header.top nav.tabs button{display:inline-flex;align-items:center;gap:8px;padding:13px 18px 12px;font-size:15px;font-weight:600;color:var(--muted);border-radius:0;border:0;border-bottom:3px solid transparent;background:none;box-shadow:none;transform:none}
+header.top nav.tabs button .ti{font-size:17px;line-height:1}
+header.top nav.tabs button:hover{color:var(--ink);background:color-mix(in srgb,var(--accent-soft) 55%,transparent)}
+header.top nav.tabs button[aria-selected="true"],
+header.top nav.tabs button[data-tab][aria-selected="true"]{color:var(--accent-ink);background:none;box-shadow:none;border-bottom-color:var(--accent);font-weight:700}
+.whoami .btn.icon-btn{width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.whoami{font-size:13.5px}
+
+/* ---------- 화면 제목/패널 ---------- */
+section.view{gap:22px;padding-top:22px}
+.panel{padding:24px;border-radius:var(--radius);border:1px solid var(--line)}
+.panel-h{margin-bottom:16px;align-items:center}
+h2{font-size:18px;font-weight:800;letter-spacing:-.025em}
+h2::before{width:5px;height:18px;border-radius:3px;background:var(--accent)}
+h3{font-size:15.5px;font-weight:700}
+
+/* ---------- 숫자 카드 ---------- */
+.kpis{gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
+.kpi{--k:var(--accent);border:1px solid var(--line);border-radius:18px;padding:18px 20px 17px;
+  background:radial-gradient(160px 90px at 100% 0,color-mix(in srgb,var(--k) 13%,transparent),transparent 72%),var(--surface)}
+.kpi::before{display:none}
+.kpi:nth-of-type(4n+2){--k:var(--cat-aqua)} .kpi:nth-of-type(4n+3){--k:var(--cat-orange)} .kpi:nth-of-type(4n+4){--k:var(--cat-violet)}
+.kpi .l{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink-2);letter-spacing:0}
+.kpi .l::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--k);flex:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--k) 18%,transparent)}
+.kpi .v{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-top:10px}
+.kpi .s{font-size:13px;color:var(--ink-2);margin-top:4px}
+.kpis .kpi.fit .v{font-size:14px;font-size:min(28px,10cqw)}
+
+/* ---------- 표 ---------- */
+.tbl-wrap{border-radius:16px;border:1px solid var(--line)}
+table{font-size:14px}
+th{font-size:12.5px;font-weight:700;color:var(--ink-2);letter-spacing:0;padding:12px 14px;background:var(--surface-2);border-bottom:1px solid var(--line-2)}
+td{padding:14px;border-bottom:1px solid var(--line);vertical-align:middle}
+td:first-child{font-weight:600}
+tr.click{transition:background-color .1s}
+tr.click:hover td{background:var(--accent-soft)}
+tr.click:hover td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.num{font-weight:500}
+.pill{font-size:12.5px;padding:3px 11px 3px 9px;line-height:17px}
+.tag{font-size:12px;padding:1px 8px;line-height:19px}
+.count-tag,.period-tag{font-size:12.5px;padding:4px 12px}
+
+/* ---------- 입력/버튼/선택 ---------- */
+.filters input[type=search],.filters select,.log-form select,.log-form input[type=date],.quicklog select{font-size:14.5px;padding:10px 14px;min-height:42px;border-radius:12px}
+.btn{font-size:14px;padding:9px 16px;min-height:40px;border-radius:12px}
+.btn.primary{background:var(--accent);box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 38%,transparent)}
+.seg{padding:4px;border-radius:14px}
+.seg button{font-size:14px;padding:9px 16px;min-height:38px}
+.chip{font-size:13.5px;padding:7px 14px}
+.outbtn{font-size:13px;padding:8px 14px;min-height:36px}
+.explain{font-size:13.5px;padding:13px 15px;line-height:1.6}
+dl.defs{font-size:13.5px}
+details.help summary{font-size:14px;font-weight:600}
+
+/* ---------- 막대그래프 ---------- */
+.vbars{gap:9px;height:190px;padding-inline:6px;background:repeating-linear-gradient(to top,transparent 0,transparent calc(25% - 1px),color-mix(in srgb,var(--line) 80%,transparent) calc(25% - 1px),color-mix(in srgb,var(--line) 80%,transparent) 25%)}
+.vbars .col{min-width:44px}
+.vbars .bar{width:64%;opacity:.5;border-radius:9px 9px 3px 3px}
+.vbars .col:hover .bar{opacity:.85}
+.vbars .col:last-child .bar{opacity:1;background:linear-gradient(180deg,var(--accent),var(--accent-ink))}
+.vbars .val{font-size:12px;font-weight:700;color:var(--ink)}
+.vbars .lbl{font-size:12px}
+.hbar{font-size:14px}
+.hbar .t{height:14px}
+.stackbar{height:16px}
+.stackbar-legend{font-size:13.5px}
+
+/* ---------- 서랍/모달 ---------- */
+.drawer-h h2{font-size:19px}
+.info-row{font-size:14px}
+.log-note{font-size:14px}
+.order-h{font-size:14px}
+
+/* ---------- 모바일: 하단 메뉴 + 카드형 표 ---------- */
+@media (max-width:720px){
+  body{padding-inline:12px;padding-bottom:calc(92px + env(safe-area-inset-bottom,0px));font-size:15px}
+  header.top{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bg);padding:10px 12px 10px;margin-inline:-12px}
+  .brand{gap:8px}
+  .brand .logo{height:30px}
+  .whoami{flex-direction:row;align-items:center;gap:8px;margin-left:auto}
+  .whoami .row{gap:6px}
+  #who-name{display:none}
+  .btn.icon-btn{min-height:36px}
+  header.top nav.tabs{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:30;margin:0;max-width:none;width:100%;
+    display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;overflow:visible;
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));
+    background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(13,24,48,.08)}
+  header.top nav.tabs button{flex-direction:column;justify-content:center;gap:3px;padding:7px 2px 6px;min-height:54px;font-size:11.5px;font-weight:600;border-bottom:0;border-radius:14px;white-space:nowrap}
+  header.top nav.tabs button .ti{font-size:21px}
+  header.top nav.tabs button[aria-selected="true"],
+  header.top nav.tabs button[data-tab][aria-selected="true"]{background:var(--accent-soft);color:var(--accent-ink);border-bottom:0}
+  header.top nav.tabs button.hide{display:none}
+  .hscroll-fixed{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
+  .toast{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+  section.view{gap:16px;padding-top:16px}
+  .panel{padding:16px;border-radius:16px}
+  h2{font-size:17px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .kpi{padding:14px 14px 13px;border-radius:16px}
+  .kpi .v{font-size:22px;margin-top:8px}
+  .kpis .kpi.fit .v{font-size:min(22px,10cqw)}
+  .filters input[type=search],.filters select,.log-form select,.log-form input[type=date],.quicklog select,.log-form textarea,.quicklog textarea,.authcard input,.modalcard input{font-size:16px}
+  .filters{gap:10px}
+  .filters select,.filters input[type=search]{flex:1 1 100%}
+  .seg{display:flex;width:100%}
+  .seg button{flex:1 1 auto;padding:10px 8px;font-size:13.5px}
+  .vbars{height:170px}
+  /* 카드형 표 */
+  .tbl-wrap.rt{border:0;background:none;border-radius:0;overflow:visible;margin:0}
+  table.rt,table.rt tbody{display:block;width:100%}
+  table.rt thead{display:none}
+  table.rt tr{display:block;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px 15px;margin-bottom:10px;box-shadow:var(--card-shadow)}
+  table.rt tr.click:active{background:var(--accent-soft)}
+  table.rt td{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:5px 0;border:0;white-space:normal;text-align:right;font-size:14.5px;background:none !important;box-shadow:none !important}
+  table.rt td::before{content:attr(data-label);flex:none;color:var(--muted);font-size:12.5px;font-weight:600;text-align:left}
+  table.rt td[data-label=""]::before{display:none}
+  table.rt td.rt-title{display:block;text-align:left;font-size:16.5px;font-weight:800;color:var(--ink);padding:0 0 9px;margin-bottom:5px;border-bottom:1px solid var(--line);white-space:normal;word-break:keep-all}
+  table.rt td.rt-title::before{display:none}
+  table.rt td.rt-skip{display:none}
+  table.rt td.num{white-space:normal}
+  table.rt tbody tr:last-child{margin-bottom:0}
+}
+
+@media (max-width:720px){
+  .brand{flex-wrap:nowrap}
+  .titlegrp .cap-name,.titlegrp .divider{display:none}
+  .titlegrp .ver-pill{font-size:10.5px;padding:2px 7px}
+  .whoami .row{gap:5px}
+  .whoami .badge,.whoami .role,#who-role{display:none}
+  .whoami .btn:not(.icon-btn){min-height:36px;padding:6px 12px;font-size:13px}
+  header.top{padding:8px 12px}
+  .kpi .l{font-size:12px;line-height:1.3}
+  /* 카드형 표: 2열 격자로 높이 줄이기 */
+  table.rt tr{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;row-gap:8px;padding:12px 14px}
+  table.rt td{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:0;font-size:14.5px;font-weight:600;color:var(--ink)}
+  table.rt td::before{font-size:11.5px;font-weight:600}
+  table.rt td.rt-title{grid-column:1/-1;display:block;padding:0 0 8px;margin:0 0 2px}
+  table.rt td.rt-wide{grid-column:1/-1}
+}
+@media (max-width:720px){.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:4px}.seg button{white-space:nowrap}}
 </style>
 </head>
 <body>
@@ -607,18 +774,18 @@ tr.stm-in td{background:color-mix(in srgb,var(--accent-soft) 60%,transparent) !i
     <div class="titlegrp">
       <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.30</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.31</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
     </div>
   </div>
   <nav class="tabs" id="tabs">
-    <button data-tab="summary" aria-selected="true">📊 Dashboard</button>
-    <button data-tab="cityhall" aria-selected="false">🏛️ 시청</button>
-    <button data-tab="customers" aria-selected="false">🏢 거래처</button>
-    <button data-tab="sales" aria-selected="false">💼 영업</button>
-    <button data-tab="products" aria-selected="false">🏷️ 생산품</button>
+    <button data-tab="summary" aria-selected="true"><span class="ti">📊</span><span class="tl">대시보드</span></button>
+    <button data-tab="cityhall" aria-selected="false"><span class="ti">🏛️</span><span class="tl">시청</span></button>
+    <button data-tab="customers" aria-selected="false"><span class="ti">🏢</span><span class="tl">거래처</span></button>
+    <button data-tab="sales" aria-selected="false"><span class="ti">💼</span><span class="tl">영업</span></button>
+    <button data-tab="products" aria-selected="false"><span class="ti">🏷️</span><span class="tl">생산품</span></button>
   </nav>
 </header>
 
@@ -3199,6 +3366,34 @@ function logItemHTML(a, orderDates){
     ${a.next_contact_date? `<div class="log-next">다음 연락 예정: ${a.next_contact_date}</div>` : ''}
   </div>`;
 }
+
+// ---------- 모바일에서 표를 카드로 보여주기 위한 라벨 달기 (화면 폭이 좁을 때만 CSS가 카드로 바꿈) ----------
+(function(){
+  const SKIP = '#view-summary,#view-stmt,#view-recon,#view-admin,.stm,.omodal,.stm-preview';
+  const IDX = ['#','순서','순위','번호','No','no',''];
+  function mark(root){
+    (root||document).querySelectorAll('.tbl-wrap > table').forEach(t=>{
+      if(t.dataset.rt) return;
+      if(t.closest(SKIP)){ t.dataset.rt='0'; return; }
+      const ths = [...t.querySelectorAll('thead th')];
+      if(ths.length < 4){ t.dataset.rt='0'; return; }
+      if(t.querySelector('tbody input[type=checkbox]')){ t.dataset.rt='0'; return; }
+      const labels = ths.map(th=>th.textContent.replace(/\s+/g,' ').trim());
+      const ti = IDX.includes(labels[0]) && labels.length>1 ? 1 : 0;
+      t.querySelectorAll('tbody tr').forEach(tr=>{
+        [...tr.children].forEach((td,i)=>{
+          td.setAttribute('data-label', labels[i]||'');
+          if(i===ti) td.classList.add('rt-title'); else if(i<ti) td.classList.add('rt-skip');
+        });
+      });
+      t.classList.add('rt'); t.parentElement.classList.add('rt'); t.dataset.rt='1';
+    });
+  }
+  let pend = false;
+  const mo = new MutationObserver(()=>{ if(pend) return; pend = true; requestAnimationFrame(()=>{ pend = false; mark(document); }); });
+  mo.observe(document.body, {childList:true, subtree:true});
+  mark(document);
+})();
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}</script>
 <div id="stmtPrintRoot"></div>
