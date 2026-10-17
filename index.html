@@ -16,8 +16,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://hevlgbkkzrambtkqfbka.supabase.co" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"></noscript>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 :root{
@@ -711,7 +711,7 @@ details.help summary{font-size:14px;font-weight:600}
 .rp-pick{display:flex;align-items:center;gap:6px}
 .rp-pick select{min-height:42px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:0 10px;font:inherit}
 .rp-toolbar #rpPrint{margin-left:auto}
-.rp-paper{--p-ink:#141b2d;--p-mut:#667085;--p-line:#e4e7ee;--p-acc:#2a4bd7;--p-soft:#f4f6fb;
+.rp-paper{--p-ink:#141b2d;--p-mut:#667085;--p-line:#e4e7ee;--p-acc:#4651b8;--p-soft:#f4f6fb;
   background:#fff;color:var(--p-ink);width:min(794px,100%);margin:0 auto;border-radius:14px;
   box-shadow:0 1px 3px rgba(16,24,40,.08),0 12px 40px rgba(16,24,40,.10);padding:0;overflow:hidden;font-size:12.5px;line-height:1.5}
 .rp-page{padding:30px 34px 26px}
@@ -857,6 +857,104 @@ tr.click:focus-visible,.kpi.click:focus-visible,.order.click:focus-visible,[data
 :root[data-theme="dark"]{--on-accent:#0b1330}
 .btn.primary,.chip[aria-pressed="true"],.today-dot{color:var(--on-accent)}
 .chip[aria-pressed="true"] .muted{color:color-mix(in srgb,var(--on-accent) 88%,transparent)}
+
+/* ===== v3.35 Linear 디자인 토큰 (DESIGN.md 적용) =====
+   단일 악센트(라벤더 #5e6ad2) · 1px 헤어라인 · 그림자/그라데이션 제거 · 8/12px 둥근 모서리 */
+:root{
+  --bg:#f6f7f8; --surface:#ffffff; --surface-2:#f2f3f5; --ink:#0f1011; --ink-2:#3c4149; --muted:#62666d;
+  --line:#e4e6ea; --line-2:#d0d3d9;
+  --accent:#5e6ad2; --accent-ink:#4651b8; --accent-soft:#eceefb;
+  --good:#1d7f47; --good-soft:#e3f2e9; --warn:#a66300; --warn-soft:#faefd9; --bad:#c23636; --bad-soft:#fae7e7; --idle:#62666d; --idle-soft:#eef0f2;
+  --bar:#5e6ad2; --bar-muted:#c9cef2; --chart-accent:#7b86e0; --chart-accent-ink:#5e6ad2;
+  --card-shadow:none; --card-shadow-hover:none; --radius:12px;
+  --font:Inter,"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+  --on-accent:#fff;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#010102; --surface:#0f1011; --surface-2:#141516; --ink:#f7f8f8; --ink-2:#d0d6e0; --muted:#8a8f98;
+  --line:#23252a; --line-2:#34343a;
+  --accent:#5e6ad2; --accent-ink:#8d98ff; --accent-soft:#181a33;
+  --good:#4cc38a; --good-soft:#10261b; --warn:#e2a23c; --warn-soft:#2a2010; --bad:#f2777a; --bad-soft:#2f1618; --idle:#8a8f98; --idle-soft:#1a1b1e;
+  --bar:#5e6ad2; --bar-muted:#2a2f66; --chart-accent:#7b86e0; --chart-accent-ink:#5e6ad2;
+  --card-shadow:none; --card-shadow-hover:none; --on-accent:#fff;
+} }
+:root[data-theme="dark"]{
+  --bg:#010102; --surface:#0f1011; --surface-2:#141516; --ink:#f7f8f8; --ink-2:#d0d6e0; --muted:#8a8f98;
+  --line:#23252a; --line-2:#34343a;
+  --accent:#5e6ad2; --accent-ink:#8d98ff; --accent-soft:#181a33;
+  --good:#4cc38a; --good-soft:#10261b; --warn:#e2a23c; --warn-soft:#2a2010; --bad:#f2777a; --bad-soft:#2f1618; --idle:#8a8f98; --idle-soft:#1a1b1e;
+  --bar:#5e6ad2; --bar-muted:#2a2f66; --chart-accent:#7b86e0; --chart-accent-ink:#5e6ad2;
+  --card-shadow:none; --card-shadow-hover:none; --on-accent:#fff;
+}
+/* 배경·머리글 */
+body{background:var(--bg);background-image:none;letter-spacing:-.011em;font-feature-settings:"tnum" 1,"cv11" 1}
+header.top{background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid var(--line)}
+.brand h1{background:none;-webkit-text-fill-color:currentColor;color:var(--ink)}
+.ver-tag{background:var(--accent-soft);border:1px solid var(--line)}
+/* 탭 */
+header.top nav.tabs button{font-weight:500;letter-spacing:-.011em}
+header.top nav.tabs button:hover{background:var(--surface-2)}
+header.top nav.tabs button[aria-selected="true"],
+header.top nav.tabs button[data-tab][aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+nav.tabs button[data-tab][aria-selected="true"]{background:none;box-shadow:none}
+/* 제목 */
+h2{font-weight:600;letter-spacing:-.02em}
+h2::before{background:var(--accent);width:3px;border-radius:2px}
+h3{font-weight:600;letter-spacing:-.011em}
+/* 카드/패널: 헤어라인만 */
+.panel,.kpi,.tbl-wrap,.order,.authcard,.modalcard{box-shadow:none}
+.panel{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.kpi::before{display:none}
+.kpi .l::before{background:var(--muted);box-shadow:none;width:6px;height:6px}
+.kpi:nth-of-type(n){--k:var(--accent)}
+.kpi:nth-of-type(n)::before{display:none}
+.kpi .v{font-weight:600;letter-spacing:-.03em}
+.kpi.click:hover{border-color:var(--line-2);background:var(--surface-2)}
+.tbl-wrap{border-radius:12px}
+th{font-weight:500;color:var(--muted);background:var(--surface-2)}
+td:first-child{font-weight:500}
+tr.click:hover td{background:var(--surface-2)}
+tr.click:hover td:first-child{box-shadow:inset 2px 0 0 var(--accent)}
+.pill,.tag,.count-tag,.period-tag{border-radius:9999px}
+/* 입력·버튼 (8px) */
+.filters input[type=search],.filters select,.log-form select,.log-form input[type=date],.quicklog select,
+input[type=text],input[type=password],input[type=email],input[type=number],input[type=date],select,textarea{border-radius:8px}
+.btn{border-radius:8px;font-weight:500;box-shadow:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);box-shadow:none;color:var(--on-accent)}
+.btn.primary:hover{background:color-mix(in srgb,var(--accent) 82%,#fff)}
+.seg{border-radius:10px;background:var(--surface-2);border:1px solid var(--line)}
+.seg button{border-radius:7px;font-weight:500}
+.seg button[aria-selected="true"],.seg button.on,.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line-2);font-weight:600}
+.chip{border-radius:9999px}
+/* 막대그래프: 단색 */
+.vbars .bar{background:var(--accent);opacity:.45;border-radius:4px 4px 0 0}
+.vbars .col:hover .bar{opacity:.8}
+.vbars .col:last-child .bar{background:var(--accent);opacity:1}
+.hbar .t b{background-image:none}
+.omodal-total{background:var(--accent)}
+/* 빠른기록/기록 폼의 색조 배경 → 중립 */
+.quicklog,.log-form{background:var(--surface-2);border-radius:12px}
+/* 로그인 화면 */
+.authwrap{background:var(--bg)}
+.authcard{border:1px solid var(--line);border-radius:12px}
+.authcard::before{background:var(--accent);height:2px}
+/* 모바일 하단 메뉴 */
+@media (max-width:720px){
+  header.top{background:var(--bg)}
+  header.top nav.tabs{box-shadow:none;background:color-mix(in srgb,var(--surface) 94%,transparent);border-top:1px solid var(--line)}
+  header.top nav.tabs button[aria-selected="true"],
+  header.top nav.tabs button[data-tab][aria-selected="true"]{background:var(--accent-soft);color:var(--accent-ink)}
+  table.rt tr{box-shadow:none;border-radius:12px}
+  .panel{border-radius:12px}
+  .kpi{border-radius:12px}
+}
+/* 리포트(화면의 종이 바깥 쪽 + 종이 안 악센트) */
+.rp-paper{--p-acc:#4651b8;--p-soft:#f5f6fa;box-shadow:none;border:1px solid var(--line);border-radius:12px}
+.rp-tile.hero{background:#f5f6fd;border-color:#d6daf5}
+.rp-bar span{background:#c9cef2}
+.rp-pick select{border-radius:8px}
+@media print{ body.rp-printing .rp-paper{border:0} }
 </style>
 </head>
 <body>
@@ -928,7 +1026,7 @@ tr.click:focus-visible,.kpi.click:focus-visible,.order.click:focus-visible,[data
     <div class="titlegrp">
       <img class="logo" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.34</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.35</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -3644,23 +3742,23 @@ function rpChart(labels, A, B, hl, partialLast, aLabel, bLabel){
     const cx=L+iw*i+iw/2;
     if(B){
       const bv=B[i], av=A[i];
-      if(bv!=null && bv>0) s+=`<rect x="${cx-bw-1}" y="${y(bv)}" width="${bw}" height="${T+ih-y(bv)}" rx="2" fill="#cdd3e2"/>`;
+      if(bv!=null && bv>0) s+=`<rect x="${cx-bw-1}" y="${y(bv)}" width="${bw}" height="${T+ih-y(bv)}" rx="2" fill="#c9cef2"/>`;
       if(av!=null && av>0){
         const last = partialLast && i===hl;
-        s+=`<rect x="${cx+1}" y="${y(av)}" width="${bw}" height="${T+ih-y(av)}" rx="2" fill="#2a4bd7" ${last?'fill-opacity=".55" stroke="#2a4bd7" stroke-dasharray="3 2"':''}/>`;
+        s+=`<rect x="${cx+1}" y="${y(av)}" width="${bw}" height="${T+ih-y(av)}" rx="2" fill="#4651b8" ${last?'fill-opacity=".55" stroke="#4651b8" stroke-dasharray="3 2"':''}/>`;
         s+=`<text x="${cx+1+bw/2}" y="${y(av)-4}" text-anchor="middle" font-size="9.5" fill="#1f2a44" font-weight="700">${(av/1e8).toFixed(1)}</text>`;
       }
     }else{
       const av=A[i]; if(av==null) return;
       const isHl = i===hl, last = partialLast && i===hl;
-      const fill = isHl ? '#2a4bd7' : '#b4c0f2';
-      s+=`<rect x="${cx-bw/2}" y="${y(av)}" width="${bw}" height="${Math.max(1,T+ih-y(av))}" rx="3" fill="${fill}" ${last?'fill-opacity=".55" stroke="#2a4bd7" stroke-dasharray="3 2"':''}/>`;
+      const fill = isHl ? '#4651b8' : '#c9cef2';
+      s+=`<rect x="${cx-bw/2}" y="${y(av)}" width="${bw}" height="${Math.max(1,T+ih-y(av))}" rx="3" fill="${fill}" ${last?'fill-opacity=".55" stroke="#4651b8" stroke-dasharray="3 2"':''}/>`;
       s+=`<text x="${cx}" y="${y(av)-5}" text-anchor="middle" font-size="11.5" fill="#1f2a44" font-weight="${isHl?800:600}">${rpMoneyS(av)}</text>`;
     }
     s+=`<text x="${cx}" y="${H-7}" text-anchor="middle" font-size="11" fill="${i===hl?'#1f2a44':'#6b7385'}" font-weight="${i===hl?800:500}">${esc(lb)}</text>`;
   });
   s+='</svg>';
-  const legend = B ? `<div class="rp-legend"><i style="background:#2a4bd7"></i>${esc(aLabel)}<i style="background:#cdd3e2"></i>${esc(bLabel)}<span>막대 위 숫자: 억원</span></div>` : '';
+  const legend = B ? `<div class="rp-legend"><i style="background:#4651b8"></i>${esc(aLabel)}<i style="background:#c9cef2"></i>${esc(bLabel)}<span>막대 위 숫자: 억원</span></div>` : '';
   return s+legend;
 }
 
