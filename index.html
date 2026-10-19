@@ -1031,20 +1031,30 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 .dlv-legend i{display:inline-block;width:18px;height:6px;border-radius:3px}
 .dlv-legend i.g{background:#19b45a}.dlv-legend i.o{background:#f0a020}.dlv-legend i.r{background:#e5484d}
 .dlv-grid{display:grid;gap:12px;margin-top:12px}
-@media (min-width:1000px){ .dlv-grid{grid-template-columns:minmax(0,1fr) 380px;align-items:start} .dlv-list{max-height:min(70vh,640px);overflow:auto} }
+@media (min-width:1000px){ .dlv-grid{grid-template-columns:minmax(0,1fr) 400px;align-items:start} .dlv-list{max-height:min(82vh,880px);overflow:auto} }
 .dlv-mapbox{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--surface-2)}
-#dlv-map{height:clamp(300px,54vh,560px);width:100%}
+#dlv-map{height:clamp(340px,62vh,760px);width:100%}
+@media (min-width:1000px){ #dlv-map{height:clamp(480px,82vh,880px)} }
 .dlv-mapmsg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px;background:var(--surface-2);color:var(--ink);overflow:auto;z-index:5}
 .dlv-pin{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4);cursor:pointer}
 .dlv-pin.on{background:#e5484d;transform:scale(1.22)}
 .dlv-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 2px 8px}
-.dlv-item{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);margin-bottom:8px}
+.dlv-item{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);margin-bottom:8px}
 .dlv-item.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 30%,transparent)}
 .dlv-no{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:grid;place-items:center}
 .dlv-nm{font-weight:600;word-break:keep-all;overflow-wrap:anywhere}
 .dlv-ad{margin:2px 0}
 .dlv-act{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 .dlv-act .btn{min-height:36px;padding:6px 12px;font-size:13px}
+.dlv-ord{display:inline-flex;gap:4px;margin-left:auto}
+.dlv-act .btn.dlv-mv{min-width:40px;padding:6px 8px;font-weight:700}
+.dlv-act .btn.dlv-mv:disabled{opacity:.35}
+.dlv-grip{position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:transparent;color:var(--muted);font-size:20px;line-height:1;cursor:grab;touch-action:none;border-radius:8px;display:grid;place-items:center;user-select:none;-webkit-user-select:none}
+.dlv-grip:hover{background:var(--surface-2)}
+.dlv-item .dlv-nm{padding-right:40px}
+.dlv-item.drag{opacity:.92;box-shadow:0 8px 22px rgba(0,0,0,.28);border-color:var(--accent);z-index:20;position:relative;pointer-events:none}
+.dlv-ph{border:2px dashed var(--accent);border-radius:12px;margin-bottom:8px;background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.dlv-hint{font-size:12.5px;margin:0 2px 8px}
 .dlv-empty{text-align:left}
 </style>
 </head>
@@ -1118,7 +1128,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.39</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.40</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -2795,7 +2805,7 @@ async function dlvLoadKey(){
   return DLV.key;
 }
 async function dlvLoadPlans(){
-  const {data, error} = await sb.from('delivery_plan').select('*').eq('plan_date', DLV.date).eq('user_id', ME.id).order('created_at',{ascending:true});
+  const {data, error} = await sb.from('delivery_plan').select('*').eq('plan_date', DLV.date).eq('user_id', ME.id).order('sort_order',{ascending:true,nullsFirst:false}).order('created_at',{ascending:true});
   if(error) throw error;
   DLV.plans = data||[];
 }
@@ -2894,21 +2904,96 @@ function dlvDrawList(){
   }
   const bad = P.filter(p=> !p.address || p._fail).length;
   list.innerHTML = `<div class="dlv-head"><b>내 배송 ${num(P.length)}곳</b>${bad?`<span class="pill s-warn">위치 확인 필요 ${bad}</span>`:''}</div>`
+    + (P.length>1?`<div class="dlv-hint muted">순서는 ▲▼ 버튼이나 오른쪽 ☰ 를 끌어서 바꿔요. 번호가 지도 핀과 같이 바뀌어요.</div>`:'')
     + P.map((p,i)=>{
       const miss = !p.address || p._fail;
       return `<div class="dlv-item${DLV.sel===p.id?' on':''}" data-id="${esc(p.id)}">
         <div class="dlv-no">${i+1}</div>
+        ${P.length>1?`<button class="dlv-grip" type="button" data-id="${esc(p.id)}" aria-label="${esc(p.customer_name)} 순서 끌어서 바꾸기" title="끌어서 순서 바꾸기">☰</button>`:''}
         <div class="dlv-bd">
           <div class="dlv-nm">${esc(p.customer_name)}</div>
           <div class="dlv-ad small ${miss?'err':'muted'}">${p.address?esc(p.address):'주소가 없어요'}${p._fail?' — 지도에서 위치를 못 찾았어요':''}</div>
           <div class="small muted">${esc((p.sale_date||'').slice(5).replace('-','/'))}-${esc(p.sale_no)} · 품목 ${num(p.item_count||0)}${p.total_amount!=null?' · '+won(p.total_amount):''}</div>
           <div class="dlv-act"><button class="btn dlv-fo" data-id="${esc(p.id)}" type="button"${p.lat==null?' disabled':''}>📍 지도</button>
             <button class="btn dlv-ed" data-id="${esc(p.id)}" type="button">✏️ 주소</button>
-            <button class="btn dlv-rm" data-id="${esc(p.id)}" type="button">빼기</button></div>
+            <button class="btn dlv-rm" data-id="${esc(p.id)}" type="button">빼기</button>
+            ${P.length>1?`<span class="dlv-ord"><button class="btn dlv-mv" data-id="${esc(p.id)}" data-d="-1" type="button" aria-label="위로"${i===0?' disabled':''}>▲</button><button class="btn dlv-mv" data-id="${esc(p.id)}" data-d="1" type="button" aria-label="아래로"${i===P.length-1?' disabled':''}>▼</button></span>`:''}</div>
         </div></div>`; }).join('');
   list.querySelectorAll('.dlv-fo').forEach(b=> b.onclick = ()=>dlvFocus(b.dataset.id));
   list.querySelectorAll('.dlv-ed').forEach(b=> b.onclick = ()=>dlvEditAddr(DLV.plans.find(x=>x.id===b.dataset.id)));
   list.querySelectorAll('.dlv-rm').forEach(b=> b.onclick = ()=>dlvRemove(DLV.plans.find(x=>x.id===b.dataset.id)));
+  list.querySelectorAll('.dlv-mv').forEach(b=> b.onclick = ()=>dlvMove(b.dataset.id, Number(b.dataset.d)));
+  list.querySelectorAll('.dlv-grip').forEach(g=> dlvBindDrag(g));
+}
+// ---- 순서 바꾸기 ----
+let dlvSaveTimer = null;
+function dlvApplyOrder(ids, keepScrollId){
+  const m = new Map(DLV.plans.map(x=>[x.id,x]));
+  const next = ids.map(id=>m.get(id)).filter(Boolean);
+  if(next.length !== DLV.plans.length) return;
+  DLV.plans = next;
+  DLV.plans.forEach((x,i)=>{ x.sort_order = i+1; });
+  dlvDrawList(); dlvDrawPins(false);
+  if(keepScrollId){ const it = document.querySelector('.dlv-item[data-id="'+keepScrollId+'"]'); if(it) it.scrollIntoView({block:'nearest'}); }
+  clearTimeout(dlvSaveTimer); dlvSaveTimer = setTimeout(dlvSaveOrder, 400);
+}
+function dlvMove(id, d){
+  const ids = DLV.plans.map(x=>x.id), i = ids.indexOf(id), j = i + d;
+  if(i<0 || j<0 || j>=ids.length) return;
+  ids.splice(j,0,ids.splice(i,1)[0]);
+  dlvApplyOrder(ids, id);
+  const mv = document.querySelector('.dlv-mv[data-id="'+id+'"][data-d="'+d+'"]'); if(mv && !mv.disabled) mv.focus({preventScroll:true});
+}
+async function dlvSaveOrder(){
+  const rows = DLV.plans.map((x,i)=>({id:x.id, n:i+1}));
+  try{
+    const res = await Promise.all(rows.map(r=> sb.from('delivery_plan').update({sort_order:r.n}).eq('id', r.id)));
+    const bad = res.find(r=>r && r.error); if(bad) throw bad.error;
+  }catch(err){
+    toast('순서 저장 실패: '+(err.message||err)); try{ await dlvLoadPlans(); dlvDrawList(); dlvDrawPins(false); }catch(e){}
+  }
+}
+function dlvBindDrag(grip){
+  grip.addEventListener('pointerdown', ev=>{
+    if(ev.button!==undefined && ev.button>0) return;
+    ev.preventDefault();
+    const list = document.getElementById('dlv-list'), item = grip.closest('.dlv-item'); if(!item) return;
+    const id = item.dataset.id, r0 = item.getBoundingClientRect();
+    const ph = document.createElement('div'); ph.className = 'dlv-ph'; ph.style.height = r0.height+'px';
+    item.parentNode.insertBefore(ph, item);
+    const offY = ev.clientY - r0.top;
+    item.classList.add('drag'); item.style.position = 'fixed'; item.style.left = r0.left+'px'; item.style.width = r0.width+'px'; item.style.top = r0.top+'px';
+    try{ grip.setPointerCapture(ev.pointerId); }catch(e){}
+    let raf = 0, lastY = ev.clientY;
+    const others = ()=> Array.from(list.querySelectorAll('.dlv-item')).filter(x=>x!==item);
+    const place = ()=>{
+      item.style.top = (lastY - offY)+'px';
+      const cy = lastY;
+      let before = null;
+      for(const o of others()){ const r = o.getBoundingClientRect(); if(cy < r.top + r.height/2){ before = o; break; } }
+      if(before){ if(ph.nextSibling !== before) before.parentNode.insertBefore(ph, before); }
+      else { const lastIt = others().pop(); if(lastIt && lastIt.nextSibling !== ph) lastIt.parentNode.insertBefore(ph, lastIt.nextSibling); }
+    };
+    const edge = ()=>{ // 화면 가장자리에서 자동 스크롤
+      const h = window.innerHeight; let dy = 0;
+      if(lastY < 70) dy = -12; else if(lastY > h-70) dy = 12;
+      if(dy){ const lr = list.getBoundingClientRect(); if(list.scrollHeight>list.clientHeight+2 && getComputedStyle(list).overflowY!=='visible'){ list.scrollTop += dy; } else window.scrollBy(0,dy); place(); }
+      raf = requestAnimationFrame(edge);
+    };
+    raf = requestAnimationFrame(edge);
+    const mv = e=>{ lastY = e.clientY; place(); };
+    const end = e=>{
+      cancelAnimationFrame(raf);
+      grip.removeEventListener('pointermove', mv); grip.removeEventListener('pointerup', end); grip.removeEventListener('pointercancel', end);
+      try{ grip.releasePointerCapture(ev.pointerId); }catch(_){}
+      const ids = []; Array.from(list.children).forEach(c=>{ if(c===ph) ids.push(id); else if(c.classList.contains('dlv-item') && c!==item) ids.push(c.dataset.id); });
+      ph.remove();
+      const old = DLV.plans.map(x=>x.id);
+      if(e.type==='pointercancel' || ids.join()===old.join()){ dlvDrawList(); dlvHighlight(); return; }
+      dlvApplyOrder(ids, id);
+    };
+    grip.addEventListener('pointermove', mv); grip.addEventListener('pointerup', end); grip.addEventListener('pointercancel', end);
+  });
 }
 async function dlvRemove(p){
   if(!p || !confirm(`"${p.customer_name}"을(를) 내 배송지도에서 뺄까요?`)) return;
@@ -3055,12 +3140,14 @@ async function dlvOpenConfirm(chosen){
     btn.disabled = true; msg.textContent = '저장 중…';
     mount.querySelectorAll('.dlv-cad').forEach(inp=>{ rows[Number(inp.dataset.i)].addr = inp.value.trim(); });
     try{
-      const {data:ex} = await sb.from('delivery_plan').select('sale_date,sale_no,address,lat,lng').eq('plan_date', date).eq('user_id', ME.id);
+      const {data:ex} = await sb.from('delivery_plan').select('sale_date,sale_no,address,lat,lng,sort_order').eq('plan_date', date).eq('user_id', ME.id);
       const exm = new Map((ex||[]).map(r=>[r.sale_date+'|'+r.sale_no, r]));
+      let nextOrd = Math.max(0, ...(ex||[]).map(r=>Number(r.sort_order)||0));
       const payload = rows.map(r=>{
         const prev = exm.get(r.o.date+'|'+Number(r.o.no)); const same = prev && prev.address === (r.addr||null);
         return {user_id:ME.id, plan_date:date, sale_date:r.o.date, sale_no:Number(r.o.no), customer_id:r.cid, customer_name:r.o.customer,
-          address:r.addr||null, lat: same?prev.lat:null, lng: same?prev.lng:null, total_amount:r.o.total, item_count:r.o.items.length};
+          address:r.addr||null, lat: same?prev.lat:null, lng: same?prev.lng:null, total_amount:r.o.total, item_count:r.o.items.length,
+          sort_order: (prev && prev.sort_order) ? prev.sort_order : ++nextOrd};
       });
       const {error} = await sb.from('delivery_plan').upsert(payload, {onConflict:'user_id,plan_date,sale_date,sale_no'});
       if(error) throw error;
