@@ -1013,6 +1013,11 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 .pf-done{border:1px solid var(--line);background:var(--accent-soft);color:var(--accent-ink);border-radius:8px;padding:7px 10px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap;min-height:36px}
 .pf-go{white-space:nowrap;min-height:36px}
 .pf-msg{font-size:13px}
+#dd-body .tbl-wrap{overflow-x:auto}
+#dd-body .tbl-wrap th,#dd-body .tbl-wrap td{padding:9px 8px}
+#dd-body .tbl-wrap td:first-child,#dd-body .tbl-wrap th:first-child{white-space:normal;padding-left:12px;word-break:keep-all;overflow-wrap:anywhere}
+#dd-body .tbl-wrap td.num,#dd-body .tbl-wrap th.num{white-space:nowrap}
+#dd-body .tbl-wrap td.num:last-child,#dd-body .tbl-wrap th.num:last-child{padding-right:12px}
 
 /* 명세서 검색 결과: 폰에서는 한 건을 카드처럼 (사인 버튼이 화면 밖으로 밀리지 않게) */
 .c-n{display:none}
@@ -1049,6 +1054,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 .dlv-pin.on{background:#e5484d;transform:scale(1.22)}
 .dlv-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 2px 8px}
 .dlv-item{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);margin-bottom:8px}
+.dlv-item{cursor:pointer}
 .dlv-item.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 30%,transparent)}
 .dlv-no{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:grid;place-items:center}
 .dlv-nm{font-weight:600;word-break:keep-all;overflow-wrap:anywhere}
@@ -1137,7 +1143,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.40</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.41</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -2682,14 +2688,9 @@ async function pfShrink(file){
   c.getContext('2d').drawImage(src,0,0,c.width,c.height);
   return await new Promise(res=> c.toBlob(res,'image/jpeg',0.72));
 }
-function pfOpenSign(o){
-  const itemsHtml = o.items.map(it=>`<tr><td>${esc(it.item_name||'')}</td><td class="num">${num(it.quantity)}</td><td class="num">${won(it.supply_amount)}</td></tr>`).join('');
-  const mount = pfModal(`
-    <div class="omodal-h"><div class="ttl"><h3>${esc(o.customer)}</h3><div class="meta">${esc(o.date)} · 판매번호 ${esc(o.no)} · 인수확인</div></div><button class="x" aria-label="닫기">✕</button></div>
-    <div class="omodal-b">
-      <div class="pf-sum"><span>받은 물품 ${num(o.items.length)}개</span><span>${won(o.total)}</span></div>
-      <details class="pf-items"><summary>품목 보기</summary><div class="tbl-wrap"><table><thead><tr><th>품목</th><th class="num">수량</th><th class="num">금액</th></tr></thead><tbody>${itemsHtml}</tbody></table></div></details>
-      <label class="pf-lab">받는 분 이름<input class="pf-in" id="pf-name" type="text" placeholder="예: 홍길동" maxlength="30" autocomplete="off"></label>
+// 사인 입력 칸(이름·사인·사진·메모·저장) — 명세서 화면과 배송지도 상세 팝업이 같이 씀
+function pfSignFormHTML(){
+  return `<label class="pf-lab">받는 분 이름<input class="pf-in" id="pf-name" type="text" placeholder="예: 홍길동" maxlength="30" autocomplete="off"></label>
       <div><div class="pf-lab" style="margin-bottom:6px">위 물품을 받았음을 확인하며 아래에 사인해주세요</div>
         <div class="pf-pad" id="pf-padwrap"><canvas aria-label="사인 칸"></canvas><div class="hint">여기에 손가락으로 사인</div></div></div>
       <div class="pf-row"><button class="btn" id="pf-clear" type="button">지우기</button>
@@ -2697,8 +2698,9 @@ function pfOpenSign(o){
         <span class="small muted">담당자가 없을 때는 사진만 찍어도 돼요</span></div>
       <div id="pf-prev"></div>
       <label class="pf-lab">메모 (선택)<input class="pf-in" id="pf-note" type="text" placeholder="예: 경비실에 맡김" maxlength="120" autocomplete="off"></label>
-      <div class="pf-row pf-foot"><span class="pf-msg grow" id="pf-msg"></span><button class="btn primary" id="pf-save" type="button" disabled>저장</button></div>
-    </div>`);
+      <div class="pf-row pf-foot"><span class="pf-msg grow" id="pf-msg"></span><button class="btn primary" id="pf-save" type="button" disabled>저장</button></div>`;
+}
+function pfBindSign(mount, o, after){
   const $q = s=>mount.querySelector(s);
   let photoBlob = null;
   const refresh = ()=>{ $q('#pf-save').disabled = !(pad.isDrawn() || photoBlob); };
@@ -2706,7 +2708,6 @@ function pfOpenSign(o){
   const dirty = ()=> pad.isDrawn() || !!photoBlob || $q('#pf-name').value.trim() || $q('#pf-note').value.trim();
   const close = ()=>{ mount.remove(); };
   const tryClose = ()=>{ if(dirty() && !confirm('저장하지 않은 내용이 있어요. 닫을까요?')) return; close(); };
-  $q('.x').onclick = tryClose; $q('.omodal-scrim').onclick = tryClose;
   $q('#pf-clear').onclick = ()=>pad.clear();
   $q('#pf-photo').onchange = async e=>{
     const f = e.target.files && e.target.files[0]; if(!f) return;
@@ -2735,9 +2736,22 @@ function pfOpenSign(o){
       const {data, error} = await sb.from('delivery_proof').insert(row).select(PF_SEL).single();
       if(error){ if(path) sb.storage.from('delivery-proof').remove([path]); throw error; }
       const k = pfKey(o.date,o.no); PF.map.set(k,data); PF.cnt.set(k,(PF.cnt.get(k)||0)+1);
-      toast('인수확인을 저장했어요'); close(); stmDraw();
+      toast('인수확인을 저장했어요'); close(); after && after();
     }catch(err){ btn.disabled = false; msg.innerHTML = `<span class="err">저장 실패: ${esc(err.message||err)}</span>`; }
   };
+  return {close, tryClose, pad};
+}
+function pfOpenSign(o){
+  const itemsHtml = o.items.map(it=>`<tr><td>${esc(it.item_name||'')}</td><td class="num">${num(it.quantity)}</td><td class="num">${won(it.supply_amount)}</td></tr>`).join('');
+  const mount = pfModal(`
+    <div class="omodal-h"><div class="ttl"><h3>${esc(o.customer)}</h3><div class="meta">${esc(o.date)} · 판매번호 ${esc(o.no)} · 인수확인</div></div><button class="x" aria-label="닫기">✕</button></div>
+    <div class="omodal-b">
+      <div class="pf-sum"><span>받은 물품 ${num(o.items.length)}개</span><span>${won(o.total)}</span></div>
+      <details class="pf-items"><summary>품목 보기</summary><div class="tbl-wrap"><table><thead><tr><th>품목</th><th class="num">수량</th><th class="num">금액</th></tr></thead><tbody>${itemsHtml}</tbody></table></div></details>
+      ${pfSignFormHTML()}
+    </div>`);
+  const h = pfBindSign(mount, o, ()=>stmDraw());
+  mount.querySelector('.x').onclick = h.tryClose; mount.querySelector('.omodal-scrim').onclick = h.tryClose;
 }
 async function pfOpenView(o){
   const mount = pfModal(`
@@ -2817,6 +2831,7 @@ async function dlvLoadPlans(){
   const {data, error} = await sb.from('delivery_plan').select('*').eq('plan_date', DLV.date).eq('user_id', ME.id).order('sort_order',{ascending:true,nullsFirst:false}).order('created_at',{ascending:true});
   if(error) throw error;
   DLV.plans = data||[];
+  try{ await pfLoadStatus(DLV.plans.map(x=>({date:x.sale_date, no:x.sale_no}))); }catch(e){}
 }
 
 // ---- 화면 ----
@@ -2900,6 +2915,56 @@ function dlvDrawKeySetup(){
   }
 }
 
+// ---- 배송지 상세 + 사인 (배송지도에서 배송지를 고르면 열림) ----
+async function dlvOpenDetail(p){
+  if(!p) return;
+  const o = {customer:p.customer_name, date:p.sale_date, no:p.sale_no, key:p.sale_date+'|'+p.sale_no, items:[], total:Number(p.total_amount)||0};
+  const mount = pfModal(`
+    <div class="omodal-h"><div class="ttl"><h3>${esc(p.customer_name)}</h3><div class="meta">${esc(p.sale_date)} · 판매번호 ${esc(p.sale_no)}</div></div><button class="x" aria-label="닫기">✕</button></div>
+    <div class="omodal-b"><div id="dd-body" class="spin">불러오는 중…</div></div>`);
+  const $q = s=>mount.querySelector(s);
+  let tryClose = ()=>mount.remove();
+  $q('.x').onclick = ()=>tryClose(); $q('.omodal-scrim').onclick = ()=>tryClose();
+  const body = $q('#dd-body');
+  let rows = [];
+  try{
+    const r = await sb.from('sale_orders').select('*').eq('order_date', p.sale_date).eq('order_no', p.sale_no).order('line_no',{ascending:true});
+    if(r.error) throw r.error; rows = r.data||[];
+    const cid = p.customer_id || (rows.find(x=>x.customer_id)||{}).customer_id;
+    if(cid) await loadContacts([cid]);
+    o.cid = cid;
+  }catch(err){ body.className = ''; body.innerHTML = `<span class="err">불러오기 실패: ${esc(err.message||err)}</span>`; return; }
+  if(!mount.isConnected) return;
+  o.items = rows; if(rows.length) o.total = rows.reduce((t,x)=>t+(Number(x.supply_amount)||0),0);
+  const cc = o.cid ? CONTACT_CACHE.get(o.cid) : null;
+  const contact = parseContact((rows.find(x=>x.contact)||{}).contact || (cc && cc.contact));
+  const note = (rows.find(x=>x.delivery_note)||{}).delivery_note;
+  body.className = ''; body.style.display = 'grid'; body.style.gap = '14px'; body.style.gridTemplateColumns = 'minmax(0,1fr)';
+  const signedHtml = ()=>{
+    const r = PF.map.get(pfKey(o.date,o.no)); if(!r) return '';
+    return `<div class="pf-sum" style="background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--ink)"><span>✅ 인수확인 완료 · <b>${esc(r.receiver_name||'확인됨')}</b> <span class="small muted">${esc(pfFmt(r.signed_at))}</span></span><button class="btn" id="dd-view" type="button">기록 보기</button></div>`;
+  };
+  body.innerHTML = `
+    <div class="info-box">
+      ${p.address ? `<div class="info-row"><div class="l">배송지</div><div class="v">${esc(p.address)}</div></div>` : ''}
+      <div class="info-row"><div class="l">담당자</div><div class="v">
+        ${contact ? `${esc(contact.name||'-')}${contact.phones.length ? `<div class="contact-phones">${contact.phones.map(t=>`<a href="tel:${t.replace(/[^0-9]/g,'')}">📞 ${esc(t)}</a>`).join('')}</div>` : ''}` : `<span class="small muted">등록된 연락처가 없어요</span>`}
+      </div></div>
+      ${note ? `<div class="info-row"><div class="l">비고</div><div class="v small muted">${esc(note)}</div></div>` : ''}
+    </div>
+    <div class="tbl-wrap"><table><thead><tr><th>품목</th><th class="num">수량</th><th class="num">금액</th></tr></thead><tbody>
+      ${rows.length ? rows.map(it=>`<tr><td>${esc(it.item_name||'')}</td><td class="num">${num(it.quantity)}</td><td class="num">${won(it.supply_amount)}</td></tr>`).join('') : '<tr><td colspan="3" class="small muted">품목 정보를 찾지 못했어요</td></tr>'}
+    </tbody></table></div>
+    <div class="omodal-total"><span>총 금액</span><span>${won(o.total)}</span></div>
+    <div id="dd-signed">${signedHtml()}</div>
+    <div class="quicklog" id="dd-sign">
+      <div class="qhead">${PF.map.has(pfKey(o.date,o.no)) ? '다시 받으려면 아래에 사인해주세요' : '물품을 전달했다면 바로 사인을 받으세요'}</div>
+      ${pfSignFormHTML()}
+    </div>`;
+  const vb = body.querySelector('#dd-view'); if(vb) vb.onclick = ()=>pfOpenView(o);
+  const h = pfBindSign(mount, o, ()=>{ dlvDrawList(); });
+  tryClose = h.tryClose;
+}
 // ---- 목록 ----
 function dlvDrawList(){
   const list = document.getElementById('dlv-list'); if(!list) return;
@@ -2913,7 +2978,7 @@ function dlvDrawList(){
   }
   const bad = P.filter(p=> !p.address || p._fail).length;
   list.innerHTML = `<div class="dlv-head"><b>내 배송 ${num(P.length)}곳</b>${bad?`<span class="pill s-warn">위치 확인 필요 ${bad}</span>`:''}</div>`
-    + (P.length>1?`<div class="dlv-hint muted">순서는 ▲▼ 버튼이나 오른쪽 ☰ 를 끌어서 바꿔요. 번호가 지도 핀과 같이 바뀌어요.</div>`:'')
+    + (P.length>1?`<div class="dlv-hint muted">배송지를 누르면 상세·사인 화면이 열려요. 순서는 ▲▼ 버튼이나 오른쪽 ☰ 를 끌어서 바꿔요.</div>`:'')
     + P.map((p,i)=>{
       const miss = !p.address || p._fail;
       return `<div class="dlv-item${DLV.sel===p.id?' on':''}" data-id="${esc(p.id)}">
@@ -2923,12 +2988,15 @@ function dlvDrawList(){
           <div class="dlv-nm">${esc(p.customer_name)}</div>
           <div class="dlv-ad small ${miss?'err':'muted'}">${p.address?esc(p.address):'주소가 없어요'}${p._fail?' — 지도에서 위치를 못 찾았어요':''}</div>
           <div class="small muted">${esc((p.sale_date||'').slice(5).replace('-','/'))}-${esc(p.sale_no)} · 품목 ${num(p.item_count||0)}${p.total_amount!=null?' · '+won(p.total_amount):''}</div>
-          <div class="dlv-act"><button class="btn dlv-fo" data-id="${esc(p.id)}" type="button"${p.lat==null?' disabled':''}>📍 지도</button>
+          ${(()=>{ const r = PF.map.get(pfKey(p.sale_date,p.sale_no)); return r ? `<div class="small" style="margin-top:4px"><span class="pill s-good">✅ 인수확인 · ${esc(r.receiver_name||'확인됨')}</span></div>` : ''; })()}
+          <div class="dlv-act"><button class="btn primary dlv-dt" data-id="${esc(p.id)}" type="button">${PF.map.has(pfKey(p.sale_date,p.sale_no))?'📋 상세':'✍️ 상세·사인'}</button><button class="btn dlv-fo" data-id="${esc(p.id)}" type="button"${p.lat==null?' disabled':''}>📍 지도</button>
             <button class="btn dlv-ed" data-id="${esc(p.id)}" type="button">✏️ 주소</button>
             <button class="btn dlv-rm" data-id="${esc(p.id)}" type="button">빼기</button>
             ${P.length>1?`<span class="dlv-ord"><button class="btn dlv-mv" data-id="${esc(p.id)}" data-d="-1" type="button" aria-label="위로"${i===0?' disabled':''}>▲</button><button class="btn dlv-mv" data-id="${esc(p.id)}" data-d="1" type="button" aria-label="아래로"${i===P.length-1?' disabled':''}>▼</button></span>`:''}</div>
         </div></div>`; }).join('');
   list.querySelectorAll('.dlv-fo').forEach(b=> b.onclick = ()=>dlvFocus(b.dataset.id));
+  list.querySelectorAll('.dlv-dt').forEach(b=> b.onclick = ()=>dlvOpenDetail(DLV.plans.find(x=>x.id===b.dataset.id)));
+  list.querySelectorAll('.dlv-item').forEach(it=> it.addEventListener('click', e=>{ if(e.target.closest('button,a,input')) return; dlvOpenDetail(DLV.plans.find(x=>x.id===it.dataset.id)); }));
   list.querySelectorAll('.dlv-ed').forEach(b=> b.onclick = ()=>dlvEditAddr(DLV.plans.find(x=>x.id===b.dataset.id)));
   list.querySelectorAll('.dlv-rm').forEach(b=> b.onclick = ()=>dlvRemove(DLV.plans.find(x=>x.id===b.dataset.id)));
   list.querySelectorAll('.dlv-mv').forEach(b=> b.onclick = ()=>dlvMove(b.dataset.id, Number(b.dataset.d)));
