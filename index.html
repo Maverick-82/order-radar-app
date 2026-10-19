@@ -1022,6 +1022,30 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
   .stm-res .c-pf{grid-area:pf;text-align:right}
 }
 .pf-foot{position:sticky;bottom:-20px;background:var(--surface);padding:12px 0 18px;margin-bottom:-20px;border-top:1px solid var(--line);z-index:2}
+/* ===== 배송 (배송지도) ===== */
+.dlv-bar{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:flex-end}
+.dlv-bar .btn{min-height:40px}
+.dlv-date{display:grid;gap:4px}
+.dlv-date input{min-height:40px}
+.dlv-legend{margin-left:auto;display:inline-flex;gap:6px;align-items:center}
+.dlv-legend i{display:inline-block;width:18px;height:6px;border-radius:3px}
+.dlv-legend i.g{background:#19b45a}.dlv-legend i.o{background:#f0a020}.dlv-legend i.r{background:#e5484d}
+.dlv-grid{display:grid;gap:12px;margin-top:12px}
+@media (min-width:1000px){ .dlv-grid{grid-template-columns:minmax(0,1fr) 380px;align-items:start} .dlv-list{max-height:min(70vh,640px);overflow:auto} }
+.dlv-mapbox{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--surface-2)}
+#dlv-map{height:clamp(300px,54vh,560px);width:100%}
+.dlv-mapmsg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px;background:var(--surface-2);color:var(--ink);overflow:auto;z-index:5}
+.dlv-pin{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4);cursor:pointer}
+.dlv-pin.on{background:#e5484d;transform:scale(1.22)}
+.dlv-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 2px 8px}
+.dlv-item{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);margin-bottom:8px}
+.dlv-item.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 30%,transparent)}
+.dlv-no{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:grid;place-items:center}
+.dlv-nm{font-weight:600;word-break:keep-all;overflow-wrap:anywhere}
+.dlv-ad{margin:2px 0}
+.dlv-act{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.dlv-act .btn{min-height:36px;padding:6px 12px;font-size:13px}
+.dlv-empty{text-align:left}
 </style>
 </head>
 <body>
@@ -1094,7 +1118,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.38</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.39</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -1104,6 +1128,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
     <button data-tab="summary" aria-selected="true"><span class="ti">📊</span><span class="tl">Dashboard</span></button>
     <button data-tab="cityhall" aria-selected="false"><span class="ti">🏛️</span><span class="tl">시청</span></button>
     <button data-tab="customers" aria-selected="false"><span class="ti">🏢</span><span class="tl">거래처</span></button>
+    <button data-tab="delivery" aria-selected="false"><span class="ti">🚚</span><span class="tl">배송</span></button>
     <button data-tab="sales" aria-selected="false"><span class="ti">💼</span><span class="tl">영업</span></button>
     <button data-tab="products" aria-selected="false"><span class="ti">🏷️</span><span class="tl">생산품</span></button>
     <button data-tab="report" aria-selected="false"><span class="ti">📑</span><span class="tl">리포트</span></button>
@@ -1116,6 +1141,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 <section class="view hide" id="view-cityhall"></section>
 <section class="view hide" id="view-products"></section>
 <section class="view hide" id="view-report"></section>
+<section class="view hide" id="view-delivery"></section>
 <section class="view hide" id="view-stmt"></section>
 <section class="view hide" id="view-recon"></section>
 <section class="view hide" id="view-admin"></section>
@@ -1242,17 +1268,17 @@ let CUSTS = []; // customer_stats rows, loaded once per session
 let custById = new Map();
 let currentTab = 'summary';
 let currentSalesSub = 'coretarget';
-const VIEW_IDS = ['summary','customers','sales','products','cityhall','report','stmt','recon','admin'];
+const VIEW_IDS = ['summary','customers','delivery','sales','products','cityhall','report','stmt','recon','admin'];
 // Supabase는 한 번에 1000줄까지만 주므로, 판매 줄이 많은 거래처는 나눠서 끝까지 가져옴
 async function sbAll(build){
   const all=[]; for(let from=0;;from+=1000){ const {data,error}=await build().range(from,from+999); if(error) return {data:all,error}; all.push(...(data||[])); if(!data||data.length<1000) break; }
   return {data:all};
 }
-const ALL_TABS = [['summary','Dashboard'],['cityhall','시청'],['customers','거래처 (거래명세서 포함)'],['sales','영업'],['products','생산품'],['report','경영 리포트']];
+const ALL_TABS = [['summary','Dashboard'],['cityhall','시청'],['customers','거래처'],['delivery','배송 (배송지도·거래명세서)'],['sales','영업'],['products','생산품'],['report','경영 리포트']];
 const ID_DOMAIN = 'example.com'; // 아이디(able1 등)로 가입·로그인할 때 내부적으로 붙이는 주소 (실제 메일은 안 감)
 function loginEmail(v){ v = String(v||'').trim(); return v.includes('@') ? v : v.toLowerCase()+'@'+ID_DOMAIN; }
 function loginIdOnly(v){ v = String(v||'').trim(); return v.includes('@') ? v : v.toLowerCase(); }
-function canTab(t){ if(!ME) return false; if(t==='stmt') return canTab('customers'); /* 거래명세서는 거래처 화면 안에 있음 */ if(t==='admin') return ME.role==='admin'; if(ME.role==='admin') return true; return !Array.isArray(ME.tabs) || ME.tabs.includes(t); }
+function canTab(t){ if(!ME) return false; if(t==='stmt') return canTab('delivery'); /* 거래명세서는 배송 화면 안에 있음 */ if(t==='admin') return ME.role==='admin'; if(ME.role==='admin') return true; return !Array.isArray(ME.tabs) || ME.tabs.includes(t); }
 
 // ---------------- Auth ----------------
 const authBoxes = ['loginBox','signupBox','forgotBox','resetBox','pendingBox'];
@@ -1523,6 +1549,7 @@ function renderTab(){
   if(ME && !canTab(currentTab)) return;
   if(currentTab==='summary') renderSummaryView();
   else if(currentTab==='customers') renderCustomersView();
+  else if(currentTab==='delivery') renderDeliveryView();
   else if(currentTab==='sales') renderSalesView();
   else if(currentTab==='products') renderProductsView();
   else if(currentTab==='cityhall') renderCityHallView();
@@ -2526,7 +2553,8 @@ function stmDraw(){
       <div class="filters"><span class="count-tag">${num(pages)}장 · ${won(total)}</span>
       <button class="btn" id="stm-clear" ${chosen.length?'':'disabled'}>모두 비우기</button>
       <button class="btn" id="stm-pv">${STM.previewOpen?'미리보기 닫기':'미리보기'}</button>
-      <button class="btn primary" id="stm-print" ${chosen.length?'':'disabled'}>🖨️ 한 파일로 인쇄 / PDF 저장</button></div></div>
+      <button class="btn primary" id="stm-dlv" ${chosen.length?'':'disabled'}>🚚 배송 확정</button>
+      <button class="btn" id="stm-print" ${chosen.length?'':'disabled'}>🖨️ 한 파일로 인쇄 / PDF 저장</button></div></div>
     ${chosen.length ? `<div class="stm-chips">${chosen.map(o=>`<span class="stm-chip" title="${esc(o.customer)}"><b>${o.md}-${o.no}</b> ${esc(o.customer.length>16?o.customer.slice(0,16)+'…':o.customer)} <button class="stm-x" data-k="${esc(o.key)}" aria-label="빼기">×</button></span>`).join('')}</div>`
       : '<p class="small muted" style="margin:0">위에서 검색하고 체크하면 여기에 쌓여요. 다른 번호나 거래처로 또 검색해서 체크해도 계속 쌓여요.</p>'}
     <label class="small" style="display:block;line-height:1.7;margin:10px 0 0"><input type="checkbox" id="stm-sum" style="margin-right:6px;vertical-align:middle" ${STM.withSum?'checked':''}> 명세서 뒤에 <b>거래처 영업 요약 1장</b> 붙이기 <span class="muted">(선택한 거래처마다 담당자·연락처와 품목별 근거 · ${num(stmCustIds(chosen).length)}곳)</span></label>
@@ -2536,6 +2564,7 @@ function stmDraw(){
   cartEl.querySelector('#stm-clear').onclick = ()=>{ if(!confirm('선택한 명세서를 모두 비울까요?')) return; STM.cart.clear(); stmSaveCart(); stmDraw(); };
   cartEl.querySelector('#stm-pv').onclick = ()=>{ STM.previewOpen = !STM.previewOpen; stmDraw(); };
   cartEl.querySelector('#stm-print').onclick = stmPrint;
+  cartEl.querySelector('#stm-dlv').onclick = ()=>dlvOpenConfirm(chosen);
   const drawPrev = ()=>{ prev.innerHTML = (STM.previewOpen && chosen.length) ? `<div class="stm stm-preview">${stmPagesHtml(chosen)}${stmSummaryHtml(chosen)}</div>` : ''; };
   drawPrev();
   if(STM.previewOpen && chosen.length && STM.withSum){
@@ -2721,6 +2750,326 @@ async function pfOpenView(o){
     toast('삭제했어요'); close();
     try{ await pfLoadStatus([o]); }catch(_){} stmDraw();
   });
+}
+
+
+// ================= 배송 (배송지도 + 거래명세서) =================
+// 거래명세서에서 고른 건을 "배송 확정"하면 내 배송지도(카카오맵)에 번호 핀으로 표시됨. 내 확정 기록은 나만 봄(DB 권한으로 막아둠).
+// 교통상황은 카카오맵 교통 레이어. 실시간 스트림이 아니라 '새로고침' 누를 때 + 화면을 보고 있는 동안 3분마다 새로 불러옴.
+let dlvSub = 'map'; // 'map'(배송지도) / 'stmt'(거래명세서)
+const DLV = {date:null, plans:[], key:undefined, kakaoErr:'', map:null, pins:new Map(), trafficOn:true, lastTs:null, timer:null, sel:null, geoRun:0};
+const dlvToday = ()=> localYmd(new Date());
+const dlvHM = d=> String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+const DLV_TRAFFIC_MS = 180000;
+
+function dlvStop(){ if(DLV.timer){ clearInterval(DLV.timer); DLV.timer = null; } DLV.map = null; DLV.pins = new Map(); DLV.geoRun++; }
+function renderDeliveryView(){
+  const el = document.getElementById('view-delivery'); if(!el) return;
+  el.innerHTML = `<div class="subnav"><div class="seg" id="dlvSeg">
+      <button data-d="map" aria-pressed="${dlvSub==='map'}">🗺️ 배송지도</button>
+      <button data-d="stmt" aria-pressed="${dlvSub==='stmt'}">🧾 거래명세서</button></div></div>
+    <div id="dlvMapWrap" class="${dlvSub==='map'?'':'hide'}"></div>`;
+  el.querySelector('#dlvSeg').onclick = e=>{ const b = e.target.closest('button[data-d]'); if(!b) return; dlvSub = b.dataset.d; dlvStop(); renderDeliveryView(); };
+  document.getElementById('view-stmt').classList.toggle('hide', dlvSub!=='stmt');
+  if(dlvSub==='stmt'){ dlvStop(); renderStmtView(); return; }
+  dlvStop(); dlvInitMap();
+}
+
+// ---- 카카오 SDK ----
+function dlvLoadKakao(key){
+  return new Promise((resolve, reject)=>{
+    if(window.kakao && kakao.maps && kakao.maps.services && kakao.maps.Map){ resolve(); return; }
+    const old = document.getElementById('kakao-sdk'); if(old) old.remove();
+    const s = document.createElement('script'); s.id = 'kakao-sdk';
+    s.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey='+encodeURIComponent(key)+'&libraries=services&autoload=false';
+    const to = setTimeout(()=>reject(new Error('시간이 너무 오래 걸려요')), 15000);
+    s.onload = ()=>{ try{ kakao.maps.load(()=>{ clearTimeout(to); resolve(); }); }catch(e){ clearTimeout(to); reject(e); } };
+    s.onerror = ()=>{ clearTimeout(to); reject(new Error('카카오 지도를 불러오지 못했어요')); };
+    document.head.appendChild(s);
+  });
+}
+async function dlvLoadKey(){
+  if(DLV.key !== undefined) return DLV.key;
+  const {data} = await sb.from('app_settings').select('value').eq('key','kakao_js_key').maybeSingle();
+  DLV.key = (data && data.value && data.value.trim()) || null;
+  return DLV.key;
+}
+async function dlvLoadPlans(){
+  const {data, error} = await sb.from('delivery_plan').select('*').eq('plan_date', DLV.date).eq('user_id', ME.id).order('created_at',{ascending:true});
+  if(error) throw error;
+  DLV.plans = data||[];
+}
+
+// ---- 화면 ----
+async function dlvInitMap(){
+  const wrap = document.getElementById('dlvMapWrap'); if(!wrap) return;
+  if(!DLV.date) DLV.date = dlvToday();
+  wrap.innerHTML = `
+    <div class="panel dlv-bar">
+      <label class="small muted dlv-date">배송일<input type="date" id="dlv-date" value="${esc(DLV.date)}"></label>
+      <button class="btn" id="dlv-traffic" type="button" aria-pressed="${DLV.trafficOn}">🚦 교통상황 ${DLV.trafficOn?'켜짐':'꺼짐'}</button>
+      <button class="btn primary" id="dlv-refresh" type="button">🔄 새로고침</button>
+      <span class="small muted" id="dlv-ts"></span>
+      <span class="dlv-legend small muted">교통 <i class="g"></i>원활 <i class="o"></i>서행 <i class="r"></i>정체</span>
+    </div>
+    <div class="dlv-grid">
+      <div class="dlv-mapbox"><div id="dlv-map"></div><div id="dlv-mapmsg" class="dlv-mapmsg">불러오는 중…</div></div>
+      <div id="dlv-list" class="dlv-list"></div>
+    </div>`;
+  const q = s=>wrap.querySelector(s);
+  q('#dlv-date').onchange = e=>{ DLV.date = e.target.value || dlvToday(); dlvStop(); dlvInitMap(); };
+  q('#dlv-traffic').onclick = ()=>{ DLV.trafficOn = !DLV.trafficOn; dlvApplyTraffic(true); const b = q('#dlv-traffic'); b.setAttribute('aria-pressed', String(DLV.trafficOn)); b.textContent = '🚦 교통상황 '+(DLV.trafficOn?'켜짐':'꺼짐'); };
+  q('#dlv-refresh').onclick = ()=>dlvRefresh(true);
+  try{ await Promise.all([dlvLoadKey(), dlvLoadPlans()]); }
+  catch(e){ q('#dlv-mapmsg').innerHTML = `<span class="err">불러오기 실패: ${esc((e&&e.message)||e)}</span>`; return; }
+  if(!wrap.isConnected) return;
+  dlvDrawList();
+  if(!DLV.key){ q('#dlv-mapmsg').innerHTML = ''; q('#dlv-mapmsg').style.display = 'none'; dlvDrawKeySetup(); return; }
+  try{ await dlvLoadKakao(DLV.key); }
+  catch(e){ q('#dlv-mapmsg').innerHTML = `<div class="err">${esc(e.message||'지도를 불러오지 못했어요')}</div><div class="small muted" style="margin-top:6px">키가 맞는지, 이 사이트 주소(${esc(location.origin)})가 카카오에 등록됐는지 확인해주세요.</div>${ME.role==='admin'?'<button class="btn" id="dlv-rekey" type="button" style="margin-top:8px">지도 키 변경</button>':''}`; const rk = q('#dlv-rekey'); if(rk) rk.onclick = dlvDrawKeySetup; return; }
+  if(!wrap.isConnected) return;
+  q('#dlv-mapmsg').style.display = 'none';
+  DLV.map = new kakao.maps.Map(q('#dlv-map'), {center:new kakao.maps.LatLng(37.5665,126.9780), level:8});
+  try{ DLV.map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT); }catch(e){}
+  dlvApplyTraffic(false);
+  DLV.lastTs = new Date(); dlvTs();
+  DLV.timer = setInterval(()=>{ if(document.visibilityState==='visible' && currentTab==='delivery' && dlvSub==='map' && DLV.map) dlvRefresh(false); }, DLV_TRAFFIC_MS);
+  dlvDrawPins(true);
+  dlvGeocodeMissing();
+}
+function dlvTs(){ const t = document.getElementById('dlv-ts'); if(t && DLV.lastTs) t.textContent = '교통 '+dlvHM(DLV.lastTs)+' 기준'; }
+function dlvApplyTraffic(manual){
+  if(!DLV.map) return;
+  const T = kakao.maps.MapTypeId.TRAFFIC;
+  try{ DLV.map.removeOverlayMapTypeId(T); }catch(e){}
+  if(DLV.trafficOn){ try{ DLV.map.addOverlayMapTypeId(T); }catch(e){} }
+  if(manual){ DLV.lastTs = new Date(); dlvTs(); }
+}
+async function dlvRefresh(manual){
+  if(!DLV.map){ dlvInitMap(); return; }
+  DLV.trafficOn = DLV.trafficOn || manual; // 새로고침을 눌렀는데 꺼져 있으면 켬
+  const b = document.getElementById('dlv-traffic'); if(b){ b.setAttribute('aria-pressed', String(DLV.trafficOn)); b.textContent = '🚦 교통상황 '+(DLV.trafficOn?'켜짐':'꺼짐'); }
+  dlvApplyTraffic(true);
+  if(manual){
+    try{ await dlvLoadPlans(); dlvDrawList(); dlvDrawPins(false); dlvGeocodeMissing(); toast('교통상황과 배송지를 새로 불러왔어요'); }
+    catch(e){ toast('새로고침 실패: '+((e&&e.message)||e)); }
+  }
+}
+function dlvDrawKeySetup(){
+  const list = document.getElementById('dlv-list'); const msg = document.getElementById('dlv-mapmsg');
+  const isAdmin = ME && ME.role==='admin';
+  if(msg){ msg.style.display = 'block'; msg.innerHTML = isAdmin
+    ? `<div style="text-align:left;max-width:420px;margin:0 auto"><b>카카오 지도 키를 등록해주세요</b>
+        <ol class="small" style="margin:8px 0 10px;padding-left:18px;display:grid;gap:4px">
+          <li><b>developers.kakao.com</b> 로그인 → 내 애플리케이션 → 앱 만들기</li>
+          <li>앱 키에서 <b>JavaScript 키</b> 복사 (REST 키 아님)</li>
+          <li>[카카오맵] → [사용 설정] 상태를 <b>ON</b></li>
+          <li><b>JavaScript SDK 도메인</b>에 <b>${esc(location.origin)}</b> 등록</li>
+          <li>아래에 키를 붙여넣고 저장</li></ol>
+        <input class="pf-in" id="dlv-keyin" type="text" placeholder="JavaScript 키 붙여넣기" autocomplete="off" spellcheck="false">
+        <div class="pf-row" style="margin-top:8px"><button class="btn primary" id="dlv-keysave" type="button">저장</button><span class="small" id="dlv-keymsg"></span></div></div>`
+    : `<div><b>지도 키가 아직 등록되지 않았어요</b><div class="small muted" style="margin-top:6px">관리자가 카카오 지도 키를 등록하면 지도가 나와요. 배송 목록은 아래에서 볼 수 있어요.</div></div>`;
+    const sv = msg.querySelector('#dlv-keysave');
+    if(sv) sv.onclick = async ()=>{
+      const v = msg.querySelector('#dlv-keyin').value.trim(); const m = msg.querySelector('#dlv-keymsg');
+      if(v.length < 16){ m.innerHTML = '<span class="err">키가 너무 짧아요. 다시 확인해주세요.</span>'; return; }
+      sv.disabled = true; m.textContent = '저장 중…';
+      const {error} = await sb.from('app_settings').upsert({key:'kakao_js_key', value:v, updated_at:new Date().toISOString()}, {onConflict:'key'});
+      if(error){ sv.disabled = false; m.innerHTML = `<span class="err">저장 실패: ${esc(error.message)}</span>`; return; }
+      DLV.key = v; toast('지도 키를 저장했어요'); dlvStop(); dlvInitMap();
+    };
+  }
+}
+
+// ---- 목록 ----
+function dlvDrawList(){
+  const list = document.getElementById('dlv-list'); if(!list) return;
+  const P = DLV.plans;
+  if(!P.length){
+    list.innerHTML = `<div class="panel dlv-empty"><b>${DLV.date===dlvToday()?'오늘':esc(DLV.date)} 확정한 배송지가 없어요</b>
+      <p class="small muted" style="margin:6px 0 10px">거래명세서에서 내가 가는 곳을 조회해 선택하고 <b>🚚 배송 확정</b>을 누르면 여기에 나와요.</p>
+      <button class="btn primary" id="dlv-gostmt" type="button">🧾 거래명세서로 가기</button></div>`;
+    list.querySelector('#dlv-gostmt').onclick = ()=>{ dlvSub = 'stmt'; dlvStop(); renderDeliveryView(); window.scrollTo(0,0); };
+    return;
+  }
+  const bad = P.filter(p=> !p.address || p._fail).length;
+  list.innerHTML = `<div class="dlv-head"><b>내 배송 ${num(P.length)}곳</b>${bad?`<span class="pill s-warn">위치 확인 필요 ${bad}</span>`:''}</div>`
+    + P.map((p,i)=>{
+      const miss = !p.address || p._fail;
+      return `<div class="dlv-item${DLV.sel===p.id?' on':''}" data-id="${esc(p.id)}">
+        <div class="dlv-no">${i+1}</div>
+        <div class="dlv-bd">
+          <div class="dlv-nm">${esc(p.customer_name)}</div>
+          <div class="dlv-ad small ${miss?'err':'muted'}">${p.address?esc(p.address):'주소가 없어요'}${p._fail?' — 지도에서 위치를 못 찾았어요':''}</div>
+          <div class="small muted">${esc((p.sale_date||'').slice(5).replace('-','/'))}-${esc(p.sale_no)} · 품목 ${num(p.item_count||0)}${p.total_amount!=null?' · '+won(p.total_amount):''}</div>
+          <div class="dlv-act"><button class="btn dlv-fo" data-id="${esc(p.id)}" type="button"${p.lat==null?' disabled':''}>📍 지도</button>
+            <button class="btn dlv-ed" data-id="${esc(p.id)}" type="button">✏️ 주소</button>
+            <button class="btn dlv-rm" data-id="${esc(p.id)}" type="button">빼기</button></div>
+        </div></div>`; }).join('');
+  list.querySelectorAll('.dlv-fo').forEach(b=> b.onclick = ()=>dlvFocus(b.dataset.id));
+  list.querySelectorAll('.dlv-ed').forEach(b=> b.onclick = ()=>dlvEditAddr(DLV.plans.find(x=>x.id===b.dataset.id)));
+  list.querySelectorAll('.dlv-rm').forEach(b=> b.onclick = ()=>dlvRemove(DLV.plans.find(x=>x.id===b.dataset.id)));
+}
+async function dlvRemove(p){
+  if(!p || !confirm(`"${p.customer_name}"을(를) 내 배송지도에서 뺄까요?`)) return;
+  const {error} = await sb.from('delivery_plan').delete().eq('id', p.id);
+  if(error){ toast('삭제 실패: '+error.message); return; }
+  DLV.plans = DLV.plans.filter(x=>x.id!==p.id); dlvDrawList(); dlvDrawPins(false); toast('뺐어요');
+}
+
+// ---- 핀 ----
+function dlvDrawPins(fit){
+  if(!DLV.map) return;
+  DLV.pins.forEach(o=>o.ov.setMap(null)); DLV.pins = new Map();
+  const bounds = new kakao.maps.LatLngBounds(); let n = 0, last = null;
+  DLV.plans.forEach((p,i)=>{
+    if(p.lat==null || p.lng==null) return;
+    const pos = new kakao.maps.LatLng(p.lat, p.lng);
+    const el = document.createElement('div'); el.className = 'dlv-pin'+(DLV.sel===p.id?' on':''); el.textContent = String(i+1); el.title = p.customer_name;
+    el.addEventListener('click', ()=>{ DLV.sel = p.id; dlvHighlight(); const it = document.querySelector('.dlv-item[data-id="'+p.id+'"]'); if(it) it.scrollIntoView({block:'nearest',behavior:'smooth'}); });
+    const ov = new kakao.maps.CustomOverlay({position:pos, content:el, xAnchor:.5, yAnchor:.5, zIndex:3});
+    ov.setMap(DLV.map); DLV.pins.set(p.id,{ov,el,pos}); bounds.extend(pos); n++; last = pos;
+  });
+  if(fit && n){ if(n===1){ DLV.map.setCenter(last); DLV.map.setLevel(4); } else { try{ DLV.map.setBounds(bounds, 60, 40, 60, 40); }catch(e){} } }
+}
+function dlvHighlight(){
+  DLV.pins.forEach((o,id)=> o.el.classList.toggle('on', id===DLV.sel));
+  document.querySelectorAll('.dlv-item').forEach(it=> it.classList.toggle('on', it.dataset.id===DLV.sel));
+}
+function dlvFocus(id){
+  const o = DLV.pins.get(id); if(!o || !DLV.map) return;
+  DLV.sel = id; dlvHighlight(); DLV.map.setCenter(o.pos); DLV.map.setLevel(4);
+  const box = document.querySelector('.dlv-mapbox'); if(box) box.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+
+// ---- 주소 → 좌표 (카카오 지오코더, 결과는 geo_cache에 저장해서 다음엔 바로) ----
+function dlvAddrVariants(a){
+  const s = String(a||'').replace(/\s+/g,' ').trim(); if(!s) return [];
+  const c = s.replace(/\([^)]*\)/g,' ').replace(/\s*\d+\s*층.*$/,'').replace(/\s*(별관|본관|\d+\s*호).*$/,'').replace(/(\d)-0\b/g,'$1').replace(/[.,\s]+$/,'').replace(/\s+/g,' ').trim();
+  return [...new Set([c, s].filter(Boolean))];
+}
+const dlvOk = st=> window.kakao && kakao.maps.services && st === kakao.maps.services.Status.OK;
+function dlvSearch(kind, q){
+  return new Promise(res=>{
+    try{
+      const svc = kind==='addr' ? new kakao.maps.services.Geocoder() : new kakao.maps.services.Places();
+      const cb = (r,st)=> res(dlvOk(st) && r && r[0] ? {lat:Number(r[0].y), lng:Number(r[0].x)} : null);
+      kind==='addr' ? svc.addressSearch(q, cb) : svc.keywordSearch(q, cb);
+    }catch(e){ res(null); }
+  });
+}
+async function dlvFind(p){
+  const vars = dlvAddrVariants(p.address);
+  for(const v of vars){ const r = await dlvSearch('addr', v); if(r) return r; }
+  for(const v of vars){ const r = await dlvSearch('key', v); if(r) return r; }
+  const r = await dlvSearch('key', p.customer_name); return r;
+}
+async function dlvGeocodeMissing(){
+  const run = ++DLV.geoRun;
+  const todo = DLV.plans.filter(p=> p.address && p.lat==null && !p._fail);
+  if(!todo.length) return;
+  // 1) 이미 찾아둔 주소(캐시)
+  try{
+    const {data} = await sb.from('geo_cache').select('address,lat,lng').in('address', [...new Set(todo.map(p=>p.address))]);
+    const m = new Map((data||[]).map(r=>[r.address,r]));
+    for(const p of todo){ const c = m.get(p.address); if(c){ p.lat = c.lat; p.lng = c.lng; sb.from('delivery_plan').update({lat:c.lat,lng:c.lng}).eq('id',p.id).then(()=>{}); } }
+  }catch(e){}
+  dlvDrawPins(true);
+  // 2) 나머지는 카카오에 물어봄 (천천히)
+  for(const p of todo.filter(p=>p.lat==null)){
+    if(run !== DLV.geoRun || !DLV.map) return;
+    const r = await dlvFind(p);
+    if(run !== DLV.geoRun) return;
+    if(r){
+      p.lat = r.lat; p.lng = r.lng;
+      sb.from('delivery_plan').update({lat:r.lat,lng:r.lng}).eq('id',p.id).then(()=>{});
+      sb.from('geo_cache').upsert({address:p.address, lat:r.lat, lng:r.lng, updated_at:new Date().toISOString()},{onConflict:'address'}).then(()=>{});
+    } else p._fail = true;
+    dlvDrawPins(true); dlvDrawList();
+    await new Promise(r=>setTimeout(r,120));
+  }
+  dlvDrawList();
+}
+
+// ---- 주소 수정 ----
+function dlvEditAddr(p){
+  if(!p) return;
+  const mount = pfModal(`
+    <div class="omodal-h"><div class="ttl"><h3>${esc(p.customer_name)}</h3><div class="meta">배송 주소 수정</div></div><button class="x" aria-label="닫기">✕</button></div>
+    <div class="omodal-b">
+      <label class="pf-lab">주소<input class="pf-in" id="dlv-ad" type="text" value="${esc(p.address||'')}" placeholder="예: 서울 양천구 목동서로 33" autocomplete="off"></label>
+      <div class="small muted">도로명이나 지번, 건물 이름을 적어주세요. 층·호수는 빼도 돼요. 고친 주소는 이 거래처 다음 배송에도 써요.</div>
+      <div class="pf-row pf-foot"><span class="pf-msg grow" id="dlv-adm"></span><button class="btn primary" id="dlv-adsave" type="button">저장</button></div>
+    </div>`);
+  const close = ()=>mount.remove();
+  mount.querySelector('.x').onclick = close; mount.querySelector('.omodal-scrim').onclick = close;
+  mount.querySelector('#dlv-adsave').onclick = async ()=>{
+    const v = mount.querySelector('#dlv-ad').value.trim(); const m = mount.querySelector('#dlv-adm');
+    if(!v){ m.innerHTML = '<span class="err">주소를 적어주세요.</span>'; return; }
+    m.textContent = '저장 중…';
+    const {error} = await sb.from('delivery_plan').update({address:v, lat:null, lng:null}).eq('id', p.id);
+    if(error){ m.innerHTML = `<span class="err">저장 실패: ${esc(error.message)}</span>`; return; }
+    if(p.customer_id) sb.from('customer_addr').upsert({customer_id:p.customer_id, address:v, updated_at:new Date().toISOString()},{onConflict:'customer_id'}).then(()=>{});
+    p.address = v; p.lat = null; p.lng = null; p._fail = false;
+    close(); dlvDrawList(); dlvDrawPins(false); dlvGeocodeMissing(); toast('주소를 고쳤어요');
+  };
+}
+
+// ---- 명세서 → 배송 확정 ----
+function dlvCustId(o){ const it = (o.items||[]).find(i=>i.customer_id); return it ? it.customer_id : null; }
+async function dlvResolveAddrs(chosen){
+  const ids = [...new Set(chosen.map(dlvCustId).filter(Boolean))];
+  const out = new Map(); if(!ids.length) return out;
+  try{
+    const [ov, od] = await Promise.all([
+      sb.from('customer_addr').select('customer_id,address').in('customer_id', ids),
+      sb.from('orders').select('customer_id,address,order_date').in('customer_id', ids).neq('address','').not('address','is',null).order('order_date',{ascending:false}).limit(4000)
+    ]);
+    (od.data||[]).forEach(r=>{ if(!out.has(r.customer_id)) out.set(r.customer_id, {address:r.address, src:'주문서'}); });
+    (ov.data||[]).forEach(r=>{ out.set(r.customer_id, {address:r.address, src:'직접 고친 주소'}); });
+  }catch(e){}
+  return out;
+}
+async function dlvOpenConfirm(chosen){
+  if(!chosen.length) return;
+  const mount = pfModal(`
+    <div class="omodal-h"><div class="ttl"><h3>🚚 배송 확정</h3><div class="meta">선택한 ${num(chosen.length)}곳을 내 배송지도에 올려요</div></div><button class="x" aria-label="닫기">✕</button></div>
+    <div class="omodal-b">
+      <label class="pf-lab">배송일<input class="pf-in" id="dlv-cdate" type="date" value="${esc(DLV.date||dlvToday())}"></label>
+      <div id="dlv-clist" class="spin">주소 불러오는 중…</div>
+      <div class="pf-row pf-foot"><span class="pf-msg grow" id="dlv-cmsg"></span><button class="btn primary" id="dlv-csave" type="button" disabled>배송 확정</button></div>
+    </div>`);
+  const close = ()=>mount.remove();
+  mount.querySelector('.x').onclick = close; mount.querySelector('.omodal-scrim').onclick = close;
+  const addrs = await dlvResolveAddrs(chosen);
+  if(!mount.isConnected) return;
+  const rows = chosen.map(o=>{ const cid = dlvCustId(o), a = cid ? addrs.get(cid) : null; return {o, cid, addr:(a&&a.address)||'', src:a?a.src:'', orig:(a&&a.address)||''}; });
+  const box = mount.querySelector('#dlv-clist'); box.className = ''; box.style.display = 'grid'; box.style.gap = '10px';
+  box.innerHTML = rows.map((r,i)=>`<div class="pf-card"><div><b>${esc(r.o.customer)}</b> <span class="meta">· ${esc(r.o.md)}-${esc(r.o.no)} · ${won(r.o.total)}</span></div>
+      <input class="pf-in dlv-cad" data-i="${i}" type="text" value="${esc(r.addr)}" placeholder="주소가 없어요 — 입력해주세요" autocomplete="off" aria-label="${esc(r.o.customer)} 주소">
+      <div class="meta">${r.addr?('주소 출처: '+esc(r.src)):'<span class="err">이 거래처의 주소를 찾지 못했어요. 적어주면 지도에 나와요.</span>'}</div></div>`).join('');
+  mount.querySelector('#dlv-csave').disabled = false;
+  mount.querySelector('#dlv-csave').onclick = async ()=>{
+    const btn = mount.querySelector('#dlv-csave'), msg = mount.querySelector('#dlv-cmsg');
+    const date = mount.querySelector('#dlv-cdate').value || dlvToday();
+    btn.disabled = true; msg.textContent = '저장 중…';
+    mount.querySelectorAll('.dlv-cad').forEach(inp=>{ rows[Number(inp.dataset.i)].addr = inp.value.trim(); });
+    try{
+      const {data:ex} = await sb.from('delivery_plan').select('sale_date,sale_no,address,lat,lng').eq('plan_date', date).eq('user_id', ME.id);
+      const exm = new Map((ex||[]).map(r=>[r.sale_date+'|'+r.sale_no, r]));
+      const payload = rows.map(r=>{
+        const prev = exm.get(r.o.date+'|'+Number(r.o.no)); const same = prev && prev.address === (r.addr||null);
+        return {user_id:ME.id, plan_date:date, sale_date:r.o.date, sale_no:Number(r.o.no), customer_id:r.cid, customer_name:r.o.customer,
+          address:r.addr||null, lat: same?prev.lat:null, lng: same?prev.lng:null, total_amount:r.o.total, item_count:r.o.items.length};
+      });
+      const {error} = await sb.from('delivery_plan').upsert(payload, {onConflict:'user_id,plan_date,sale_date,sale_no'});
+      if(error) throw error;
+      const edits = rows.filter(r=> r.cid && r.addr && r.addr !== r.orig).map(r=>({customer_id:r.cid, address:r.addr, updated_at:new Date().toISOString()}));
+      if(edits.length) sb.from('customer_addr').upsert(edits, {onConflict:'customer_id'}).then(()=>{});
+      DLV.date = date; dlvSub = 'map'; close(); dlvStop(); renderDeliveryView(); window.scrollTo(0,0);
+      toast(`내 배송지도에 ${payload.length}곳을 올렸어요`);
+    }catch(err){ btn.disabled = false; msg.innerHTML = `<span class="err">저장 실패: ${esc(err.message||err)}</span>`; }
+  };
 }
 
 // ---------------- City Hall (시청) view ----------------
@@ -2947,12 +3296,11 @@ function filteredCustomers(){
 let custSub = 'list'; // 거래처 화면 안의 보기: 'list'(거래처 목록) / 'stmt'(거래명세서) / 'recon'(주문↔판매 대사, 관리자만)
 function renderCustomersView(){
   const el = document.getElementById('view-customers');
-  if(custSub==='recon' && !(ME&&ME.role==='admin')) custSub = 'list';
+  if(custSub==='stmt' || custSub==='recon' && !(ME&&ME.role==='admin')) custSub = 'list';
   el.innerHTML = `
     <div class="subnav">
       <div class="seg" id="custSeg">
         <button data-c="list" aria-pressed="${custSub==='list'}">🏢 거래처 목록</button>
-        <button data-c="stmt" aria-pressed="${custSub==='stmt'}">🧾 거래명세서</button>
         ${(ME&&ME.role==='admin')?`<button data-c="recon" aria-pressed="${custSub==='recon'}">🔍 주문↔판매 대사</button>`:''}
       </div>
     </div>
