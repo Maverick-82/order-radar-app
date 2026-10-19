@@ -982,6 +982,46 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 .kpis .kpi:not(.fit){container-type:inline-size}
 .kpis .kpi:not(.fit) .v{font-size:min(28px,13cqw);white-space:nowrap}
 @media (max-width:720px){.kpis .kpi:not(.fit) .v{font-size:min(22px,13cqw)}}
+/* ===== 인수확인 (사인·사진) ===== */
+.pf-modal .pf-sum{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:700;padding:11px 14px;border-radius:12px;background:var(--accent-soft);color:var(--accent-ink)}
+.pf-modal details.pf-items{border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.pf-modal details.pf-items summary{padding:10px 12px;cursor:pointer;font-size:13.5px;color:var(--ink-2,var(--ink))}
+.pf-modal details.pf-items .tbl-wrap{margin:0;border:0;border-top:1px solid var(--line);border-radius:0 0 10px 10px;max-height:34vh;overflow:auto}
+.pf-lab{display:grid;gap:6px;font-size:13px;color:var(--ink-2,var(--muted))}
+.pf-in{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:16px}
+.pf-in:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.pf-pad{position:relative;border:1.5px dashed var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.pf-pad canvas{display:block;width:100%;height:190px;touch-action:none;cursor:crosshair}
+.pf-pad .hint{position:absolute;inset:0;display:grid;place-items:center;color:#9aa0a6;font-size:15px;pointer-events:none}
+.pf-pad.has .hint{display:none}
+.pf-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pf-row .grow{flex:1}
+.pf-modal .btn{min-height:44px}
+.pf-thumb{max-width:100%;max-height:150px;border-radius:10px;border:1px solid var(--line);display:block}
+.pf-card{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:8px;background:var(--surface)}
+.pf-card img{max-width:100%;border-radius:8px;background:#fff;border:1px solid var(--line)}
+.pf-card .meta{font-size:12.5px;color:var(--muted)}
+.pf-done{border:1px solid var(--line);background:var(--accent-soft);color:var(--accent-ink);border-radius:8px;padding:7px 10px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap;min-height:36px}
+.pf-go{white-space:nowrap;min-height:36px}
+.pf-msg{font-size:13px}
+
+/* 명세서 검색 결과: 폰에서는 한 건을 카드처럼 (사인 버튼이 화면 밖으로 밀리지 않게) */
+.c-n{display:none}
+@media (max-width:640px){
+  .stm-res thead{display:none}
+  .stm-res,.stm-res tbody{display:block;width:100%;min-width:0}
+  .stm-res tr{display:grid;grid-template-columns:36px minmax(0,1fr) auto;grid-template-areas:"cb cust amt" "cb no pf";gap:6px 10px;align-items:center;padding:12px 10px;border-bottom:1px solid var(--line)}
+  .stm-res td{display:block;padding:0;border:0;min-width:0}
+  .stm-res .c-cb{grid-area:cb;align-self:center}
+  .stm-res .c-cb input{width:22px;height:22px}
+  .stm-res .c-cust{grid-area:cust;font-weight:600;word-break:keep-all;overflow-wrap:anywhere}
+  .stm-res .c-amt{grid-area:amt;text-align:right;white-space:nowrap}
+  .stm-res .c-no{grid-area:no;text-align:left;color:var(--muted);font-size:13px}
+  .stm-res .c-n{display:inline}
+  .stm-res .c-nn{display:none}
+  .stm-res .c-pf{grid-area:pf;text-align:right}
+}
+.pf-foot{position:sticky;bottom:-20px;background:var(--surface);padding:12px 0 18px;margin-bottom:-20px;border-top:1px solid var(--line);z-index:2}
 </style>
 </head>
 <body>
@@ -1054,7 +1094,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.37</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.38</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -2450,6 +2490,7 @@ async function stmLoad(all){
     rows = data||[];
   }
   STM.results = stmBuildOrders(rows);
+  try{ await pfLoadStatus(STM.results); }catch(e){ /* 테이블이 없거나 권한이 없어도 명세서는 그대로 */ }
   const have = new Set(STM.results.map(o=>o.key));
   STM.missing = pairs.filter(([d,n])=>!have.has(d+'|'+n)).map(([d,n])=>`${d.slice(5).replace('-','/')}-${n}`);
   msg.innerHTML = STM.results.length ? '' : '<span class="err">해당하는 판매 내역이 없어요. 일자·번호·검색어를 확인해주세요.</span>';
@@ -2462,17 +2503,18 @@ function stmDraw(){
   if(STM.results.length){
     const allIn = STM.results.every(o=>STM.cart.has(o.key));
     list.innerHTML = `<div class="panel">
-      <div class="panel-h"><h3>검색 결과 ${num(STM.results.length)}건</h3>
+      <div class="panel-h"><h3>검색 결과 ${num(STM.results.length)}건 <span class="small muted">· 인수확인 ${num(STM.results.filter(o=>PF.map.has(pfKey(o.date,o.no))).length)}/${num(STM.results.length)}</span></h3>
         <div class="filters"><button class="btn" id="stm-toggle">${allIn?'이 결과 모두 해제':'이 결과 모두 선택'}</button></div></div>
       ${STM.missing.length?`<p class="small" style="color:var(--bad);margin:0 0 8px">찾지 못한 번호: ${esc(STM.missing.join(', '))}</p>`:''}
-      <div class="tbl-wrap"><table><thead><tr><th>선택</th><th class="num">번호</th><th>거래처</th><th class="num">품목</th><th class="num">금액</th></tr></thead><tbody>
-      ${STM.results.map(o=>`<tr class="${STM.cart.has(o.key)?'stm-in':''}"><td><input type="checkbox" class="stm-cb" data-k="${esc(o.key)}" ${STM.cart.has(o.key)?'checked':''}></td><td class="num">${o.md}-${o.no}</td><td style="white-space:normal">${esc(o.customer)}</td><td class="num">${o.items.length}</td><td class="num">${won(o.total)}</td></tr>`).join('')}
+      <div class="tbl-wrap"><table class="stm-res"><thead><tr><th>선택</th><th class="num">번호</th><th>거래처</th><th class="num">품목</th><th class="num">금액</th><th>인수확인</th></tr></thead><tbody>
+      ${STM.results.map(o=>`<tr class="${STM.cart.has(o.key)?'stm-in':''}"><td class="c-cb"><input type="checkbox" class="stm-cb" aria-label="선택" data-k="${esc(o.key)}" ${STM.cart.has(o.key)?'checked':''}></td><td class="num c-no">${o.md}-${o.no}<span class="c-n"> · 품목 ${o.items.length}</span></td><td class="c-cust" style="white-space:normal">${esc(o.customer)}</td><td class="num c-nn">${o.items.length}</td><td class="num c-amt">${won(o.total)}</td><td class="c-pf">${pfCell(o)}</td></tr>`).join('')}
       </tbody></table></div></div>`;
     list.querySelectorAll('.stm-cb').forEach(cb=> cb.onchange = ()=>{
       const o = STM.results.find(x=>x.key===cb.dataset.k); if(!o) return;
       cb.checked ? STM.cart.set(o.key,o) : STM.cart.delete(o.key);
       stmSaveCart(); stmDraw();
     });
+    pfBindList(list);
     list.querySelector('#stm-toggle').onclick = ()=>{ STM.results.forEach(o=> allIn ? STM.cart.delete(o.key) : STM.cart.set(o.key,o)); stmSaveCart(); stmDraw(); };
   } else list.innerHTML = '';
   // --- 선택한 명세서 (여러 검색에서 모은 것) ---
@@ -2487,7 +2529,7 @@ function stmDraw(){
       <button class="btn primary" id="stm-print" ${chosen.length?'':'disabled'}>🖨️ 한 파일로 인쇄 / PDF 저장</button></div></div>
     ${chosen.length ? `<div class="stm-chips">${chosen.map(o=>`<span class="stm-chip" title="${esc(o.customer)}"><b>${o.md}-${o.no}</b> ${esc(o.customer.length>16?o.customer.slice(0,16)+'…':o.customer)} <button class="stm-x" data-k="${esc(o.key)}" aria-label="빼기">×</button></span>`).join('')}</div>`
       : '<p class="small muted" style="margin:0">위에서 검색하고 체크하면 여기에 쌓여요. 다른 번호나 거래처로 또 검색해서 체크해도 계속 쌓여요.</p>'}
-    <label class="small" style="display:flex;gap:6px;align-items:center;margin:10px 0 0"><input type="checkbox" id="stm-sum" ${STM.withSum?'checked':''}> 명세서 뒤에 <b>거래처 영업 요약 1장</b> 붙이기 <span class="muted">(선택한 거래처마다 담당자·연락처와 품목별 근거 · ${num(stmCustIds(chosen).length)}곳)</span></label>
+    <label class="small" style="display:block;line-height:1.7;margin:10px 0 0"><input type="checkbox" id="stm-sum" style="margin-right:6px;vertical-align:middle" ${STM.withSum?'checked':''}> 명세서 뒤에 <b>거래처 영업 요약 1장</b> 붙이기 <span class="muted">(선택한 거래처마다 담당자·연락처와 품목별 근거 · ${num(stmCustIds(chosen).length)}곳)</span></label>
     <p class="small muted" style="margin:8px 0 0">인쇄 화면에서 용지 <b>A4</b>, 배율 <b>100%</b>로 인쇄하면 한 장에 같은 명세서가 위·아래 2부 들어가요. 직인은 인쇄 후 찍어주세요. 선택 목록은 이 기기에 저장돼서 새로고침해도 남아요.</p>
   </div>`;
   cartEl.querySelectorAll('.stm-x').forEach(b=> b.onclick = ()=>{ STM.cart.delete(b.dataset.k); stmSaveCart(); stmDraw(); });
@@ -2514,6 +2556,171 @@ async function stmPrint(){
   const clear = ()=>{ root.innerHTML=''; window.removeEventListener('afterprint', clear); };
   window.addEventListener('afterprint', clear);
   setTimeout(()=>window.print(), 80);
+}
+
+
+// ================= 인수확인 (사인·사진) =================
+// 명세서(판매일자+번호)마다 거래처 담당자의 손가락 사인 또는 사진을 남김.
+// 종이 원본은 영업관리에서 계속 보관하고, 이 기록은 거래처·번호로 바로 찾는 '사본'임. (테이블 delivery_proof, 사진은 비공개 저장소)
+const PF = {map:new Map(), cnt:new Map()};
+const pfKey = (d,n)=> d+'|'+Number(n);
+const PF_SEL = 'id,sale_date,sale_no,receiver_name,signed_at,has_signature,photo_path,profiles(name)';
+function pfFmt(ts){ try{ return new Date(ts).toLocaleString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
+async function pfLoadStatus(orders){
+  const dates = [...new Set(orders.map(o=>o.date))], nos = [...new Set(orders.map(o=>Number(o.no)))];
+  if(!dates.length) return;
+  const {data, error} = await sb.from('delivery_proof').select(PF_SEL).in('sale_date', dates).in('sale_no', nos).order('signed_at',{ascending:false}).limit(1000);
+  if(error) throw error;
+  orders.forEach(o=>{ const k=pfKey(o.date,o.no); PF.map.delete(k); PF.cnt.delete(k); });
+  (data||[]).forEach(r=>{ const k=pfKey(r.sale_date,r.sale_no); PF.cnt.set(k,(PF.cnt.get(k)||0)+1); if(!PF.map.has(k)) PF.map.set(k,r); });
+}
+function pfCell(o){
+  const r = PF.map.get(pfKey(o.date,o.no));
+  if(!r) return `<button class="btn pf-go" data-k="${esc(o.key)}">✍️ 사인받기</button>`;
+  return `<button class="pf-done" data-k="${esc(o.key)}" title="${esc(pfFmt(r.signed_at))}">✅ ${r.has_signature?'✍️':'📷'} ${esc(r.receiver_name||'확인됨')}</button>`;
+}
+function pfBindList(list){
+  list.querySelectorAll('.pf-go').forEach(b=> b.onclick = ()=>{ const o = STM.results.find(x=>x.key===b.dataset.k); if(o) pfOpenSign(o); });
+  list.querySelectorAll('.pf-done').forEach(b=> b.onclick = ()=>{ const o = STM.results.find(x=>x.key===b.dataset.k); if(o) pfOpenView(o); });
+}
+function pfModal(inner){
+  const mount = document.createElement('div'); document.body.appendChild(mount);
+  mount.innerHTML = `<div class="omodal-scrim"></div><div class="omodal pf-modal" role="dialog" aria-modal="true">${inner}</div>`;
+  return mount;
+}
+// ---- 사인 패드 (손가락/펜) ----
+function pfPad(wrap, onChange){
+  const cv = wrap.querySelector('canvas'), ctx = cv.getContext('2d');
+  let drawing = false, last = null, drawn = false;
+  const fit = ()=>{
+    const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio||1;
+    cv.width = Math.max(1,Math.round(r.width*dpr)); cv.height = Math.max(1,Math.round(r.height*dpr));
+    ctx.setTransform(dpr,0,0,dpr,0,0); ctx.fillStyle = '#fff'; ctx.fillRect(0,0,r.width,r.height);
+    ctx.lineWidth = 2.6; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#111';
+  };
+  const pt = e=>{ const r = cv.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; };
+  cv.addEventListener('pointerdown', e=>{
+    e.preventDefault(); try{ cv.setPointerCapture(e.pointerId); }catch(_){}
+    drawing = true; last = pt(e);
+    ctx.beginPath(); ctx.arc(last.x,last.y,1.4,0,Math.PI*2); ctx.fillStyle = '#111'; ctx.fill();
+    if(!drawn){ drawn = true; wrap.classList.add('has'); onChange && onChange(); }
+  });
+  cv.addEventListener('pointermove', e=>{
+    if(!drawing) return; e.preventDefault();
+    const p = pt(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); last = p;
+  });
+  const end = ()=>{ drawing = false; last = null; };
+  cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end); cv.addEventListener('pointerleave', end);
+  requestAnimationFrame(fit);
+  return {
+    clear(){ fit(); drawn = false; wrap.classList.remove('has'); onChange && onChange(); },
+    isDrawn: ()=>drawn,
+    dataUrl(){ // 가로 520px로 줄여서 저장 (용량 작게)
+      const w = 520, h = Math.round(520*cv.height/cv.width), c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(cv,0,0,w,h); return c.toDataURL('image/png');
+    }
+  };
+}
+// ---- 사진 줄이기 (가로세로 최대 1400px, JPEG) ----
+async function pfShrink(file){
+  let src, w, h;
+  try{ src = await createImageBitmap(file); w = src.width; h = src.height; }
+  catch(e){
+    src = await new Promise((res,rej)=>{ const i = new Image(); i.onload = ()=>res(i); i.onerror = rej; i.src = URL.createObjectURL(file); });
+    w = src.naturalWidth; h = src.naturalHeight;
+  }
+  const s = Math.min(1, 1400/Math.max(w,h)), c = document.createElement('canvas');
+  c.width = Math.round(w*s); c.height = Math.round(h*s);
+  c.getContext('2d').drawImage(src,0,0,c.width,c.height);
+  return await new Promise(res=> c.toBlob(res,'image/jpeg',0.72));
+}
+function pfOpenSign(o){
+  const itemsHtml = o.items.map(it=>`<tr><td>${esc(it.item_name||'')}</td><td class="num">${num(it.quantity)}</td><td class="num">${won(it.supply_amount)}</td></tr>`).join('');
+  const mount = pfModal(`
+    <div class="omodal-h"><div class="ttl"><h3>${esc(o.customer)}</h3><div class="meta">${esc(o.date)} · 판매번호 ${esc(o.no)} · 인수확인</div></div><button class="x" aria-label="닫기">✕</button></div>
+    <div class="omodal-b">
+      <div class="pf-sum"><span>받은 물품 ${num(o.items.length)}개</span><span>${won(o.total)}</span></div>
+      <details class="pf-items"><summary>품목 보기</summary><div class="tbl-wrap"><table><thead><tr><th>품목</th><th class="num">수량</th><th class="num">금액</th></tr></thead><tbody>${itemsHtml}</tbody></table></div></details>
+      <label class="pf-lab">받는 분 이름<input class="pf-in" id="pf-name" type="text" placeholder="예: 홍길동" maxlength="30" autocomplete="off"></label>
+      <div><div class="pf-lab" style="margin-bottom:6px">위 물품을 받았음을 확인하며 아래에 사인해주세요</div>
+        <div class="pf-pad" id="pf-padwrap"><canvas aria-label="사인 칸"></canvas><div class="hint">여기에 손가락으로 사인</div></div></div>
+      <div class="pf-row"><button class="btn" id="pf-clear" type="button">지우기</button>
+        <label class="btn" style="cursor:pointer">📷 사진으로 남기기<input id="pf-photo" type="file" accept="image/*" capture="environment" hidden></label>
+        <span class="small muted">담당자가 없을 때는 사진만 찍어도 돼요</span></div>
+      <div id="pf-prev"></div>
+      <label class="pf-lab">메모 (선택)<input class="pf-in" id="pf-note" type="text" placeholder="예: 경비실에 맡김" maxlength="120" autocomplete="off"></label>
+      <div class="pf-row pf-foot"><span class="pf-msg grow" id="pf-msg"></span><button class="btn primary" id="pf-save" type="button" disabled>저장</button></div>
+    </div>`);
+  const $q = s=>mount.querySelector(s);
+  let photoBlob = null;
+  const refresh = ()=>{ $q('#pf-save').disabled = !(pad.isDrawn() || photoBlob); };
+  const pad = pfPad($q('#pf-padwrap'), refresh);
+  const dirty = ()=> pad.isDrawn() || !!photoBlob || $q('#pf-name').value.trim() || $q('#pf-note').value.trim();
+  const close = ()=>{ mount.remove(); };
+  const tryClose = ()=>{ if(dirty() && !confirm('저장하지 않은 내용이 있어요. 닫을까요?')) return; close(); };
+  $q('.x').onclick = tryClose; $q('.omodal-scrim').onclick = tryClose;
+  $q('#pf-clear').onclick = ()=>pad.clear();
+  $q('#pf-photo').onchange = async e=>{
+    const f = e.target.files && e.target.files[0]; if(!f) return;
+    $q('#pf-msg').textContent = '사진 줄이는 중…';
+    try{
+      photoBlob = await pfShrink(f);
+      $q('#pf-prev').innerHTML = `<img class="pf-thumb" alt="찍은 사진 미리보기" src="${URL.createObjectURL(photoBlob)}">`;
+      $q('#pf-msg').textContent = '';
+    }catch(err){ photoBlob = null; $q('#pf-prev').innerHTML = ''; $q('#pf-msg').innerHTML = '<span class="err">사진을 읽지 못했어요. 다시 찍어주세요.</span>'; }
+    refresh();
+  };
+  $q('#pf-save').onclick = async ()=>{
+    const btn = $q('#pf-save'), msg = $q('#pf-msg');
+    const name = $q('#pf-name').value.trim();
+    if(pad.isDrawn() && !name){ msg.innerHTML = '<span class="err">받는 분 이름을 적어주세요.</span>'; $q('#pf-name').focus(); return; }
+    btn.disabled = true; msg.textContent = '저장 중…';
+    let path = null;
+    try{
+      if(photoBlob){
+        path = `${o.date}/${Number(o.no)}-${Date.now()}.jpg`;
+        const up = await sb.storage.from('delivery-proof').upload(path, photoBlob, {contentType:'image/jpeg', upsert:false});
+        if(up.error) throw up.error;
+      }
+      const row = {sale_date:o.date, sale_no:Number(o.no), customer_name:o.customer, receiver_name:name||null,
+        signature: pad.isDrawn() ? pad.dataUrl() : null, photo_path:path, note:$q('#pf-note').value.trim()||null};
+      const {data, error} = await sb.from('delivery_proof').insert(row).select(PF_SEL).single();
+      if(error){ if(path) sb.storage.from('delivery-proof').remove([path]); throw error; }
+      const k = pfKey(o.date,o.no); PF.map.set(k,data); PF.cnt.set(k,(PF.cnt.get(k)||0)+1);
+      toast('인수확인을 저장했어요'); close(); stmDraw();
+    }catch(err){ btn.disabled = false; msg.innerHTML = `<span class="err">저장 실패: ${esc(err.message||err)}</span>`; }
+  };
+}
+async function pfOpenView(o){
+  const mount = pfModal(`
+    <div class="omodal-h"><div class="ttl"><h3>${esc(o.customer)}</h3><div class="meta">${esc(o.date)} · 판매번호 ${esc(o.no)} · 인수확인 기록</div></div><button class="x" aria-label="닫기">✕</button></div>
+    <div class="omodal-b"><div id="pf-body" class="spin">불러오는 중…</div>
+      <div class="pf-row"><button class="btn" id="pf-again" type="button">✍️ 다시 받기</button></div></div>`);
+  const close = ()=>mount.remove();
+  mount.querySelector('.x').onclick = close; mount.querySelector('.omodal-scrim').onclick = close;
+  mount.querySelector('#pf-again').onclick = ()=>{ close(); pfOpenSign(o); };
+  const body = mount.querySelector('#pf-body');
+  const {data, error} = await sb.from('delivery_proof').select('id,receiver_name,signature,photo_path,note,signed_at,created_by,profiles(name)').eq('sale_date',o.date).eq('sale_no',Number(o.no)).order('signed_at',{ascending:false});
+  if(error){ body.className = ''; body.innerHTML = `<span class="err">불러오기 실패: ${esc(error.message)}</span>`; return; }
+  const rows = data||[];
+  const urls = await Promise.all(rows.map(async r=>{ if(!r.photo_path) return ''; const s = await sb.storage.from('delivery-proof').createSignedUrl(r.photo_path, 900); return (s&&s.data&&s.data.signedUrl)||''; }));
+  const isAdmin = ME && ME.role==='admin';
+  body.className = ''; body.style.display = 'grid'; body.style.gap = '12px';
+  body.innerHTML = rows.length ? rows.map((r,i)=>`<div class="pf-card">
+      <div><b>${esc(r.receiver_name||'(이름 없음)')}</b> <span class="meta">· ${esc(pfFmt(r.signed_at))} · ${esc((r.profiles&&r.profiles.name)||'')} 기록</span></div>
+      ${r.signature?`<img alt="사인" src="${esc(r.signature)}">`:''}
+      ${urls[i]?`<img alt="현장 사진" src="${esc(urls[i])}">`:''}
+      ${r.note?`<div class="small">${esc(r.note)}</div>`:''}
+      ${isAdmin?`<div><button class="btn pf-del" data-i="${i}" type="button">삭제 (관리자)</button></div>`:''}
+    </div>`).join('') : '<div class="small muted">기록이 없어요.</div>';
+  body.querySelectorAll('.pf-del').forEach(b=> b.onclick = async ()=>{
+    const r = rows[Number(b.dataset.i)]; if(!r || !confirm('이 인수확인 기록을 삭제할까요? 되돌릴 수 없어요.')) return;
+    const {error:e1} = await sb.from('delivery_proof').delete().eq('id', r.id);
+    if(e1){ toast('삭제 실패: '+e1.message); return; }
+    if(r.photo_path) await sb.storage.from('delivery-proof').remove([r.photo_path]);
+    toast('삭제했어요'); close();
+    try{ await pfLoadStatus([o]); }catch(_){} stmDraw();
+  });
 }
 
 // ---------------- City Hall (시청) view ----------------
