@@ -1107,6 +1107,18 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 .wx-tog[aria-expanded="true"] .wx-mini{display:none}
 .wx-body{margin-top:8px}
 .wx-body[hidden]{display:none}
+/* 음악·라디오 */
+#dlvSeg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+#dlvSeg button{padding-inline:6px;font-size:14px;white-space:nowrap}
+.dlv-mu{margin-bottom:10px;padding-top:12px;padding-bottom:10px}
+.dlv-mu-h{display:flex;align-items:center;gap:12px}
+.dlv-mu-i{font-size:28px;line-height:1}
+.dlv-mu-t{flex:1;min-width:0}
+.dlv-mu-t b{font-size:16px}
+.dlv-mu-go{min-height:48px;padding:10px 20px;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap}
+.dlv-mu-ed{margin-top:8px}
+.dlv-mu-ed summary{cursor:pointer;font-size:13px;color:var(--muted);padding:6px 0}
+.dlv-mu-f{display:grid;gap:8px;margin-top:4px}
 .dlv-empty{text-align:left}
 </style>
 </head>
@@ -1180,7 +1192,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.43</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.44</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -2826,12 +2838,51 @@ async function pfOpenView(o){
 // ================= 배송 (배송지도 + 거래명세서) =================
 // 거래명세서에서 고른 건을 "배송 확정"하면 내 배송지도(카카오맵)에 번호 핀으로 표시됨. 내 확정 기록은 나만 봄(DB 권한으로 막아둠).
 // 교통상황은 카카오맵 교통 레이어. 실시간 스트림이 아니라 '새로고침' 누를 때 + 화면을 보고 있는 동안 3분마다 새로 불러옴.
-let dlvSub = 'map'; // 'map'(배송지도) / 'stmt'(거래명세서)
+let dlvSub = 'map'; // 'map'(배송지도) / 'stmt'(거래명세서) / 'music'(음악·라디오)
 const DLV = {wxOpen:null, wx:null, wxAt:0, wxBusy:false, date:null, plans:[], key:undefined, kakaoErr:'', map:null, pins:new Map(), trafficOn:true, lastTs:null, timer:null, sel:null, geoRun:0};
 const dlvToday = ()=> localYmd(new Date());
 const dlvHM = d=> String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
 const DLV_TRAFFIC_MS = 180000;
 
+// ---- 음악·라디오 바로가기 ----
+// 앱 안에서 소리를 내는 게 아니라, 누르면 그 서비스(웹 또는 설치된 앱)를 새 창으로 열어줌. 소리는 그쪽 앱이 책임지고 틀어줌.
+// 주소는 내가 바꿀 수 있고(이 기기에만 저장), '기본값'으로 되돌릴 수도 있음.
+const DLV_MUSIC = [
+  {id:'ytm',  icon:'🎧', name:'유튜브 뮤직', desc:'내 음악·재생목록', url:'https://music.youtube.com/'},
+  {id:'mbc',  icon:'📻', name:'MBC mini',    desc:'MBC 라디오',      url:'https://mini.imbc.com/'},
+  {id:'kbs',  icon:'📻', name:'KBS 콩',      desc:'KBS 라디오',      url:'https://kong.kbs.co.kr/'},
+  {id:'sbs',  icon:'📻', name:'SBS 고릴라',  desc:'SBS 라디오',      url:'https://gorealra.sbs.co.kr/'}
+];
+function dlvMusicLinks(){ try{ return JSON.parse(localStorage.getItem('dlvMusicLinks')||'{}')||{}; }catch(e){ return {}; } }
+function dlvMusicSave(map){ try{ localStorage.setItem('dlvMusicLinks', JSON.stringify(map)); return true; }catch(e){ return false; } }
+function dlvMusicOk(u){ try{ const x = new URL(u); return x.protocol==='https:' || x.protocol==='http:'; }catch(e){ return false; } }
+function dlvRenderMusic(){
+  const wrap = document.getElementById('dlvMusicWrap'); if(!wrap) return;
+  const mine = dlvMusicLinks();
+  wrap.innerHTML = `<div class="dlv-music">
+    <p class="small muted" style="margin:0 2px 10px">버튼을 누르면 새 창(또는 설치된 앱)으로 열려요. 소리는 그 서비스가 틀어주니까, 화면을 꺼도 계속 나오는지는 각 서비스 설정을 따라요. <b>운전 중에는 조작하지 말고 출발 전에 틀어두세요.</b></p>
+    ${DLV_MUSIC.map(m=>{ const u = mine[m.id] || m.url; return `<div class="panel dlv-mu" data-id="${m.id}">
+      <div class="dlv-mu-h"><span class="dlv-mu-i" aria-hidden="true">${m.icon}</span><div class="dlv-mu-t"><b>${esc(m.name)}</b><div class="small muted">${esc(m.desc)}${mine[m.id]?' · 바꾼 주소':''}</div></div>
+        <a class="btn primary dlv-mu-go" href="${esc(u)}" target="_blank" rel="noopener noreferrer">▶ 열기</a></div>
+      <details class="dlv-mu-ed"><summary>주소 바꾸기</summary>
+        <div class="dlv-mu-f"><input class="pf-in dlv-mu-in" type="url" inputmode="url" autocomplete="off" value="${esc(u)}" aria-label="${esc(m.name)} 주소">
+          <div class="pf-row"><button class="btn dlv-mu-save" type="button">저장</button><button class="btn dlv-mu-reset" type="button">기본값으로</button><span class="small dlv-mu-msg"></span></div>
+          <div class="small muted">앱이 안 열리고 웹이 열리면, 그 앱의 공유 링크를 복사해서 여기에 붙여넣어도 돼요.</div></div></details>
+    </div>`; }).join('')}
+  </div>`;
+  wrap.querySelectorAll('.dlv-mu').forEach(card=>{
+    const id = card.dataset.id, m = DLV_MUSIC.find(x=>x.id===id);
+    const inp = card.querySelector('.dlv-mu-in'), msg = card.querySelector('.dlv-mu-msg');
+    card.querySelector('.dlv-mu-save').onclick = ()=>{
+      const v = inp.value.trim();
+      if(!dlvMusicOk(v)){ msg.innerHTML = '<span class="err">https:// 로 시작하는 주소를 넣어주세요.</span>'; return; }
+      const mp = dlvMusicLinks(); if(v === m.url) delete mp[id]; else mp[id] = v;
+      if(!dlvMusicSave(mp)){ msg.innerHTML = '<span class="err">이 기기에 저장하지 못했어요.</span>'; return; }
+      toast('주소를 저장했어요'); dlvRenderMusic();
+    };
+    card.querySelector('.dlv-mu-reset').onclick = ()=>{ const mp = dlvMusicLinks(); delete mp[id]; dlvMusicSave(mp); toast('기본 주소로 되돌렸어요'); dlvRenderMusic(); };
+  });
+}
 // ---- 날씨 (시간대별, 현재 시각 이후) ----
 // Open-Meteo(키 없이 쓰는 무료 예보 서비스)에서 기상청 모델 예보를 받아와요. 실시간 스트림이 아니라
 // 화면을 열 때 + '새로고침' 누를 때 + 화면을 보고 있는 동안 20분마다 새로 받아와요.
@@ -2956,11 +3007,14 @@ function renderDeliveryView(){
   const el = document.getElementById('view-delivery'); if(!el) return;
   el.innerHTML = `<div class="subnav"><div class="seg" id="dlvSeg">
       <button data-d="map" aria-pressed="${dlvSub==='map'}">🗺️ 배송지도</button>
-      <button data-d="stmt" aria-pressed="${dlvSub==='stmt'}">🧾 거래명세서</button></div></div>
-    <div id="dlvMapWrap" class="${dlvSub==='map'?'':'hide'}"></div>`;
+      <button data-d="stmt" aria-pressed="${dlvSub==='stmt'}">🧾 거래명세서</button>
+      <button data-d="music" aria-pressed="${dlvSub==='music'}">🎵 음악·라디오</button></div></div>
+    <div id="dlvMapWrap" class="${dlvSub==='map'?'':'hide'}"></div>
+    <div id="dlvMusicWrap" class="${dlvSub==='music'?'':'hide'}"></div>`;
   el.querySelector('#dlvSeg').onclick = e=>{ const b = e.target.closest('button[data-d]'); if(!b) return; dlvSub = b.dataset.d; dlvStop(); renderDeliveryView(); };
   document.getElementById('view-stmt').classList.toggle('hide', dlvSub!=='stmt');
   if(dlvSub==='stmt'){ dlvStop(); renderStmtView(); return; }
+  if(dlvSub==='music'){ dlvStop(); dlvRenderMusic(); return; }
   dlvStop(); dlvInitMap();
 }
 
