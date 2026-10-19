@@ -1070,6 +1070,33 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 .dlv-item.drag{opacity:.92;box-shadow:0 8px 22px rgba(0,0,0,.28);border-color:var(--accent);z-index:20;position:relative;pointer-events:none}
 .dlv-ph{border:2px dashed var(--accent);border-radius:12px;margin-bottom:8px;background:color-mix(in srgb,var(--accent) 8%,transparent)}
 .dlv-hint{font-size:12.5px;margin:0 2px 8px}
+/* 날씨 띠 */
+.dlv-wx{margin-top:12px;padding-top:12px;padding-bottom:10px}
+.wx-head{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;margin-bottom:8px}
+.wx-head b{font-size:15px}
+.wx-sum{font-size:13px;color:var(--muted)}
+.wx-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.wx-chip{font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink)}
+.wx-chip.rain{border-color:#3b82f6;background:rgba(59,130,246,.13)}
+.wx-chip.snow{border-color:#8b5cf6;background:rgba(139,92,246,.14)}
+.wx-chip.hot{border-color:#f97316;background:rgba(249,115,22,.13)}
+.wx-chip.cold{border-color:#06b6d4;background:rgba(6,182,212,.13)}
+.wx-chip.ok{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
+.wx-row{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.wx-h{flex:0 0 auto;min-width:58px;display:grid;justify-items:center;gap:1px;padding:6px 5px;border-radius:12px;border:1px solid var(--line);background:var(--surface);scroll-snap-align:start;font-variant-numeric:tabular-nums}
+.wx-h .t{font-size:12px;color:var(--muted)}
+.wx-h .i{font-size:20px;line-height:1.15}
+.wx-h .d{font-size:16px;font-weight:700}
+.wx-h .p{font-size:12px;color:var(--muted);min-height:14px}
+.wx-h .a{font-size:11.5px;font-weight:600;min-height:14px}
+.wx-h.now{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)}
+.wx-h.now .t{color:var(--accent-ink);font-weight:700}
+.wx-h.rain{border-color:#3b82f6;background:rgba(59,130,246,.12)}
+.wx-h.snow{border-color:#8b5cf6;background:rgba(139,92,246,.14)}
+.wx-h.rain .p,.wx-h.rain .a{color:#2563eb}.wx-h.snow .p,.wx-h.snow .a{color:#7c3aed}
+:root[data-theme="dark"] .wx-h.rain .p,:root[data-theme="dark"] .wx-h.rain .a{color:#7db4ff}
+:root[data-theme="dark"] .wx-h.snow .p,:root[data-theme="dark"] .wx-h.snow .a{color:#c4b0ff}
+.wx-foot{font-size:11.5px;margin-top:0}
 .dlv-empty{text-align:left}
 </style>
 </head>
@@ -1143,7 +1170,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIkAAABACAYAAAAuw1S1AAAOZklEQVR4nO2ce5zU1XXAv+f+Zl+z7EMIMLvgg4AKiAhBMSgamsbWFyjiLsguIDQ11tpqm6YmUePqp0Y00cakNZKHymN5jAREC5IoaLVoY2M0NiiKBiywsyAuj33P43fyx+zsznt22Vl3Q3/fz2f/mHvPPffM73fmPs65d8HBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHB4eRB+tuAjLykLvYdHItlnwUyHLAIqR+MDzHvsWDoRyDaL7Y9dXA0LntZXOmvqC57qMe6Vu4/D7EejivdQHXZYydsX5Zw9bcBKVm+fwguq5I6319gpAiN8mcjgAIhqK3/BOq2kOPaSOWwpv4y92TG9LcBCagKK+vm4LJWoMxBpSi9PENRWUQguJwVvi99Rlb+v2JgOckyzWF1/XcQ+RuUvB61VSnBcDcr6m5CdeBPo39CDBwnqVFDoe87KJf0So+RSlbX39wLO1x4Dw2iRgfOs+lnBs6aZHT9IpBpWdGlzGFV/QdUe7Z1S35F3flYcjUwAa0vxQ+M8QWp9e3G1m0MaX6eK89s75ENW3bn0VA0HbEvBCkDLOAgar/Oh+XbqZFgT79WJzXqYnT9dOB8BA+qRRgJoboPo7/BdeQ/qZzgP2H9cQyMYbm2/vNgP45K9n69qo3k5d9I5eBjKWW8+wbjd90BTEmvi08gtJQFI38XU55qd2PMVmz728DnkuoTDmCF7mfeyA86y7q7u1lZdwlGbkEZmsbiT7HlERZ6fp32e3WTATKk6o1ZdRAAkSLaWytS1i/fPwS/9QMyOQiAMBQxD7Km7vyMssqpqP0AqRwkLDOCkPV9avedmVFfNKvqlyByTwYHARiC0ftZVX91j/SnoP+dxOsbimp2ppl4RK6kRhOn1Bo1uKwakPLk7TRJ3EVc2NzJk3tK0/fJuG4tuhU3uO5Kal8yVtddCzo/iZ520IOgidOX2Lexon5Ct/Snof+dJGBfBNJH054UM6ru3ITizx+cgTIuoVz1OWyZT1X5Zdjy16BvxNZLETn5Vd3vngaQ1aD/DuxI7I8RjKn7ckY9K+qHYctNcY2PoXovH3lmUl1eRW7DLODxGAdXEcS+HXq32+t/J1FJfFnZxCXjE8ose26iHdSyoPxRFnoOAbDQs4cPy+4i/uUKf8kyzcnYr/IeOdYSqj1PUF2+keqyexC9L3GUMtdk1GW0AsjtskGVkP0tFpS/So3YAFRO8FNdth7lF7H2yhnUHjgvYx/puu9N46wgMqJP9at4Yj7/bN9gVEbHynCAPM+KhLY1YiP+H4AGomTdFB1K79hCOwHuS4gAV5W/kvAS4WxW1Bdm+BIXx36U37IoatEbTa7E6wdMr4KM/b8FtjW3z2YbACE2Yuu2xmPHyRh9kUoJJW1fdfoRan2/RpneWRbSM4B3UvZp8xJLyj5JWtcW8pJvzYmdYu3TUupa+UkZBIfFlKnmsLpuTlL5oIJIS3jNE5FPMrX2gP53kr4nbrQ0p4TzPtFF+lFaDbbuRqTLSYymX5gaeTtl3VdPbaDWV4fSNYLmmGKCdltSeQ0NSQhUiEzEZmJaG2J0yKndlk3CZ+okzZsot4QJIgxVoRBg2vbynbuO8153ddhA+6ApBXhmDsMzdwyu0oKeWWHnJoaHJEPgSQIxH23S9xmyj6bXp59C1DQb0HyE5E5iQiW9XhVID1MccfS5k+gLlLS3cSNCBcqZ0PE77vgxv/5nJ6L1TeBNbK0J/fIQb8z+4PK3mPiz6WB1Y97S4wlOEpBhyWU7MOqJ2yBYaeVdpji9CVISq5+W+MGtE9s6homrFA4AH6ftI4v0mZOoIoHNLGxv406gJOVD6AVGsK4YzrS24VunvXNs5K6phx57l2Gz0weo/KYu4VtbejGwJXkDFdR3YUyRZBhJ1J4AbE9a520oIdB2WozTqX0cyE8qnx84gj/OYNHfMb/8kbQ2ZJE+2d3oS+S3b+antvIQUJKxQRaYWMLYpjG3zOK1qVvTCu71vB8OQEWhTOUp3zlJ5VcdvKrjsFMXkmkLLF9hWUPy7x1ovwaNWrSKKiWyL6WqylMPAIdjykIkbutjbN4/kpX7z+v8W+M7I7296cm6k+gycvxNrESZmW3dmXAJrrYr9n2DbWXPphQKJ9ZeiS0UwaX3sbpubEzxat+XwL41QYdK+jlecVPYdgfe3+fGlC8/MBnVG+Kk/5dZ5S1p9SFxsRo5gzUHLkoquqyhBLW+h1gPd/6FyJxOSEPWp5v2EXwX5dJs6+0JrdfxrYK3H61l1G2TkgoYXQv8eWy+SEqw9UfU+t7GVh9GxmBzVvIcqKY/CBXWN5XAkMdZWfcsKkcQnYThqoQclc3GjKps1mH0apCutZBt7mSV70kCbS+yeNRRtuzO43DhBVhtN6MSndtphtxfZbY3NVkdSVo3cynKwmzqPBEEzB/GLr2M4PHkO4aq8o9REoNniKBMRuRKlLPSdOBJWReNchoit2K4G5GZCQ6ifMCCsv/KqGeh5xASZ284P3QzOfnrWeXbQsOgzRipSQgeok9RPeR4t+xNQdacRBURm3uypa+3lOfjGfPm2a+mFKgqq8VW7wmqPx3voUHJq+LyPSnRY+QF7+/2Ie75ZatBNqWozU1R/jxVZc90z57UZM1JAs9xIdDrjGM2eeFS5hPyJ38JIsrC8p8gegfwbkolwlGU12LKVAztwelJ5Q1vovaDQHNqnfp7rJy/61iUdg8RpdrzI2z5LkLyaG6Xgccw8ijVZQ8jvb9JkLU1iRqu7ottbm8oy8fDuw/UpRWqKg8HXbyHPARDZ6N2KSGrANFGhD3s9uziC758juvkuJaHMVoPduzoKbl7WDC0jmV1O3DLVETOBT0FxYVQj2W/zg0j3kqwI8+9F39rrC7bSrR9oWc7L+kr7PNNwpiJYA8HCkH82FqP0Z00l7/B1+ICgL0ga0mTtud4EUhMy/czS/6Hpavv41/7244/ZbK3uxHGDLSRBOAyD6NW97cRKWhaz0QJ8VUAUV52z2NDb3W2ehllK48AqOGNQRU80Fud2XMSzRCF7CeG5pM+RN6PiDICYS6ACseh904StCk0hosAxKZXu5oIJ30W2G0REx3VZeQ0lXA2gMnhU/d11LeuZ5oq4wQa2mD74EqOATR7mYJynhHaNMSr7huIiYxqDaZpPDOM8kWEPBX2Bv08U1rFkYhM4waG4WcYwKBWPuRj/E3jmSHC6dgcTjbhqxerye5K7wfz2H/KbI4e2UhpboAbUCYDecBuS1mTP4+PIvaqTVdAUBjcsoaLgjk0FF/PrhN9hllzEoFDCukTZf1AgcROgq3FeIxhG4CEWN76NCMUvgLhnGO+crRxLdeKcDMwDwlnnrGwm73cVVjJzwGavHha4AkDUyIvWhRycrir+Wn+sbCCTQASZJEY/gmgzU2FPZ47DUxCQeCWZDN0s/J9Y4icZ91RGqCqZT0XEuAphcFRjnV5SPhay1puc89jA8pPxDAyStVUtdhohdgKLDrRZ5i9YJqk2Ub2IyV5qVdKCvMjDtJZJpRahmdFmBcnboB7m7x4dAt5BtYQOWmvqNA5tA9Cebx5LRck6a8GmJTO3qan+WeRTgd5yw1VLRal2KxUGAwEgC0Im4BWIFcNP2xcyziB94GuszFKoyg7gf9L12cmshdMg5ezpSubeNI4CZAD1LihXJTr6Bg0FIpRnnfnMyoU5BwgclQwR5QvNjdRqXQm2fZaysXuSs5EWUz4JRo1fCO+MxXOEWUXwr0qfFOFmG1q0zoWifL1jo9vt/mplEpaJcTfa0eiVGFxYSWLCyu4SUKdzpRjhNvcc5lv20QfmN7hnsuXC+dydw8eWQJZc5JgiA1A1vbm2aLQSuMkyu7CSn4slYTcc9lB9BkN5Ycyi5bi+RwWovIrwjDoSl5KiH+IrAkK57IFwtORwCXqTVjM7y0o4IrCCh4bVMGTRDmJKJeIsDRiV8jF/CHV4dFJlSs6xA6qja9xLRMa1zIhFF7sHuyoixkRs0nWnGTQNRxEeDpb+j4LRBIO7nTe9gvZXUO0QsyBZoHImZXWgvf575g6JZJMM62h2AtaonhlFkkzviqMJfI+hMKiYPg4g3rJRSjrEBtuDNui/4DhHW2KGjf0zZowq7sbv839uYYrUUqzqbevUCX2QpPSElkUBl1pR0ULQCAgNXHHqqNGh1AOxWLH1HX3NFl5C3wTuItmDJGz9Eq7wIepGkkw4QxbVsiqkxTP4nDbZm4FVqAD4LpG31EHDFcoblzPOUXXszOqrus2YhCJfgoqafI5is8YbreVVYTXSkua1uOV63mnxUtDx66m0V1J2stcjWvTXC89QbL+IvOv4gVRbkcSLi6cNEQv0o3Ng7opfG2jcS0TgM5DSpbVg0Ce8B8FFbwM/DjSXGy+pzUYVSL/HeFzrV4679Col4JmL1tbvOxuXsf6BJW9PAAdoU9+7XkzWadKNXQFlU4m1MUT0rV+uaC1jd80e3neCL9UuhxDyXixOwE3PAqdWd5JLeNZHLL4Nzo2BTasal7HT1vWsbQFXgMmd/S5CiDH1XU0U+HS5nUsb/GSeLquB/TZlFAwk23+8IWmVQzAXU9vKLqOQyL8FR0LWhVKgS8gsdO3KKOTNE+LVNIkwr9EFX3b+DmC8LeAH8hFmKXCYiB84V35eeFcngHIs/kDEDmCYCFcrpoYs+kJfRqWL57FYeDrTZt4yGWYLTADYbwqwzM27iNCebSbQPh8iJq4ULWwM7JhPqU9alGr+KDzTIkPoKCCVxs3MM0KUAVMsYVcI+xX5WW0YzsqhIxQp3a4rRgaYroTGiJ1CHsi5QU78baMYwYdOxcxXFtYwbKWNfzWtqgycK5CvsBelA0d2/ewmkpCrb9gtga5BeF0VfJESTya4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OAwEPkjAM/rqjCoYzwAAAAASUVORK5CYII=" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.41</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.42</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -2790,11 +2817,113 @@ async function pfOpenView(o){
 // 거래명세서에서 고른 건을 "배송 확정"하면 내 배송지도(카카오맵)에 번호 핀으로 표시됨. 내 확정 기록은 나만 봄(DB 권한으로 막아둠).
 // 교통상황은 카카오맵 교통 레이어. 실시간 스트림이 아니라 '새로고침' 누를 때 + 화면을 보고 있는 동안 3분마다 새로 불러옴.
 let dlvSub = 'map'; // 'map'(배송지도) / 'stmt'(거래명세서)
-const DLV = {date:null, plans:[], key:undefined, kakaoErr:'', map:null, pins:new Map(), trafficOn:true, lastTs:null, timer:null, sel:null, geoRun:0};
+const DLV = {wx:null, wxAt:0, wxBusy:false, date:null, plans:[], key:undefined, kakaoErr:'', map:null, pins:new Map(), trafficOn:true, lastTs:null, timer:null, sel:null, geoRun:0};
 const dlvToday = ()=> localYmd(new Date());
 const dlvHM = d=> String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
 const DLV_TRAFFIC_MS = 180000;
 
+// ---- 날씨 (시간대별, 현재 시각 이후) ----
+// Open-Meteo(키 없이 쓰는 무료 예보 서비스)에서 기상청 모델 예보를 받아와요. 실시간 스트림이 아니라
+// 화면을 열 때 + '새로고침' 누를 때 + 화면을 보고 있는 동안 20분마다 새로 받아와요.
+const DLV_WX_MS = 20*60*1000;
+function dlvKst(){ // 한국 시각 기준 {ymd:'2026-10-19', h:21}
+  try{
+    const f = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
+    const g = t=>(f.find(x=>x.type===t)||{}).value;
+    return {ymd:`${g('year')}-${g('month')}-${g('day')}`, h:Number(g('hour'))};
+  }catch(e){ const d = new Date(); return {ymd:localYmd(d), h:d.getHours()}; }
+}
+function dlvWxIcon(code, day){
+  const c = Number(code);
+  if(c===0) return day===0 ? '🌙' : '☀️';
+  if(c===1||c===2) return day===0 ? '☁️' : '🌤️';
+  if(c===3) return '☁️';
+  if(c===45||c===48) return '🌫️';
+  if(c>=51&&c<=57) return '🌦️';
+  if((c>=61&&c<=67)||(c>=80&&c<=82)) return '🌧️';
+  if((c>=71&&c<=77)||c===85||c===86) return '❄️';
+  if(c>=95) return '⛈️';
+  return '🌡️';
+}
+function dlvWxLabel(code){
+  const c = Number(code);
+  if(c===0) return '맑음'; if(c===1||c===2) return '구름조금'; if(c===3) return '흐림'; if(c===45||c===48) return '안개';
+  if(c>=51&&c<=57) return '이슬비'; if((c>=61&&c<=67)||(c>=80&&c<=82)) return '비';
+  if((c>=71&&c<=77)||c===85||c===86) return '눈'; if(c>=95) return '뇌우'; return '';
+}
+function dlvWxParse(j, model){
+  const h = j && j.hourly; if(!h || !Array.isArray(h.time) || !h.time.length) return null;
+  const pick = k=> h[k] || (model && h[k+'_'+model]) || [];
+  const T = pick('temperature_2m'); if(!T.length || T.filter(v=>v!=null).length < T.length*0.5) return null;
+  const F = pick('apparent_temperature'), P = pick('precipitation_probability'), R = pick('precipitation'), S = pick('snowfall'), C = pick('weather_code'), D = pick('is_day');
+  const hours = h.time.map((t,i)=>({t, ymd:t.slice(0,10), h:Number(t.slice(11,13)), temp:T[i], feel:F[i], pop:P[i], mm:R[i], snow:S[i], code:C[i], day:D[i]}));
+  const d = j.daily || {}; const dm = (k)=> d[k] || (model && d[k+'_'+model]) || [];
+  const days = {}; (d.time||[]).forEach((t,i)=>{ days[t] = {min:dm('temperature_2m_min')[i], max:dm('temperature_2m_max')[i]}; });
+  return {hours, days};
+}
+async function dlvLoadWeather(force){
+  const box = document.getElementById('dlv-wx'); if(!box) return;
+  if(DLV.wx && !force && Date.now()-DLV.wxAt < DLV_WX_MS){ dlvDrawWeather(); return; }
+  if(DLV.wxBusy) return; DLV.wxBusy = true;
+  try{
+    const pts = (DLV.plans||[]).filter(x=>x.lat!=null && x.lng!=null);
+    const lat = pts.length ? pts.reduce((a,x)=>a+x.lat,0)/pts.length : 37.5665, lng = pts.length ? pts.reduce((a,x)=>a+x.lng,0)/pts.length : 126.978;
+    const base = 'https://api.open-meteo.com/v1/forecast?latitude='+lat.toFixed(3)+'&longitude='+lng.toFixed(3)
+      +'&hourly=temperature_2m,apparent_temperature,precipitation_probability,precipitation,snowfall,weather_code,is_day'
+      +'&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FSeoul&forecast_days=3';
+    let wx = null, src = '';
+    try{ const r = await fetch(base+'&models=kma_seamless'); if(r.ok){ wx = dlvWxParse(await r.json(), 'kma_seamless'); if(wx) src = '기상청 모델'; } }catch(e){}
+    if(!wx){ const r = await fetch(base); if(!r.ok) throw new Error('날씨 서버 응답 '+r.status); wx = dlvWxParse(await r.json(), ''); src = 'Open-Meteo 예보'; }
+    if(!wx) throw new Error('예보 데이터가 비어 있어요');
+    wx.src = src; wx.area = pts.length ? '배송지 근처' : '서울';
+    DLV.wx = wx; DLV.wxAt = Date.now();
+  }catch(e){
+    if(!DLV.wx){ box.innerHTML = `<div class="small"><span class="err">날씨를 불러오지 못했어요 (${esc((e&&e.message)||e)})</span> <button class="btn" id="dlv-wxretry" type="button" style="margin-left:6px">다시 시도</button></div>`; const b = box.querySelector('#dlv-wxretry'); if(b) b.onclick = ()=>dlvLoadWeather(true); DLV.wxBusy = false; return; }
+  }
+  DLV.wxBusy = false; dlvDrawWeather();
+}
+function dlvWxRanges(list, pred){ // 연속된 시간대를 [시작,끝] 묶음으로
+  const out = []; let cur = null;
+  list.forEach(x=>{ if(pred(x)){ if(cur && x.h===cur[1]+1) cur[1] = x.h; else { cur = [x.h,x.h]; out.push(cur); } } });
+  return out;
+}
+const dlvWxRng = r=> r[0]===r[1] ? `${r[0]}시` : `${r[0]}~${r[1]+1}시`;
+function dlvDrawWeather(){
+  const box = document.getElementById('dlv-wx'); const wx = DLV.wx; if(!box || !wx) return;
+  const now = dlvKst(), date = DLV.date || now.ymd;
+  const isToday = date===now.ymd;
+  let list = wx.hours.filter(x=>x.ymd===date);
+  const dayTxt = isToday ? '오늘' : date.slice(5).replace('-','/');
+  if(!list.length){
+    box.innerHTML = `<div class="small muted">🌤 ${esc(dayTxt)} 날씨 예보가 없어요. ${date<now.ymd?'지난 날짜는 예보를 보여주지 않아요.':'예보는 오늘부터 3일 뒤까지만 볼 수 있어요.'}</div>`; return;
+  }
+  list = isToday ? list.filter(x=>x.h>=now.h) : list.filter(x=>x.h>=6 && x.h<=22);
+  if(!list.length){ box.innerHTML = `<div class="small muted">🌙 오늘 남은 시간대 예보가 없어요.</div>`; return; }
+  const isSnow = x=> (Number(x.snow)||0) >= 0.1 || [71,73,75,77,85,86].includes(Number(x.code));
+  const isRain = x=> !isSnow(x) && ((Number(x.mm)||0) >= 0.1 || (x.pop!=null && Number(x.pop)>=60) || [51,53,55,56,57,61,63,65,66,67,80,81,82,95,96,99].includes(Number(x.code)));
+  const rainR = dlvWxRanges(list, isRain), snowR = dlvWxRanges(list, isSnow);
+  const temps = list.map(x=>x.temp).filter(v=>v!=null), feels = list.map(x=>x.feel!=null?x.feel:x.temp).filter(v=>v!=null);
+  const tmin = Math.min(...temps), tmax = Math.max(...temps), fmin = Math.min(...feels), fmax = Math.max(...feels);
+  const chips = [];
+  if(snowR.length) chips.push(`<span class="wx-chip snow">❄️ 눈 ${snowR.map(dlvWxRng).join(', ')}</span>`);
+  if(rainR.length) chips.push(`<span class="wx-chip rain">☔ 비 ${rainR.map(dlvWxRng).join(', ')}</span>`);
+  if(!snowR.length && !rainR.length) chips.push(`<span class="wx-chip ok">✅ ${isToday?'남은 시간':'이날'} 비·눈 소식은 없어요</span>`);
+  if(fmin <= 0) chips.push(`<span class="wx-chip cold">🥶 체감 ${Math.round(fmin)}°까지 내려가요</span>`);
+  if(fmax >= 33) chips.push(`<span class="wx-chip hot">🥵 체감 ${Math.round(fmax)}°까지 올라가요</span>`);
+  const dd = wx.days[date];
+  const fmt = v=> v==null ? '-' : Math.round(v)+'°';
+  box.innerHTML = `<div class="wx-head"><b>🌤 ${esc(dayTxt)} 날씨</b><span class="wx-sum">${isToday?'지금부터 · ':''}${dd?`하루 ${fmt(dd.min)} / ${fmt(dd.max)} · `:''}${esc(wx.area)}</span></div>
+    <div class="wx-chips">${chips.join('')}</div>
+    <div class="wx-row" role="list" aria-label="시간대별 날씨">${list.map(x=>{
+      const sn = isSnow(x), rn = isRain(x);
+      const amt = sn ? ((Number(x.snow)||0)>=0.1 ? '❄ '+(Math.round(x.snow*10)/10)+'cm' : '❄ 눈') : ((Number(x.mm)||0)>=0.1 ? '💧 '+(Math.round(x.mm*10)/10)+'mm' : '');
+      const now1 = isToday && x.h===now.h;
+      return `<div class="wx-h${now1?' now':''}${sn?' snow':rn?' rain':''}" role="listitem" title="${esc(dlvWxLabel(x.code))}${x.feel!=null?' · 체감 '+Math.round(x.feel)+'°':''}">
+        <span class="t">${now1?'지금':x.h+'시'}</span><span class="i" aria-hidden="true">${dlvWxIcon(x.code,x.day)}</span>
+        <span class="d">${fmt(x.temp)}</span><span class="p">${x.pop!=null?Math.round(x.pop)+'%':''}</span><span class="a">${amt}</span></div>`; }).join('')}</div>
+    <div class="wx-foot muted">${esc(wx.src)} · ${esc(dlvHM(new Date(DLV.wxAt)))} 기준 · 옆으로 밀면 이후 시간 · 새로고침으로 갱신</div>`;
+  const nowEl = box.querySelector('.wx-h.now'); // 현재 시각은 맨 앞이라 따로 스크롤 안 함
+}
 function dlvStop(){ if(DLV.timer){ clearInterval(DLV.timer); DLV.timer = null; } DLV.map = null; DLV.pins = new Map(); DLV.geoRun++; }
 function renderDeliveryView(){
   const el = document.getElementById('view-delivery'); if(!el) return;
@@ -2846,6 +2975,7 @@ async function dlvInitMap(){
       <span class="small muted" id="dlv-ts"></span>
       <span class="dlv-legend small muted">교통 <i class="g"></i>원활 <i class="o"></i>서행 <i class="r"></i>정체</span>
     </div>
+    <div class="panel dlv-wx" id="dlv-wx"><div class="small muted">날씨 불러오는 중…</div></div>
     <div class="dlv-grid">
       <div class="dlv-mapbox"><div id="dlv-map"></div><div id="dlv-mapmsg" class="dlv-mapmsg">불러오는 중…</div></div>
       <div id="dlv-list" class="dlv-list"></div>
@@ -2858,6 +2988,7 @@ async function dlvInitMap(){
   catch(e){ q('#dlv-mapmsg').innerHTML = `<span class="err">불러오기 실패: ${esc((e&&e.message)||e)}</span>`; return; }
   if(!wrap.isConnected) return;
   dlvDrawList();
+  dlvLoadWeather(false);
   if(!DLV.key){ q('#dlv-mapmsg').innerHTML = ''; q('#dlv-mapmsg').style.display = 'none'; dlvDrawKeySetup(); return; }
   try{ await dlvLoadKakao(DLV.key); }
   catch(e){ q('#dlv-mapmsg').innerHTML = `<div class="err">${esc(e.message||'지도를 불러오지 못했어요')}</div><div class="small muted" style="margin-top:6px">키가 맞는지, 이 사이트 주소(${esc(location.origin)})가 카카오에 등록됐는지 확인해주세요.</div>${ME.role==='admin'?'<button class="btn" id="dlv-rekey" type="button" style="margin-top:8px">지도 키 변경</button>':''}`; const rk = q('#dlv-rekey'); if(rk) rk.onclick = dlvDrawKeySetup; return; }
@@ -2880,7 +3011,8 @@ function dlvApplyTraffic(manual){
   if(manual){ DLV.lastTs = new Date(); dlvTs(); }
 }
 async function dlvRefresh(manual){
-  if(!DLV.map){ dlvInitMap(); return; }
+  if(!DLV.map){ if(manual) DLV.wxAt = 0; dlvInitMap(); if(manual) dlvLoadWeather(true); return; }
+  dlvLoadWeather(!!manual);
   DLV.trafficOn = DLV.trafficOn || manual; // 새로고침을 눌렀는데 꺼져 있으면 켬
   const b = document.getElementById('dlv-traffic'); if(b){ b.setAttribute('aria-pressed', String(DLV.trafficOn)); b.textContent = '🚦 교통상황 '+(DLV.trafficOn?'켜짐':'꺼짐'); }
   dlvApplyTraffic(true);
