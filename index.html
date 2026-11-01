@@ -1137,6 +1137,11 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 .dlv-mu-f{display:grid;gap:8px;margin-top:4px}
 .dlv-empty{text-align:left}
 </style>
+<style>
+.dr-in{width:100%;box-sizing:border-box;font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:10px;padding:9px 12px;margin-bottom:8px}
+textarea.dr-in{resize:vertical;line-height:1.55}
+.dr-sec{margin:0 0 20px}.dr-sec h3{margin:0 0 8px;font-size:15px}
+</style>
 </head>
 <body>
 
@@ -1208,7 +1213,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.53</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.54</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -1217,11 +1222,12 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
   <nav class="tabs" id="tabs" aria-label="주 메뉴">
     <button data-tab="summary" aria-selected="true"><span class="ti">📊</span><span class="tl">Dashboard</span></button>
     <button data-tab="cityhall" aria-selected="false"><span class="ti">🏛️</span><span class="tl">시청</span></button>
-    <button data-tab="customers" aria-selected="false"><span class="ti">🏢</span><span class="tl">거래처</span></button>
     <button data-tab="delivery" aria-selected="false"><span class="ti">🚚</span><span class="tl">배송</span></button>
     <button data-tab="sales" aria-selected="false"><span class="ti">💼</span><span class="tl">영업</span></button>
-    <button data-tab="products" aria-selected="false"><span class="ti">🏷️</span><span class="tl">생산품</span></button>
     <button data-tab="report" aria-selected="false"><span class="ti">📑</span><span class="tl">리포트</span></button>
+    <button data-tab="dailyreport" aria-selected="false"><span class="ti">📝</span><span class="tl">업무보고</span></button>
+    <button data-tab="customers" aria-selected="false"><span class="ti">🏢</span><span class="tl">거래처</span></button>
+    <button data-tab="products" aria-selected="false"><span class="ti">🏷️</span><span class="tl">생산품</span></button>
   </nav>
 </header>
 
@@ -1231,6 +1237,7 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 <section class="view hide" id="view-cityhall"></section>
 <section class="view hide" id="view-products"></section>
 <section class="view hide" id="view-report"></section>
+<section class="view hide" id="view-dailyreport"></section>
 <section class="view hide" id="view-delivery"></section>
 <section class="view hide" id="view-stmt"></section>
 <section class="view hide" id="view-recon"></section>
@@ -1358,17 +1365,17 @@ let CUSTS = []; // customer_stats rows, loaded once per session
 let custById = new Map();
 let currentTab = 'summary';
 let currentSalesSub = 'coretarget';
-const VIEW_IDS = ['summary','customers','delivery','sales','products','cityhall','report','stmt','recon','admin'];
+const VIEW_IDS = ['summary','customers','delivery','sales','products','cityhall','report','dailyreport','stmt','recon','admin'];
 // Supabase는 한 번에 1000줄까지만 주므로, 판매 줄이 많은 거래처는 나눠서 끝까지 가져옴
 async function sbAll(build){
   const all=[]; for(let from=0;;from+=1000){ const {data,error}=await build().range(from,from+999); if(error) return {data:all,error}; all.push(...(data||[])); if(!data||data.length<1000) break; }
   return {data:all};
 }
-const ALL_TABS = [['summary','Dashboard'],['cityhall','시청'],['customers','거래처'],['delivery','배송 (배송지도·거래명세서)'],['sales','영업'],['products','생산품'],['report','경영 리포트']];
+const ALL_TABS = [['summary','Dashboard'],['cityhall','시청'],['delivery','배송 (배송지도·거래명세서)'],['sales','영업'],['report','경영 리포트'],['dailyreport','업무보고'],['customers','거래처'],['products','생산품']];
 const ID_DOMAIN = 'example.com'; // 아이디(able1 등)로 가입·로그인할 때 내부적으로 붙이는 주소 (실제 메일은 안 감)
 function loginEmail(v){ v = String(v||'').trim(); return v.includes('@') ? v : v.toLowerCase()+'@'+ID_DOMAIN; }
 function loginIdOnly(v){ v = String(v||'').trim(); return v.includes('@') ? v : v.toLowerCase(); }
-function canTab(t){ if(!ME) return false; if(t==='stmt') return canTab('delivery'); /* 거래명세서는 배송 화면 안에 있음 */ if(t==='admin') return ME.role==='admin'; if(ME.role==='admin') return true; return !Array.isArray(ME.tabs) || ME.tabs.includes(t); }
+function canTab(t){ if(!ME) return false; if(t==='stmt') return canTab('delivery'); /* 거래명세서는 배송 화면 안에 있음 */ if(t==='admin') return ME.role==='admin'; if(ME.role==='admin') return true; if(t==='dailyreport' && ME.team) return true; /* 소속 팀이 지정된 사람은 업무보고 화면은 항상 볼 수 있음 */ return !Array.isArray(ME.tabs) || ME.tabs.includes(t); }
 
 // ---------------- Auth ----------------
 const authBoxes = ['loginBox','signupBox','forgotBox','resetBox','pendingBox'];
@@ -1531,7 +1538,7 @@ async function boot(uid){
   BOOTED_UID = uid;
   // 사용자 정보 확인·저장된 데이터 읽기·최신 데이터 받기를 한꺼번에 시작 (순서대로 기다리지 않음)
   const snapP = idbGet(SNAP_VER+uid);
-  const profP = sb.from('profiles').select('id,name,role,approved,tabs,login_id').eq('id', uid).single();
+  const profP = sb.from('profiles').select('id,name,role,approved,tabs,login_id,team').eq('id', uid).single();
   const fresh = Promise.all([
     loadCustomers(true), ensureMonthsLoaded(true), ensureItemTotalsLoaded(true), ensureCustYearTotalsLoaded(true),
     fetchSummaryExtras().catch(()=>null)
@@ -1644,6 +1651,7 @@ function renderTab(){
   else if(currentTab==='products') renderProductsView();
   else if(currentTab==='cityhall') renderCityHallView();
   else if(currentTab==='report') renderReportView();
+  else if(currentTab==='dailyreport') renderDailyReportView();
   else if(currentTab==='stmt') renderStmtView();
   else if(currentTab==='admin') renderAdminView();
 }
@@ -1665,7 +1673,7 @@ async function renderAdminUsers(){
   const v = document.getElementById('adm-body');
   if(!v) return;
   v.innerHTML = '<div class="spin">불러오는 중…</div>';
-  const {data, error} = await sb.from('profiles').select('id,name,role,approved,tabs,login_id,created_at').order('created_at',{ascending:true});
+  const {data, error} = await sb.from('profiles').select('id,name,role,approved,tabs,login_id,team,created_at').order('created_at',{ascending:true});
   if(error){ v.innerHTML = `<div class="panel err">불러오기 실패: ${esc(error.message)}</div>`; return; }
   const rows = (data||[]).slice().sort((a,b)=> (a.approved===b.approved ? 0 : a.approved ? 1 : -1));
   const pending = rows.filter(r=>!r.approved).length;
@@ -1682,6 +1690,7 @@ async function renderAdminUsers(){
           <span class="adm-badge ${r.approved?'ok':'wait'}">${r.approved?'승인됨':'승인 대기'}</span>${me?'<span class="adm-badge">나</span>':''}</div>
         <div class="adm-ctl">
           ${me ? '' : `<button class="btn ${r.approved?'':'primary'}" data-act="approve">${r.approved?'승인 취소':'승인'}</button>`}
+          <select data-act="team" aria-label="소속 팀"><option value="">소속 팀 없음</option>${['영업관리팀','물류관리팀','전략영업팀','전략영업부'].map(t=>`<option value="${t}"${r.team===t?' selected':''}>${t==='전략영업부'?'전략영업부 (부장님 · 전체 열람)':t}</option>`).join('')}</select>
           ${me ? '' : `<select data-act="role" aria-label="역할"><option value="member"${r.role!=='admin'?' selected':''}>팀원</option><option value="admin"${r.role==='admin'?' selected':''}>관리자</option></select>`}
         </div>
         ${(r.role==='admin') ? '<div class="adm-note" style="margin:8px 0 0">관리자는 모든 화면을 볼 수 있어요.</div>' : `<div class="adm-tabs">${ALL_TABS.map(([k,l])=>`<label class="${tabsOn.includes(k)?'on':''}"><input type="checkbox" data-act="tab" value="${k}"${tabsOn.includes(k)?' checked':''}>${l}</label>`).join('')}</div>`}
@@ -1703,6 +1712,10 @@ async function renderAdminUsers(){
       const next = !rec.approved;
       if(!next && !confirm(`${rec.name||''} 님의 승인을 취소할까요? 이 사람은 데이터를 볼 수 없게 돼요.`)) return;
       if(await save({approved: next}, next?'승인했어요':'승인을 취소했어요')) renderAdminUsers();
+    });
+    row.querySelectorAll('[data-act="team"]').forEach(sel=> sel.onchange = async ()=>{
+      const v = sel.value || null;
+      if(await save({team: v}, v?`소속 팀을 ${v}(으)로 저장했어요`:'소속 팀을 해제했어요')){ if(rec.id===ME.id) ME.team = v; }
     });
     row.querySelectorAll('[data-act="role"]').forEach(sel=> sel.onchange = async ()=>{
       if(await save({role: sel.value}, sel.value==='admin'?'관리자로 변경했어요':'팀원으로 변경했어요')) renderAdminUsers();
@@ -5516,6 +5529,177 @@ async function renderReportView(){
     if(!armed) return; disarm(); hist.guard();
   }, true));
 })();
+</script>
+<script>
+// ---------------- 업무보고 (전략영업부 · 영업관리팀/물류관리팀/전략영업팀 일일보고) ----------------
+// 팀 단위로 작성(소속팀은 관리자 화면에서 지정), 부장님(소속 '전략영업부')과 관리자는 3개 팀을 모두 열람.
+// 한 팀 · 하루에 보고 1건(report_date + team)이고, 보고한 뒤에도 고칠 수 있어요. DB: daily_reports
+const DR_TEAMS = ['영업관리팀','물류관리팀','전략영업팀'];
+const DR_TAGS = ['재고 부족','입고 지연','파손·불량','특이사항 없음'];
+const DR = {date:null, editTeam:null, all:[], rows:[]};
+const drToday = ()=> localYmd(new Date());
+function drAddDays(ymd,n){ const [y,m,d]=ymd.split('-').map(Number); return localYmd(new Date(y,m-1,d+n)); }
+function drDow(ymd){ const [y,m,d]=ymd.split('-').map(Number); return ['일','월','화','수','목','금','토'][new Date(y,m-1,d).getDay()]; }
+function drLabel(ymd){ const [y,m,d]=ymd.split('-').map(Number); return `${y}년 ${m}월 ${d}일 ${drDow(ymd)}요일`; }
+function drShort(ymd){ const [,m,d]=ymd.split('-').map(Number); return `${m}/${d}(${drDow(ymd)})`; }
+const drCanAll = ()=> !!ME && (ME.role==='admin' || ME.team==='전략영업부');
+const drMyTeam = ()=> (ME && DR_TEAMS.includes(ME.team)) ? ME.team : null;
+const drTime = iso => { try{ return new Date(iso).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false}); }catch(e){ return ''; } };
+function drPill(r){
+  if(r && r.status==='submitted') return `<span class="pill s-good">보고 완료${r.submitted_at?' · '+esc(drTime(r.submitted_at)):''}</span>`;
+  if(r && r.status==='draft') return '<span class="pill s-warn">임시저장</span>';
+  return '<span class="pill s-idle">미보고</span>';
+}
+async function drLoad(){
+  const d = DR.date, from = drAddDays(d,-14);
+  const {data, error} = await sb.from('daily_reports').select('*').gte('report_date', from).lte('report_date', d).order('report_date',{ascending:false});
+  if(error) throw error;
+  DR.all = data||[];
+  DR.rows = DR.all.filter(r=>r.report_date===d);
+}
+async function renderDailyReportView(){
+  const el = document.getElementById('view-dailyreport'); if(!el) return;
+  if(!DR.date) DR.date = drToday();
+  const all = drCanAll(), mine = drMyTeam();
+  if(!all && !mine){ el.innerHTML = '<div class="panel">소속 팀이 아직 지정되지 않았어요. 관리자에게 팀 지정을 요청해주세요.</div>'; return; }
+  el.innerHTML = '<div class="spin">불러오는 중…</div>';
+  try{ await drLoad(); }
+  catch(e){ el.innerHTML = `<div class="panel err">불러오기 실패: ${esc((e&&e.message)||e)}</div>`; return; }
+  if(!all) DR.editTeam = mine;
+  else if(DR.editTeam && !DR_TEAMS.includes(DR.editTeam)) DR.editTeam = null;
+  if(DR.editTeam) drRenderForm(el, DR.editTeam); else drRenderBoard(el);
+}
+function drNavHtml(){
+  const t = drToday();
+  return `<div class="panel"><div class="filters" style="align-items:center">
+    <button class="btn" data-dr="prev" aria-label="전날">◀</button>
+    <input type="date" id="dr-date" value="${esc(DR.date)}" max="${esc(t)}" aria-label="보고 날짜">
+    <button class="btn" data-dr="next" aria-label="다음날" ${DR.date>=t?'disabled':''}>▶</button>
+    <button class="btn" data-dr="today" ${DR.date===t?'disabled':''}>오늘</button>
+    <span class="small muted">${esc(drLabel(DR.date))}</span></div></div>`;
+}
+function drBindNav(el){
+  const go = d=>{ DR.date = d; renderDailyReportView(); };
+  el.querySelectorAll('[data-dr="prev"]').forEach(b=> b.onclick = ()=> go(drAddDays(DR.date,-1)));
+  el.querySelectorAll('[data-dr="next"]').forEach(b=> b.onclick = ()=>{ const n = drAddDays(DR.date,1); if(n<=drToday()) go(n); });
+  el.querySelectorAll('[data-dr="today"]').forEach(b=> b.onclick = ()=> go(drToday()));
+  const di = el.querySelector('#dr-date'); if(di) di.onchange = ()=>{ if(di.value && di.value<=drToday()) go(di.value); };
+}
+const drList = (arr, empty)=> (arr&&arr.length) ? `<ul style="margin:6px 0 0 18px;padding:0;line-height:1.6">${arr.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>` : `<div class="small muted" style="margin-top:6px">${empty}</div>`;
+
+// ---- 부장님·관리자: 오늘 보고 현황판 ----
+function drRenderBoard(el){
+  const by = {}; DR.rows.forEach(r=>{ by[r.team] = r; });
+  const sub = DR_TEAMS.filter(t=>by[t] && by[t].status==='submitted').length;
+  const draft = DR_TEAMS.filter(t=>by[t] && by[t].status==='draft').length;
+  const urgent = DR_TEAMS.filter(t=>by[t] && by[t].status==='submitted' && by[t].urgent && (by[t].request||'').trim());
+  const isAdmin = ME && ME.role==='admin';
+  // 최근 7영업일(주말 제외) 보고 현황표
+  const days = []; for(let k=0; days.length<7 && k<14; k++){ const d = drAddDays(DR.date,-k); const w = drDow(d); if(w!=='토' && w!=='일') days.push(d); }
+  const cell = (t,d)=>{ const r = DR.all.find(x=>x.team===t && x.report_date===d); const s = r&&r.status==='submitted' ? '<span class="pill s-good">✓</span>' : r&&r.status==='draft' ? '<span class="pill s-warn">임시</span>' : '<span class="muted">–</span>'; return `<td class="num click" data-dr-date="${d}" style="text-align:center">${s}</td>`; };
+  el.innerHTML = drNavHtml() + `
+  <div class="kpis">
+    <div class="kpi"><div class="l">보고 완료</div><div class="v" style="color:var(--good)">${sub} / ${DR_TEAMS.length}팀</div></div>
+    <div class="kpi"><div class="l">임시저장 (작성 중)</div><div class="v">${draft}팀</div></div>
+    <div class="kpi"><div class="l">미보고</div><div class="v" style="color:${DR_TEAMS.length-sub-draft?'var(--bad)':'inherit'}">${DR_TEAMS.length-sub-draft}팀</div></div>
+    <div class="kpi"><div class="l">결정 요청</div><div class="v" style="color:${urgent.length?'var(--bad)':'inherit'}">${urgent.length}건</div></div>
+  </div>
+  ${urgent.length ? `<div class="panel" style="border:1px solid var(--bad)"><div class="panel-h"><h2 style="color:var(--bad)">⚠ 결정이 필요한 건</h2></div>
+    ${urgent.map(t=>`<div class="order"><div class="order-h"><b>${esc(t)}</b> <span class="pill s-bad">결정 요청</span></div><div class="ship" style="white-space:pre-wrap">${esc(by[t].request)}</div></div>`).join('')}</div>` : ''}
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px">
+  ${DR_TEAMS.map(t=>{ const r = by[t]; const shown = r && r.status==='submitted';
+    return `<div class="panel"><div class="panel-h"><h2>${esc(t)}</h2>${drPill(r)}</div>
+      ${shown ? `
+        <div class="small muted">특이사항</div>
+        <div style="margin:4px 0 10px">${(r.issue_tags||[]).map(x=>`<span class="tag">${esc(x)}</span>`).join(' ')}${r.issues?`<div style="white-space:pre-wrap;margin-top:4px">${esc(r.issues)}</div>`:''}${!(r.issue_tags||[]).length&&!r.issues?'<span class="muted">없음</span>':''}</div>
+        <div class="small muted">오늘 한 일</div>${drList(r.done,'적은 내용이 없어요')}
+        <div class="small muted" style="margin-top:10px">내일 할 일</div>${drList(r.next_plan,'적은 내용이 없어요')}
+        <div class="small muted" style="margin-top:10px">건의 · 결정 요청${r.urgent?' <span class="pill s-bad">긴급</span>':''}</div>
+        <div style="white-space:pre-wrap;margin-top:4px">${r.request?esc(r.request):'<span class="muted">없음</span>'}</div>`
+      : `<div class="small muted" style="padding:14px 0">${r ? '작성 중이에요 (보고하면 여기에 나와요).' : '아직 보고 전이에요.'}</div>`}
+      ${isAdmin ? `<div style="margin-top:12px"><button class="btn" data-dr-edit="${esc(t)}">${r?'열어서 수정':'대신 작성'}</button></div>` : ''}
+    </div>`; }).join('')}
+  </div>
+  <div class="panel"><div class="panel-h"><h2>최근 7영업일 보고 현황</h2><span class="note">칸을 누르면 그 날짜로 이동해요</span></div>
+    <div class="tbl-wrap"><table><thead><tr><th>팀</th>${days.slice().reverse().map(d=>`<th class="num" style="text-align:center">${esc(drShort(d))}</th>`).join('')}</tr></thead><tbody>
+    ${DR_TEAMS.map(t=>`<tr><td>${esc(t)}</td>${days.slice().reverse().map(d=>cell(t,d)).join('')}</tr>`).join('')}
+    </tbody></table></div></div>`;
+  drBindNav(el);
+  el.querySelectorAll('[data-dr-edit]').forEach(b=> b.onclick = ()=>{ DR.editTeam = b.dataset.drEdit; renderDailyReportView(); });
+  el.querySelectorAll('[data-dr-date]').forEach(td=> td.onclick = ()=>{ DR.date = td.dataset.drDate; renderDailyReportView(); });
+}
+
+// ---- 팀: 보고 작성 ----
+function drRenderForm(el, team){
+  const cur = DR.rows.find(r=>r.team===team) || null;
+  const pad = (arr,n)=>{ const a=(arr||[]).slice(); while(a.length<n) a.push(''); return a; };
+  const done = pad(cur&&cur.done, 3), next = pad(cur&&cur.next_plan, 2);
+  const tags = new Set((cur&&cur.issue_tags)||[]);
+  const isSub = cur && cur.status==='submitted';
+  const all = drCanAll();
+  const inp = (cls,v,ph)=>`<input class="dr-in ${cls}" type="text" value="${esc(v)}" placeholder="${esc(ph)}" maxlength="200">`;
+  const history = DR.all.filter(r=>r.team===team && r.report_date!==DR.date).slice(0,10);
+  el.innerHTML = drNavHtml() + `
+  <div class="panel">
+    <div class="panel-h"><h2>${esc(team)} 일일보고 작성</h2>${drPill(cur)}</div>
+    ${all ? '<div style="margin-bottom:10px"><button class="btn" id="dr-back">← 현황판으로</button></div>' : ''}
+    <div class="small muted" style="margin:0 0 14px">${esc(drLabel(DR.date))} · ${isSub?'이미 보고했어요. 고친 내용은 "수정 저장"을 눌러야 부장님 화면에 반영돼요.':'보고하면 부장님 화면에 바로 올라가요. 보고한 뒤에도 고칠 수 있어요.'}</div>
+
+    <div class="dr-sec"><h3>1. 재고·입출고 특이사항</h3>
+      <div class="chip-row" id="dr-tags">${DR_TAGS.map(x=>`<button class="chip" type="button" data-tag="${esc(x)}" aria-pressed="${tags.has(x)}">${esc(x)}</button>`).join('')}</div>
+      <label class="small muted" for="dr-issues" style="display:block;margin-top:8px">자세한 내용</label>
+      <textarea class="dr-in" id="dr-issues" rows="3" maxlength="1500" placeholder="예: 복사용지 A4/85g 재고 부족 예상 (3일분)">${esc((cur&&cur.issues)||'')}</textarea></div>
+
+    <div class="dr-sec"><h3>2. 오늘 한 일</h3>
+      <div id="dr-done">${done.map(v=>inp('dr-done-i',v,'한 일을 적어주세요')).join('')}</div>
+      <button class="btn" type="button" id="dr-done-add">+ 항목 추가</button></div>
+
+    <div class="dr-sec"><h3>3. 내일 할 일</h3>
+      <div id="dr-next">${next.map(v=>inp('dr-next-i',v,'할 일을 적어주세요')).join('')}</div>
+      <button class="btn" type="button" id="dr-next-add">+ 항목 추가</button></div>
+
+    <div class="dr-sec"><h3>4. 부장님께 건의 · 결정 요청 <span class="small muted" style="font-weight:400">없으면 비워두세요</span></h3>
+      <textarea class="dr-in" id="dr-req" rows="3" maxlength="1500" placeholder="건의하거나 결정이 필요한 내용을 적어주세요">${esc((cur&&cur.request)||'')}</textarea>
+      <label style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="dr-urgent" ${cur&&cur.urgent?'checked':''}><span>결정이 필요한 건이에요 (부장님 화면 맨 위에 빨간 표시로 떠요)</span></label></div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px">
+      ${isSub ? '<button class="btn primary" id="dr-submit">수정 저장</button>' : '<button class="btn" id="dr-draft">임시저장</button><button class="btn primary" id="dr-submit">보고하기</button>'}
+      <span class="small" id="dr-msg"></span>
+    </div>
+  </div>
+  ${history.length ? `<div class="panel"><div class="panel-h"><h2>지난 보고</h2><span class="note">최근 2주 · 누르면 그 날짜로 이동</span></div>
+    ${history.map(r=>`<div class="order click" data-dr-date="${esc(r.report_date)}"><div class="order-h"><b>${esc(drShort(r.report_date))}</b> ${drPill(r)}</div><div class="ship">${esc(((r.done||[])[0])||(r.issues||'')||'-')}${(r.done||[]).length>1?` 외 ${(r.done||[]).length-1}건`:''}</div></div>`).join('')}</div>` : ''}`;
+  drBindNav(el);
+  const back = el.querySelector('#dr-back'); if(back) back.onclick = ()=>{ DR.editTeam = null; renderDailyReportView(); };
+  el.querySelectorAll('[data-dr-date]').forEach(x=> x.onclick = ()=>{ DR.date = x.dataset.drDate; renderDailyReportView(); });
+  el.querySelectorAll('#dr-tags .chip').forEach(c=> c.onclick = ()=> c.setAttribute('aria-pressed', String(c.getAttribute('aria-pressed')!=='true')));
+  const addRow = (boxId,cls,ph)=>{ const box = el.querySelector(boxId); const i = document.createElement('input'); i.className='dr-in '+cls; i.type='text'; i.placeholder=ph; i.maxLength=200; box.appendChild(i); i.focus(); };
+  el.querySelector('#dr-done-add').onclick = ()=> addRow('#dr-done','dr-done-i','한 일을 적어주세요');
+  el.querySelector('#dr-next-add').onclick = ()=> addRow('#dr-next','dr-next-i','할 일을 적어주세요');
+  const msg = el.querySelector('#dr-msg');
+  const collect = ()=>({
+    done: [...el.querySelectorAll('.dr-done-i')].map(i=>i.value.trim()).filter(Boolean),
+    next_plan: [...el.querySelectorAll('.dr-next-i')].map(i=>i.value.trim()).filter(Boolean),
+    issues: el.querySelector('#dr-issues').value.trim(),
+    issue_tags: [...el.querySelectorAll('#dr-tags .chip[aria-pressed="true"]')].map(c=>c.dataset.tag),
+    request: el.querySelector('#dr-req').value.trim(),
+    urgent: el.querySelector('#dr-urgent').checked
+  });
+  const save = async (status)=>{
+    const f = collect();
+    if(status==='submitted' && !f.done.length && !f.next_plan.length && !f.issues && !f.issue_tags.length && !f.request){ msg.innerHTML = '<span class="err">내용을 하나라도 적어주세요.</span>'; return; }
+    if(f.urgent && !f.request){ msg.innerHTML = '<span class="err">결정 요청에 체크했으면 내용을 적어주세요.</span>'; return; }
+    const row = Object.assign({report_date:DR.date, team, status, author_id:ME.id, updated_at:new Date().toISOString()}, f);
+    if(status==='submitted') row.submitted_at = (cur && cur.status==='submitted' && cur.submitted_at) ? cur.submitted_at : new Date().toISOString();
+    el.querySelectorAll('button').forEach(b=>b.disabled = true);
+    const {error} = await sb.from('daily_reports').upsert(row, {onConflict:'report_date,team'});
+    if(error){ el.querySelectorAll('button').forEach(b=>b.disabled = false); msg.innerHTML = `<span class="err">저장 실패: ${esc(error.message||error)}</span>`; return; }
+    toast(status==='submitted' ? (isSub?'수정했어요':'보고했어요') : '임시저장했어요');
+    renderDailyReportView();
+  };
+  const d = el.querySelector('#dr-draft'); if(d) d.onclick = ()=> save('draft');
+  el.querySelector('#dr-submit').onclick = ()=> save('submitted');
+}
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}</script>
 <div id="stmtPrintRoot"></div>
