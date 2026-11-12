@@ -179,6 +179,22 @@ tr.click:hover td{background:var(--accent-soft)}
 .vbars .col:hover .bar{filter:brightness(1.08)}
 .vbars .lbl{font-size:10.5px;color:var(--muted);margin-top:5px;white-space:nowrap}
 .vbars .val{font-size:11px;font-weight:600;color:var(--ink-2);margin-bottom:3px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mchart{position:relative;margin-top:10px}
+.mchart svg text{font-family:inherit;font-variant-numeric:tabular-nums}
+.mleg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink-2);margin-bottom:6px}
+.mleg i{display:inline-block;vertical-align:middle;margin-right:6px}
+.mleg .ln{width:18px;height:0;border-top:2px dashed var(--ink-2);opacity:.6}
+.mleg .dk{width:12px;height:12px;border-radius:3px;background:var(--chart-accent-ink)}
+.mleg .hz{width:12px;height:12px;border-radius:3px;border:1px dashed var(--chart-accent-ink);background:repeating-linear-gradient(45deg,color-mix(in srgb,var(--chart-accent) 55%,transparent) 0 3px,color-mix(in srgb,var(--chart-accent) 18%,transparent) 3px 6px)}
+.mchart .mcol{cursor:pointer}
+.mchart .mcol .mhl{fill:var(--chart-accent);opacity:0;transition:opacity .12s}
+.mchart .mcol:hover .mhl,.mchart .mcol.on .mhl{opacity:.14}
+.mtip{position:absolute;z-index:5;pointer-events:none;background:var(--surface);border:1px solid var(--line-2);border-radius:10px;box-shadow:var(--card-shadow-hover);padding:9px 12px;font-size:12px;color:var(--ink-2);min-width:150px;line-height:1.55}
+.mtip[hidden]{display:none}
+.mtip .t{font-weight:700;color:var(--ink);font-size:13px}
+.mtip .a{font-size:15px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+details.mtbl{margin-top:14px}
+details.mtbl summary{cursor:pointer;font-size:13px;color:var(--ink-2);font-weight:600}
 .explain{background:var(--surface-2);border-radius:11px;padding:11px 13px;font-size:12.5px;color:var(--ink-2)}
 .explain b{color:var(--ink)}
 .chip-row{display:flex;flex-wrap:wrap;gap:6px}
@@ -1213,7 +1229,7 @@ textarea.dr-in{resize:vertical;line-height:1.55}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIkAAABACAYAAAAuw1S1AAAOZklEQVR4nO2ce5zU1XXAv+f+Zl+z7EMIMLvgg4AKiAhBMSgamsbWFyjiLsguIDQ11tpqm6YmUePqp0Y00cakNZKHymN5jAREC5IoaLVoY2M0NiiKBiywsyAuj33P43fyx+zsznt22Vl3Q3/fz2f/mHvPPffM73fmPs65d8HBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHB4eRB+tuAjLykLvYdHItlnwUyHLAIqR+MDzHvsWDoRyDaL7Y9dXA0LntZXOmvqC57qMe6Vu4/D7EejivdQHXZYydsX5Zw9bcBKVm+fwguq5I6319gpAiN8mcjgAIhqK3/BOq2kOPaSOWwpv4y92TG9LcBCagKK+vm4LJWoMxBpSi9PENRWUQguJwVvi99Rlb+v2JgOckyzWF1/XcQ+RuUvB61VSnBcDcr6m5CdeBPo39CDBwnqVFDoe87KJf0So+RSlbX39wLO1x4Dw2iRgfOs+lnBs6aZHT9IpBpWdGlzGFV/QdUe7Z1S35F3flYcjUwAa0vxQ+M8QWp9e3G1m0MaX6eK89s75ENW3bn0VA0HbEvBCkDLOAgar/Oh+XbqZFgT79WJzXqYnT9dOB8BA+qRRgJoboPo7/BdeQ/qZzgP2H9cQyMYbm2/vNgP45K9n69qo3k5d9I5eBjKWW8+wbjd90BTEmvi08gtJQFI38XU55qd2PMVmz728DnkuoTDmCF7mfeyA86y7q7u1lZdwlGbkEZmsbiT7HlERZ6fp32e3WTATKk6o1ZdRAAkSLaWytS1i/fPwS/9QMyOQiAMBQxD7Km7vyMssqpqP0AqRwkLDOCkPV9avedmVFfNKvqlyByTwYHARiC0ftZVX91j/SnoP+dxOsbimp2ppl4RK6kRhOn1Bo1uKwakPLk7TRJ3EVc2NzJk3tK0/fJuG4tuhU3uO5Kal8yVtddCzo/iZ520IOgidOX2Lexon5Ct/Snof+dJGBfBNJH054UM6ru3ITizx+cgTIuoVz1OWyZT1X5Zdjy16BvxNZLETn5Vd3vngaQ1aD/DuxI7I8RjKn7ckY9K+qHYctNcY2PoXovH3lmUl1eRW7DLODxGAdXEcS+HXq32+t/J1FJfFnZxCXjE8ose26iHdSyoPxRFnoOAbDQs4cPy+4i/uUKf8kyzcnYr/IeOdYSqj1PUF2+keqyexC9L3GUMtdk1GW0AsjtskGVkP0tFpS/So3YAFRO8FNdth7lF7H2yhnUHjgvYx/puu9N46wgMqJP9at4Yj7/bN9gVEbHynCAPM+KhLY1YiP+H4AGomTdFB1K79hCOwHuS4gAV5W/kvAS4WxW1Bdm+BIXx36U37IoatEbTa7E6wdMr4KM/b8FtjW3z2YbACE2Yuu2xmPHyRh9kUoJJW1fdfoRan2/RpneWRbSM4B3UvZp8xJLyj5JWtcW8pJvzYmdYu3TUupa+UkZBIfFlKnmsLpuTlL5oIJIS3jNE5FPMrX2gP53kr4nbrQ0p4TzPtFF+lFaDbbuRqTLSYymX5gaeTtl3VdPbaDWV4fSNYLmmGKCdltSeQ0NSQhUiEzEZmJaG2J0yKndlk3CZ+okzZsot4QJIgxVoRBg2vbynbuO8153ddhA+6ApBXhmDsMzdwyu0oKeWWHnJoaHJEPgSQIxH23S9xmyj6bXp59C1DQb0HyE5E5iQiW9XhVID1MccfS5k+gLlLS3cSNCBcqZ0PE77vgxv/5nJ6L1TeBNbK0J/fIQb8z+4PK3mPiz6WB1Y97S4wlOEpBhyWU7MOqJ2yBYaeVdpji9CVISq5+W+MGtE9s6homrFA4AH6ftI4v0mZOoIoHNLGxv406gJOVD6AVGsK4YzrS24VunvXNs5K6phx57l2Gz0weo/KYu4VtbejGwJXkDFdR3YUyRZBhJ1J4AbE9a520oIdB2WozTqX0cyE8qnx84gj/OYNHfMb/8kbQ2ZJE+2d3oS+S3b+antvIQUJKxQRaYWMLYpjG3zOK1qVvTCu71vB8OQEWhTOUp3zlJ5VcdvKrjsFMXkmkLLF9hWUPy7x1ovwaNWrSKKiWyL6WqylMPAIdjykIkbutjbN4/kpX7z+v8W+M7I7296cm6k+gycvxNrESZmW3dmXAJrrYr9n2DbWXPphQKJ9ZeiS0UwaX3sbpubEzxat+XwL41QYdK+jlecVPYdgfe3+fGlC8/MBnVG+Kk/5dZ5S1p9SFxsRo5gzUHLkoquqyhBLW+h1gPd/6FyJxOSEPWp5v2EXwX5dJs6+0JrdfxrYK3H61l1G2TkgoYXQv8eWy+SEqw9UfU+t7GVh9GxmBzVvIcqKY/CBXWN5XAkMdZWfcsKkcQnYThqoQclc3GjKps1mH0apCutZBt7mSV70kCbS+yeNRRtuzO43DhBVhtN6MSndtphtxfZbY3NVkdSVo3cynKwmzqPBEEzB/GLr2M4PHkO4aq8o9REoNniKBMRuRKlLPSdOBJWReNchoit2K4G5GZCQ6ifMCCsv/KqGeh5xASZ284P3QzOfnrWeXbQsOgzRipSQgeok9RPeR4t+xNQdacRBURm3uypa+3lOfjGfPm2a+mFKgqq8VW7wmqPx3voUHJq+LyPSnRY+QF7+/2Ie75ZatBNqWozU1R/jxVZc90z57UZM1JAs9xIdDrjGM2eeFS5hPyJ38JIsrC8p8gegfwbkolwlGU12LKVAztwelJ5Q1vovaDQHNqnfp7rJy/61iUdg8RpdrzI2z5LkLyaG6Xgccw8ijVZQ8jvb9JkLU1iRqu7ottbm8oy8fDuw/UpRWqKg8HXbyHPARDZ6N2KSGrANFGhD3s9uziC758juvkuJaHMVoPduzoKbl7WDC0jmV1O3DLVETOBT0FxYVQj2W/zg0j3kqwI8+9F39rrC7bSrR9oWc7L+kr7PNNwpiJYA8HCkH82FqP0Z00l7/B1+ICgL0ga0mTtud4EUhMy/czS/6Hpavv41/7244/ZbK3uxHGDLSRBOAyD6NW97cRKWhaz0QJ8VUAUV52z2NDb3W2ehllK48AqOGNQRU80Fud2XMSzRCF7CeG5pM+RN6PiDICYS6ACseh904StCk0hosAxKZXu5oIJ30W2G0REx3VZeQ0lXA2gMnhU/d11LeuZ5oq4wQa2mD74EqOATR7mYJynhHaNMSr7huIiYxqDaZpPDOM8kWEPBX2Bv08U1rFkYhM4waG4WcYwKBWPuRj/E3jmSHC6dgcTjbhqxerye5K7wfz2H/KbI4e2UhpboAbUCYDecBuS1mTP4+PIvaqTVdAUBjcsoaLgjk0FF/PrhN9hllzEoFDCukTZf1AgcROgq3FeIxhG4CEWN76NCMUvgLhnGO+crRxLdeKcDMwDwlnnrGwm73cVVjJzwGavHha4AkDUyIvWhRycrir+Wn+sbCCTQASZJEY/gmgzU2FPZ47DUxCQeCWZDN0s/J9Y4icZ91RGqCqZT0XEuAphcFRjnV5SPhay1puc89jA8pPxDAyStVUtdhohdgKLDrRZ5i9YJqk2Ub2IyV5qVdKCvMjDtJZJpRahmdFmBcnboB7m7x4dAt5BtYQOWmvqNA5tA9Cebx5LRck6a8GmJTO3qan+WeRTgd5yw1VLRal2KxUGAwEgC0Im4BWIFcNP2xcyziB94GuszFKoyg7gf9L12cmshdMg5ezpSubeNI4CZAD1LihXJTr6Bg0FIpRnnfnMyoU5BwgclQwR5QvNjdRqXQm2fZaysXuSs5EWUz4JRo1fCO+MxXOEWUXwr0qfFOFmG1q0zoWifL1jo9vt/mplEpaJcTfa0eiVGFxYSWLCyu4SUKdzpRjhNvcc5lv20QfmN7hnsuXC+dydw8eWQJZc5JgiA1A1vbm2aLQSuMkyu7CSn4slYTcc9lB9BkN5Ycyi5bi+RwWovIrwjDoSl5KiH+IrAkK57IFwtORwCXqTVjM7y0o4IrCCh4bVMGTRDmJKJeIsDRiV8jF/CHV4dFJlSs6xA6qja9xLRMa1zIhFF7sHuyoixkRs0nWnGTQNRxEeDpb+j4LRBIO7nTe9gvZXUO0QsyBZoHImZXWgvf575g6JZJMM62h2AtaonhlFkkzviqMJfI+hMKiYPg4g3rJRSjrEBtuDNui/4DhHW2KGjf0zZowq7sbv839uYYrUUqzqbevUCX2QpPSElkUBl1pR0ULQCAgNXHHqqNGh1AOxWLH1HX3NFl5C3wTuItmDJGz9Eq7wIepGkkw4QxbVsiqkxTP4nDbZm4FVqAD4LpG31EHDFcoblzPOUXXszOqrus2YhCJfgoqafI5is8YbreVVYTXSkua1uOV63mnxUtDx66m0V1J2stcjWvTXC89QbL+IvOv4gVRbkcSLi6cNEQv0o3Ng7opfG2jcS0TgM5DSpbVg0Ce8B8FFbwM/DjSXGy+pzUYVSL/HeFzrV4679Col4JmL1tbvOxuXsf6BJW9PAAdoU9+7XkzWadKNXQFlU4m1MUT0rV+uaC1jd80e3neCL9UuhxDyXixOwE3PAqdWd5JLeNZHLL4Nzo2BTasal7HT1vWsbQFXgMmd/S5CiDH1XU0U+HS5nUsb/GSeLquB/TZlFAwk23+8IWmVQzAXU9vKLqOQyL8FR0LWhVKgS8gsdO3KKOTNE+LVNIkwr9EFX3b+DmC8LeAH8hFmKXCYiB84V35eeFcngHIs/kDEDmCYCFcrpoYs+kJfRqWL57FYeDrTZt4yGWYLTADYbwqwzM27iNCebSbQPh8iJq4ULWwM7JhPqU9alGr+KDzTIkPoKCCVxs3MM0KUAVMsYVcI+xX5WW0YzsqhIxQp3a4rRgaYroTGiJ1CHsi5QU78baMYwYdOxcxXFtYwbKWNfzWtqgycK5CvsBelA0d2/ewmkpCrb9gtga5BeF0VfJESTya4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OAwEPkjAM/rqjCoYzwAAAAASUVORK5CYII=" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.64</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.65</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -2169,6 +2185,125 @@ function monthTable(rows){
     <tr><td class="rowhd">금액</td>${rows.map(r=>`<td class="num">${won(r.amount)}</td>`).join('')}</tr>
   </tbody></table></div>`;
 }
+// ---------------- 대시보드 월별 판매금액 차트 (SVG): 눈금·월평균선·최고월 강조·진행중인 달 표시·마우스/터치 툴팁 ----------------
+function niceStep(max, n){ const raw = max/n; const p = Math.pow(10, Math.floor(Math.log10(raw))); const f = raw/p; return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*p; }
+function axisLbl(v){ if(v===0) return '0'; if(v>=1e8) return (v/1e8).toFixed(1).replace(/\.0$/,'')+'억'; if(v>=1e4) return Math.round(v/1e4).toLocaleString('ko-KR')+'만'; return String(Math.round(v)); }
+function chartLbl(n){ n = Number(n)||0; if(n>=1e8) return (n/1e8).toFixed(1)+'억'; if(n>=1e4) return Math.round(n/1e4).toLocaleString('ko-KR')+'만'; return Math.round(n).toLocaleString('ko-KR'); }
+function pctChg(cur, prev){ cur = Number(cur)||0; prev = Number(prev)||0; if(!prev) return null; const p = (cur-prev)/prev*100; return {p, up:p>=0, txt:`${p>=0?'▲':'▼'} ${Math.abs(p).toFixed(1)}%`}; }
+function pctSpan(c){ return c ? `<b style="color:${c.up?'var(--good)':'var(--bad)'}">${c.txt}</b>` : '<span class="muted">-</span>'; }
+function monthShift(month, dm){ const y = Number(month.slice(0,4)), m = Number(month.slice(5,7))-1+dm; const d = new Date(y + Math.floor(m/12), ((m%12)+12)%12, 1); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-01'; }
+let MCHART = null;
+function drawMonthChart(host, rows, all){
+  if(!host) return;
+  MCHART = {host, rows, all};
+  const n = rows.length;
+  if(!n){ host.innerHTML = '<p class="small muted">데이터가 없습니다.</p>'; return; }
+  const byM = new Map((all||[]).map(r=>[r.month, r]));
+  const nowKey = curMonthKey();
+  const W = Math.max(300, host.clientWidth || 360), H = 262;
+  const mg = {l:48, r:14, t:30, b:32};
+  const iw = W-mg.l-mg.r, ih = H-mg.t-mg.b;
+  const vals = rows.map(r=>Number(r.amount)||0);
+  const done = rows.filter(r=>r.month!==nowKey);
+  const base = done.length ? done : rows;
+  const avg = base.reduce((s,r)=>s+(Number(r.amount)||0),0)/base.length;
+  const maxV = Math.max(...vals, 1);
+  const step = niceStep(maxV*1.1, 4), top = Math.ceil(maxV*1.1/step)*step;
+  const y = v => mg.t + ih - (v/top)*ih;
+  const band = iw/n, bw = Math.max(3, Math.min(42, band*0.62));
+  const multiYear = new Set(rows.map(r=>r.month.slice(0,4))).size>1;
+  const lblEvery = Math.max(1, Math.ceil(40/band));
+  const maxI = vals.indexOf(Math.max(...vals));
+  const xl = r => multiYear ? r.month.slice(2,7).replace('-','.') : (Number(r.month.slice(5,7))+'월');
+  let s = `<defs>
+    <linearGradient id="mcg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--chart-accent)"/><stop offset="1" style="stop-color:var(--chart-accent);stop-opacity:.45"/></linearGradient>
+    <pattern id="mch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--chart-accent);fill-opacity:.18"/><rect width="3" height="6" style="fill:var(--chart-accent);fill-opacity:.55"/></pattern>
+  </defs>`;
+  const ticks = Math.round(top/step);
+  for(let k=0;k<=ticks;k++){
+    const v = step*k, yy = y(v);
+    s += `<line x1="${mg.l}" x2="${W-mg.r}" y1="${yy}" y2="${yy}" style="stroke:var(--line)" ${k?'stroke-dasharray="3 4"':''}/>`;
+    s += `<text x="${mg.l-8}" y="${yy+4}" text-anchor="end" font-size="11" style="fill:var(--muted)">${axisLbl(v)}</text>`;
+  }
+  rows.forEach((r,i)=>{
+    const v = vals[i], x = mg.l + band*i + (band-bw)/2, h = Math.max(2, (v/top)*ih), partial = r.month===nowKey;
+    const fill = partial ? 'url(#mch)' : (i===maxI ? 'var(--chart-accent-ink)' : 'url(#mcg)');
+    s += `<g class="mcol" data-i="${i}"><rect class="mhl" x="${mg.l+band*i}" y="${mg.t-12}" width="${band}" height="${ih+12}" rx="6"/>`;
+    s += `<rect x="${x}" y="${mg.t+ih-h}" width="${bw}" height="${h}" rx="${Math.min(6,bw/2)}" style="fill:${fill}${partial?';stroke:var(--chart-accent-ink)':''}" ${partial?'stroke-dasharray="4 3"':''}/>`;
+    if(v && (band>=44 || i===maxI || i===n-1)){
+      s += `<text x="${x+bw/2}" y="${y(v)-6}" text-anchor="middle" font-size="11.5" font-weight="${i===maxI?700:600}" style="fill:${i===maxI?'var(--ink)':'var(--ink-2)'}">${chartLbl(v)}</text>`;
+    }
+    if(i%lblEvery===0 || i===n-1 && (n-1)%lblEvery===0){
+      s += `<text x="${mg.l+band*i+band/2}" y="${H-10}" text-anchor="middle" font-size="11" style="fill:var(--muted)">${xl(r)}</text>`;
+    }
+    s += `<rect x="${mg.l+band*i}" y="${mg.t-12}" width="${band}" height="${ih+12+mg.b}" fill="transparent"/></g>`;
+  });
+  s += `<line x1="${mg.l}" x2="${W-mg.r}" y1="${y(avg)}" y2="${y(avg)}" stroke-dasharray="5 4" style="stroke:var(--ink-2)" opacity=".55"/>`;
+  const hasPartial = rows.some(r=>r.month===nowKey);
+  const legend = `<div class="mleg"><span><i class="ln"></i>월평균 ${chartLbl(avg)}</span>${n>1?'<span><i class="dk"></i>가장 많이 판 달</span>':''}${hasPartial?'<span><i class="hz"></i>진행 중인 달</span>':''}</div>`;
+  host.classList.add('mchart');
+  host.innerHTML = `${legend}<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="월별 판매금액 차트" style="display:block;overflow:visible">${s}</svg><div class="mtip" hidden></div>`;
+  const tip = host.querySelector('.mtip');
+  const svgEl = host.querySelector('svg');
+  const hide = ()=>{ tip.hidden = true; host.querySelectorAll('.mcol.on').forEach(g=>g.classList.remove('on')); };
+  const show = g => {
+    const i = Number(g.dataset.i), r = rows[i], partial = r.month===nowKey;
+    host.querySelectorAll('.mcol.on').forEach(x=>x.classList.remove('on')); g.classList.add('on');
+    const pm = byM.get(monthShift(r.month,-1)), py = byM.get(monthShift(r.month,-12));
+    const lbl = r.month.slice(0,4)+'년 '+Number(r.month.slice(5,7))+'월';
+    tip.innerHTML = `<div class="t">${lbl}${partial?' <span class="muted" style="font-weight:500">· 진행중</span>':''}</div>
+      <div class="a">${won(r.amount)}</div>
+      <div>판매 ${num(r.order_count)}건 · 거래처 ${num(r.customer_count)}곳</div>
+      ${partial ? '<div class="muted">이번 달은 아직 끝나지 않아 비교하지 않아요</div>' : `<div>전월 대비 ${pctSpan(pctChg(r.amount, pm&&pm.amount))}</div><div>전년 동월 대비 ${pctSpan(pctChg(r.amount, py&&py.amount))}</div>`}`;
+    tip.hidden = false;
+    const cx = mg.l + band*i + band/2, w = tip.offsetWidth;
+    let left = cx > W/2 ? cx - band/2 - w - 6 : cx + band/2 + 6;
+    left = Math.max(0, Math.min(W-w, left));
+    tip.style.left = left+'px'; tip.style.top = (svgEl.getBoundingClientRect().top - host.getBoundingClientRect().top + 4)+'px';
+  };
+  host.querySelectorAll('.mcol').forEach(g=>{
+    g.addEventListener('pointerenter', ()=>show(g));
+    g.addEventListener('pointerdown', ()=>show(g));
+    g.addEventListener('pointerleave', e=>{ if(e.pointerType==='mouse') hide(); });
+  });
+  if(!window.__mtipBound){
+    window.__mtipBound = true;
+    document.addEventListener('pointerdown', e=>{ if(MCHART && MCHART.host.isConnected && !MCHART.host.contains(e.target)){ const t = MCHART.host.querySelector('.mtip'); if(t) t.hidden = true; MCHART.host.querySelectorAll('.mcol.on').forEach(g=>g.classList.remove('on')); } });
+    let rt = null;
+    window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(()=>{ if(MCHART && MCHART.host.isConnected && MCHART.host.clientWidth) drawMonthChart(MCHART.host, MCHART.rows, MCHART.all); }, 150); });
+  }
+}
+// 차트 아래 요약 4칸: 월평균·최고·최저·최근 완료월 전월 대비 (진행 중인 달은 평균·비교에서 뺌)
+function monthStatsHtml(rows, all){
+  const nowKey = curMonthKey();
+  const done = rows.filter(r=>r.month!==nowKey && (Number(r.amount)||0)>0);
+  if(!done.length) return '';
+  const byM = new Map((all||[]).map(r=>[r.month, r]));
+  const amt = r => Number(r.amount)||0;
+  const avg = done.reduce((s,r)=>s+amt(r),0)/done.length;
+  const hi = done.reduce((a,b)=>amt(b)>amt(a)?b:a), lo = done.reduce((a,b)=>amt(b)<amt(a)?b:a);
+  const last = done[done.length-1], pm = byM.get(monthShift(last.month,-1));
+  const ch = pctChg(last.amount, pm && pm.amount);
+  const ml = r => r.month.slice(0,4)+'년 '+Number(r.month.slice(5,7))+'월';
+  return `<div class="kpis" style="margin-top:14px">
+    <div class="kpi"><div class="l">월평균</div><div class="v">${amtShort(avg)}원</div><div class="s">진행 중인 달 제외 ${done.length}개월</div></div>
+    <div class="kpi"><div class="l">가장 많이 판 달</div><div class="v">${amtShort(amt(hi))}원</div><div class="s">${ml(hi)}</div></div>
+    <div class="kpi"><div class="l">가장 적게 판 달</div><div class="v">${amtShort(amt(lo))}원</div><div class="s">${ml(lo)}</div></div>
+    <div class="kpi"><div class="l">${ml(last)} 전월 대비</div><div class="v" style="color:${ch?(ch.up?'var(--good)':'var(--bad)'):'inherit'}">${ch?ch.txt:'-'}</div><div class="s">${amtShort(amt(last))}원</div></div>
+  </div>`;
+}
+// 정확한 금액이 필요할 때: 가로로 밀 필요 없이 세로로 내려보는 표 (접어둠)
+function monthDetailHtml(rows, all){
+  if(!rows.length) return '';
+  const nowKey = curMonthKey();
+  const byM = new Map((all||[]).map(r=>[r.month, r]));
+  const body = rows.slice().reverse().map(r=>{
+    const partial = r.month===nowKey, pm = byM.get(monthShift(r.month,-1));
+    return `<tr><td>${esc(r.month.slice(0,4)+'년 '+Number(r.month.slice(5,7))+'월')}${partial?' <span class="small muted">진행중</span>':''}</td><td class="num">${won(r.amount)}</td><td class="num">${num(r.order_count)}건</td><td class="num">${partial?'<span class="muted">-</span>':pctSpan(pctChg(r.amount, pm&&pm.amount))}</td></tr>`;
+  }).join('');
+  return `<details class="mtbl"><summary>월별 금액 표로 보기 (${rows.length}개월)</summary>
+    <div class="tbl-wrap" style="max-height:360px;overflow-y:auto;margin-top:8px"><table><thead><tr><th>월</th><th class="num">판매금액</th><th class="num">판매건수</th><th class="num">전월 대비</th></tr></thead><tbody>${body}</tbody></table></div></details>`;
+}
 // ---------------- generic year-range helpers (요약 차트 · 거래처 상세 차트 공용) ----------------
 function monthYears(monthsArr){ return [...new Set((monthsArr||[]).map(m=>m.month.slice(0,4)))]; }
 function monthYearBounds(monthsArr, y){
@@ -2479,8 +2614,9 @@ async function renderSummaryView(){
   <div class="panel">
     <div class="panel-h"><h2>월별 판매금액</h2><span class="period-tag">${chartRows.length}개월</span></div>
     ${monthRangeChips(summaryMonths, summaryRange, 'summarySeg', true)}
-    ${chartRows.length? monthBars(chartRows) : '<p class="small muted">데이터가 없습니다.</p>'}
-    ${monthTable(chartRows)}
+    <div id="mchart"></div>
+    ${monthStatsHtml(chartRows, summaryMonths)}
+    ${monthDetailHtml(chartRows, summaryMonths)}
   </div>
   <div class="status-row">
   <div class="panel"><div class="panel-h"><h2>거래처 상태 분포</h2><span class="period-tag">기준일 ${todayStr()}</span></div>
@@ -2529,6 +2665,7 @@ async function renderSummaryView(){
     ${topItems.map(i=>`<tr><td>${esc(i.item_name)}</td><td class="num">${won(i.amount)}</td><td class="num">${num(i.qty)}</td></tr>`).join('')}
     </tbody></table></div></div>`;
   el.querySelectorAll('[data-yr]').forEach(b=> b.onclick = ()=>{ summaryRange = b.dataset.yr; renderSummaryView(); });
+  drawMonthChart(el.querySelector('#mchart'), chartRows, summaryMonths);
   el.querySelectorAll('[data-goto-st]').forEach(b=> b.onclick = ()=> gotoCustomersByStatus(b.dataset.gotoSt) );
   el.querySelectorAll('[data-goto-core]').forEach(b=> b.onclick = ()=> gotoCoreTargets() );
   const gseg = document.getElementById('summaryGroupSeg');
