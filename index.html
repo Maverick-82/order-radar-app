@@ -728,7 +728,7 @@ details.help summary{font-size:14px;font-weight:600}
   table.rt td.rt-title{grid-column:1/-1;display:block;padding:0 0 8px;margin:0 0 2px}
   table.rt td.rt-wide{grid-column:1/-1}
 }
-@media (max-width:720px){.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:4px}.seg button{white-space:nowrap}}
+@media (max-width:720px){.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:4px}.seg button{white-space:nowrap}.seg.yrs{grid-template-columns:repeat(3,1fr)}.seg.yrs button{padding:9px 4px}}
 
 /* ---------- 경영 리포트 ---------- */
 #view-report{gap:14px}
@@ -1229,7 +1229,7 @@ textarea.dr-in{resize:vertical;line-height:1.55}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.68</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.69</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -2323,7 +2323,7 @@ function monthRangeChips(monthsArr, range, segId, noRecent){
   if(years.length<=1) return '';
   const n = (monthsArr||[]).length;
   const opts = [...(noRecent?[]:[['recent','최근 12개월']]), ...years.map(y=>[y,y+'년']), ['all',`전체(${n}개월)`]];
-  return `<div class="seg" id="${segId}">${opts.map(([k,label])=>`<button data-yr="${k}" aria-pressed="${range===k}">${label}</button>`).join('')}</div>`;
+  return `<div class="seg yrs" id="${segId}">${opts.map(([k,label])=>`<button data-yr="${k}" aria-pressed="${range===k}">${label}</button>`).join('')}</div>`;
 }
 // summaryMonths: monthly_order_totals 전체 캐시(전 거래처 공통 타임라인). 요약 차트와 거래처 상세 차트가 함께 씀.
 let summaryMonths = null;
@@ -2406,7 +2406,17 @@ function normalizeItemName(raw){
   return bracket ? (base + ' ' + bracket) : base;
 }
 let itemTotalsCache = null;
+// 주요 품목 연도별: item_year_totals(품목×연도 집계)를 연도를 고를 때 한 번만 받아서 보관
+let itemRange = String(new Date().getFullYear()); const itemYearCache = {};   // 기본은 올해 (데이터가 없으면 전체로 돌아감)
+async function ensureItemYearLoaded(y){
+  if(!y || y==='all') return null;
+  if(itemYearCache[y]) return itemYearCache[y];
+  const {data, error} = await sb.from('item_year_totals').select('item_name,qty,amount').eq('yr', Number(y)).order('amount',{ascending:false}).limit(1500);
+  if(error) throw error;
+  return (itemYearCache[y] = data || []);
+}
 async function ensureItemTotalsLoaded(force){
+  if(force) Object.keys(itemYearCache).forEach(k=>delete itemYearCache[k]);
   if(itemTotalsCache && !force) return itemTotalsCache;
   const {data, error} = await sb.from('item_totals').select('*').order('amount', {ascending:false}).limit(1500);
   if(error){ if(!force) itemTotalsCache = []; throw error; }
@@ -2522,17 +2532,24 @@ async function renderSummaryView(){
   try{
     const ex = summaryExtras;
     const usable = ex && ex.key===startCur && (ex.keep || Date.now()-ex.t < 30000);
-    const [, items, , extras] = await Promise.all([
+    const [, items, , extras, itemYr] = await Promise.all([
       ensureMonthsLoaded(), ensureItemTotalsLoaded(), ensureCustYearTotalsLoaded(),
-      usable ? Promise.resolve(ex) : fetchSummaryExtras()
+      usable ? Promise.resolve(ex) : fetchSummaryExtras(),
+      ensureItemYearLoaded(itemRange).catch(()=>null)
     ]);
     if(ex && ex.keep) ex.keep = false; // 저장해 둔 값은 첫 화면에만 쓰고, 이후엔 다시 받아서 최신으로 보여줌
-    itemRows = items;
+    const hasYr = !!(itemYr && itemYr.length);
+    itemRows = (itemRange!=='all' && hasYr) ? itemYr : items;
+    if(itemRange!=='all' && !hasYr) itemRange = 'all';
     monthActs = extras.acts; monthOrders = extras.orders;
   }
   catch(error){ el.innerHTML = `<div class="panel">불러오기 실패: ${esc(error.message)}</div>`; return; }
   const byStatus = {}; CUSTS.forEach(c=>byStatus[c.status]=(byStatus[c.status]||0)+1);
-  const topItems = topMergedItems(itemRows, 40);
+  const allItems = topMergedItems(itemRows, 100000);   // 비율(%)은 전체 품목 합계 기준으로 계산
+  const topItems = allItems.slice(0, 40);
+  const itemYears = monthYears(summaryMonths);
+  const itemChips = itemYears.length>1 ? `<div class="seg yrs" id="itemSeg" style="margin:0 0 12px">${[['all','전체'],...itemYears.map(y=>[y,y+'년'])].map(([k,l])=>`<button data-iyr="${k}" aria-pressed="${itemRange===k}">${l}</button>`).join('')}</div>` : '';
+  const itemPeriod = itemRange==='all' ? '전체 기간' : itemRange+'년';
   { const ys = monthYears(summaryMonths), thisY = String(new Date().getFullYear());
     if(summaryRange!=='all' && !ys.includes(summaryRange)) summaryRange = ys.includes(thisY) ? thisY : (ys[ys.length-1]||'all'); }
   const [a,b] = monthRangeBounds(summaryMonths, summaryRange);
@@ -2654,17 +2671,20 @@ async function renderSummaryView(){
       <button data-g="유형별" aria-pressed="${summaryGroupBy==='유형별'}">유형별</button>
       <button data-g="거래처별" aria-pressed="${summaryGroupBy==='거래처별'}">거래처별</button>
     </div></div>
-    <span class="period-tag">${rangeLabel(summaryRange)} 기준</span>
+    ${monthRangeChips(summaryMonths, summaryRange, 'typeSeg', true) || `<span class="period-tag">${rangeLabel(summaryRange)} 기준</span>`}
     ${summaryGroupBy==='유형별'
       ? hbars(Object.entries(byType).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([n,v])=>({n,v,s:won(v)})), {cat:true})
       : hbars(topCustomers)}
   </div>
-  <div class="panel"><div class="panel-h"><h2>주요 품목</h2><span class="note">누적금액 상위 · 특가·공동구매 등 표기만 다른 동일 품목은 합산</span></div>
-    ${stackbar(topItems.map(i=>({n:i.item_name, v:Number(i.amount)||0})))}
-    <div class="tbl-wrap" style="max-height:300px;overflow-y:auto;margin-top:14px"><table><thead><tr><th>품목</th><th class="num">누적금액</th><th class="num">수량</th></tr></thead><tbody>
+  <div class="panel"><div class="panel-h"><h2>주요 품목</h2><span class="note">${itemPeriod} 금액 상위 · 특가·공동구매 등 표기만 다른 동일 품목은 합산</span></div>
+    ${itemChips}
+    ${stackbar(allItems.map(i=>({n:i.item_name, v:Number(i.amount)||0})))}
+    <div class="tbl-wrap" style="max-height:300px;overflow-y:auto;margin-top:14px"><table><thead><tr><th>품목</th><th class="num">${itemRange==='all'?'누적금액':'금액'}</th><th class="num">수량</th></tr></thead><tbody>
     ${topItems.map(i=>`<tr><td>${esc(i.item_name)}</td><td class="num">${won(i.amount)}</td><td class="num">${num(i.qty)}</td></tr>`).join('')}
     </tbody></table></div></div>`;
-  el.querySelectorAll('[data-yr]').forEach(b=> b.onclick = ()=>{ summaryRange = b.dataset.yr; renderSummaryView(); });
+  const keepScroll = async fn=>{ const y = window.scrollY; await fn(); window.scrollTo(0, y); };
+  el.querySelectorAll('[data-yr]').forEach(b=> b.onclick = ()=> keepScroll(()=>{ summaryRange = b.dataset.yr; return renderSummaryView(); }));
+  el.querySelectorAll('[data-iyr]').forEach(b=> b.onclick = ()=> keepScroll(()=>{ itemRange = b.dataset.iyr; return renderSummaryView(); }));
   drawMonthChart(el.querySelector('#mchart'), chartRows, summaryMonths);
   el.querySelectorAll('[data-goto-st]').forEach(b=> b.onclick = ()=> gotoCustomersByStatus(b.dataset.gotoSt) );
   el.querySelectorAll('[data-goto-core]').forEach(b=> b.onclick = ()=> gotoCoreTargets() );
@@ -5452,7 +5472,7 @@ async function openDrawer(custId){
   const custMonthsAll = (months && months.length)
     ? months.map(m=>({month: m.month, amount: byMonth.get(m.month)||0, orders:(orderKeysByMonth.get(m.month)||new Set()).size}))
     : [...byMonth.entries()].sort((a,b)=> a[0]<b[0]?-1:1).map(([month,amount])=>({month, amount, orders:(orderKeysByMonth.get(month)||new Set()).size}));
-  let custRange = 'recent';
+  let custRange = monthYears(custMonthsAll).includes(String(new Date().getFullYear())) ? String(new Date().getFullYear()) : 'recent';  // 기본은 올해
   // 주문(orders) 테이블은 한 줄이 "한 주문의 품목 하나"라서, 같은 날짜·같은 주문번호(order_no)끼리
   // 묶어야 실제 "주문 1건"이 됨 — 최근 주문 목록은 이 묶음 단위로 보여주고, 클릭하면 그 주문에 속한
   // 품목 전체와 배송지·담당자 연락처를 한번에 보여줌.
