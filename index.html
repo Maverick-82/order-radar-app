@@ -181,6 +181,30 @@ tr.click:hover td{background:var(--accent-soft)}
 .vbars .val{font-size:11px;font-weight:600;color:var(--ink-2);margin-bottom:3px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .mchart{position:relative;margin-top:10px}
 .mchart svg text{font-family:inherit;font-variant-numeric:tabular-nums}
+.donut{display:grid;grid-template-columns:200px 1fr;gap:12px 28px;align-items:center;margin-top:14px}
+.dn-svg{display:block;overflow:visible;margin:0 auto}
+.dn-s{transition:opacity .15s;cursor:pointer}
+.dn-l{font-size:11px;fill:var(--muted)}
+.dn-v{font-size:19px;font-weight:700;fill:var(--ink);font-variant-numeric:tabular-nums}
+.dn-leg{list-style:none;margin:0;padding:0;display:grid;gap:2px;width:100%}
+.dn-leg li{display:grid;grid-template-columns:12px minmax(0,1fr) auto auto;gap:4px 10px;align-items:center;font-size:13px;padding:6px 8px;border-radius:8px;cursor:default;transition:opacity .15s,background-color .15s}
+.dn-leg .sw{width:11px;height:11px;border-radius:3px}
+.dn-leg .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.dn-leg .pc{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;text-align:right;min-width:46px}
+.dn-leg .am{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;text-align:right;min-width:92px}
+.dn-leg li.on{background:var(--surface-2)}
+.donut.hov .dn-s:not(.on){opacity:.28}
+.donut.hov .dn-leg li:not(.on){opacity:.55}
+@media (max-width:640px){.donut{grid-template-columns:1fr}.dn-leg .am{display:none}}
+.core5{display:grid;gap:8px;margin-top:10px}
+.c5{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 13px;border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:background-color .15s}
+.c5:hover{background:var(--surface-2)}
+.c5 .rk{width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;font-size:13px}
+.c5 .nm{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.c5 .sub{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5}
+.c5 .amt{font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.c5 .amt small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.c5 .late{color:var(--bad);font-weight:600}
 .mleg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink-2);margin-bottom:6px}
 .mleg i{display:inline-block;vertical-align:middle;margin-right:6px}
 .mleg .ln{width:18px;height:0;border-top:2px dashed var(--ink-2);opacity:.6}
@@ -1229,7 +1253,7 @@ textarea.dr-in{resize:vertical;line-height:1.55}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.69</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.70</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -2170,6 +2194,43 @@ function stackbar(rows, capN){
   <div class="stackbar">${items.map(it=>`<div class="seg" style="width:${Math.max(0.6,it.v/total*100).toFixed(2)}%;background:${it.c}" title="${esc(it.n)} · ${won(it.v)} (${(it.v/total*100).toFixed(1)}%)"></div>`).join('')}</div>
   <div class="stackbar-legend">${items.map(it=>`<span class="li"><span class="sw" style="background:${it.c}"></span><span class="nm" title="${esc(it.n)}">${esc(it.n)}</span><span class="amt">${(it.v/total*100).toFixed(0)}%</span></span>`).join('')}</div>`;
 }
+// 유형별 매출 비중을 도넛(원형) 차트로 — 위에 마우스를 올리거나(폰은 터치) 범례를 누르면 가운데에 그 항목의 비율이 떠요
+function donutChart(rows, capN){
+  capN = capN || 7;
+  const sorted = rows.filter(r=>r.v>0).sort((a,b)=>b.v-a.v);
+  if(!sorted.length) return '<p class="small muted">표시할 데이터가 없어요.</p>';
+  const items = sorted.slice(0, capN).map((r,i)=>({n:r.n, v:r.v, c:CAT_HUES[i % CAT_HUES.length]}));
+  const rest = sorted.slice(capN), restSum = rest.reduce((s,r)=>s+r.v,0);
+  if(restSum>0) items.push({n:`기타 ${rest.length}개 유형`, v:restSum, c:'var(--idle)'});
+  const total = items.reduce((s,r)=>s+r.v,0) || 1;
+  const R = 70, SW = 30, C = 2*Math.PI*R; let off = 0;
+  const arcs = items.map((it,i)=>{
+    const frac = it.v/total, len = Math.max(0.5, frac*C - (items.length>1 ? 2 : 0));
+    const el = `<circle class="dn-s" data-i="${i}" cx="100" cy="100" r="${R}" fill="none" stroke-width="${SW}" style="stroke:${it.c}" stroke-dasharray="${len.toFixed(2)} ${(C-len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}"><title>${esc(it.n)} · ${won(it.v)} (${(frac*100).toFixed(1)}%)</title></circle>`;
+    off += frac*C; return el;
+  }).join('');
+  return `<div class="donut"><svg class="dn-svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="유형별 매출 비중 도넛 차트"><g transform="rotate(-90 100 100)">${arcs}</g><text class="dn-l" x="100" y="95" text-anchor="middle">합계</text><text class="dn-v" x="100" y="118" text-anchor="middle">${esc(amtShort(total))}</text></svg>
+    <ul class="dn-leg">${items.map((it,i)=>`<li data-i="${i}" data-n="${esc(it.n)}" data-pc="${(it.v/total*100).toFixed(1)}%"><span class="sw" style="background:${it.c}"></span><span class="nm" title="${esc(it.n)}">${esc(it.n)}</span><span class="pc">${(it.v/total*100).toFixed(1)}%</span><span class="am">${won(it.v)}</span></li>`).join('')}</ul></div>`;
+}
+function bindDonut(root){
+  root.querySelectorAll('.donut').forEach(d=>{
+    const lbl = d.querySelector('.dn-l'), val = d.querySelector('.dn-v');
+    const base = [lbl.textContent, val.textContent];
+    const on = i=>{
+      const li = d.querySelector(`.dn-leg li[data-i="${i}"]`); if(!li) return;
+      d.classList.add('hov');
+      d.querySelectorAll('[data-i]').forEach(x=> x.classList.toggle('on', x.dataset.i===String(i)));
+      const n = li.dataset.n; lbl.textContent = n.length>9 ? n.slice(0,9)+'…' : n; val.textContent = li.dataset.pc;
+    };
+    const off = ()=>{ d.classList.remove('hov'); d.querySelectorAll('.on').forEach(x=>x.classList.remove('on')); lbl.textContent = base[0]; val.textContent = base[1]; };
+    d.querySelectorAll('[data-i]').forEach(x=>{
+      x.addEventListener('pointerenter', ()=>on(x.dataset.i));
+      x.addEventListener('pointerdown', ()=>on(x.dataset.i));
+      x.addEventListener('pointerleave', e=>{ if(e.pointerType==='mouse') off(); });
+    });
+    d.addEventListener('pointerleave', e=>{ if(e.pointerType==='mouse') off(); });
+  });
+}
 function monthBars(rows){
   const max = Math.max(...rows.map(r=>Number(r.amount)||0),1);
   return `<div class="vbars-wrap"><div class="vbars">${rows.map(r=>{
@@ -2601,6 +2662,23 @@ async function renderSummaryView(){
   // "이번달 영업 활동" 카드(신규 거래처·전화·방문·문자)를 누르면 그 거래처/기록 목록을 아래에 펼쳐서 보여줌
   const newCustList = CUSTS.filter(c=>c.first_date && c.first_date.slice(0,7)===nowYM)
     .sort((a,b)=> a.first_date<b.first_date ? 1 : a.first_date>b.first_date ? -1 : (Number(b.total_amount)||0)-(Number(a.total_amount)||0));
+  // 예전엔 자주·많이 주문했는데 지금은 끊긴 "핵심 영업 거래처" 5곳: 이탈의심 중 판매 5회 이상,
+  // 누적금액·판매일수 순위(백분위)를 평균한 값이 높은 순. (5곳이 안 되면 기준을 조금 넓힘)
+  const coreLapsed = (()=>{
+    const pick = (sts, minN)=> CUSTS.filter(c=> sts.includes(c.status) && (Number(c.n_dates)||0) >= minN && !Number(c.umbrella_children));
+    let pool = pick(['이탈의심'], 5);
+    if(pool.length < 5) pool = pick(['이탈의심','주의'], 3);
+    const pr = key=>{ const a = pool.slice().sort((x,y)=>(Number(x[key])||0)-(Number(y[key])||0)); const m = new Map(); a.forEach((c,i)=> m.set(c.customer_id, a.length>1 ? i/(a.length-1) : 1)); return m; };
+    const pa = pr('total_amount'), pn = pr('n_dates');
+    return pool.map(c=>Object.assign({}, c, {_sc:(pa.get(c.customer_id)+pn.get(c.customer_id))/2})).sort((a,b)=> b._sc-a._sc || (Number(b.total_amount)||0)-(Number(a.total_amount)||0)).slice(0,5);
+  })();
+  const agoLbl = d=>{ d = Number(d)||0; return d<60 ? d+'일 전' : d<365 ? '약 '+Math.round(d/30)+'개월 전' : '약 '+(d/365).toFixed(1)+'년 전'; };
+  const coreHtml = coreLapsed.length ? `<div class="core5">${coreLapsed.map((c,i)=>{
+      const cyc = Math.round(Number(c.typical_cycle_days)||0);
+      return `<div class="c5 click" data-goto-cust="${c.customer_id}" role="button" tabindex="0"><span class="rk">${i+1}</span>
+        <div style="min-width:0"><div class="nm" title="${esc(c.name)}">${esc(c.name)}</div>
+        <div class="sub">${esc(c.ctype||'')} · 주문 ${num(c.n_dates)}회 · <span class="late">마지막 주문 ${agoLbl(c.days_since_last_order)}</span>${cyc?` (평소 ${cyc}일마다 주문)`:''}</div></div>
+        <div class="amt">${amtShort(Number(c.total_amount)||0)}<small>누적 판매금액</small></div></div>`; }).join('')}</div>` : '<p class="small muted">조건에 맞는 거래처가 아직 없어요.</p>';
   const actRowsHtml = list => list.map(a=>`<tr class="click" data-goto-cust="${a.customer_id}"><td>${esc((a.customers&&a.customers.name)||'-')}</td><td><span class="tag">${LOG_TYPE[a.kind]||a.kind}</span></td><td class="small muted">${esc((a.note||'').slice(0,40))}${(a.note||'').length>40?'…':''}</td><td class="num small muted">${esc((a.created_at||'').slice(0,10))}</td></tr>`).join('');
   const actDefaultHtml = monthActs.length ? `
     <div class="tbl-wrap" style="margin-top:14px"><table><thead><tr><th>거래처</th><th>구분</th><th>내용</th><th class="num">일시</th></tr></thead><tbody>
@@ -2666,14 +2744,18 @@ async function renderSummaryView(){
     </div>
     <div id="actDetail">${actDefaultHtml}</div>
   </div>
-  <div class="panel"><div class="panel-h"><h2>${esc(summaryGroupBy)} 누적매출 상위</h2>
+  <div class="panel"><div class="panel-h"><h2>🔥 놓치면 아쉬운 단골 5곳</h2><span class="note">예전엔 자주·많이 샀는데 지금은 끊긴 곳 · 눌러서 상세 보기</span></div>
+    ${coreHtml}
+    <p class="small muted" style="margin:10px 0 0;line-height:1.6">기준: 구매 늦어진 거래처 중 주문 5회 이상, 누적금액과 주문 횟수가 모두 큰 순서예요. 더 많이 보려면 영업 → 🔥 영업대상을 봐요.</p>
+  </div>
+  <div class="panel"><div class="panel-h"><h2>${summaryGroupBy==='유형별' ? '유형별 매출 비중' : '거래처별 누적매출 상위'}</h2>
     <div class="seg" id="summaryGroupSeg">
       <button data-g="유형별" aria-pressed="${summaryGroupBy==='유형별'}">유형별</button>
       <button data-g="거래처별" aria-pressed="${summaryGroupBy==='거래처별'}">거래처별</button>
     </div></div>
     ${monthRangeChips(summaryMonths, summaryRange, 'typeSeg', true) || `<span class="period-tag">${rangeLabel(summaryRange)} 기준</span>`}
     ${summaryGroupBy==='유형별'
-      ? hbars(Object.entries(byType).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([n,v])=>({n,v,s:won(v)})), {cat:true})
+      ? donutChart(Object.entries(byType).map(([n,v])=>({n,v})))
       : hbars(topCustomers)}
   </div>
   <div class="panel"><div class="panel-h"><h2>주요 품목</h2><span class="note">${itemPeriod} 금액 상위 · 특가·공동구매 등 표기만 다른 동일 품목은 합산</span></div>
@@ -2686,6 +2768,7 @@ async function renderSummaryView(){
   el.querySelectorAll('[data-yr]').forEach(b=> b.onclick = ()=> keepScroll(()=>{ summaryRange = b.dataset.yr; return renderSummaryView(); }));
   el.querySelectorAll('[data-iyr]').forEach(b=> b.onclick = ()=> keepScroll(()=>{ itemRange = b.dataset.iyr; return renderSummaryView(); }));
   drawMonthChart(el.querySelector('#mchart'), chartRows, summaryMonths);
+  bindDonut(el);
   el.querySelectorAll('[data-goto-st]').forEach(b=> b.onclick = ()=> gotoCustomersByStatus(b.dataset.gotoSt) );
   el.querySelectorAll('[data-goto-core]').forEach(b=> b.onclick = ()=> gotoCoreTargets() );
   const gseg = document.getElementById('summaryGroupSeg');
