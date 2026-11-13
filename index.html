@@ -28,7 +28,7 @@
   --bar:#2563eb; --bar-muted:#b7d3f6; --shadow:0 8px 30px rgba(20,30,50,.14);
   --cat-aqua:#1baf7a; --cat-aqua-soft:#dbf2e9; --cat-orange:#eb6834; --cat-orange-soft:#fbe4d9; --cat-violet:#4a3aa7; --cat-violet-soft:#e7e3f8;
   --cat-yellow:#eda100; --cat-yellow-soft:#fbedd1; --cat-magenta:#e87ba4; --cat-magenta-soft:#fbe4ec; --cat-green:#008300; --cat-green-soft:#dcefdc;
-  --chart-1:#93b4ef; --chart-2:#f3b98d; --chart-3:#8fd0bd; --chart-4:#f2cf8d; --chart-5:#eeaac6; --chart-6:#a9d6a4; --chart-7:#bcb2ec;
+  --chart-1:#93b4ef; --chart-2:#f3b98d; --chart-3:#8fd0bd; --chart-4:#f2cf8d; --chart-5:#eeaac6; --chart-6:#a9d6a4; --chart-7:#bcb2ec; --chart-8:#86cbe6; --chart-9:#eba3a3; --chart-10:#c6d27e; --chart-11:#d5b594; --chart-12:#a3b3c9;
   --chart-accent:#8fabe8; --chart-accent-ink:#6f8fd4;
   --card-shadow:0 1px 2px rgba(16,24,40,.04), 0 2px 10px rgba(16,24,40,.06);
   --card-shadow-hover:0 6px 20px rgba(16,24,40,.10), 0 2px 6px rgba(16,24,40,.06);
@@ -41,7 +41,7 @@
   --good:#45b877; --good-soft:#15301f; --warn:#e2a23c; --warn-soft:#342711; --bad:#ee6b6b; --bad-soft:#3a1b1c; --idle:#9aa3b0; --idle-soft:#262b33;
   --cat-aqua:#199e70; --cat-aqua-soft:#132e26; --cat-orange:#d95926; --cat-orange-soft:#3a2416; --cat-violet:#9085e9; --cat-violet-soft:#241f47;
   --cat-yellow:#c98500; --cat-yellow-soft:#332a10; --cat-magenta:#d55181; --cat-magenta-soft:#3a1f29; --cat-green:#008300; --cat-green-soft:#173517;
-  --chart-1:#7fa3e0; --chart-2:#d99f6e; --chart-3:#6fb89f; --chart-4:#cfab60; --chart-5:#cf85a7; --chart-6:#84b87e; --chart-7:#a294dd;
+  --chart-1:#7fa3e0; --chart-2:#d99f6e; --chart-3:#6fb89f; --chart-4:#cfab60; --chart-5:#cf85a7; --chart-6:#84b87e; --chart-7:#a294dd; --chart-8:#5fa9c9; --chart-9:#cf7f7f; --chart-10:#a5b05c; --chart-11:#b08f6e; --chart-12:#7f90a8;
   --chart-accent:#7fa3e0; --chart-accent-ink:#5f85c8;
   --card-shadow:0 1px 2px rgba(0,0,0,.24), 0 2px 10px rgba(0,0,0,.3);
   --card-shadow-hover:0 6px 22px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.3);
@@ -52,7 +52,7 @@
   --good:#45b877; --good-soft:#15301f; --warn:#e2a23c; --warn-soft:#342711; --bad:#ee6b6b; --bad-soft:#3a1b1c; --idle:#9aa3b0; --idle-soft:#262b33;
   --cat-aqua:#199e70; --cat-aqua-soft:#132e26; --cat-orange:#d95926; --cat-orange-soft:#3a2416; --cat-violet:#9085e9; --cat-violet-soft:#241f47;
   --cat-yellow:#c98500; --cat-yellow-soft:#332a10; --cat-magenta:#d55181; --cat-magenta-soft:#3a1f29; --cat-green:#008300; --cat-green-soft:#173517;
-  --chart-1:#7fa3e0; --chart-2:#d99f6e; --chart-3:#6fb89f; --chart-4:#cfab60; --chart-5:#cf85a7; --chart-6:#84b87e; --chart-7:#a294dd;
+  --chart-1:#7fa3e0; --chart-2:#d99f6e; --chart-3:#6fb89f; --chart-4:#cfab60; --chart-5:#cf85a7; --chart-6:#84b87e; --chart-7:#a294dd; --chart-8:#5fa9c9; --chart-9:#cf7f7f; --chart-10:#a5b05c; --chart-11:#b08f6e; --chart-12:#7f90a8;
   --chart-accent:#7fa3e0; --chart-accent-ink:#5f85c8;
   --card-shadow:0 1px 2px rgba(0,0,0,.24), 0 2px 10px rgba(0,0,0,.3);
   --card-shadow-hover:0 6px 22px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.3);
@@ -1181,6 +1181,78 @@ header.top ~ * [id],section.view{scroll-margin-top:84px}
 .dr-in{width:100%;box-sizing:border-box;font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:10px;padding:9px 12px;margin-bottom:8px}
 textarea.dr-in{resize:vertical;line-height:1.55}
 .dr-sec{margin:0 0 20px}.dr-sec h3{margin:0 0 8px;font-size:15px}
+
+/* ===== v3.73 디자인: 진한 포인트 색 · 또렷한 위계 · 읽기 편한 글자 ===== */
+:root{
+  --bg:#f1f3f9; --surface:#ffffff; --surface-2:#ecf0f8; --ink:#0b1222; --ink-2:#364058; --muted:#63708a;
+  --line:#e2e6f0; --line-2:#cbd3e4;
+  --accent:#3347e6; --accent-ink:#2433bf; --accent-soft:#e7eaff; --on-accent:#fff;
+  --bar:#3347e6; --bar-muted:#c3caf7; --chart-accent:#5062ee; --chart-accent-ink:#3347e6;
+  --chart-1:#5b86ea; --chart-2:#f0934f; --chart-3:#35b595; --chart-4:#efb743; --chart-5:#e0699b; --chart-6:#72bd62; --chart-7:#8b78e2; --chart-8:#43aedb; --chart-9:#e46f6f; --chart-10:#a9b838; --chart-11:#c1976a; --chart-12:#7c91b2;
+  --card-shadow:0 1px 2px rgba(18,28,66,.05),0 8px 24px rgba(18,28,66,.06); --card-shadow-hover:0 6px 14px rgba(18,28,66,.09),0 16px 36px rgba(18,28,66,.09); --radius:16px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a0d19; --surface:#121728; --surface-2:#1a2036; --ink:#f2f4ff; --ink-2:#c6cee8; --muted:#8e99b8; --line:#232a45; --line-2:#323b5e;
+  --accent:#5b6eff; --accent-ink:#b0bbff; --accent-soft:#1a2150; --on-accent:#fff;
+  --bar:#5b6eff; --bar-muted:#2a3270; --chart-accent:#6f80ff; --chart-accent-ink:#8d9bff;
+  --chart-1:#7499f0; --chart-2:#e8a06c; --chart-3:#52c4a4; --chart-4:#e8bf5c; --chart-5:#e384ad; --chart-6:#86cc77; --chart-7:#9d8cec; --chart-8:#5cbbe3; --chart-9:#ea8585; --chart-10:#bccb52; --chart-11:#cfa97c; --chart-12:#93a5c4;
+  --card-shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.35); --card-shadow-hover:0 6px 14px rgba(0,0,0,.45),0 16px 36px rgba(0,0,0,.4);
+} }
+:root[data-theme="dark"]{
+  --bg:#0a0d19; --surface:#121728; --surface-2:#1a2036; --ink:#f2f4ff; --ink-2:#c6cee8; --muted:#8e99b8; --line:#232a45; --line-2:#323b5e;
+  --accent:#5b6eff; --accent-ink:#b0bbff; --accent-soft:#1a2150; --on-accent:#fff;
+  --bar:#5b6eff; --bar-muted:#2a3270; --chart-accent:#6f80ff; --chart-accent-ink:#8d9bff;
+  --chart-1:#7499f0; --chart-2:#e8a06c; --chart-3:#52c4a4; --chart-4:#e8bf5c; --chart-5:#e384ad; --chart-6:#86cc77; --chart-7:#9d8cec; --chart-8:#5cbbe3; --chart-9:#ea8585; --chart-10:#bccb52; --chart-11:#cfa97c; --chart-12:#93a5c4;
+  --card-shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.35); --card-shadow-hover:0 6px 14px rgba(0,0,0,.45),0 16px 36px rgba(0,0,0,.4);
+}
+body{background:var(--bg);background-image:linear-gradient(180deg,color-mix(in srgb,var(--accent) 9%,transparent) 0,transparent 380px);background-repeat:no-repeat;font-size:14.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+header.top{background:color-mix(in srgb,var(--surface) 92%,transparent);border-bottom:1px solid var(--line)}
+header.top nav.tabs button{font-weight:600;color:var(--muted)}
+header.top nav.tabs button:hover{color:var(--ink)}
+header.top nav.tabs button[aria-selected="true"],header.top nav.tabs button[data-tab][aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--card-shadow)}
+.panel-h{margin-bottom:16px}
+h2{font-size:17px;font-weight:700;letter-spacing:-.025em}
+h2::before{background:linear-gradient(180deg,var(--accent),color-mix(in srgb,var(--accent) 50%,#9b5cff));width:4px;border-radius:3px}
+.panel-h .note{font-size:12.5px;color:var(--muted)}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px 16px;box-shadow:var(--card-shadow)}
+.kpi .l{font-size:12.5px;font-weight:600;color:var(--muted)}
+.kpi .v{font-size:28px;font-weight:800;letter-spacing:-.035em;margin-top:8px;line-height:1.1}
+.kpi .s{font-size:12.5px;color:var(--ink-2);margin-top:5px}
+.kpi.click:hover{border-color:var(--accent);background:var(--surface);box-shadow:var(--card-shadow-hover);transform:translateY(-2px)}
+.kpi.hero{background:linear-gradient(135deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 55%,#8b3fe0) 130%);border-color:transparent;box-shadow:0 12px 30px color-mix(in srgb,var(--accent) 36%,transparent)}
+.kpi.hero .l,.kpi.hero .s{color:rgba(255,255,255,.84)}
+.kpi.hero .v{color:#fff}
+.kpi.hero .l::before{background:rgba(255,255,255,.85)}
+.seg{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:3px;box-shadow:none}
+.seg button{border-radius:9px;font-weight:600;color:var(--ink-2)}
+.seg button:hover{color:var(--ink);background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.seg button[aria-selected="true"],.seg button.on,.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);box-shadow:0 3px 10px color-mix(in srgb,var(--accent) 40%,transparent);font-weight:700}
+.chip{font-weight:600}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn{border-radius:10px;font-weight:600}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent);box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 34%,transparent)}
+.btn.primary:hover{background:var(--accent-ink);border-color:var(--accent-ink)}
+.period-tag{font-weight:700}
+th{font-size:12px;font-weight:700;color:var(--muted);background:var(--surface-2)}
+td{font-size:13.5px}
+tr.click:hover td{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+tr.click:hover td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.tbl-wrap{border-radius:14px}
+input:focus,select:focus,textarea:focus{outline:2px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:1px;border-color:var(--accent)}
+.c5{border-radius:14px;background:var(--surface)}
+.c5:hover{border-color:var(--accent);background:var(--surface);box-shadow:var(--card-shadow)}
+.c5 .rk{background:var(--accent);color:var(--on-accent);box-shadow:0 3px 8px color-mix(in srgb,var(--accent) 35%,transparent)}
+.c5 .amt{font-size:16px;font-weight:800;letter-spacing:-.02em}
+.dn-v{font-weight:800}
+.dn-leg li.on{background:var(--accent-soft)}
+.mleg .ln{opacity:.8}
+@media (max-width:720px){
+  .panel{border-radius:18px;padding:18px}
+  .kpi{border-radius:14px;padding:15px 16px 14px}
+  .kpi .v{font-size:24px}
+  header.top nav.tabs button[aria-selected="true"],header.top nav.tabs button[data-tab][aria-selected="true"]{background:var(--accent-soft);color:var(--accent);border-bottom-color:transparent}
+}
 </style>
 </head>
 <body>
@@ -1253,7 +1325,7 @@ textarea.dr-in{resize:vertical;line-height:1.55}
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.71</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.73</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -2195,11 +2267,12 @@ function stackbar(rows, capN){
   <div class="stackbar-legend">${items.map(it=>`<span class="li"><span class="sw" style="background:${it.c}"></span><span class="nm" title="${esc(it.n)}">${esc(it.n)}</span><span class="amt">${(it.v/total*100).toFixed(0)}%</span></span>`).join('')}</div>`;
 }
 // 유형별 매출 비중을 도넛(원형) 차트로 — 위에 마우스를 올리거나(폰은 터치) 범례를 누르면 가운데에 그 항목의 비율이 떠요
+const DN_COLORS = Array.from({length:12}, (_,i)=>`var(--chart-${i+1})`);
 function donutChart(rows, capN){
-  capN = capN || 7;
+  capN = capN || 11;   // 11개 + 나머지(기타) = 최대 12조각
   const sorted = rows.filter(r=>r.v>0).sort((a,b)=>b.v-a.v);
   if(!sorted.length) return '<p class="small muted">표시할 데이터가 없어요.</p>';
-  const items = sorted.slice(0, capN).map((r,i)=>({n:r.n, v:r.v, c:CAT_HUES[i % CAT_HUES.length]}));
+  const items = sorted.slice(0, capN).map((r,i)=>({n:r.n, v:r.v, c:DN_COLORS[i % DN_COLORS.length]}));
   const rest = sorted.slice(capN), restSum = rest.reduce((s,r)=>s+r.v,0);
   if(restSum>0) items.push({n:`기타 ${rest.length}개 유형`, v:restSum, c:'var(--idle)'});
   const total = items.reduce((s,r)=>s+r.v,0) || 1;
@@ -2722,7 +2795,7 @@ async function renderSummaryView(){
   };
   el.innerHTML = `
   <div class="kpis">
-    <div class="kpi fit"><div class="l">판매금액 (${rangeLabel(summaryRange)})</div><div class="v">${won(rangeAmount)}</div></div>
+    <div class="kpi fit hero"><div class="l">판매금액 (${rangeLabel(summaryRange)})</div><div class="v">${won(rangeAmount)}</div></div>
     <div class="kpi"><div class="l">거래처 (${rangeLabel(summaryRange)})</div><div class="v">${num(rangeCustCount)}곳</div></div>
     <div class="kpi"><div class="l">판매건수 (${rangeLabel(summaryRange)})</div><div class="v">${num(rangeOrders)}건</div></div>
     <div class="kpi click" data-goto-core="1"><div class="l">구매 늦어진 거래처</div><div class="v" style="color:var(--bad)">${num((byStatus['이탈의심']||0)+(byStatus['주의']||0))}곳</div><div class="s">🔥 영업대상 보기 →</div></div>
