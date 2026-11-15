@@ -1364,6 +1364,86 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   .org-hero{padding:20px 18px;border-radius:20px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ===== v3.88 컬러 보강: 메뉴마다 고유 색 + 숫자·막대·차트 색 다양화 + 부서명 굵게 ===== */
+:root{--v-indigo:#4f46e5;--v-emerald:#059669;--v-amber:#d97706;--v-rose:#e11d48;--v-cyan:#0891b2;--v-violet:#7c3aed;--v-orange:#ea580c;--v-teal:#0d9488;--v-pink:#db2777;--v-blue:#2563eb;--v-purple:#9333ea}
+/* 화면별 테마색 (JS가 body[data-th]를 바꿔줌) */
+body[data-th]{--accent:var(--th);--accent-ink:color-mix(in srgb,var(--th) 78%,#000);--accent-soft:color-mix(in srgb,var(--th) 11%,var(--surface));--chart-accent:color-mix(in srgb,var(--th) 82%,#fff);--chart-accent-ink:var(--th);--bar:var(--th);--cat-violet:var(--th2)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body[data-th]{--accent:color-mix(in srgb,var(--th) 78%,#fff);--accent-ink:color-mix(in srgb,var(--th) 45%,#fff);--accent-soft:color-mix(in srgb,var(--th) 22%,var(--surface));--chart-accent:color-mix(in srgb,var(--th) 78%,#fff);--chart-accent-ink:var(--th)}}
+:root[data-theme="dark"] body[data-th]{--accent:color-mix(in srgb,var(--th) 78%,#fff);--accent-ink:color-mix(in srgb,var(--th) 45%,#fff);--accent-soft:color-mix(in srgb,var(--th) 22%,var(--surface));--chart-accent:color-mix(in srgb,var(--th) 78%,#fff);--chart-accent-ink:var(--th)}
+body[data-th="indigo"]{--th:var(--v-indigo);--th2:#9333ea}
+body[data-th="rose"]{--th:var(--v-rose);--th2:#f97316}
+body[data-th="orange"]{--th:var(--v-orange);--th2:#f59e0b}
+body[data-th="emerald"]{--th:var(--v-emerald);--th2:#0ea5e9}
+body[data-th="teal"]{--th:var(--v-teal);--th2:#22c55e}
+body[data-th="cyan"]{--th:var(--v-cyan);--th2:#6366f1}
+body[data-th="violet"]{--th:var(--v-violet);--th2:#ec4899}
+body[data-th="blue"]{--th:var(--v-blue);--th2:#06b6d4}
+body[data-th="pink"]{--th:var(--v-pink);--th2:#f59e0b}
+body[data-th="purple"]{--th:var(--v-purple);--th2:#3b82f6}
+/* 상단 메뉴: 탭마다 자기 색 */
+nav.tabs button[data-tab]{--t:var(--v-indigo)}
+nav.tabs button[data-tab="cityhall"]{--t:var(--v-pink)}
+nav.tabs button[data-tab="delivery"]{--t:var(--v-orange)}
+nav.tabs button[data-tab="sales"]{--t:var(--v-blue)}
+nav.tabs button[data-tab="report"]{--t:var(--v-purple)}
+nav.tabs button[data-tab="dailyreport"]{--t:var(--v-teal)}
+nav.tabs button[data-tab] .ti{filter:saturate(1.15)}
+nav.tabs button[data-tab]:not([aria-selected="true"]){color:color-mix(in srgb,var(--t) 62%,var(--ink-2))}
+nav.tabs button[data-tab]:not([aria-selected="true"]):hover{background:color-mix(in srgb,var(--t) 12%,var(--surface));color:var(--t)}
+nav.tabs button[data-tab][aria-selected="true"]{background:linear-gradient(135deg,var(--t) 0%,color-mix(in srgb,var(--t) 70%,#000) 100%)!important;color:#fff!important;box-shadow:0 8px 20px -6px color-mix(in srgb,var(--t) 65%,transparent),0 1px 0 rgba(255,255,255,.35) inset}
+/* 영업 하위 메뉴: 버튼마다 자기 색 */
+.salesSeg button[data-s]{--t:var(--v-blue)}
+.salesSeg button[data-s="churn"]{--t:var(--v-rose)}
+.salesSeg button[data-s="coretarget"]{--t:var(--v-orange)}
+.salesSeg button[data-s="schools"]{--t:var(--v-emerald)}
+.salesSeg button[data-s="dong"]{--t:var(--v-teal)}
+.salesSeg button[data-s="assembly"]{--t:var(--v-indigo)}
+.salesSeg button[data-s="mofa"]{--t:var(--v-cyan)}
+.salesSeg button[data-s="contact"]{--t:var(--v-violet)}
+.salesSeg button[data-s="customers"]{--t:var(--v-blue)}
+.salesSeg button[data-s="products"]{--t:var(--v-pink)}
+.salesSeg button[data-s]:not([aria-pressed="true"]){color:color-mix(in srgb,var(--t) 70%,var(--ink-2));font-weight:600}
+.salesSeg button[data-s]:not([aria-pressed="true"]):hover{background:color-mix(in srgb,var(--t) 13%,var(--surface));color:var(--t)}
+.salesSeg button[data-s][aria-pressed="true"]{background:linear-gradient(135deg,var(--t),color-mix(in srgb,var(--t) 68%,#000))!important;color:#fff!important;box-shadow:0 6px 16px -6px color-mix(in srgb,var(--t) 70%,transparent)}
+/* 제목 막대·패널 윗줄 */
+h2::before{background:linear-gradient(180deg,var(--accent),var(--th2,var(--cat-violet)))!important}
+.panel{background-image:linear-gradient(90deg,var(--accent),var(--th2,var(--accent-ink))),linear-gradient(180deg,var(--surface),var(--surface))!important;background-size:100% 3px,100% 100%!important;background-repeat:no-repeat!important}
+.panel-h .note{background:var(--accent-soft);color:var(--accent-ink)}
+th{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 13%,var(--surface-2)),color-mix(in srgb,var(--accent) 6%,var(--surface-2)));color:var(--accent-ink);font-weight:700}
+/* 숫자 카드: 카드마다 다른 색 */
+.kpi:nth-child(6n+1){--kc:var(--v-indigo)}.kpi:nth-child(6n+2){--kc:var(--v-emerald)}.kpi:nth-child(6n+3){--kc:var(--v-amber)}
+.kpi:nth-child(6n+4){--kc:var(--v-rose)}.kpi:nth-child(6n+5){--kc:var(--v-cyan)}.kpi:nth-child(6n+6){--kc:var(--v-violet)}
+.kpi{border-left-color:var(--kc)!important;background:linear-gradient(150deg,var(--surface) 0%,color-mix(in srgb,var(--kc) 12%,var(--surface)) 100%)!important}
+.kpi::before{background:linear-gradient(90deg,var(--kc),color-mix(in srgb,var(--kc) 10%,transparent))!important}
+.kpi .v{color:color-mix(in srgb,var(--kc) 82%,var(--ink))}
+.kpi .l{color:color-mix(in srgb,var(--kc) 55%,var(--ink-2));font-weight:600}
+/* 막대그래프: 줄마다 색 */
+.hbars .hbar:nth-child(8n+1){--hc:var(--v-indigo)}.hbars .hbar:nth-child(8n+2){--hc:var(--v-emerald)}.hbars .hbar:nth-child(8n+3){--hc:var(--v-amber)}.hbars .hbar:nth-child(8n+4){--hc:var(--v-rose)}
+.hbars .hbar:nth-child(8n+5){--hc:var(--v-cyan)}.hbars .hbar:nth-child(8n+6){--hc:var(--v-violet)}.hbars .hbar:nth-child(8n+7){--hc:var(--v-orange)}.hbars .hbar:nth-child(8n+8){--hc:var(--v-teal)}
+.hbars.rainbow .hbar .t b{background-image:linear-gradient(90deg,color-mix(in srgb,var(--hc) 62%,#fff) 0%,var(--hc) 100%)!important;opacity:1!important;box-shadow:0 2px 8px -2px color-mix(in srgb,var(--hc) 60%,transparent)}
+.hbars .hbar .nm{font-weight:700;color:var(--ink)}
+.hbars.rainbow .hbar .nm::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--hc);margin-right:7px;vertical-align:1px}
+.hbar .num{font-weight:700}
+/* 부서명 굵게 */
+td.dn{font-weight:800;color:var(--ink);letter-spacing:-.015em}
+td.dn::before{content:"";display:inline-block;width:8px;height:8px;border-radius:3px;background:var(--accent);margin-right:8px;vertical-align:1px}
+table.rt td.rt-title{font-weight:800}
+.lnk{font-weight:700}
+/* 증감 표시: 칩 모양 */
+td .dl.up,td .dl.down{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:800;font-size:12.5px}
+td .dl.up{background:var(--good-soft);color:var(--good)}
+td .dl.down{background:var(--bad-soft);color:var(--bad)}
+/* 월별 차트: 작년=따뜻한 모래색, 올해=테마색 */
+.mc-prev{background:linear-gradient(180deg,color-mix(in srgb,var(--v-amber) 55%,var(--surface)),color-mix(in srgb,var(--v-amber) 30%,var(--surface)))!important}
+.mc-cur{background:linear-gradient(180deg,var(--accent) 0%,var(--th2,var(--cat-violet)) 100%)!important}
+.mc-val{font-weight:800;color:var(--accent-ink)}
+/* 분석 첫 화면 카드: 테마색 그라데이션 */
+.org-hero{background:linear-gradient(135deg,color-mix(in srgb,var(--th,#4f46e5) 88%,#000) 0%,var(--th,#4f46e5) 45%,var(--th2,#9333ea) 100%)!important;box-shadow:0 26px 50px -22px color-mix(in srgb,var(--th,#4f46e5) 70%,transparent)!important}
+.oh-kpis>div:nth-child(1){background:rgba(255,255,255,.16)}
+.oh-kpis>div:nth-child(2){background:rgba(255,220,120,.18)}
+.oh-kpis>div:nth-child(3){background:rgba(255,140,160,.2)}
+/* 버튼·칩 */
+.chip[aria-pressed="true"],.btn.primary{background:linear-gradient(135deg,var(--accent),var(--th2,var(--accent-ink)))!important}
 </style>
 </head>
 <body>
@@ -1436,7 +1516,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.87</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.88</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -1867,7 +1947,10 @@ async function boot(uid){
 // 거래처·생산품 화면은 상단 탭이 아니라 '영업' 탭 안의 하위 메뉴로 들어 있음 (영업 탭이 켜진 상태로 표시)
 function navTabOf(t){ return (t==='customers' || t==='products') ? 'sales' : t; }
 function tabBtnVisible(t){ return t==='sales' ? (canTab('sales') || canTab('customers') || canTab('products')) : canTab(t); }
-function setNavSelected(){ const n = navTabOf(currentTab); document.querySelectorAll('#tabs button[data-tab]').forEach(x=> x.setAttribute('aria-selected', String(x.dataset.tab===n))); }
+const TAB_TH = {summary:'indigo',cityhall:'pink',delivery:'orange',report:'purple',dailyreport:'teal',stmt:'blue',recon:'cyan',admin:'indigo',customers:'blue',products:'pink'};
+const SUB_TH = {churn:'rose',coretarget:'orange',schools:'emerald',dong:'teal',assembly:'indigo',mofa:'cyan',contact:'violet'};
+function applyTheme(){ try{ const th = currentTab==='sales' ? (SUB_TH[currentSalesSub]||'orange') : (TAB_TH[currentTab]||'indigo'); document.body.dataset.th = th; }catch(e){} }
+function setNavSelected(){ const n = navTabOf(currentTab); document.querySelectorAll('#tabs button[data-tab]').forEach(x=> x.setAttribute('aria-selected', String(x.dataset.tab===n))); applyTheme(); }
 function goSection(t){
   if(!canTab(t)){ toast('이 화면을 볼 권한이 없습니다'); return; }
   currentTab = t;
@@ -2388,7 +2471,7 @@ function hbars(rows, opts){
   opts = opts || {};
   const max = opts.max || Math.max(...rows.map(r=>r.v),1);
   const n = rows.length;
-  return `<div class="hbars">${rows.map((r,i)=>{
+  return `<div class="hbars${opts.cat?'':' rainbow'}">${rows.map((r,i)=>{
     const color = opts.cat ? CAT_HUES[i % CAT_HUES.length] : 'var(--chart-accent)';
     const op = opts.cat ? 1 : Math.max(0.4, 1 - (n>1? i/(n-1) : 0)*0.55).toFixed(2);
     return `<div class="hbar${r.id!=null?' click':''}"${r.id!=null?` data-hb-id="${r.id}"`:''}><span class="nm" title="${esc(r.n)}">${esc(r.n)}</span><span class="t"><b style="width:${Math.max(0,r.v/max*100).toFixed(1)}%;background:${color};opacity:${op}"></b></span><span class="num small">${r.s}</span></div>`;
@@ -5158,6 +5241,7 @@ function renderCustomersView(){
 
 // ---------------- Sales view ----------------
 function renderSalesView(){
+  applyTheme();
   const el = document.getElementById('view-sales');
   el.innerHTML = salesSegHtml() + `<div id="salesBody"></div>`;
   bindSalesSeg(el);
@@ -5799,7 +5883,7 @@ async function renderOrgAnalysis(key){
   <div class="panel"><div class="panel-h"><h2>기관별 ${thisY}년 매출</h2><span class="note">표 줄을 누르면 아래 부서 목록이 그 기관으로 좁혀집니다</span></div>
     ${subBars.length?hbars(subBars):'<p class="small muted">올해 판매가 없습니다.</p>'}
     <div class="tbl-wrap" style="margin-top:14px"><table><thead><tr><th>기관</th><th class="num">구매 부서</th><th class="num">${thisY}년</th><th class="num">작년 같은 기간</th><th class="num">증감</th></tr></thead><tbody>
-    ${subRows.map(r=>`<tr class="click org-sub" data-sub="${esc(r.sub)}"><td>${esc(r.sub)}</td><td class="num">${num(r.buy)} / ${num(r.n)}</td><td class="num">${won(r.now)}</td><td class="num">${won(r.prev)}</td><td class="num">${orgDelta(r.now, r.prev)}</td></tr>`).join('')}
+    ${subRows.map(r=>`<tr class="click org-sub" data-sub="${esc(r.sub)}"><td class="dn">${esc(r.sub)}</td><td class="num">${num(r.buy)} / ${num(r.n)}</td><td class="num">${won(r.now)}</td><td class="num">${won(r.prev)}</td><td class="num">${orgDelta(r.now, r.prev)}</td></tr>`).join('')}
     </tbody></table></div></div>
   <div class="panel" id="org-dept"><div class="panel-h"><h2>부서별</h2><span class="note" id="org-cnt"></span></div>
     <div class="filters" style="align-items:center;gap:8px;flex-wrap:wrap">
@@ -5815,7 +5899,7 @@ async function renderOrgAnalysis(key){
     const rows = depts.filter(c=> (S.f==='전체' || c.sub===S.f) && (S.st==='전체' || (S.st==='구매' ? c.now>0 : c.now<=0)) && (!q || orgBaseName(c.name).toLowerCase().includes(q)))
       .sort((a,b)=> S.st==='미구매' ? b.prevAll-a.prevAll : (b.now-a.now || b.prevAll-a.prevAll));
     document.getElementById('org-cnt').textContent = `${num(rows.length)}곳`+(rows.length>300?' 중 300곳 표시':'');
-    document.getElementById('org-rows').innerHTML = rows.slice(0,300).map(c=>`<tr class="click" data-id="${c.customer_id}"><td>${esc(c.short)}</td><td class="num">${won(c.now)}</td><td class="num">${num(c.orders.size)}</td><td>${esc(dateTxt(c.lastDate))}</td><td class="num">${won(c.prevYtd)}</td><td class="num">${orgDelta(c.now, c.prevYtd)}</td><td class="num">${won(c.prevAll+0)}</td></tr>`).join('') || '<tr><td colspan="7" class="muted">조건에 맞는 부서가 없습니다.</td></tr>';
+    document.getElementById('org-rows').innerHTML = rows.slice(0,300).map(c=>`<tr class="click" data-id="${c.customer_id}"><td class="dn">${esc(c.short)}</td><td class="num">${won(c.now)}</td><td class="num">${num(c.orders.size)}</td><td>${esc(dateTxt(c.lastDate))}</td><td class="num">${won(c.prevYtd)}</td><td class="num">${orgDelta(c.now, c.prevYtd)}</td><td class="num">${won(c.prevAll+0)}</td></tr>`).join('') || '<tr><td colspan="7" class="muted">조건에 맞는 부서가 없습니다.</td></tr>';
   };
   drawRows();
   body.querySelector('#org-f').onchange = e=>{ S.f = e.target.value; drawRows(); };
