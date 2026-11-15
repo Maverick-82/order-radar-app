@@ -1444,6 +1444,11 @@ td .dl.down{background:var(--bad-soft);color:var(--bad)}
 .oh-kpis>div:nth-child(3){background:rgba(255,140,160,.2)}
 /* 버튼·칩 */
 .chip[aria-pressed="true"],.btn.primary{background:linear-gradient(135deg,var(--accent),var(--th2,var(--accent-ink)))!important}
+/* 큰 파란(보라) 카드는 흰 글씨 유지 */
+.kpi.hero{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 92%,#000) 0%,var(--accent) 45%,var(--th2,#8b3fe0) 130%)!important;border-left-color:transparent!important;box-shadow:0 14px 32px -12px color-mix(in srgb,var(--accent) 60%,transparent)!important}
+.kpi.hero::before{background:linear-gradient(90deg,rgba(255,255,255,.55),rgba(255,255,255,0))!important}
+.kpi.hero .v{color:#fff!important}
+.kpi.hero .l,.kpi.hero .s{color:rgba(255,255,255,.88)!important}
 </style>
 </head>
 <body>
