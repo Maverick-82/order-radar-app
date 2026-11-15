@@ -1478,6 +1478,15 @@ header.top{backdrop-filter:none!important;-webkit-backdrop-filter:none!important
 .pa-meta{margin-top:3px;font-size:12.5px;color:var(--ink-2);line-height:1.55}
 .pa-pill{flex:none;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 10px;white-space:nowrap}
 .pa-pill.bad{background:var(--bad-soft);color:var(--bad)}.pa-pill.warn{background:var(--warn-soft);color:var(--warn)}.pa-pill.good{background:var(--good-soft);color:var(--good)}.pa-pill.idle{background:var(--idle-soft);color:var(--idle)}
+.pa-diag{margin-top:2px}
+.pa-finds{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.pa-finds li{padding:10px 13px;border-radius:10px;font-size:13.5px;line-height:1.6;border:1px solid var(--line);border-left-width:4px;background:var(--surface)}
+.pa-finds li.bad{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad-soft) 55%,var(--surface))}
+.pa-finds li.warn{border-left-color:var(--warn);background:color-mix(in srgb,var(--warn-soft) 55%,var(--surface))}
+.pa-finds li.good{border-left-color:var(--good);background:color-mix(in srgb,var(--good-soft) 55%,var(--surface))}
+.pa-ok{padding:10px 13px;border-radius:10px;border:1px solid var(--line);border-left:4px solid var(--good);background:color-mix(in srgb,var(--good-soft) 55%,var(--surface));font-size:13.5px}
+.pa-ask{margin-top:10px;padding:10px 13px;border-radius:10px;background:var(--surface-2);font-size:13px}
+.pa-ask ol{margin:5px 0 0 18px;padding:0;line-height:1.7}
 </style>
 </head>
 <body>
@@ -1550,7 +1559,7 @@ header.top{backdrop-filter:none!important;-webkit-backdrop-filter:none!important
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.89</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.90</span></span></div>
     </div>
     <div class="whoami">
       <div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div>
@@ -5993,86 +6002,146 @@ function salesTipHTML(c){
 // 이 거래처에 한해서, 영업 탭의 핵심 영업대상(재주문 예상·추가구매 추천 팁)·이탈 감지(품목 끊김 포함)가
 // 쓰는 것과 완전히 같은 기준으로 계산한 품목별 근거를 보여줌 — "거래처별로도 설명이 상세했으면 좋겠다"는
 // 요청에 맞춰, 패널에서 보던 판정을 그 거래처 하나로 좁혀서 구체적인 품목명·날짜·숫자로 보여준다.
-function salesDetailHTML(c, itemStats, recoRows, itemStatsSku, orders){
-  const stats = itemStats || [];
-  const rows = (orders||[]).filter(o=>o.order_date);
+function salesDetailHTML(c, lines, recoRows, itemStatsSku){
+  // 이 거래처의 전체 판매 줄(품목 단위)로 직접 계산 — 주문 규모·주기·품목 구성·단가·빠진 품목을 숫자로 비교
+  const L = (lines||[]).filter(o=>o.order_date);
+  if(!L.length) return '';
   const dd = (a,b)=> Math.round((new Date(a+'T00:00:00') - new Date(b+'T00:00:00'))/86400000);
   const today = localYmd(new Date());
-  const statOf = f => stats.find(r=>r.item_name===f) || stats.find(r=>itemFamilyName(r.item_name)===f) || null;
+  const med = a=>{ const x=a.filter(v=>v!=null&&isFinite(v)).sort((p,q)=>p-q); if(!x.length) return null; const m=x.length>>1; return x.length%2?x[m]:(x[m-1]+x[m])/2; };
+  const mean = a=> a.length ? a.reduce((s,v)=>s+v,0)/a.length : 0;
   const pill = (txt, cls)=>`<span class="pa-pill ${cls||''}">${esc(txt)}</span>`;
-  const sections = [];
+  const man = v=> { v=Math.round(v||0); return v>=1e8 ? (v/1e8).toFixed(1)+'억원' : v>=1e4 ? num(Math.round(v/1e4))+'만원' : num(v)+'원'; };
 
-  // ① 최근 주문일에 주문한 품목 (간단 요약)
-  let latestFams = new Set();
-  if(rows.length){
-    const latest = rows.reduce((m,o)=> o.order_date>m ? o.order_date : m, '');
-    const lastRows = rows.filter(o=>o.order_date===latest);
-    const byF = new Map();
-    lastRows.forEach(o=>{ const f = itemFamilyName(o.item_name); if(!byF.has(f)) byF.set(f,{f, qty:0, amt:0, unit:o.unit||''}); const e = byF.get(f); e.qty += Number(o.quantity)||0; e.amt += Number(o.supply_amount)||0; });
-    const fams = [...byF.values()].sort((a,b)=>b.amt-a.amt);
-    latestFams = new Set(fams.map(x=>x.f));
-    const total = fams.reduce((s,x)=>s+x.amt,0);
-    const ago = dd(today, latest);
-    sections.push(`<div class="pa-sec"><div class="pa-h">🧾 최근 주문 <b>${esc(latest)}</b> <span class="muted">(${ago<=0?'오늘':ago+'일 전'}) · 품목 ${fams.length}개 · ${won(total)}</span></div>
-      <div class="pa-chips">${fams.slice(0,8).map(x=>`<span class="pa-chip"><b>${esc(x.f)}</b>${x.qty?` ${num(x.qty)}${esc(x.unit)||'개'}`:''}<i>${won(x.amt)}</i></span>`).join('')}${fams.length>8?`<span class="pa-chip muted">외 ${fams.length-8}개</span>`:''}</div></div>`);
+  // 주문일 단위로 묶기
+  const ev = new Map();
+  L.forEach(o=>{
+    const f = itemFamilyName(o.item_name), amt = Number(o.supply_amount)||0, q = Number(o.quantity)||0;
+    if(!ev.has(o.order_date)) ev.set(o.order_date, {date:o.order_date, amt:0, fams:new Map(), lines:[]});
+    const e = ev.get(o.order_date); e.amt += amt; e.lines.push(o);
+    if(!e.fams.has(f)) e.fams.set(f,{amt:0,qty:0}); const g = e.fams.get(f); g.amt += amt; g.qty += q;
+  });
+  const dates = [...ev.keys()].sort();
+  const D0 = dates[dates.length-1], prior = dates.slice(0,-1);
+  const latest = ev.get(D0);
+  const famHist = new Map();   // 품목군 → [{date,amt,qty}] 오래된 순
+  dates.forEach(d=>{ ev.get(d).fams.forEach((g,f)=>{ if(!famHist.has(f)) famHist.set(f,[]); famHist.get(f).push({date:d, amt:g.amt, qty:g.qty}); }); });
+  const gapsOf = h => h.slice(1).map((x,i)=>dd(x.date, h[i].date));
+  const sections = [], finds = [], asks = [];
+  const ago = dd(today, D0);
 
-    // ② 그 품목들의 분석
-    const lines = fams.slice(0,8).map(x=>{
-      const st = statOf(x.f);
-      // 직전 구매일 (최근 주문 바로 전에 같은 품목을 산 날) — 조회된 주문 기록 안에서 계산
-      const prevDates = [...new Set(rows.filter(o=>itemFamilyName(o.item_name)===x.f && o.order_date<latest).map(o=>o.order_date))].sort().reverse();
-      const gap = prevDates.length ? dd(latest, prevDates[0]) : null;
-      const bits = [];
-      if(st && st.order_count>1){
-        bits.push(`누적 ${num(st.order_count)}회 구매`);
-        if(st.cycle_days) bits.push(`평소 ${st.cycle_days}일 주기`);
-      } else bits.push('이번이 첫 구매(또는 이력 적음)');
-      if(gap!=null) bits.push(`직전 구매 ${prevDates[0]} → ${gap}일 만에 재구매`);
-      let tag = '';
-      if(st && st.cycle_days && gap!=null){
-        const r = gap / st.cycle_days;
-        tag = r < 0.6 ? pill('평소보다 빨리 샀음','good') : r > 1.5 ? pill('평소보다 늦게 샀음','warn') : pill('평소 주기대로','idle');
-      }
-      let qtyTxt = '';
-      if(st && st.usual_qty && x.qty){
-        const q = x.qty / st.usual_qty;
-        qtyTxt = `수량 ${num(x.qty)}개 (보통 ${num(Math.round(st.usual_qty))}개${q>=1.3?' · 평소보다 많이':q<=0.7?' · 평소보다 적게':''})`;
-        bits.push(qtyTxt);
-      }
-      return `<li><div class="pa-row"><b class="pa-nm">${esc(x.f)}</b>${tag}</div><div class="pa-meta">${bits.map(esc).join(' · ')}${st && st.next_date ? ` · 다음 예상 <b>${esc(st.next_date)}</b>` : ''}</div></li>`;
-    });
-    sections.push(`<div class="pa-sec"><div class="pa-h">📊 최근 주문 품목 분석 <span class="muted">— 평소 주기·수량과 비교</span></div><ul class="pa-list">${lines.join('')}</ul></div>`);
+  // ── 평소 대비 이번 주문 ──
+  const base = prior.slice(-6);
+  const medAmt = base.length>=3 ? med(base.map(d=>ev.get(d).amt)) : null;
+  const medCnt = base.length>=3 ? med(base.map(d=>ev.get(d).fams.size)) : null;
+  const orderGaps = dates.slice(1).map((d,i)=>dd(d, dates[i]));
+  const medOrderGap = orderGaps.length>=3 ? med(orderGaps.slice(0,-1).slice(-6)) : null;     // 이번 간격 제외한 평소 주문 간격
+  const lastGap = orderGaps.length ? orderGaps[orderGaps.length-1] : null;
+  if(medAmt){
+    const r = latest.amt / medAmt;
+    if(r<=0.6) finds.push({sev:'bad', t:`이번 주문 금액 <b>${man(latest.amt)}</b>은 직전 ${base.length}회 중앙값 ${man(medAmt)}의 <b>${Math.round(r*100)}%</b> — 주문 규모가 눈에 띄게 줄었습니다.`}), asks.push('주문 규모가 줄어든 이유(예산·수요 변화, 다른 곳 분산)를 확인');
+    else if(r>=1.6) finds.push({sev:'good', t:`이번 주문 금액 <b>${man(latest.amt)}</b>은 직전 ${base.length}회 중앙값 ${man(medAmt)}의 <b>${Math.round(r*100)}%</b> — 평소보다 큰 주문입니다.`});
+  }
+  if(medCnt && medCnt>=2){
+    const n = latest.fams.size;
+    if(n <= medCnt*0.6) finds.push({sev:'warn', t:`한 번에 주문하는 품목이 평소 <b>${Math.round(medCnt)}개</b>에서 이번엔 <b>${n}개</b>로 줄었습니다.`});
+  }
+  if(medOrderGap && lastGap!=null){
+    if(lastGap >= medOrderGap*1.6) finds.push({sev:'warn', t:`이번 주문은 직전 주문 후 <b>${lastGap}일</b> 만 — 평소 간격(${Math.round(medOrderGap)}일)보다 늦었습니다.`});
+    const exp = Math.round(dd(today, D0) - medOrderGap);
+    if(exp > medOrderGap*0.3 && c.status!=='통합집계') finds.push({sev: exp>medOrderGap ? 'bad':'warn', t:`마지막 주문(${D0}) 후 <b>${ago}일</b> — 평소 간격(${Math.round(medOrderGap)}일) 기준 다음 주문 예상일이 <b>${exp}일</b> 지났습니다.`}), asks.push('다음 발주 계획이 있는지 확인');
   }
 
-  // ③ 예전엔 3회 이상 샀는데 최근 주문에는 없는 품목
-  const lapsed = stats.filter(r=>r.order_count>=3 && !latestFams.has(r.item_name) && !latestFams.has(itemFamilyName(r.item_name)))
-    .map(r=>{ const since = r.since_days!=null ? r.since_days : (r.last_date ? dd(today, r.last_date) : null); const ratio = (r.cycle_days && since!=null) ? since / r.cycle_days : null; return Object.assign({}, r, {since, ratio}); })
-    .sort((a,b)=>{ const w = x=> x.status==='끊김의심'?0 : x.status==='지연'?1 : x.status==='임박'?2 : 3; return w(a)-w(b) || (b.total_amount||0)-(a.total_amount||0); });
+  // ── 최근 주문 요약 + 품목 분석 ──
+  const fams = [...latest.fams.entries()].map(([f,g])=>({f, ...g})).sort((a,b)=>b.amt-a.amt);
+  const cmp = medAmt ? ` · 평소(중앙값) 대비 ${Math.round(latest.amt/medAmt*100)}%` : '';
+  sections.push(`<div class="pa-sec"><div class="pa-h">🧾 최근 주문 <b>${esc(D0)}</b> <span class="muted">(${ago<=0?'오늘':ago+'일 전'}) · 품목 ${fams.length}개 · ${won(latest.amt)}${cmp}</span></div>
+    <div class="pa-chips">${fams.slice(0,10).map(x=>`<span class="pa-chip"><b>${esc(x.f)}</b>${x.qty?` ${num(x.qty)}개`:''}<i>${won(x.amt)}</i></span>`).join('')}${fams.length>10?`<span class="pa-chip muted">외 ${fams.length-10}개</span>`:''}</div></div>`);
+
+  const priceMoves = [];
+  const lines1 = fams.slice(0,10).map(x=>{
+    const h = famHist.get(x.f), n = h.length;
+    const bits = [];
+    let tag = '';
+    if(n<=1){ bits.push('이번이 첫 구매 — 이후 재구매 여부를 지켜볼 품목'); tag = pill('신규 품목','good'); }
+    else {
+      const prev = h[n-2], gap = dd(D0, prev.date);
+      const gaps = gapsOf(h), baseGaps = gaps.slice(0,-1);
+      const mg = baseGaps.length>=2 ? med(baseGaps) : null;
+      bits.push(`누적 ${n}회 구매 · 직전 ${prev.date} → <b>${gap}일</b> 만에 재구매${mg?` (평소 ${Math.round(mg)}일 간격)`:''}`);
+      if(mg){ const r = gap/mg; tag = r<0.6 ? pill('평소보다 빨리 샀음','good') : r>1.5 ? pill('평소보다 늦게 샀음','warn') : pill('평소 간격대로','idle'); }
+      const mq = med(h.slice(0,-1).slice(-6).map(v=>v.qty).filter(v=>v>0));
+      if(mq && x.qty){ const q = x.qty/mq; bits.push(`수량 ${num(x.qty)}개 (평소 ${num(Math.round(mq))}개${q>=1.3?' · <b>평소보다 많음</b>':q<=0.7?' · <b>평소보다 적음</b>':''})`); }
+      // 같은 품목명끼리 단가 비교
+      const best = {chg:0};
+      latest.lines.filter(o=>itemFamilyName(o.item_name)===x.f && Number(o.unit_price)>0).forEach(o=>{
+        for(let i=dates.length-2;i>=0;i--){ const pl = ev.get(dates[i]).lines.find(z=>z.item_name===o.item_name && Number(z.unit_price)>0); if(pl){ const chg = (Number(o.unit_price)-Number(pl.unit_price))/Number(pl.unit_price); if(Math.abs(chg)>Math.abs(best.chg)) Object.assign(best,{chg, name:o.item_name, from:Number(pl.unit_price), to:Number(o.unit_price), date:dates[i]}); break; } }
+      });
+      if(Math.abs(best.chg)>=0.03){ bits.push(`단가 ${num(best.from)}원 → <b>${num(best.to)}원</b> (${best.chg>0?'▲':'▼'}${Math.abs(Math.round(best.chg*100))}%)`); if(best.chg>=0.05) priceMoves.push({f:x.f, chg:best.chg}); }
+      // 최근 1년 vs 그 전 1년
+      const y1 = h.filter(v=>dd(today,v.date)<=365).reduce((s,v)=>s+v.amt,0), y0 = h.filter(v=>dd(today,v.date)>365 && dd(today,v.date)<=730).reduce((s,v)=>s+v.amt,0);
+      if(y0>0 && dates[0] && dd(today,dates[0])>400) bits.push(`최근 1년 ${man(y1)} / 그 전 1년 ${man(y0)} (${y1>=y0?'▲':'▼'}${Math.abs(Math.round((y1/y0-1)*100))}%)`);
+      const mgAll = gaps.length>=2 ? med(gaps) : null;
+      if(mgAll){ const nx = new Date(D0+'T00:00:00'); nx.setDate(nx.getDate()+Math.round(mgAll)); bits.push(`다음 구매 예상 <b>${localYmd(nx)}</b>`); }
+    }
+    return `<li><div class="pa-row"><b class="pa-nm">${esc(x.f)}</b>${tag}</div><div class="pa-meta">${bits.join('<br>')}</div></li>`;
+  });
+  if(priceMoves.length){ const t = priceMoves.sort((a,b)=>b.chg-a.chg)[0]; finds.push({sev:'warn', t:`<b>${esc(t.f)}</b> 단가가 직전 구매보다 <b>${Math.round(t.chg*100)}%</b> 올랐습니다 — 가격 때문에 구매가 줄 수 있어 확인이 필요합니다.`}); asks.push(`${t.f} 단가 인상에 대한 반응 확인`); }
+  sections.push(`<div class="pa-sec"><div class="pa-h">📊 최근 주문 품목 분석 <span class="muted">— 이 거래처의 평소 간격·수량·단가와 비교</span></div><ul class="pa-list">${lines1.join('')}</ul></div>`);
+
+  // ── 예전엔 3회 이상 샀는데 최근 주문엔 없는 품목 ──
+  const lapsed = [];
+  famHist.forEach((h,f)=>{
+    if(latest.fams.has(f) || h.length<3) return;
+    const last = h[h.length-1].date, gaps = gapsOf(h), mg = med(gaps);
+    const since = dd(today,last), sinceD0 = dd(D0,last);
+    const after = dates.filter(d=>d>last).length;     // 마지막 구매 뒤에 이 거래처가 (다른 품목으로) 주문한 횟수
+    const ratio = mg>0 ? since/mg : null;
+    const avgAmt = mean(h.slice(-4).map(v=>v.amt));
+    const annual = mg>0 ? avgAmt*365/mg : null;
+    let sev = 'low';
+    if(ratio!=null && ratio>=2 && after>=2) sev = 'high';
+    else if((ratio!=null && ratio>=1.3 && after>=1) || (ratio!=null && ratio>=2)) sev = 'mid';
+    const qty = med(h.slice(-4).map(v=>v.qty).filter(v=>v>0));
+    lapsed.push({f, n:h.length, last, since, sinceD0, after, mg, ratio, avgAmt, annual, sev, qty, total:h.reduce((s,v)=>s+v.amt,0)});
+  });
+  const SEVW = {high:0,mid:1,low:2};
+  lapsed.sort((a,b)=> SEVW[a.sev]-SEVW[b.sev] || (b.annual||0)-(a.annual||0) || b.total-a.total);
   if(lapsed.length){
-    const stopN = lapsed.filter(r=>r.status==='끊김의심').length;
-    sections.push(`<div class="pa-sec"><div class="pa-h">🔎 예전엔 3회 이상 샀는데 최근 주문엔 없는 품목 <span class="muted">(${lapsed.length}개${stopN?` · 끊긴 것으로 보임 ${stopN}개`:''})</span></div>
-      <div class="small muted" style="margin:2px 0 8px">최근 주문일에 빠진 품목 중 구매 이력이 3회 이상인 것 — 다른 곳에서 사고 있을 가능성이 있는지 볼 때 참고하십시오</div>
-      <ul class="pa-list">${lapsed.slice(0,8).map(r=>{
-        const tag = r.status==='끊김의심' ? pill('끊긴 것으로 보임','bad') : r.status==='지연' ? pill('늦어지는 중','warn') : r.status==='임박' ? pill('곧 재구매 예상','good') : pill('아직 주기 안','idle');
-        const bits = [`${num(r.order_count)}회 구매`, `마지막 ${r.last_date||'-'}${r.since!=null?` (${r.since}일 전)`:''}`];
-        if(r.cycle_days) bits.push(`평소 ${r.cycle_days}일 주기${r.ratio!=null?` → ${r.ratio.toFixed(1)}배 경과`:''}`);
-        if(r.usual_qty) bits.push(`보통 ${num(Math.round(r.usual_qty))}개씩`);
-        bits.push(`누적 ${won(r.total_amount)}`);
-        return `<li><div class="pa-row"><b class="pa-nm">${esc(r.item_name)}</b>${tag}</div><div class="pa-meta">${bits.map(esc).join(' · ')}</div></li>`;
-      }).join('')}</ul>${lapsed.length>8?`<div class="small muted">외 ${lapsed.length-8}개</div>`:''}</div>`);
+    const hi = lapsed.filter(r=>r.sev==='high'), mi = lapsed.filter(r=>r.sev==='mid');
+    const risk = [...hi,...mi].reduce((s,r)=>s+(r.annual||0),0);
+    if(hi.length) finds.push({sev:'bad', t:`3회 이상 사던 품목 중 <b>${hi.map(r=>esc(r.f)).slice(0,3).join('·')}${hi.length>3?` 외 ${hi.length-3}개`:''}</b>이(가) 최근 주문들에서 계속 빠지고 있습니다 — 다른 곳으로 옮겼을 가능성이 높고, 평소 주기로 환산하면 <b>연 약 ${man(hi.reduce((s,r)=>s+(r.annual||0),0))}</b> 규모입니다.`}), asks.push(`${hi.slice(0,3).map(r=>r.f).join('·')} — 지금 어디서 구매하시는지(가격·납기·품질 중 무엇이 이유인지)`);
+    else if(mi.length) finds.push({sev:'warn', t:`<b>${mi.map(r=>esc(r.f)).slice(0,3).join('·')}</b>이(가) 평소 주기보다 늦어지고 있습니다 (연 환산 약 ${man(mi.reduce((s,r)=>s+(r.annual||0),0))}).`}), asks.push(`${mi.slice(0,3).map(r=>r.f).join('·')} 재주문 계획 확인`);
+    sections.push(`<div class="pa-sec"><div class="pa-h">🔎 예전엔 3회 이상 샀는데 최근 주문엔 없는 품목 <span class="muted">(${lapsed.length}개${risk>0?` · 의심 품목 연 환산 약 ${man(risk)}`:''})</span></div>
+      <div class="small muted" style="margin:2px 0 8px">최근 주문(${esc(D0)})에 빠진 품목 중 구매 이력이 3회 이상인 것입니다. "이후 주문"은 마지막 구매 뒤에 이 거래처가 다른 품목으로 주문한 횟수 — 거래는 계속되는데 이 품목만 안 샀다면 다른 곳 구매 가능성이 큽니다.</div>
+      <ul class="pa-list">${lapsed.slice(0,10).map(r=>{
+        const tag = r.sev==='high' ? pill('다른 곳 구매 의심 높음','bad') : r.sev==='mid' ? pill('늦어지는 중','warn') : (r.ratio!=null && r.ratio>=0.8 ? pill('곧 재구매 시점','good') : pill('아직 주기 안','idle'));
+        const bits = [`${r.n}회 구매 · 마지막 ${r.last} (${r.since}일 전)`];
+        if(r.mg) bits.push(`평소 ${Math.round(r.mg)}일 간격 → <b>${r.ratio.toFixed(1)}배</b> 경과`);
+        bits.push(`이후 이 거래처 주문 <b>${r.after}회</b> 중 이 품목 없음`);
+        bits.push(`1회 평균 ${man(r.avgAmt)}${r.qty?` · 보통 ${num(Math.round(r.qty))}개`:''} · 누적 ${man(r.total)}${r.annual?` · 연 환산 약 ${man(r.annual)}`:''}`);
+        return `<li><div class="pa-row"><b class="pa-nm">${esc(r.f)}</b>${tag}</div><div class="pa-meta">${bits.join('<br>')}</div></li>`;
+      }).join('')}</ul>${lapsed.length>10?`<div class="small muted">외 ${lapsed.length-10}개</div>`:''}</div>`);
   }
 
-  // ④ 같은 유형 기관이 많이 사는데 이 거래처는 안 사는 품목 (기존 추천)
-  const have = new Set((itemStatsSku||stats).map(r=>r.item_name));
-  const recos = (recoRows||[]).filter(r=>!have.has(r.item_name)).slice(0,3);
+  // ── 같은 유형 기관이 많이 사는 미구매 품목 ──
+  const have = new Set((itemStatsSku||[]).map(r=>r.item_name));
+  const haveFam = new Set([...famHist.keys()]);
+  const recos = (recoRows||[]).filter(r=>!have.has(r.item_name) && !haveFam.has(itemFamilyName(r.item_name))).slice(0,3);
   if(recos.length){
-    sections.push(`<div class="pa-sec"><div class="pa-h">💡 같은 유형 기관이 많이 사는 미구매 품목</div>
-      <ul class="pa-list">${recos.map(r=>`<li><div class="pa-row"><b class="pa-nm">${esc(r.item_name)}</b>${pill('동종 구매율 '+r.penetration_pct+'%','idle')}</div><div class="pa-meta">${esc(c.ctype||'')} 기관 기준</div></li>`).join('')}</ul></div>`);
+    sections.push(`<div class="pa-sec"><div class="pa-h">💡 같은 유형 기관이 많이 사는데 아직 안 산 품목</div>
+      <ul class="pa-list">${recos.map(r=>`<li><div class="pa-row"><b class="pa-nm">${esc(r.item_name)}</b>${pill('동종 구매율 '+r.penetration_pct+'%','idle')}</div><div class="pa-meta">${esc(c.ctype||'')} 기관 ${r.penetration_pct}%가 구매 — 이 거래처는 구매 기록 없음</div></li>`).join('')}</ul></div>`);
   }
-  if(!sections.length) return '';
+
+  // ── 맨 위: 한 줄 진단 + 다음 연락 때 확인할 것 ──
+  const SEVW2 = {bad:0, warn:1, good:2};
+  finds.sort((a,b)=>SEVW2[a.sev]-SEVW2[b.sev]);
+  const head = `<div class="pa-sec pa-diag"><div class="pa-h">🎯 진단 <span class="muted">— 이 거래처 판매일 ${dates.length}일치 기록 기준</span></div>
+    ${finds.length ? `<ul class="pa-finds">${finds.slice(0,6).map(f=>`<li class="${f.sev}">${f.t}</li>`).join('')}</ul>` : `<div class="pa-ok">뚜렷한 이상 신호는 없습니다 — 주문 규모·간격·품목 구성이 평소 수준입니다.</div>`}
+    ${asks.length ? `<div class="pa-ask"><b>다음 연락 때 확인할 것</b><ol>${[...new Set(asks)].slice(0,4).map(a=>`<li>${esc(a)}</li>`).join('')}</ol></div>` : ''}</div>`;
   return `<div class="panel pa-panel">
-    <div class="panel-h"><h3>이 거래처의 품목 분석</h3><span class="note">최근 주문 기준</span></div>
-    ${sections.join('')}
+    <div class="panel-h"><h3>이 거래처의 품목 분석</h3><span class="note">판매 기록으로 직접 계산 · 오늘 ${esc(today)}</span></div>
+    ${head}${sections.join('')}
   </div>`;
 }
 
@@ -6123,7 +6192,7 @@ async function openDrawer(custId){
   const [{data: orders}, {data: acts}, {data: allOrders}, months, {data: itemStats}, {data: itemStatsSku}, {data: recoRows}] = await Promise.all([
     sb.from('sale_orders').select('*').eq('customer_id', custId).order('order_date', {ascending:false}).order('order_no', {ascending:false}).limit(150),
     sb.from('activities').select('id,kind,note,next_contact_date,created_at,author_id,profiles(name)').eq('customer_id', custId).order('created_at', {ascending:false}),
-    sbAll(()=>sb.from('sale_orders').select('order_date,supply_amount,order_no').eq('customer_id', custId).order('id')),
+    sbAll(()=>sb.from('sale_orders').select('order_date,supply_amount,order_no,item_name,quantity,unit_price').eq('customer_id', custId).order('id')),
     ensureMonthsLoaded().catch(()=>[]),
     sb.from('item_family_stats').select('*').eq('customer_id', custId).then(r=>r, ()=>({data:[]})),
     sb.from('item_customer_stats').select('*').eq('customer_id', custId).then(r=>r, ()=>({data:[]})),
@@ -6283,7 +6352,7 @@ async function openDrawer(custId){
         <button class="lnk" id="umbrellaGotoBtn" style="font-weight:600">→ "${esc(c.name)}" 산하 부서 목록 보기</button>
       </div>` : ''}
       ${['이탈의심','주의','휴면','일회성'].includes(c.status) ? salesTipHTML(c) : ''}
-      ${salesDetailHTML(c, itemStats, recoRows, itemStatsSku, orders)}
+      ${salesDetailHTML(c, allOrders, recoRows, itemStatsSku)}
       <div class="panel">
         <div class="panel-h"><h3>월별 판매금액</h3><span class="period-tag">${chartRows.length}개월</span></div>
         ${hasAnyOrders ? monthRangeChips(custMonthsAll, custRange, 'custChartSeg') : ''}
