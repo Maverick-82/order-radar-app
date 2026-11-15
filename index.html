@@ -1449,6 +1449,20 @@ td .dl.down{background:var(--bad-soft);color:var(--bad)}
 .kpi.hero::before{background:linear-gradient(90deg,rgba(255,255,255,.55),rgba(255,255,255,0))!important}
 .kpi.hero .v{color:#fff!important}
 .kpi.hero .l,.kpi.hero .s{color:rgba(255,255,255,.88)!important}
+/* v3.88b 업무용으로 차분하게: 숫자 카드는 흰 바탕 + 굵은 색 띠 하나만 */
+.kpi{background:var(--surface)!important;border:1px solid var(--line)!important;border-left:4px solid var(--kc)!important;border-radius:10px!important;box-shadow:0 1px 2px rgba(16,24,40,.06)!important;backdrop-filter:none!important;animation:none!important}
+.kpi::before,.kpi::after{display:none!important}
+.kpi .v{color:var(--ink)!important;font-weight:800}
+.kpi .l{color:var(--ink-2)!important;font-weight:600}
+.kpi .l::before{background:var(--kc)!important;opacity:1!important}
+.kpi:hover{transform:none!important;box-shadow:0 4px 12px rgba(16,24,40,.10)!important;border-color:var(--line-2)!important}
+.kpi.click:hover{background:var(--surface-2)!important}
+.kpi.hero{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 90%,#000) 0%,var(--accent) 100%)!important;border:0!important;box-shadow:0 4px 14px -4px color-mix(in srgb,var(--accent) 55%,transparent)!important}
+.kpi.hero .l::before{background:rgba(255,255,255,.85)!important}
+/* 메뉴·표 윗줄도 반투명(유리) 대신 단단한 흰 바탕 */
+nav.tabs,.subnav .seg.salesSeg,.subnav .seg{background:var(--surface)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 1px 3px rgba(16,24,40,.08)!important}
+header.top{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--bg)!important}
+.panel{box-shadow:0 1px 3px rgba(16,24,40,.07)!important}
 </style>
 </head>
 <body>
