@@ -1679,6 +1679,13 @@ header.top::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;
 .et .rk.r1,.et .rk.r2,.et .rk.r3,.et .rk{background:linear-gradient(135deg,color-mix(in srgb,var(--ec,var(--accent)) 70%,#fff),var(--ec,var(--accent)))}
 .et-bar{height:9px}
 .et-bar b{background:linear-gradient(90deg,color-mix(in srgb,var(--ec,var(--accent)) 55%,#fff),var(--ec,var(--accent)))!important;box-shadow:0 2px 8px -3px color-mix(in srgb,var(--ec,var(--accent)) 70%,transparent)}
+
+/* ===== v4.00 데이터 기준일 표시 ===== */
+.asof-pill{margin-left:8px;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);white-space:nowrap}
+.asof-pill.stale{background:var(--warn-soft);color:var(--warn)}
+.asof-stale{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:rgba(255,196,0,.22);color:#ffd45e;font-weight:700;font-size:11.5px}
+.oh-s .asof-stale,.org-hero .asof-stale{background:rgba(255,196,0,.22);color:#ffd45e}
+@media (max-width:720px){.asof-pill{display:none}}
 </style>
 </head>
 <body>
@@ -1751,7 +1758,7 @@ header.top::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;
     <div class="titlegrp">
       <img class="logo" width="137" height="64" src="data:image/png;base64,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" alt="AbleMarket">
       <span class="divider" aria-hidden="true"></span>
-      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v3.99</span></span></div>
+      <div class="titletxt"><h1 class="sr-only">able market</h1><span class="cap"><span class="cap-name">Maverick</span><span class="ver-pill">v4.00</span><span class="asof-pill" id="asofPill" hidden></span></span></div>
     </div>
     <div class="whoami">
       <div class="legacy-btns" style="display:none"><div class="row"><button class="btn icon-btn" id="btn-theme" title="테마: 자동" aria-label="테마 전환">🌓</button><button class="btn icon-btn" id="btn-refresh" title="새로고침" aria-label="새로고침">↻</button><button class="btn icon-btn" id="btn-pw" title="비밀번호 변경" aria-label="비밀번호 변경">🔑</button><span id="who-name"></span><span class="role" id="who-role"></span><button class="btn" id="btn-logout">로그아웃</button></div></div>
@@ -2747,6 +2754,7 @@ async function loadCustomers(quiet){
   }
   CUSTS = all;
   custById = new Map(CUSTS.map(c=>[c.customer_id, c]));
+  loadAsOf(true);
 }
 
 // ---------------- shared chart helpers ----------------
@@ -3317,7 +3325,7 @@ function execBriefHtml(){
   if(riskCore.length) msgs.push({k:'risk', icon:'🔥', html:`자주 사다가 늦어진 핵심 거래처가 <b>${num(riskCore.length)}곳</b> 있습니다 (판매 5회 이상 · 마지막 주문 1년 이내) — 영업대상 탭에서 우선순위로 볼 수 있습니다.`, text:`구매가 늦어진 핵심 거래처 ${num(riskCore.length)}곳`});
   if(newThisYear) msgs.push({k:'up', icon:'🌱', html:`올해 처음 거래를 시작한 신규 거래처는 <b>${num(newThisYear)}곳</b>입니다.`, text:`올해 신규 거래처 ${num(newThisYear)}곳`});
 
-  EXEC_TEXT = [`[${Y}년 ${m}월 ${now.getDate()}일 기준 판매 현황]`,
+  EXEC_TEXT = [`[${Y}년 판매 현황 · ${ASOF.sale?`판매 데이터 ${asofMd(ASOF.sale)}까지`:`${m}월 ${now.getDate()}일 기준`}]`,
     `· 올해 누적 매출 ${won(ytdAll)}${progress!=null?` (작년 연 매출의 ${pct(progress)}%)`:''}`,
     proj!=null ? `· 작년 같은 기간 추세로 보면 연말 약 ${amtShort(proj)}원 전망 (추정)` : '',
     ...msgs.map(x=>'· '+x.text)].filter(Boolean).join('\n');
@@ -3327,7 +3335,7 @@ function execBriefHtml(){
   return `<div class="exec">
     <div class="exec-hero">
       <div class="eh-main">
-        <div class="eh-k">${Y}년 누적 매출 <span class="eh-asof">${m}월 ${now.getDate()}일 기준</span></div>
+        <div class="eh-k">${Y}년 누적 매출 <span class="eh-asof">${asofText()}</span></div>
         <div class="eh-v">${won(ytdAll)}</div>
         <div class="eh-sub">${growth!=null?`<span class="eh-d ${growth>=0?'up':'down'}">${growth>=0?'▲':'▼'} ${Math.abs(Math.round(growth*1000)/10)}%</span> 작년 같은 기간(1~${m-1}월) ${amtShort(prevDone)}원 대비`:`작년 연 매출 ${amtShort(prevTotal)}원`}</div>
         ${progress!=null?`<div class="eh-prog"><div class="eh-bar"><b style="width:${barW.toFixed(1)}%"></b></div><div class="eh-pl"><span>작년 연 매출 ${amtShort(prevTotal)}원의 <b>${pct(progress)}%</b> 달성</span>${proj!=null?`<span>연말 전망 <b>${amtShort(proj)}원</b> <i>(작년 추세 기준 추정)</i></span>`:''}</div></div>`:''}
@@ -3359,6 +3367,7 @@ function execBriefHtml(){
 async function renderSummaryView(){
   const el = document.getElementById('view-summary');
   el.innerHTML = '<div class="spin">불러오는 중…</div>';
+  await loadAsOf();
   const now = new Date();
   const pad = n=>String(n).padStart(2,'0');
   const nowYM = `${now.getFullYear()}-${pad(now.getMonth()+1)}`;
@@ -5611,7 +5620,7 @@ function custHeroHtml(){
   const real = CUSTS.filter(c=>!/^zz/i.test(c.name||'') && !Number(c.umbrella_children));
   const totAmt = CUSTS.reduce((t,c)=>t+(Number(c.total_amount)||0),0);
   const top = CUSTS.slice().sort((a,b)=>(Number(b.total_amount)||0)-(Number(a.total_amount)||0))[0];
-  return pageHero({icon:'🏢', title:'거래처 현황', asof:`${todayStr()} 기준`, value:num(CUSTS.length), unit:'곳',
+  return pageHero({icon:'🏢', title:'거래처 현황', asof:asofText(), value:num(CUSTS.length), unit:'곳',
     sub:`전체 거래처 · 누적 판매 <b>${won(totAmt)}</b>${top?` · 누적 1위 ${esc(top.name)}`:''}`,
     prog: CUSTS.length? (100*activeY/CUSTS.length) : 0, progLabel:`올해(${Y}) 구매한 거래처 <b>${num(activeY)}곳</b> (${CUSTS.length?Math.round(100*activeY/CUSTS.length):0}%)`,
     tiles:[
@@ -5794,6 +5803,36 @@ const OUTCOME_LABEL = {connected:'통화 연결', no_answer:'부재중', order_p
 let coreCatKey = null; // null이면 오늘의 카테고리
 
 function localYmd(d){ const p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
+// ---- 데이터 기준일: 판매·주문서가 어느 날짜까지 들어와 있는지 (오늘 날짜가 아니라 이 날짜가 분석의 기준) ----
+const ASOF = {sale:null, order:null, loaded:false};
+async function loadAsOf(force){
+  if(ASOF.loaded && !force) return ASOF;
+  try{
+    const [a,b] = await Promise.all([
+      sb.from('sale_orders').select('order_date').order('order_date',{ascending:false}).limit(1),
+      sb.from('orders').select('order_date').order('order_date',{ascending:false}).limit(1)]);
+    ASOF.sale = (a.data&&a.data[0]) ? String(a.data[0].order_date).slice(0,10) : null;
+    ASOF.order = (b.data&&b.data[0]) ? String(b.data[0].order_date).slice(0,10) : null;
+    ASOF.loaded = true;
+  }catch(e){}
+  syncAsOfPill();
+  return ASOF;
+}
+const asofMd = ymd => { if(!ymd) return '-'; const [,m,d] = ymd.split('-').map(Number); return `${m}월 ${d}일`; };
+const asofGap = ()=>{ if(!ASOF.sale) return 0; const [y,m,d] = ASOF.sale.split('-').map(Number), n = new Date(); return Math.max(0, Math.round((new Date(n.getFullYear(),n.getMonth(),n.getDate()) - new Date(y,m-1,d))/86400000)); };
+// 화면 머리말용: "판매 11월 12일까지" (+ 4일 이상 지났으면 경고)
+function asofText(){
+  if(!ASOF.sale) return `${todayStr()} 기준`;
+  const g = asofGap();
+  return `판매 데이터 ${asofMd(ASOF.sale)}까지${g>=4?` <span class="asof-stale">⚠ ${g}일 전 데이터</span>`:''}`;
+}
+function syncAsOfPill(){
+  const el = document.getElementById('asofPill'); if(!el) return;
+  if(!ASOF.sale){ el.hidden = true; return; }
+  const g = asofGap(); el.hidden = false; el.classList.toggle('stale', g>=4);
+  el.textContent = `데이터 ${ASOF.sale.slice(5).replace('-','.')}`;
+  el.title = `판매 ${asofMd(ASOF.sale)}까지 · 주문서 ${asofMd(ASOF.order)}까지${g>=4?` (오늘보다 ${g}일 전 — 새 파일을 올려 주세요)`:''}`;
+}
 function addDaysYmd(n){ const d=new Date(); d.setDate(d.getDate()+n); return localYmd(d); }
 // 월~금만 세는 영업일 번호 (토·일은 다음 월요일로 간주) — 6개 카테고리가 공평하게 돌아감
 function businessDayIndex(date){
@@ -5828,6 +5867,30 @@ function coreIsCustom(c){
   return JSON.stringify([...c.statuses].sort())!==JSON.stringify([...d.statuses].sort()) || c.minOrders!==d.minOrders || c.minAmountMan!==d.minAmountMan || c.minDays!==d.minDays || c.maxDays!==d.maxDays || c.perDay!==d.perDay || c.volW!==d.volW || c.cooldown!==d.cooldown || c.excludeShown!==d.excludeShown;
 }
 
+// ===== 회복 구간: 거래처 '자기 주기' 대비 얼마나 늦었는지로, 지금 연락하면 살릴 수 있는 정도를 나눔 =====
+// 너무 오래 끊긴 곳(이미 끝났을 가능성)이 '오래됐다'는 이유만으로 위로 올라오던 걸 막기 위해, 지연이 클수록 점수를 올리지 않고
+// 주기의 1.5~6배(골든타임)에서 가장 높게, 그보다 더 오래되면 점차 낮춥니다. 학교·교육청은 학기 단위 주문이라 기준을 1.5배 넓게 봅니다.
+const REC = {
+  golden:{label:'골든타임', cls:'s-good', hint:'지금 연락하면 되살릴 가능성이 가장 높은 구간'},
+  late:  {label:'늦은 편', cls:'s-warn', hint:'많이 늦었지만 연락해 볼 만한 구간'},
+  cold:  {label:'장기 이탈', cls:'s-bad', hint:'이미 끊어졌을 가능성이 커서 기대는 낮게'},
+  early: {label:'주기 막 지남', cls:'s-info', hint:'주기를 갓 넘긴 단계 — 급하지 않음'},
+  event: {label:'단기 거래', cls:'s-idle', hint:'행사성·일시 거래일 수 있어 우선순위를 낮춤'},
+};
+function coreRecovery(c){
+  const cyc = Number(c.typical_cycle_days)||0, sn = Number(c.days_since_last_order)||0;
+  const x = cyc ? sn/cyc : null;
+  const school = SCHOOL_CTYPES.includes(c.ctype) || c.ctype==='교육청·도서관', k = school ? 1.5 : 1;
+  const span = (c.first_date && c.last_date) ? Math.round((new Date(c.last_date)-new Date(c.first_date))/86400000) : null;
+  let band, f;
+  if(span!=null && span<=120 && sn>=60 && (Number(c.n_dates)||0)>=3){ band='event'; f=0.5; }
+  else if(x==null){ band='late'; f=0.6; }
+  else if(x < 1.5*k){ band='early'; f=0.6; }
+  else if(x <= 6*k){ band='golden'; f=1; }
+  else if(x <= 12*k){ band='late'; f=1-0.5*(x-6*k)/(6*k); }
+  else { band='cold'; f=0.35; }
+  return {x, band, f, school, span};
+}
 async function renderCoreTargets(){
   const CFG = coreLoadCfg();
   const CUSTOM = coreIsCustom(CFG);
@@ -5859,14 +5922,13 @@ async function renderCoreTargets(){
     const why = ocP>=amtP ? '판매건수' : '금액';
     const riskW = c.status==='이탈의심' ? 1.2 : 1;
     const vW = CFG.volW/100;
-    const cyc = Number(c.typical_cycle_days)||0;
-    const sn = Number(c.days_since_last_order)||0;
-    const overdueX = cyc ? sn/cyc : null;
-    const overdueScore = Math.min(overdueX!=null?overdueX:3, 8) / 8;
+    const rec = coreRecovery(c);
+    const overdueX = rec.x;
+    const overdueScore = rec.f;
     const timing = timingGood(c.ctype);
     const onVacation = SCHOOL_CTYPES.includes(c.ctype) && (nowMonth===7 || nowMonth===8);
     const score = (volumeScore*vW + overdueScore*(1-vW)) * riskW * (timing?1.15:1) * (onVacation?0.85:1);
-    return Object.assign({}, c, {_ocP:ocP, _amtP:amtP, _why:why, _overdueX:overdueX, _timing:timing, _onVacation:onVacation, _score:score});
+    return Object.assign({}, c, {_rec:rec, _ocP:ocP, _amtP:amtP, _why:why, _overdueX:overdueX, _timing:timing, _onVacation:onVacation, _score:score});
   }).sort((a,b)=>b._score-a._score);
 
   // 최근 연락 기록 (쉬게 할 곳 / 약속한 날이 된 곳 / 오늘 연락한 수)
@@ -5959,9 +6021,12 @@ async function renderCoreTargets(){
     t.push(c._why==='금액'
       ? `누적 ${won(c.total_amount)} — ${poolLabel} ${num(pool.length)}곳 중 금액 상위 ${Math.max(1,Math.round((1-c._amtP)*100))}%`
       : `판매 ${num(c.order_count)}회 — ${poolLabel} ${num(pool.length)}곳 중 판매건수 상위 ${Math.max(1,Math.round((1-c._ocP)*100))}%`);
-    t.push(c._overdueX!=null
-      ? `평소 ${Math.round(c.typical_cycle_days)}일 주기인데 ${num(c.days_since_last_order)}일째 (평소의 ${c._overdueX.toFixed(1)}배)`
-      : `마지막 판매 후 ${num(c.days_since_last_order)}일째`);
+    { const R = c._rec, B = REC[R.band];
+      t.push((c._overdueX!=null
+        ? `평소 ${Math.round(c.typical_cycle_days)}일 주기인데 ${num(c.days_since_last_order)}일째 (평소의 ${c._overdueX.toFixed(1)}배)`
+        : `마지막 판매 후 ${num(c.days_since_last_order)}일째`) + ` → ${B.label}: ${B.hint}`);
+      if(R.band==='event') t.push(`첫 거래부터 마지막 거래까지 ${num(R.span)}일뿐인 단기 거래입니다`);
+      if(R.school) t.push('학교·교육청은 학기 단위로 주문하는 경우가 많아 판정 기준을 1.5배 넓게 봤습니다'); }
     t.push(c.status==='이탈의심' ? '전화보다 방문·이메일 등 적극적인 컨택이 효과적입니다' : '아직 늦은 정도는 가볍습니다 — 안부 전화 정도로 충분합니다');
     if(c._onVacation) t.push('학교 방학(7~8월) 중이라 일시적으로 뜸한 걸 수 있습니다 — 개학(9월) 전후 재확인');
     else if(c._timing) t.push('지금이 이 기관유형 연락하기 좋은 시점입니다');
@@ -5987,7 +6052,7 @@ async function renderCoreTargets(){
       {k:`${cat.icon} 오늘 차례: ${esc(cat.name)}`, v:num(inCat.length), u:'곳', s:isToday?'오늘의 카테고리':'선택한 카테고리'},
       {k:'평균 끊긴 기간', v:heroDays(_poolDays), s:'마지막 판매 이후'},
       {k:'오늘 연락 기록', v:num(doneToday), u:'건', s:'통화·방문·문자'},
-      {k:'이탈의심 비중', v:pool.length?Math.round(100*pool.filter(c=>c.status==='이탈의심').length/pool.length):0, u:'%', s:'나머지는 주의 단계', warn:true}
+      {k:'골든타임 구간', v:num(pool.filter(c=>coreRecovery(c).band==='golden').length), u:'곳', s:'평소 주기의 1.5~6배 · 지금 연락 효과 큼'}
     ]});
   body.innerHTML = ctHero + `<div class="panel">
     <div class="panel-h"><h2>🔥 영업대상</h2><div class="filters"><span class="period-tag">${esc(dateLabel)}</span><button class="btn" id="ctcopy">목록 복사</button></div></div>
@@ -6002,7 +6067,7 @@ async function renderCoreTargets(){
         <label class="small">마지막 판매 후 최대 경과일 (0=제한 없음)<br><input type="number" min="0" id="cfg-maxDays" value="${CFG.maxDays}" style="width:100%"></label>
         <label class="small">하루에 보여줄 곳 수<br><input type="number" min="1" max="50" id="cfg-perDay" value="${CFG.perDay}" style="width:100%"></label>
         <label class="small">연락 후 쉬는 일수<br><input type="number" min="0" max="365" id="cfg-cooldown" value="${CFG.cooldown}" style="width:100%"></label>
-        <label class="small" style="grid-column:span 2">점수 비중 — 규모 <b id="cfg-volWv">${CFG.volW}</b>% / 지연 <b id="cfg-delayWv">${100-CFG.volW}</b>%<br><input type="range" min="0" max="100" step="5" id="cfg-volW" value="${CFG.volW}" style="width:100%"></label>
+        <label class="small" style="grid-column:span 2">점수 비중 — 규모 <b id="cfg-volWv">${CFG.volW}</b>% / 회복 가능성 <b id="cfg-delayWv">${100-CFG.volW}</b>%<br><input type="range" min="0" max="100" step="5" id="cfg-volW" value="${CFG.volW}" style="width:100%"></label>
         <label class="small" style="grid-column:1/-1"><input type="checkbox" id="cfg-excludeShown" ${CFG.excludeShown?'checked':''}> 이미 추천했던 곳은 제외 (내 기준 사용 중엔 추천 기록을 새로 남기지 않습니다)</label>
         <div style="grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="cfg-apply">이 기준으로 조회</button><button class="btn" id="cfg-reset">기본값으로</button></div>
       </div>
@@ -6013,7 +6078,8 @@ async function renderCoreTargets(){
       ${doneToday?`<br>오늘 남긴 연락 기록 <b>${num(doneToday)}건</b>`:''}${coolingCount>0?` · 최근 연락해서 쉬는 중 ${num(coolingCount)}곳`:''}${seenCount>0?` · 이미 추천한 곳 ${num(seenCount)}곳은 제외`:''}${repeatNote?`<br>${esc(repeatNote)}`:''}
     ${critHelp('선정 방식', `
       <dt>카테고리 순서</dt><dd>월~금 영업일마다 학교·교육 → 중앙부처·국회 → 서울시·구청 → 공기업·공공 → 안전·보건 → 복지·기업 순으로 순환합니다 (토·일은 월요일 차례). 위 칩을 누르면 다른 카테고리도 볼 수 있습니다.</dd>
-      <dt>점수</dt><dd>규모(판매건수·누적금액 백분위) ${CFG.volW}% + 지연 정도 ${100-CFG.volW}%, 이탈의심 ×1.2, 연락 좋은 시기 ×1.15, 방학 학교 ×0.85</dd>
+      <dt>점수</dt><dd>규모(판매건수·누적금액 백분위) ${CFG.volW}% + 회복 가능성 ${100-CFG.volW}%, 이탈의심 ×1.2, 연락 좋은 시기 ×1.15, 방학 학교 ×0.85</dd>
+      <dt>회복 구간</dt><dd>거래처마다 평소 주문 주기(주문일 간격의 중앙값)가 다르므로, 마지막 주문 후 경과일을 그 거래처 자신의 주기로 나눠 판정합니다. <b>골든타임</b>=주기의 1.5~6배(가장 높은 점수), <b>늦은 편</b>=6~12배(점수 점차 하락), <b>장기 이탈</b>=12배 초과(낮은 점수), <b>주기 막 지남</b>=1.5배 미만, <b>단기 거래</b>=첫~마지막 거래가 120일 이내인데 60일 넘게 조용한 곳(행사성 의심, 낮은 점수). 학교·교육청은 학기 단위 주문이 많아 기준을 1.5배 넓게 봅니다. 오래 끊겼다는 이유만으로 위로 올라오지 않습니다.</dd>
       <dt>매번 바뀌는 방법</dt><dd>그 카테고리 차례가 오면 점수가 높은 순서로 ${CFG.perDay}곳을 보여주고, 한 번 나온 곳은 기록해서 다음 차례엔 빠집니다. 그래서 다음엔 후순위 거래처가 나옵니다. 그 카테고리를 한 바퀴 다 돌면 가장 오래전에 나왔던 곳부터 다시 시작합니다. 같은 날엔 어느 기기에서 봐도 같은 목록입니다.</dd>
       <dt>쉬는 규칙</dt><dd>연락 결과를 남기면 결과에 따라 제외됩니다 — 부재중 3일, 주문 약속 7일, 통화 연결 14일, 거절 60일. (그 외 연락한 곳은 ${CFG.cooldown}일) 정해둔 다음 연락일이 오면 맨 위에 '약속한 날'로 올라옵니다.</dd>
       <dt>🔁 재구매 예상 / ➕ 추가구매 추천</dt><dd>골라진 곳에 한해서만 팁으로 표시합니다</dd>
@@ -6025,7 +6091,7 @@ async function renderCoreTargets(){
       <tbody>${list.map((c,ri)=>`<tr class="click" data-id="${c.customer_id}">
         <td class="num">${ri+1}</td>
         <td>
-          <div><b>${esc(c.name)}</b> <span class="small muted">${esc(c.ctype||'')}</span> <span class="pill ${c._why==='판매건수'?'s-info':'s-warn'}">${c._why}</span>${c._due?' <span class="pill s-bad">약속한 날</span>':''}${c._timing&&!c._onVacation?' <span class="pill s-good">지금 좋음</span>':''}</div>
+          <div><b>${esc(c.name)}</b> <span class="small muted">${esc(c.ctype||'')}</span> <span class="pill ${c._why==='판매건수'?'s-info':'s-warn'}">${c._why}</span> <span class="pill ${REC[c._rec.band].cls}">${REC[c._rec.band].label}</span>${c._due?' <span class="pill s-bad">약속한 날</span>':''}${c._timing&&!c._onVacation?' <span class="pill s-good">지금 좋음</span>':''}</div>
           <div class="small muted" style="margin-top:4px;line-height:1.6">${tipLines(c).map(t=>'· '+esc(t)).join('<br>')}</div>
           <div style="margin-top:6px;display:flex;gap:6px;align-items:flex-start"><span class="small">📞</span><div>${contactInline(c.customer_id)}</div></div>
           ${outBtns(c)}
@@ -6118,7 +6184,7 @@ async function renderChurn(){
   const _core = _susp.filter(c=>(Number(c.days_since_last_order)||0)<=CORE_MAX_DAYS && (Number(c.n_dates)||0)>=5);
   const _caution = CUSTS.filter(c=>c.status==='주의' && !Number(c.umbrella_children)).length;
   const _itemAmt = itemRows.reduce((t,r)=>t+(Number(r.total_amount)||0),0);
-  const churnHero = pageHero({icon:'📉', title:'이탈 감지 현황', asof:`${todayStr()} 기준`, value:num(_susp.length), unit:'곳',
+  const churnHero = pageHero({icon:'📉', title:'이탈 감지 현황', asof:asofText(), value:num(_susp.length), unit:'곳',
     sub:`거래가 끊긴 것으로 보이는 거래처 · 이 거래처들의 과거 누적 판매 <b>${won(_suspAmt)}</b>`,
     tiles:[
       {k:'핵심 거래처', v:num(_core.length), u:'곳', s:'판매 5회↑ · 마지막 주문 1년 이내', warn:true},
@@ -6341,7 +6407,9 @@ async function renderOrgAnalysis(key){
   const def = ORG_DEF[key], S = ORG[key], P = def.prefix;
   const body = document.getElementById('salesBody');
   body.innerHTML = '<div class="spin">올해 판매를 불러오는 중…</div>';
-  const now = new Date(), thisY = now.getFullYear(), lastY = thisY-1, nowM = now.getMonth();
+  await loadAsOf();
+  // 오늘이 아니라 '판매 데이터가 들어온 마지막 날'을 기준으로 올해/작년 같은 기간을 비교 (데이터가 늦게 들어와도 공정하게)
+  const now = ASOF.sale ? new Date(ASOF.sale+'T00:00:00') : new Date(), thisY = now.getFullYear(), lastY = thisY-1, nowM = now.getMonth();
   const todayS = localYmd(now), cutPrev = `${lastY}-${todayS.slice(5)}`;
   const base = CUSTS.filter(c=> orgBaseName(c.name).split(/\s+/)[0]===P).map(c=>Object.assign({}, c, {sub:orgSub(c.name,P), short:orgShort(c.name,P), umb:c.status==='통합집계'}));
   const ids = base.map(c=>c.customer_id);
